@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Transaksi{
     public static void main(String[] args) {
+        //inisialisasi
         Scanner input = new Scanner(System.in);
         int beratBarang, jarak;
         double tarifDasar =10000, tarifDasarKg =1000, tarifDasarKm =2000;
@@ -11,13 +12,14 @@ public class Transaksi{
         jumlahBarang = input.nextInt();
 
         int i = 0;
-
+        //melakukan perulangan sesuai jumlah barang yang akan dikirim
         while (i < jumlahBarang) {
             System.out.println ("Masukkan berat barang ke-" + (i+1) + ": ");
             beratBarang = input.nextInt();
             System.out.println ("Masukkan jarak pengiriman barang ke-" + (i+1) + ": ");
             jarak = input.nextInt();
             i++;
+            //menentukan harga berdasarkan data yang telah diinputkan
             if(beratBarang <= 5){
                 biayaBerat=0;
             }else{
