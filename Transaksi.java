@@ -29,7 +29,7 @@ public class Transaksi{
                 biayaJarak=(jarak-100)*tarifDasarKm;
             }
             biayaTotal = tarifDasar+biayaBerat+biayaJarak;
-            biayaAkhir += biayaTotal;
+            biayaAkhir += biayaTota;
         }
         System.out.println("estimasi biaya pengiriman: " +biayaAkhir);
     }
