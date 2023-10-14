@@ -31,6 +31,5 @@ public class Login {
             System.out.println("Login gagal. Username tidak ditemukan.");
         }
         scanner.close();
-        
     }
 }
