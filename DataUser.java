@@ -17,9 +17,7 @@ public class DataUser {
 
         // Menghasilkan output print data user
         System.out.println("\n");
-        System.out.println("----------------------");
-        System.out.println("--- INFORMASI USER ---");
-        System.out.println("----------------------");
+        System.out.println("==== INFORMASI USER ====");
         System.out.println("Nama Pengirim   : " +data[0]);
         System.out.println("Alamat pengirim : "+data[1]);
         System.out.println("Alamat tujuan   : "+data[2]);
