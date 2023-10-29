@@ -34,10 +34,17 @@ public class Main {
         int menuUtama, subMenu;
         String key;
         int beratBarang, jarakPengiriman;
-        int biayaAkhir;
+        double biayaAkhir;
         String lokasiPengiriman;
         double tarifPerKg = 5000, tarifPerKm = 1000;
         int pilihanLayanan;
+        double tarifLayanan = 0;
+        String namaPengirim;
+
+        String[] historyNamaPengirim = new String[100];
+        String[] historyTujuan = new String[100];
+        String[] historyLayanan = new String[100];
+        double[] historyBiaya = new double[100];
 
         System.out.println("=============================================");
         System.out.println("\u001B[33m     Selamat Datang di Sistem Ekspedisi     \u001B[0m");
@@ -96,13 +103,15 @@ public class Main {
 
                         switch (subMenu) {
                             case 1:
+                                System.out.print ("Masukkan Nama Pengirim: ");
+                                namaPengirim = input.next();
                                 System.out.print ("Masukkan Berat Barang: ");
                                 beratBarang = input.nextInt();
                                 System.out.print ("Masukkan Jarak Pengiriman: ");
                                 jarakPengiriman = input.nextInt();
                                 //Mencari Kota Pengiriman pada Array
                                 do {
-                                    System.out.print ("Masukkan Kota Pengiriman: ");
+                                    System.out.print ("Masukkan Kota Tujuan: ");
                                     lokasiPengiriman = input.next();
                                     for (int i = 0; i < arrayLokasi.length; i++) {
                                         if (arrayLokasi[i] != null && arrayLokasi[i].equalsIgnoreCase(lokasiPengiriman)) {
@@ -111,21 +120,34 @@ public class Main {
                                         }
                                     }
                                     if(found != true) {
-                                        System.out.println("Key tidak ditemukan");
+                                        System.out.println("Kota tidak ditemukan");
                                     }    
                                 } while (found == false);
                                 found = false;
 
                                 //Memilih Jenis Layanan pada Array
+
                                 for (int i = 0; i < arrayLayanan.length; i++) {
                                     if (arrayLayanan[i] != null) {
                                         System.out.println("["+i+"]. "+arrayLayanan[i]+" - "+arrayTarifLayanan[i]);
+                                        
                                     }
                                 }
                                 System.out.print ("Masukkan Pilihan: ");
                                 pilihanLayanan = input.nextInt();
+                                tarifLayanan = arrayTarifLayanan[pilihanLayanan];                      
 
-                                //biayaAkhir = 
+                                biayaAkhir = tarifLayanan + (tarifPerKg * beratBarang) + (tarifPerKm * jarakPengiriman);
+                                System.out.println(biayaAkhir);
+
+                                for (int i = 0; i < historyNamaPengirim.length; i++) {
+                                    if (historyNamaPengirim[i] != null) {
+                                        historyNamaPengirim[i] = namaPengirim;
+                                        historyLayanan[i] = arrayLayanan[pilihanLayanan];
+                                        historyTujuan[i] = lokasiPengiriman;
+                                        historyBiaya[i] = tarifLayanan;
+                                    }
+                                }
                                 break;
                             case 2:                                          
                                 break;
