@@ -18,6 +18,16 @@ public class Main {
             arrayLokasi[5] = "Makassar";
             arrayLokasi[6] = "Yogyakarta";
             arrayLokasi[7] = "Semarang";
+
+        double[] arrayTarifLokasi = new double[100];
+            arrayTarifLokasi[0] = 8000;
+            arrayTarifLokasi[1] = 45000;
+            arrayTarifLokasi[2] = 25000;
+            arrayTarifLokasi[3] = 16000;
+            arrayTarifLokasi[4] = 23000;
+            arrayTarifLokasi[5] = 34000;
+            arrayTarifLokasi[6] = 36000;
+            arrayTarifLokasi[7] = 23000;
             
         String[] arrayLayanan = new String[20];
             arrayLayanan[0] = "Reguler";
@@ -33,13 +43,14 @@ public class Main {
         boolean isLoop = false;
         int menuUtama, subMenu;
         String key;
-        int beratBarang, jarakPengiriman;
+        int beratBarang;
         double biayaAkhir;
         String lokasiPengiriman;
-        double tarifPerKg = 5000, tarifPerKm = 1000;
+        double tarifPerKg = 5000;
         int pilihanLayanan;
         double tarifLayanan = 0;
         String namaPengirim;
+        double biayaJarak = 0;
 
         String[] historyNamaPengirim = new String[100];
         String[] historyTujuan = new String[100];
@@ -107,14 +118,13 @@ public class Main {
                                 namaPengirim = input.next();
                                 System.out.print ("Masukkan Berat Barang: ");
                                 beratBarang = input.nextInt();
-                                System.out.print ("Masukkan Jarak Pengiriman: ");
-                                jarakPengiriman = input.nextInt();
                                 //Mencari Kota Pengiriman pada Array
                                 do {
                                     System.out.print ("Masukkan Kota Tujuan: ");
                                     lokasiPengiriman = input.next();
                                     for (int i = 0; i < arrayLokasi.length; i++) {
                                         if (arrayLokasi[i] != null && arrayLokasi[i].equalsIgnoreCase(lokasiPengiriman)) {
+                                            biayaJarak = arrayTarifLayanan[i];
                                             found = true;
                                             break;
                                         }
@@ -137,7 +147,7 @@ public class Main {
                                 pilihanLayanan = input.nextInt();
                                 tarifLayanan = arrayTarifLayanan[pilihanLayanan];                      
 
-                                biayaAkhir = tarifLayanan + (tarifPerKg * beratBarang) + (tarifPerKm * jarakPengiriman);
+                                biayaAkhir = tarifLayanan + (tarifPerKg * beratBarang) + biayaJarak;
                                 System.out.println(biayaAkhir);
 
                                 for (int i = 0; i < historyNamaPengirim.length; i++) {
@@ -149,11 +159,14 @@ public class Main {
                                     }
                                 }
                                 break;
-                            case 2:                                          
+                            case 2:
+                                System.out.println("Under Development");                                          
                                 break;
                             case 3:
+                                System.out.println("Under Development"); 
                                 break;
                             case 4:
+                                System.out.println("Under Development"); 
                                 break;
                             case 5:
                                 isLoop = false;
@@ -181,6 +194,8 @@ public class Main {
                                     if (arrayLokasi[i] == null) {
                                         System.out.print("Masukkan nama lokasi: ");
                                         arrayLokasi[i] = input.next();
+                                        System.out.print("Masukkan tarif: ");
+                                        arrayTarifLokasi[i] = input.nextDouble();
                                         break;
                                     }
                                 }
@@ -208,7 +223,7 @@ public class Main {
                                 System.out.println("=======================================");
                                 for (int i = 0; i < arrayLokasi.length; i++) {
                                     if (arrayLokasi[i] != null) {
-                                        System.out.println("["+i+"]. "+arrayLokasi[i]);
+                                        System.out.println("["+i+"]. "+arrayLokasi[i]+" - "+arrayTarifLokasi[i]);
                                     }
                                 }
                                 break;
@@ -237,9 +252,9 @@ public class Main {
                             case 1:
                                 for (int i = 0; i < arrayLayanan.length; i++) {
                                     if (arrayLayanan[i] == null) {
-                                        System.out.print("Masukkan nama layanan: ");
+                                        System.out.print("Masukkan Nama Layanan: ");
                                         arrayLayanan[i] = input.next();
-                                        System.out.print("Masukkan tarif: ");
+                                        System.out.print("Masukkan Tarif: ");
                                         arrayTarifLayanan[i] = input.nextDouble();
                                         break;
                                     }
