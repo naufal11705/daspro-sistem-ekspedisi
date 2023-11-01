@@ -7,8 +7,7 @@ public class Main {
         Scanner input = new Scanner(System.in);
         
         // Akun default
-        String[] usernames = {"naufal", "putra", "farhan"};
-        String[] passwords = {"000", "111", "222"};
+        String[][] userData = {{"naufal", "000"},{"putra", "111"},{"farhan", "222"}};
 
         // Lokasi default
         String[] arrayLokasi = new String[100];
@@ -62,24 +61,24 @@ public class Main {
         // Array History Pemesanan
         String[][] historyTransaksi = new String[100][4];
 
-        int pilihanBahasa = 0, inputPilihanBahasa;
+        int pilihanBahasa = 1, inputPilihanBahasa;
 
         // Array Multi Bahasa
         String[][] multilingual = {
             {"Welcome to the Expedition System", "Selamat Datang di Sistem Ekspedisi"},
             // Bahasa menu utama
-            {"", "Pengiriman Barang"},
+            {"", "Pengiriman Barang"}, //1
             {"", "Manajemen Lokasi"},
             {"", "Manajemen Tarif"},
-            {"", "Ganti Bahasa"},
-            {"", "Keluar"},
+            {"Change Language", "Ganti Bahasa"},
+            {"Exit", "Keluar"},
             // Bahasa input pilihan
-            {"", "Masukkan Pilihan"},
+            {"", "Masukkan Pilihan"}, //6
             // Bahasa menu pengiriman barang
             {"", "Melakukan Transaksi"},
             {"", "Mengedit Transaksi"},
             {"", "Menghapus Transaksi"},
-            {"", "Menampilkan Data Transaksi"},
+            {"", "Menampilkan Data Transaksi"}, //10
             {"", "Kembali ke Menu Utama"},
             // Bahasa menu manajemen lokasi
             {"", "Menambahkan Lokasi"},
@@ -103,12 +102,12 @@ public class Main {
             System.out.print("Masukan Password: ");
             String inputPassword = input.next();
 
-            for (int i = 0; i < usernames.length ; i++ ) {
-                if ((usernames[i].equals(inputUsername)) && (passwords[i].equals(inputPassword))) {
+            for (int i = 0; i < userData.length ; i++ ) {
+                if (userData[i][0].equals(inputUsername) && userData[i][1].equals(inputPassword)) {
                     System.out.println("Login Berhasil");
                     login = true;
                     break;
-                }    
+                }
             }
             if(!login){
                 System.out.println("Login Gagal, silahkan coba lagi!");
@@ -117,14 +116,15 @@ public class Main {
 
         do {
             System.out.println("=======================================");
-            System.out.println("\u001B[33m   "+multilingual[0][pilihanBahasa]+"   \u001B[0m");
+            System.out.println("\u001B[33m   " + multilingual[0][pilihanBahasa] + "   \u001B[0m");
             System.out.println("=======================================");
-            System.out.println("+ [1]. Pengiriman Barang              \u001B[0m+");
-            System.out.println("+ [2]. Manajemen Lokasi               \u001B[0m+");
-            System.out.println("+ [3]. Manajemen Tarif                \u001B[0m+");
-            System.out.println("+ [4]. Ganti Bahasa                   \u001B[0m+");
-            System.out.println("+ [5]. Keluar                         \u001B[0m+");
+            System.out.println("[1]. " + multilingual[1][pilihanBahasa]);
+            System.out.println("[2]. " + multilingual[2][pilihanBahasa]);
+            System.out.println("[3]. " + multilingual[3][pilihanBahasa]);
+            System.out.println("[4]. " + multilingual[4][pilihanBahasa]);
+            System.out.println("[5]. " + multilingual[5][pilihanBahasa]);
             System.out.println("=======================================");
+            
 
             System.out.print("Masukkan Pilihan: ");
             menuUtama = input.nextInt();
@@ -197,6 +197,18 @@ public class Main {
                                 }
                                 break;
                             case 2:
+                                /*for (int i = 0; i < historyTransaksi.length; i++) {
+                                    for (int j = 0; j < historyTransaksi[i].length; j++) {
+                                        if (arrayLayanan[i] != null && arrayLayanan[i].equalsIgnoreCase(key)) {
+                                            System.out.print("Masukkan Nama Layanan Baru: ");
+                                            arrayLayanan[i] = input.next();
+                                            System.out.print("Masukkan Tarif Baru: ");
+                                            arrayTarifLayanan[i] = input.nextDouble();
+                                            found = true;
+                                            break;
+                                        }
+                                    }
+                                }*/
                                 System.out.println("Under Development");                                          
                                 break;
                             case 3:
