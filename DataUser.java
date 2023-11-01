@@ -7,13 +7,13 @@ public class DataUser {
         
         // Penginputan Data
         System.out.println("Silahkan masukkan nama pengirim: ");
-        data [0]= input.next();
+        data [0]= input.nextLine();
         System.out.println("Alamat pengirim: ");
         data [1]= input.next();
         System.out.println("Alamat tujuan: ");
         data [2]= input.next();
         System.out.println("Waktu pengiriman: ");
-        data [3]= input.next();
+        data [3]= input.nextLine();
 
         // Menghasilkan output print data user
         System.out.println("\n");

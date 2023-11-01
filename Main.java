@@ -67,28 +67,40 @@ public class Main {
         String[][] multilingual = {
             {"Welcome to the Expedition System", "Selamat Datang di Sistem Ekspedisi"},
             // Bahasa menu utama
-            {"", "Pengiriman Barang"}, //1
-            {"", "Manajemen Lokasi"},
-            {"", "Manajemen Tarif"},
+            {"Delivery of Goods", "Pengiriman Barang"}, //1
+            {"Location Management", "Manajemen Lokasi"},
+            {"Cost Management", "Manajemen Tarif"},
             {"Change Language", "Ganti Bahasa"},
             {"Exit", "Keluar"},
+
             // Bahasa input pilihan
-            {"", "Masukkan Pilihan"}, //6
+            {"Enter Options: ", "Masukkan Pilihan: "}, //6
+
             // Bahasa menu pengiriman barang
-            {"", "Melakukan Transaksi"},
-            {"", "Mengedit Transaksi"},
-            {"", "Menghapus Transaksi"},
-            {"", "Menampilkan Data Transaksi"}, //10
-            {"", "Kembali ke Menu Utama"},
+            {"Transactions", "Melakukan Transaksi"},
+            {"Editing Transactions", "Mengedit Transaksi"},
+            {"Remove Transactions", "Menghapus Transaksi"},
+            {"Displyas Transactions' Data", "Menampilkan Data Transaksi"}, //10
+            {"Back to the Main Menu", "Kembali ke Menu Utama"},
+
             // Bahasa menu manajemen lokasi
-            {"", "Menambahkan Lokasi"},
-            {"", "Menghapus Lokasi"},
-            {"", "Menampilkan Data Lokasi"},
-            {"", ""},
-            {"", ""},
-            {"", ""},
-            {"", ""},
-            {"", ""},
+            {"Add Location", "Menambahkan Lokasi"}, //12
+            {"Remove Location", "Menghapus Lokasi"},
+            {"Displays Location's Data", "Menampilkan Data Lokasi"},
+            {"Back to the Main Menu", "Kembali ke Menu Utama"},
+
+            // Bahasa menu Manajemen Tarif
+            {"Add Service Types", "Tambahkan Jenis Layanan"},
+            {"Change Cost Service", "Merubah Tarif Layanan"},
+            {"Remove Service", "Menghapus Layanan"},
+            {"Displays Services' Data", "Menampilkan Layanan Data"},
+            {"Exit", "Keluar"}, //20
+
+                // submenu Transactions
+                {"Enter the Sender's Name","Masukkan Nama Pengirim"}, // 21
+                {"Enter the weight of the item", "Masukkan Berat Barang"},
+                {"Enter Destination", "Masukkan Kota Tujuan"},
+                {"Destination not Found", "KOta Tujuan tidak ditemukan"}
         };
 
         System.out.println("=============================================");
@@ -126,7 +138,7 @@ public class Main {
             System.out.println("=======================================");
             
 
-            System.out.print("Masukkan Pilihan: ");
+            System.out.print(multilingual[6][pilihanBahasa] );
             menuUtama = input.nextInt();
             input.nextLine();
 
@@ -136,27 +148,27 @@ public class Main {
                 switch (menuUtama) {
                     case 1:
                         System.out.println("=======================================");
-                        System.out.println("\u001B[33m           Pengiriman Barang          \u001B[0m");
+                        System.out.println("\u001B[33m"           + multilingual[1][pilihanBahasa] +          "\u001B[0m");
                         System.out.println("=======================================");
-                        System.out.println("+ \u001B[32m[1]. Melakukan Transaksi            \u001B[0m+");
-                        System.out.println("+ \u001B[33m[2]. Mengedit Transaksi             \u001B[0m+");
-                        System.out.println("+ \u001B[31m[3]. Menghapus Transaksi            \u001B[0m+");
-                        System.out.println("+ [4]. Menampilkan Data Transaksi     \u001B[0m+");
-                        System.out.println("+ [5]. Kembali ke Menu Utama          \u001B[0m+");
+                        System.out.println(" \u001B[32m[1]." + multilingual[7][pilihanBahasa]+            "\u001B[0m");
+                        System.out.println(" \u001B[33m[2]." + multilingual[8][pilihanBahasa]+              "\u001B[0m");
+                        System.out.println(" \u001B[31m[3]." + multilingual[9][pilihanBahasa]+             "\u001B[0m");
+                        System.out.println(" [4]." + multilingual[10][pilihanBahasa]+      "\u001B[0m");
+                        System.out.println(" [5]." + multilingual[11][pilihanBahasa]+           "\u001B[0m");
                         System.out.println("=======================================");
-                        System.out.print("Masukkan Pilihan: ");
+                        System.out.print( multilingual[6][pilihanBahasa] );
                         subMenu = input.nextInt();
                         input.nextLine();
 
                         switch (subMenu) {
                             case 1:
-                                System.out.print ("Masukkan Nama Pengirim: ");
+                                System.out.print (multilingual[21][pilihanBahasa]);
                                 namaPengirim = input.nextLine();
-                                System.out.print ("Masukkan Berat Barang (Kg): ");
+                                System.out.print (multilingual[22][pilihanBahasa]);
                                 beratBarang = input.nextInt();
                                 //Mencari Kota Pengiriman pada Array
                                 do {
-                                    System.out.print ("Masukkan Kota Tujuan: ");
+                                    System.out.print (multilingual[23][pilihanBahasa]);
                                     lokasiPengiriman = input.next();
                                     for (int i = 0; i < arrayLokasi.length; i++) {
                                         if (arrayLokasi[i] != null && arrayLokasi[i].equalsIgnoreCase(lokasiPengiriman)) {
@@ -166,7 +178,7 @@ public class Main {
                                         }
                                     }
                                     if(found != true) {
-                                        System.out.println("Kota tidak ditemukan");
+                                        System.out.println(multilingual[24][pilihanBahasa]);
                                     }    
                                 } while (found == false);
                                 found = false;
@@ -179,7 +191,7 @@ public class Main {
                                         
                                     }
                                 }
-                                System.out.print ("Masukkan Pilihan: ");
+                                System.out.print (multilingual[6][pilihanBahasa]);
                                 pilihanLayanan = input.nextInt();
                                 tarifLayanan = arrayTarifLayanan[pilihanLayanan];                      
 
@@ -237,15 +249,14 @@ public class Main {
                         break;                        
                     case 2:
                         System.out.println("=======================================");
-                        System.out.println("\u001B[33m           Manajemen Lokasi           \u001B[0m");
+                        System.out.println("\u001B[33m" + multilingual[2][pilihanBahasa]+   "\u001B[0m");
                         System.out.println("=======================================");
-                        System.out.println("+ \u001B[32m[1]. Menambahkan Lokasi             \u001B[0m+");
-                        System.out.println("+ \u001B[31m[2]. Menghapus Lokasi               \u001B[0m+");
-                        System.out.println("+ [3]. Menampilkan Data Lokasi        \u001B[0m+");
-                        System.out.println("+ [4]. Kembali ke Menu Utama          \u001B[0m+");
+                        System.out.println("+ \u001B[32m[1]." + multilingual[12][pilihanBahasa]+              "\u001B[0m");
+                        System.out.println("+ \u001B[31m[2]." + multilingual[13][pilihanBahasa]+ "\u001B[0m");
+                        System.out.println("+ [3]."+ multilingual[14][pilihanBahasa]+ "\u001B[0m");
+                        System.out.println("+ [4]."+ multilingual[15][pilihanBahasa]+ "\u001B[0m");
                         System.out.println("=======================================");
-                        System.out.print("Masukkan Pilihan: ");
-                        subMenu = input.nextInt();
+                        System.out.print(multilingual[6][pilihanBahasa]);                        subMenu = input.nextInt();
                         input.nextLine();
             
                         switch (subMenu) {
@@ -296,15 +307,15 @@ public class Main {
                         break;
                     case 3:
                         System.out.println("=======================================");
-                        System.out.println("\u001B[33m           Manajemen Tarif            \u001B[0m");
+                        System.out.println("\u001B[33m"+ multilingual[3][pilihanBahasa]+ "\u001B[0m");
                         System.out.println("=======================================");
-                        System.out.println("+ \u001B[32m[1]. Menambahkan Jenis Layanan      \u001B[0m+");
-                        System.out.println("+ \u001B[33m[2]. Mengubah Tarif Layanan         \u001B[0m+");
-                        System.out.println("+ \u001B[31m[3]. Menghapus Layanan              \u001B[0m+");
-                        System.out.println("+ [4]. Menampilkan Data Layanan       \u001B[0m+");
-                        System.out.println("+ [5]. Keluar                         \u001B[0m+");
+                        System.out.println("+ \u001B[32m[1]." + multilingual[16][pilihanBahasa]+ "\u001B[0m");
+                        System.out.println("+ \u001B[33m[2]." + multilingual[17][pilihanBahasa]+  "\u001B[0m+");
+                        System.out.println("+ \u001B[31m[3]." + multilingual[18][pilihanBahasa]+ "\u001B[0m");
+                        System.out.println("+ [4]." + multilingual[19][pilihanBahasa]+  "\u001B[0m");
+                        System.out.println("+ [5]." + multilingual[20][pilihanBahasa]+ "\u001B[0m");
                         System.out.println("=======================================");
-                        System.out.print("Masukkan Pilihan: ");
+                        System.out.print(multilingual[6][pilihanBahasa]);
                         subMenu = input.nextInt();
                         input.nextLine();
 
