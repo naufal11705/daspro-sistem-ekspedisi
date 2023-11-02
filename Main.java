@@ -1,4 +1,7 @@
 import java.util.Scanner;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Main {
 
@@ -46,7 +49,7 @@ public class Main {
         boolean exit = false;
         boolean isLoop = false;
         // Variabel untuk switch case menu
-        int menuUtama, subMenu;
+        int menuUtama, subMenu, editMenu;
         // Variabel Searching
         String key;
         int beratBarang;
@@ -55,11 +58,31 @@ public class Main {
         double tarifPerKg = 5000;
         int pilihanLayanan;
         double tarifLayanan = 0;
-        String namaPengirim;
+        String namaPengirim, nomorKontak;
         double biayaJarak = 0;
+        int pilihanEdit;
 
         // Array History Pemesanan
-        String[][] historyTransaksi = new String[100][4];
+        String[][] historyTransaksi = new String[100][6];
+            // History Default
+            historyTransaksi[0][0] = "28-10-2023";
+            historyTransaksi[0][1] = "Naufal";
+            historyTransaksi[0][2] = "08813348587";
+            historyTransaksi[0][3] = "Surabaya";
+            historyTransaksi[0][4] = "Sameday";
+            historyTransaksi[0][5] = "55000";
+            historyTransaksi[1][0] = "29-10-2023";
+            historyTransaksi[1][1] = "Farhan";
+            historyTransaksi[1][2] = "08813348587";
+            historyTransaksi[1][3] = "Malang";
+            historyTransaksi[1][4] = "Reguler";
+            historyTransaksi[1][5] = "25000";
+            historyTransaksi[2][0] = "01-11-2023";
+            historyTransaksi[2][1] = "Naufal";
+            historyTransaksi[2][2] = "08813348587";
+            historyTransaksi[2][3] = "Jakarta";
+            historyTransaksi[2][4] = "Sameday";
+            historyTransaksi[2][5] = "75000";
 
         int pilihanBahasa = 1, inputPilihanBahasa;
 
@@ -67,29 +90,47 @@ public class Main {
         String[][] multilingual = {
             {"Welcome to the Expedition System", "Selamat Datang di Sistem Ekspedisi"},
             // Bahasa menu utama
-            {"", "Pengiriman Barang"}, //1
-            {"", "Manajemen Lokasi"},
-            {"", "Manajemen Tarif"},
+            {"Delivery of Goods", "Pengiriman Barang"}, //1
+            {"Location Management", "Manajemen Lokasi"},
+            {"Cost Management", "Manajemen Tarif"},
             {"Change Language", "Ganti Bahasa"},
             {"Exit", "Keluar"},
+
             // Bahasa input pilihan
-            {"", "Masukkan Pilihan"}, //6
+            {"Enter Options: ", "Masukkan Pilihan: "}, //6
+
             // Bahasa menu pengiriman barang
-            {"", "Melakukan Transaksi"},
-            {"", "Mengedit Transaksi"},
-            {"", "Menghapus Transaksi"},
-            {"", "Menampilkan Data Transaksi"}, //10
-            {"", "Kembali ke Menu Utama"},
+            {"Transactions", "Melakukan Transaksi"},
+            {"Editing Transactions", "Mengedit Transaksi"},
+            {"Remove Transactions", "Menghapus Transaksi"},
+            {"Displyas Transactions' Data", "Menampilkan Data Transaksi"}, //10
+            {"Back to the Main Menu", "Kembali ke Menu Utama"},
+
             // Bahasa menu manajemen lokasi
-            {"", "Menambahkan Lokasi"},
-            {"", "Menghapus Lokasi"},
-            {"", "Menampilkan Data Lokasi"},
-            {"", ""},
-            {"", ""},
-            {"", ""},
-            {"", ""},
-            {"", ""},
+            {"Add Location", "Menambahkan Lokasi"}, //12
+            {"Remove Location", "Menghapus Lokasi"},
+            {"Displays Location's Data", "Menampilkan Data Lokasi"},
+            {"Back to the Main Menu", "Kembali ke Menu Utama"},
+
+            // Bahasa menu Manajemen Tarif
+            {"Add Service Types", "Tambahkan Jenis Layanan"},
+            {"Change Cost Service", "Merubah Tarif Layanan"},
+            {"Remove Service", "Menghapus Layanan"},
+            {"Displays Services' Data", "Menampilkan Layanan Data"},
+            {"Exit", "Keluar"}, //20
+
+            // submenu Transactions
+            {"Enter the Sender's Name: ","Masukkan Nama Pengirim: "}, // 21
+            {"Enter the weight of the item: ", "Masukkan Berat Barang: "},
+            {"Enter Destination: ", "Masukkan Kota Tujuan: "},
+            {"Destination not Found", "Kota Tujuan tidak ditemukan"}
         };
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = new Date();
+        String tanggalHariIni = dateFormat.format(date);
+
+        String inputanTanggalAwal = "00-00-000", inputanTanggalAkhir = "00-00-0000";
 
         System.out.println("=============================================");
         System.out.println("\u001B[33m     "+multilingual[0][pilihanBahasa]+"     \u001B[0m");
@@ -115,15 +156,15 @@ public class Main {
         }
 
         do {
-            System.out.println("=======================================");
-            System.out.println("\u001B[33m   " + multilingual[0][pilihanBahasa] + "   \u001B[0m");
-            System.out.println("=======================================");
+            System.out.println("=============================================");
+            System.out.println("\u001B[33m     "+ multilingual[0][pilihanBahasa] +"     \u001B[0m");
+            System.out.println("=============================================");
             System.out.println("[1]. " + multilingual[1][pilihanBahasa]);
             System.out.println("[2]. " + multilingual[2][pilihanBahasa]);
             System.out.println("[3]. " + multilingual[3][pilihanBahasa]);
             System.out.println("[4]. " + multilingual[4][pilihanBahasa]);
             System.out.println("[5]. " + multilingual[5][pilihanBahasa]);
-            System.out.println("=======================================");
+            System.out.println("=============================================");
             
 
             System.out.print("Masukkan Pilihan: ");
@@ -135,28 +176,30 @@ public class Main {
             do {
                 switch (menuUtama) {
                     case 1:
-                        System.out.println("=======================================");
-                        System.out.println("\u001B[33m           Pengiriman Barang          \u001B[0m");
-                        System.out.println("=======================================");
-                        System.out.println("+ \u001B[32m[1]. Melakukan Transaksi            \u001B[0m+");
-                        System.out.println("+ \u001B[33m[2]. Mengedit Transaksi             \u001B[0m+");
-                        System.out.println("+ \u001B[31m[3]. Menghapus Transaksi            \u001B[0m+");
-                        System.out.println("+ [4]. Menampilkan Data Transaksi     \u001B[0m+");
-                        System.out.println("+ [5]. Kembali ke Menu Utama          \u001B[0m+");
-                        System.out.println("=======================================");
-                        System.out.print("Masukkan Pilihan: ");
+                    System.out.println("=============================================");
+                    System.out.println("\u001B[33m"           + multilingual[1][pilihanBahasa] +          "\u001B[0m");
+                    System.out.println("=============================================");
+                    System.out.println("\u001B[32m[1]. " + multilingual[7][pilihanBahasa]+            "\u001B[0m");
+                    System.out.println("\u001B[33m[2]. " + multilingual[8][pilihanBahasa]+            "\u001B[0m");
+                    System.out.println("\u001B[31m[3]. " + multilingual[9][pilihanBahasa]+            "\u001B[0m");
+                    System.out.println("[4]. " + multilingual[10][pilihanBahasa]);
+                    System.out.println("[5]. " + multilingual[11][pilihanBahasa]);
+                    System.out.println("=============================================");
+                    System.out.print( multilingual[6][pilihanBahasa] );
                         subMenu = input.nextInt();
                         input.nextLine();
 
                         switch (subMenu) {
                             case 1:
-                                System.out.print ("Masukkan Nama Pengirim: ");
+                                System.out.print (multilingual[21][pilihanBahasa]);
                                 namaPengirim = input.nextLine();
-                                System.out.print ("Masukkan Berat Barang (Kg): ");
+                                System.out.print ("Masukkan Nomor Kontak: ");
+                                nomorKontak = input.next();
+                                System.out.print (multilingual[22][pilihanBahasa]);
                                 beratBarang = input.nextInt();
                                 //Mencari Kota Pengiriman pada Array
                                 do {
-                                    System.out.print ("Masukkan Kota Tujuan: ");
+                                    System.out.print (multilingual[23][pilihanBahasa]);
                                     lokasiPengiriman = input.next();
                                     for (int i = 0; i < arrayLokasi.length; i++) {
                                         if (arrayLokasi[i] != null && arrayLokasi[i].equalsIgnoreCase(lokasiPengiriman)) {
@@ -166,7 +209,7 @@ public class Main {
                                         }
                                     }
                                     if(found != true) {
-                                        System.out.println("Kota tidak ditemukan");
+                                        System.out.print (multilingual[24][pilihanBahasa]);
                                     }    
                                 } while (found == false);
                                 found = false;
@@ -179,7 +222,7 @@ public class Main {
                                         
                                     }
                                 }
-                                System.out.print ("Masukkan Pilihan: ");
+                                System.out.print (multilingual[6][pilihanBahasa]);
                                 pilihanLayanan = input.nextInt();
                                 tarifLayanan = arrayTarifLayanan[pilihanLayanan];                      
 
@@ -188,45 +231,162 @@ public class Main {
 
                                 for (int i = 0; i < historyTransaksi.length; i++) {
                                     if (historyTransaksi[i][0] == null) {
-                                        historyTransaksi[i][0] = namaPengirim;
-                                        historyTransaksi[i][1] = lokasiPengiriman;
-                                        historyTransaksi[i][2] = arrayLayanan[pilihanLayanan];
-                                        historyTransaksi[i][3] = Double.toString(biayaAkhir);
+                                        historyTransaksi[i][0] = tanggalHariIni;   
+                                        historyTransaksi[i][1] = namaPengirim;
+                                        historyTransaksi[i][2] = nomorKontak;
+                                        historyTransaksi[i][3] = lokasiPengiriman;
+                                        historyTransaksi[i][4] = arrayLayanan[pilihanLayanan];
+                                        historyTransaksi[i][5] = Double.toString(biayaAkhir);
                                         break;
                                     }
                                 }
                                 break;
                             case 2:
-                                /*for (int i = 0; i < historyTransaksi.length; i++) {
-                                    for (int j = 0; j < historyTransaksi[i].length; j++) {
-                                        if (arrayLayanan[i] != null && arrayLayanan[i].equalsIgnoreCase(key)) {
-                                            System.out.print("Masukkan Nama Layanan Baru: ");
-                                            arrayLayanan[i] = input.next();
-                                            System.out.print("Masukkan Tarif Baru: ");
-                                            arrayTarifLayanan[i] = input.nextDouble();
-                                            found = true;
-                                            break;
+                                System.out.println("=======================================");
+                                System.out.println("\u001B[33m           Mencari Data yang Akan Di Edit          \u001B[0m");
+                                System.out.println("=======================================");
+                                System.out.println("[1]. Berdasarkan Nama Pengirim");
+                                System.out.println("[2]. Transaksi Terbaru");
+                                System.out.println("[3]. Kembali ke Menu Utama");
+                                System.out.println("=======================================");
+                                System.out.print("Masukkan Pilihan: ");
+                                editMenu = input.nextInt();
+                                switch (editMenu) {
+                                    case 1:
+                                        System.out.print("Masukkan Key: ");
+                                        key = input.next();
+                                        for (int i = 0; i < historyTransaksi.length; i++) {
+                                            for (int j = 0; j < historyTransaksi[i].length; j++) {
+                                                if (historyTransaksi[i][0] != null && historyTransaksi[i][0].equalsIgnoreCase(key)) {
+                                                    System.out.println("=======================================");
+                                                    System.out.println("\u001B[33m           History Transaksi ["+i+"]          \u001B[0m");
+                                                    System.out.println("=======================================");
+                                                    System.out.println("Tanggal Transaksi: "+historyTransaksi[i][0]);
+                                                    System.out.println("Nama Pengirim: "+historyTransaksi[i][1]);
+                                                    System.out.println("Nomor Kontak: "+historyTransaksi[i][2]);
+                                                    System.out.println("Tujuan Pengiriman: "+historyTransaksi[i][3]);
+                                                    System.out.println("Jenis Layanan: "+historyTransaksi[i][4]);
+                                                    System.out.println("Total Biaya: "+historyTransaksi[i][5]);
+                                                    break;
+                                                }
+                                            }
                                         }
-                                    }
-                                }*/
-                                System.out.println("Under Development");                                          
+                                        System.out.println("Masukkan Kode Transaksi yang Ingin di Edit: ");
+                                        pilihanEdit = input.nextInt();
+                                        System.out.print ("Masukkan Nama Pengirim: ");
+                                        namaPengirim = input.next();
+                                        System.out.print ("Masukkan Nomor Kontak: ");
+                                        nomorKontak = input.next();
+                                        System.out.print ("Masukkan Berat Barang (Kg): ");
+                                        beratBarang = input.nextInt();
+                                        //Mencari Kota Pengiriman pada Array
+                                        do {
+                                            System.out.print ("Masukkan Kota Tujuan: ");
+                                            lokasiPengiriman = input.next();
+                                            for (int i = 0; i < arrayLokasi.length; i++) {
+                                                if (arrayLokasi[i] != null && arrayLokasi[i].equalsIgnoreCase(lokasiPengiriman)) {
+                                                    biayaJarak = arrayTarifLokasi[i];
+                                                    found = true;
+                                                    break;
+                                                }
+                                            }
+                                            if(found != true) {
+                                                System.out.println("Kota tidak ditemukan");
+                                            }    
+                                        } while (found == false);
+                                        found = false;
+
+                                        //Memilih Jenis Layanan pada Array
+
+                                        for (int i = 0; i < arrayLayanan.length; i++) {
+                                            if (arrayLayanan[i] != null) {
+                                                System.out.println("["+i+"]. "+arrayLayanan[i]+" - "+arrayTarifLayanan[i]);
+                                                
+                                            }
+                                        }
+                                        System.out.print ("Masukkan Pilihan: ");
+                                        pilihanLayanan = input.nextInt();
+                                        tarifLayanan = arrayTarifLayanan[pilihanLayanan];                      
+
+                                        biayaAkhir = tarifLayanan + (tarifPerKg * beratBarang) + biayaJarak;
+                                        System.out.println(biayaAkhir);
+
+                                        historyTransaksi[pilihanEdit][0] = tanggalHariIni;
+                                        historyTransaksi[pilihanEdit][1] = namaPengirim;
+                                        historyTransaksi[pilihanEdit][2] = nomorKontak;
+                                        historyTransaksi[pilihanEdit][3] = lokasiPengiriman;
+                                        historyTransaksi[pilihanEdit][4] = arrayLayanan[pilihanLayanan];
+                                        historyTransaksi[pilihanEdit][5] = Double.toString(biayaAkhir);
+                                        break;
+                                    case 2:
+                                        break;
+
+                                    default:
+                                        break;
+                                }                                        
                                 break;
                             case 3:
                                 System.out.println("Under Development"); 
                                 break;
                             case 4:
-                                for (int i = 0; i < historyTransaksi.length; i++) {
+                                System.out.println("=======================================");
+                                System.out.println("\u001B[33m           History Transaksi           \u001B[0m");
+                                System.out.println("=======================================");
+                                System.out.println("[1]. Berdasarkan Tanggal");
+                                System.out.println("[2]. Hari ini");
+                                System.out.println("[3]. Kembali ke Menu Utama");
+                                System.out.println("=======================================");
+                                System.out.print("Masukkan Pilihan: ");
+                                editMenu = input.nextInt();
+                                switch (editMenu) {
+                                    case 1:
+                                        try {
+                                            System.out.print("Masukkan Tanggal Awal (dd-MM-yyyy): ");
+                                            inputanTanggalAwal = input.next();
+                                            System.out.print("Masukkan Tanggal Akhir (dd-MM-yyyy): ");
+                                            inputanTanggalAkhir = input.next();
+                                            Date startDate = dateFormat.parse(inputanTanggalAwal);
+                                            Date endDate = dateFormat.parse(inputanTanggalAkhir);
+                                            for (int i = 0; i < historyTransaksi.length; i++) {
+                                                if (historyTransaksi[i][0] != null){
+                                                    Date transaksiDate = dateFormat.parse(historyTransaksi[i][0]);
+                                                    if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
+                                                        System.out.println("=======================================");
+                                                        System.out.println("\u001B[33m           History Transaksi "+(i+1)+"          \u001B[0m");
+                                                        System.out.println("=======================================");
+                                                        System.out.println("Tanggal Transaksi: "+historyTransaksi[i][0]);
+                                                        System.out.println("Nama Pengirim: "+historyTransaksi[i][1]);
+                                                        System.out.println("Nomor Kontak: "+historyTransaksi[i][2]);
+                                                        System.out.println("Tujuan Pengiriman: "+historyTransaksi[i][3]);
+                                                        System.out.println("Jenis Layanan: "+historyTransaksi[i][4]);
+                                                        System.out.println("Total Biaya: "+historyTransaksi[i][5]);
+                                                    }
+                                                }
+                                            }
+                                            break;
+                                        } catch (ParseException e) {
+                                            e.printStackTrace();
+                                        }
+                                        break;
+                                    case 2:
+                                        System.out.println("Under Develpment");
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                /*for (int i = 0; i < historyTransaksi.length; i++) {
                                    if (historyTransaksi[i][0] != null) {
                                         System.out.println("=======================================");
                                         System.out.println("\u001B[33m           History Transaksi "+(i+1)+"          \u001B[0m");
                                         System.out.println("=======================================");
-                                        System.out.println("Nama Pengirim: "+historyTransaksi[i][0]);
-                                        System.out.println("Tujuan Pengiriman: "+historyTransaksi[i][1]);
-                                        System.out.println("Jenis Layanan: "+historyTransaksi[i][2]);
-                                        System.out.println("Total Biaya: "+historyTransaksi[i][3]);
-                                        System.out.println("=======================================");
+                                        System.out.println("Tanggal Transaksi: "+historyTransaksi[i][0]);
+                                        System.out.println("Nama Pengirim: "+historyTransaksi[i][1]);
+                                        System.out.println("Nomor Kontak: "+historyTransaksi[i][2]);
+                                        System.out.println("Tujuan Pengiriman: "+historyTransaksi[i][3]);
+                                        System.out.println("Jenis Layanan: "+historyTransaksi[i][4]);
+                                        System.out.println("Total Biaya: "+historyTransaksi[i][5]);
                                     }
-                                }
+                                }*/
                                 break;
                             case 5:
                                 isLoop = false;
@@ -237,14 +397,14 @@ public class Main {
                         break;                        
                     case 2:
                         System.out.println("=======================================");
-                        System.out.println("\u001B[33m           Manajemen Lokasi           \u001B[0m");
+                        System.out.println("\u001B[33m" + multilingual[2][pilihanBahasa]+   "\u001B[0m");
                         System.out.println("=======================================");
-                        System.out.println("+ \u001B[32m[1]. Menambahkan Lokasi             \u001B[0m+");
-                        System.out.println("+ \u001B[31m[2]. Menghapus Lokasi               \u001B[0m+");
-                        System.out.println("+ [3]. Menampilkan Data Lokasi        \u001B[0m+");
-                        System.out.println("+ [4]. Kembali ke Menu Utama          \u001B[0m+");
+                        System.out.println("\u001B[32m[1]. " + multilingual[12][pilihanBahasa]+             "\u001B[0m");
+                        System.out.println("\u001B[31m[2]. " + multilingual[13][pilihanBahasa]+             "\u001B[0m");
+                        System.out.println("[3]. "+ multilingual[14][pilihanBahasa]);
+                        System.out.println("[4]. "+ multilingual[15][pilihanBahasa]);
                         System.out.println("=======================================");
-                        System.out.print("Masukkan Pilihan: ");
+                        System.out.print(multilingual[6][pilihanBahasa]); 
                         subMenu = input.nextInt();
                         input.nextLine();
             
@@ -296,15 +456,15 @@ public class Main {
                         break;
                     case 3:
                         System.out.println("=======================================");
-                        System.out.println("\u001B[33m           Manajemen Tarif            \u001B[0m");
+                        System.out.println("\u001B[33m"+ multilingual[3][pilihanBahasa]+ "\u001B[0m");
                         System.out.println("=======================================");
-                        System.out.println("+ \u001B[32m[1]. Menambahkan Jenis Layanan      \u001B[0m+");
-                        System.out.println("+ \u001B[33m[2]. Mengubah Tarif Layanan         \u001B[0m+");
-                        System.out.println("+ \u001B[31m[3]. Menghapus Layanan              \u001B[0m+");
-                        System.out.println("+ [4]. Menampilkan Data Layanan       \u001B[0m+");
-                        System.out.println("+ [5]. Keluar                         \u001B[0m+");
+                        System.out.println("\u001B[32m[1]. " + multilingual[16][pilihanBahasa]+ "\u001B[0m");
+                        System.out.println("\u001B[33m[2]. " + multilingual[17][pilihanBahasa]+ "\u001B[0m");
+                        System.out.println("\u001B[31m[3]. " + multilingual[18][pilihanBahasa]+ "\u001B[0m");
+                        System.out.println("[4]. " + multilingual[19][pilihanBahasa]);
+                        System.out.println("[5]. " + multilingual[20][pilihanBahasa]);
                         System.out.println("=======================================");
-                        System.out.print("Masukkan Pilihan: ");
+                        System.out.print(multilingual[6][pilihanBahasa]);
                         subMenu = input.nextInt();
                         input.nextLine();
 
