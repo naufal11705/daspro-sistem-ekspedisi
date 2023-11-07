@@ -211,7 +211,7 @@ public class Main {
                                     if(found != true) {
                                         System.out.print (multilingual[24][pilihanBahasa]);
                                     }    
-                                } while (found == false);
+                                } while (!found);
                                 found = false;
 
                                 //Memilih Jenis Layanan pada Array
@@ -293,7 +293,7 @@ public class Main {
                                             if(found != true) {
                                                 System.out.println("Kota tidak ditemukan");
                                             }    
-                                        } while (found == false);
+                                        } while (!found);
                                         found = false;
 
                                         //Memilih Jenis Layanan pada Array
