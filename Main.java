@@ -167,7 +167,7 @@ public class Main {
             System.out.println("=============================================");
             
 
-            System.out.print("Masukkan Pilihan: ");
+            System.out.print(multilingual[6][pilihanBahasa] );
             menuUtama = input.nextInt();
             input.nextLine();
 
@@ -176,6 +176,7 @@ public class Main {
             do {
                 switch (menuUtama) {
                     case 1:
+
                     System.out.println("=============================================");
                     System.out.println("\u001B[33m"           + multilingual[1][pilihanBahasa] +          "\u001B[0m");
                     System.out.println("=============================================");
@@ -186,6 +187,7 @@ public class Main {
                     System.out.println("[5]. " + multilingual[11][pilihanBahasa]);
                     System.out.println("=============================================");
                     System.out.print( multilingual[6][pilihanBahasa] );
+
                         subMenu = input.nextInt();
                         input.nextLine();
 
@@ -193,8 +195,10 @@ public class Main {
                             case 1:
                                 System.out.print (multilingual[21][pilihanBahasa]);
                                 namaPengirim = input.nextLine();
+
                                 System.out.print ("Masukkan Nomor Kontak: ");
                                 nomorKontak = input.next();
+
                                 System.out.print (multilingual[22][pilihanBahasa]);
                                 beratBarang = input.nextInt();
                                 //Mencari Kota Pengiriman pada Array
@@ -399,6 +403,7 @@ public class Main {
                         System.out.println("=======================================");
                         System.out.println("\u001B[33m" + multilingual[2][pilihanBahasa]+   "\u001B[0m");
                         System.out.println("=======================================");
+
                         System.out.println("\u001B[32m[1]. " + multilingual[12][pilihanBahasa]+             "\u001B[0m");
                         System.out.println("\u001B[31m[2]. " + multilingual[13][pilihanBahasa]+             "\u001B[0m");
                         System.out.println("[3]. "+ multilingual[14][pilihanBahasa]);
@@ -406,6 +411,7 @@ public class Main {
                         System.out.println("=======================================");
                         System.out.print(multilingual[6][pilihanBahasa]); 
                         subMenu = input.nextInt();
+
                         input.nextLine();
             
                         switch (subMenu) {
@@ -458,11 +464,13 @@ public class Main {
                         System.out.println("=======================================");
                         System.out.println("\u001B[33m"+ multilingual[3][pilihanBahasa]+ "\u001B[0m");
                         System.out.println("=======================================");
+
                         System.out.println("\u001B[32m[1]. " + multilingual[16][pilihanBahasa]+ "\u001B[0m");
                         System.out.println("\u001B[33m[2]. " + multilingual[17][pilihanBahasa]+ "\u001B[0m");
                         System.out.println("\u001B[31m[3]. " + multilingual[18][pilihanBahasa]+ "\u001B[0m");
                         System.out.println("[4]. " + multilingual[19][pilihanBahasa]);
                         System.out.println("[5]. " + multilingual[20][pilihanBahasa]);
+
                         System.out.println("=======================================");
                         System.out.print(multilingual[6][pilihanBahasa]);
                         subMenu = input.nextInt();
