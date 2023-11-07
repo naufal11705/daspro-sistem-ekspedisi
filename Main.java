@@ -389,6 +389,7 @@ public class Main {
                                         System.out.println("Tujuan Pengiriman: "+historyTransaksi[i][3]);
                                         System.out.println("Jenis Layanan: "+historyTransaksi[i][4]);
                                         System.out.println("Total Biaya: "+historyTransaksi[i][5]);
+                                        Test Merge
                                     }
                                 }*/
                                 break;
