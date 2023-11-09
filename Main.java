@@ -243,7 +243,11 @@ public class Main {
                                         System.out.println("Invalid");
                                         break;
                                 }                
-                            }    
+                            }
+                            exit = false;
+                            break;
+                            
+                            
                     case 1:
 
                     System.out.println("=============================================");
