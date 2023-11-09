@@ -14,7 +14,7 @@ public class Main {
         Scanner input = new Scanner(System.in);
         
         // Akun default
-        String[][] userData = {{"naufal", "000"},{"putra", "111"},{"farhan", "222"}};
+        String[][] userData = {{"admin","admin123"},{"naufal", "000"},{"putra", "111"},{"farhan", "222"}};
 
         // Lokasi default
         String[] arrayLokasi = new String[100];
@@ -52,6 +52,7 @@ public class Main {
         boolean found = false;
         boolean exit = false;
         boolean isLoop = false;
+        boolean isAdmin = false;
         // Variabel untuk switch case menu
         int menuUtama, subMenu, editMenu;
         // Variabel Searching
@@ -151,6 +152,9 @@ public class Main {
                 if (userData[i][0].equals(inputUsername) && userData[i][1].equals(inputPassword)) {
                     System.out.println("Login Berhasil");
                     login = true;
+                    if("admin".equals(inputUsername)){
+                        isAdmin=true;
+                    }
                     break;
                 }
             }
@@ -163,7 +167,9 @@ public class Main {
             System.out.println("=============================================");
             System.out.println("\u001B[33m     "+ multilingual[0][pilihanBahasa] +"     \u001B[0m");
             System.out.println("=============================================");
-            System.out.println("[0]. " + "Manajemen Pengguna");
+            if(isAdmin){
+                System.out.println("[0]. " + "Manajemen Pengguna");
+            }
             System.out.println("[1]. " + multilingual[1][pilihanBahasa]);
             System.out.println("[2]. " + multilingual[2][pilihanBahasa]);
             System.out.println("[3]. " + multilingual[3][pilihanBahasa]);
@@ -181,7 +187,8 @@ public class Main {
             do {
                 switch (menuUtama) {
                         case 0:
-                            while(!exit) {
+                            if(isAdmin){
+                                while(!exit) {
                                 System.out.println("=======================================");
                                 System.out.println("Menu");
                                 System.out.println("=======================================");
@@ -243,6 +250,7 @@ public class Main {
                                         System.out.println("Invalid");
                                         break;
                                 }                
+                            }
                             }
                             exit = false;
                             break;
