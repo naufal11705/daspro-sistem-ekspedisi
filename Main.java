@@ -2,15 +2,19 @@ import java.util.Scanner;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Arrays;
 
 public class Main {
 
+    /**
+     * @param args
+     */
     public static void main(String[] args) {
         // Deklarasi scanner untuk memasukkan inputan
         Scanner input = new Scanner(System.in);
         
         // Akun default
-        String[][] userData = {{"naufal", "000"},{"putra", "111"},{"farhan", "222"}};
+        String[][] userData = {{"admin","admin123"},{"naufal", "000"},{"putra", "111"},{"farhan", "222"}};
 
         // Lokasi default
         String[] arrayLokasi = new String[100];
@@ -48,6 +52,7 @@ public class Main {
         boolean found = false;
         boolean exit = false;
         boolean isLoop = false;
+        boolean isAdmin = false;
         // Variabel untuk switch case menu
         int menuUtama, subMenu, editMenu;
         // Variabel Searching
@@ -149,6 +154,9 @@ public class Main {
                 if (userData[i][0].equals(inputUsername) && userData[i][1].equals(inputPassword)) {
                     System.out.println("Login Berhasil");
                     login = true;
+                    if("admin".equals(inputUsername)){
+                        isAdmin=true;
+                    }
                     break;
                 }
             }
@@ -161,6 +169,9 @@ public class Main {
             System.out.println("=============================================");
             System.out.println("\u001B[33m     "+ multilingual[0][pilihanBahasa] +"     \u001B[0m");
             System.out.println("=============================================");
+            if(isAdmin){
+                System.out.println("[0]. " + "Manajemen Pengguna");
+            }
             System.out.println("[1]. " + multilingual[1][pilihanBahasa]);
             System.out.println("[2]. " + multilingual[2][pilihanBahasa]);
             System.out.println("[3]. " + multilingual[3][pilihanBahasa]);
@@ -176,6 +187,76 @@ public class Main {
 
             do {
                 switch (menuUtama) {
+                        case 0:
+                            if(isAdmin){
+                                while(!exit) {
+                                System.out.println("=======================================");
+                                System.out.println("Menu");
+                                System.out.println("=======================================");
+                                System.out.println("[1] Tambahkan Pengguna");
+                                System.out.println("[2] Hapus Pengguna");
+                                System.out.println("[3] Data Pengguna");
+                                System.out.println("[4] Keluar");
+                                System.out.println("=======================================");
+
+                                System.out.print("Masukan Pilihan: ");
+                                int pilihan = input.nextInt();
+                                //input.next();
+
+                                switch (pilihan) {
+                                    case 1:
+                                        System.out.print("Masukan nama pengguna baru: ");
+                                        String usernameBaru = input.next();
+                                        System.out.print("Masukan kata sandi baru: ");
+                                        String katasandiBaru = input.next();
+
+                                        userData = Arrays.copyOf(userData,userData.length + 1);
+                                        userData[userData.length-1] = new String[]{usernameBaru,katasandiBaru};
+
+                                        System.out.println("Pengguna baru berhasil ditambahkan!!!");
+                                        break;
+                                    case 2:
+                                        System.out.print("Masukan username yang akan dihapus: ");
+                                        String usernameToRemove = input.next();
+                        
+                                        for (int i = 0; i < userData.length; i++) {
+                                            if (userData[i][0].equals(usernameToRemove)) {
+                                                // Menghapus user dari array userData
+                                                System.arraycopy(userData, i + 1, userData, i, userData.length - 1 - i);
+                                                userData = Arrays.copyOf(userData, userData.length - 1);
+                                                found = true;
+                                                break;
+                                            }
+                                        }
+                        
+                                        if (found) {
+                                            System.out.println("Perngguna berhasi dihapus!");
+                                        } else {
+                                            System.out.println("Pengguna tidak ditemukan.");
+                                        }
+                                        break;   
+                                    case 3:
+                                        System.out.println("=======================================");
+                                        System.out.println("Data Pengguna");
+                                        System.out.println("=======================================");
+                                        for (int i = 0; i < userData.length; i++) {
+                                            System.out.println("Username: " + userData[i][0] + " Password: " + userData[i][1]);
+                                        }
+
+                                        break;
+                                    case 4:
+                                        exit = true;
+                                        break;                                     
+                                    default:
+                                        System.out.println("Invalid");
+                                        break;
+                                }                
+                            }
+                            }
+                            exit = false;
+                            break;
+                            
+                            
                     case 1:
 
                     System.out.println("=============================================");
@@ -576,8 +657,8 @@ public class Main {
             } while (isLoop);
 
 
-        } while (!exit);
+        } while(!exit);
+    
 
-
+        }
     }
-}
