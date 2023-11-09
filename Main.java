@@ -76,12 +76,14 @@ public class Main {
             historyTransaksi[0][3] = "Surabaya";
             historyTransaksi[0][4] = "Sameday";
             historyTransaksi[0][5] = "55000";
+
             historyTransaksi[1][0] = "29-10-2023";
             historyTransaksi[1][1] = "Farhan";
             historyTransaksi[1][2] = "08813348587";
             historyTransaksi[1][3] = "Malang";
             historyTransaksi[1][4] = "Reguler";
             historyTransaksi[1][5] = "25000";
+
             historyTransaksi[2][0] = "01-11-2023";
             historyTransaksi[2][1] = "Naufal";
             historyTransaksi[2][2] = "08813348587";
@@ -176,7 +178,6 @@ public class Main {
             System.out.println("[4]. " + multilingual[4][pilihanBahasa]);
             System.out.println("[5]. " + multilingual[5][pilihanBahasa]);
             System.out.println("=============================================");
-            
 
             System.out.print(multilingual[6][pilihanBahasa] );
             menuUtama = input.nextInt();
@@ -269,8 +270,8 @@ public class Main {
                     System.out.println("=============================================");
                     System.out.print( multilingual[6][pilihanBahasa] );
 
-                        subMenu = input.nextInt();
-                        input.nextLine();
+                    subMenu = input.nextInt();
+                    input.nextLine();
 
                         switch (subMenu) {
                             case 1:
@@ -341,7 +342,7 @@ public class Main {
                                         System.out.print("Masukkan Key: ");
                                         key = input.next();
                                         for (int i = 0; i < historyTransaksi.length; i++) {
-                                            for (int j = 0; j < historyTransaksi[i].length; j++) {
+                                            //for (int j = 0; j < historyTransaksi[i].length; j++) {
                                                 if (historyTransaksi[i][1] != null && historyTransaksi[i][1].equalsIgnoreCase(key)) {
                                                     System.out.println("=======================================");
                                                     System.out.println("\u001B[33m           History Transaksi ["+i+"]          \u001B[0m");
@@ -352,9 +353,9 @@ public class Main {
                                                     System.out.println("Tujuan Pengiriman: "+historyTransaksi[i][3]);
                                                     System.out.println("Jenis Layanan: "+historyTransaksi[i][4]);
                                                     System.out.println("Total Biaya: "+historyTransaksi[i][5]);
-                                                    break;
+                                                    //break;
                                                 }
-                                            }
+                                            //}
                                         }
                                         System.out.println("Masukkan Kode Transaksi yang Ingin di Edit: ");
                                         pilihanEdit = input.nextInt();
@@ -417,7 +418,7 @@ public class Main {
                                 System.out.println("=======================================");
                                 System.out.println("\u001B[33m           History Transaksi           \u001B[0m");
                                 System.out.println("=======================================");
-                                System.out.println("[1]. Berdasarkan Tanggal");
+                                System.out.println("[1]. Berdasarkan Rentang Tanggal");
                                 System.out.println("[2]. Hari ini");
                                 System.out.println("[3]. Kembali ke Menu Utama");
                                 System.out.println("=======================================");
