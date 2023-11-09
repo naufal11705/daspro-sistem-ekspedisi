@@ -342,7 +342,7 @@ public class Main {
                                         key = input.next();
                                         for (int i = 0; i < historyTransaksi.length; i++) {
                                             for (int j = 0; j < historyTransaksi[i].length; j++) {
-                                                if (historyTransaksi[i][0] != null && historyTransaksi[i][0].equalsIgnoreCase(key)) {
+                                                if (historyTransaksi[i][1] != null && historyTransaksi[i][1].equalsIgnoreCase(key)) {
                                                     System.out.println("=======================================");
                                                     System.out.println("\u001B[33m           History Transaksi ["+i+"]          \u001B[0m");
                                                     System.out.println("=======================================");
