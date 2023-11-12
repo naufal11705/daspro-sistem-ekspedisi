@@ -26,6 +26,16 @@ public class Main {
             arrayLokasi[5] = "Makassar";
             arrayLokasi[6] = "Yogyakarta";
             arrayLokasi[7] = "Semarang";
+            arrayLokasi[8] = "Denpasar";
+            arrayLokasi[9] = "Serang";
+            arrayLokasi[10] = "Tangerang";
+            arrayLokasi[11] = "Bengkulu";
+            arrayLokasi[12] = "Gorontalo";
+            arrayLokasi[13] = "Bekasi";
+            arrayLokasi[14] = "Bogor";
+            arrayLokasi[15] = "Cirebon";
+
+            
         // Tarif berdasarkan tujuan pengiriman
         double[] arrayTarifLokasi = new double[100];
             arrayTarifLokasi[0] = 8000;
@@ -107,10 +117,10 @@ public class Main {
             {"Enter Options: ", "Masukkan Pilihan: "}, //6
 
             // Bahasa menu pengiriman barang
-            {"Transactions", "Melakukan Transaksi"},
+            {"Transactions", "Melakukan Transaksi"}, //7
             {"Editing Transactions", "Mengedit Transaksi"},
             {"Remove Transactions", "Menghapus Transaksi"},
-            {"Displyas Transactions' Data", "Menampilkan Data Transaksi"}, //10
+            {"Displyas Transactions' Data", "Menampilkan Data Transaksi"},
             {"Back to the Main Menu", "Kembali ke Menu Utama"},
 
             // Bahasa menu manajemen lokasi
@@ -120,11 +130,11 @@ public class Main {
             {"Back to the Main Menu", "Kembali ke Menu Utama"},
 
             // Bahasa menu Manajemen Tarif
-            {"Add Service Types", "Tambahkan Jenis Layanan"},
+            {"Add Service Types", "Tambahkan Jenis Layanan"}, //16
             {"Change Cost Service", "Merubah Tarif Layanan"},
             {"Remove Service", "Menghapus Layanan"},
             {"Displays Services' Data", "Menampilkan Layanan Data"},
-            {"Exit", "Keluar"}, //20
+            {"Exit", "Keluar"}, 
 
             // submenu Transactions
             {"Enter the Sender's Name: ","Masukkan Nama Pengirim: "}, // 21
@@ -172,11 +182,11 @@ public class Main {
             if(isAdmin){
                 System.out.println("[0]. " + "Manajemen Pengguna");
             }
-            System.out.println("[1]. " + multilingual[1][pilihanBahasa]);
-            System.out.println("[2]. " + multilingual[2][pilihanBahasa]);
-            System.out.println("[3]. " + multilingual[3][pilihanBahasa]);
-            System.out.println("[4]. " + multilingual[4][pilihanBahasa]);
-            System.out.println("[5]. " + multilingual[5][pilihanBahasa]);
+            System.out.println("[1]. " + multilingual[1][pilihanBahasa]); //Pengiriman Barang
+            System.out.println("[2]. " + multilingual[2][pilihanBahasa]); //Manajemen Lokasi
+            System.out.println("[3]. " + multilingual[3][pilihanBahasa]); //Manajemen Tarif
+            System.out.println("[4]. " + multilingual[4][pilihanBahasa]); //Ganti Bahasa
+            System.out.println("[5]. " + multilingual[5][pilihanBahasa]); //Keluar
             System.out.println("=============================================");
 
             System.out.print(multilingual[6][pilihanBahasa] );
@@ -260,13 +270,13 @@ public class Main {
                         System.out.println("=============================================");
                         System.out.println("\u001B[33m"           + multilingual[1][pilihanBahasa] +          "\u001B[0m");
                         System.out.println("=============================================");
-                        System.out.println("\u001B[32m[1]. " + multilingual[7][pilihanBahasa]+            "\u001B[0m");
-                        System.out.println("\u001B[33m[2]. " + multilingual[8][pilihanBahasa]+            "\u001B[0m");
-                        System.out.println("\u001B[31m[3]. " + multilingual[9][pilihanBahasa]+            "\u001B[0m");
-                        System.out.println("[4]. " + multilingual[10][pilihanBahasa]);
-                        System.out.println("[5]. " + multilingual[11][pilihanBahasa]);
+                        System.out.println("\u001B[32m[1]. " + multilingual[7][pilihanBahasa]+            "\u001B[0m"); //Melakukan Transaksi
+                        System.out.println("\u001B[33m[2]. " + multilingual[8][pilihanBahasa]+            "\u001B[0m"); //Mengedit Transaksi
+                        System.out.println("\u001B[31m[3]. " + multilingual[9][pilihanBahasa]+            "\u001B[0m"); //Menghapus Transaksi
+                        System.out.println("[4]. " + multilingual[10][pilihanBahasa]); //Menampilkan Data Transaksi
+                        System.out.println("[5]. " + multilingual[11][pilihanBahasa]); //Kembali ke Menu Utama
                         System.out.println("=============================================");
-                        System.out.print( multilingual[6][pilihanBahasa] );
+                        System.out.print( multilingual[6][pilihanBahasa] ); 
 
                         subMenu = input.nextInt();
                         input.nextLine();
@@ -487,10 +497,10 @@ public class Main {
                         System.out.println("\u001B[33m" + multilingual[2][pilihanBahasa]+   "\u001B[0m");
                         System.out.println("=======================================");
 
-                        System.out.println("\u001B[32m[1]. " + multilingual[12][pilihanBahasa]+             "\u001B[0m");
-                        System.out.println("\u001B[31m[2]. " + multilingual[13][pilihanBahasa]+             "\u001B[0m");
-                        System.out.println("[3]. "+ multilingual[14][pilihanBahasa]);
-                        System.out.println("[4]. "+ multilingual[15][pilihanBahasa]);
+                        System.out.println("\u001B[32m[1]. " + multilingual[12][pilihanBahasa]+             "\u001B[0m"); //Menambahkan Lokasi
+                        System.out.println("\u001B[31m[2]. " + multilingual[13][pilihanBahasa]+             "\u001B[0m"); //Menghapus Lokasi
+                        System.out.println("[3]. "+ multilingual[14][pilihanBahasa]); //Menampilkan Data Lokasi
+                        System.out.println("[4]. "+ multilingual[15][pilihanBahasa]); //Kembali ke Menu Utama
                         System.out.println("=======================================");
                         System.out.print(multilingual[6][pilihanBahasa]); 
                         subMenu = input.nextInt();
@@ -548,11 +558,11 @@ public class Main {
                         System.out.println("\u001B[33m"+ multilingual[3][pilihanBahasa]+ "\u001B[0m");
                         System.out.println("=======================================");
 
-                        System.out.println("\u001B[32m[1]. " + multilingual[16][pilihanBahasa]+ "\u001B[0m");
-                        System.out.println("\u001B[33m[2]. " + multilingual[17][pilihanBahasa]+ "\u001B[0m");
-                        System.out.println("\u001B[31m[3]. " + multilingual[18][pilihanBahasa]+ "\u001B[0m");
-                        System.out.println("[4]. " + multilingual[19][pilihanBahasa]);
-                        System.out.println("[5]. " + multilingual[20][pilihanBahasa]);
+                        System.out.println("\u001B[32m[1]. " + multilingual[16][pilihanBahasa]+ "\u001B[0m"); //Tambahan Jenis Layanan
+                        System.out.println("\u001B[33m[2]. " + multilingual[17][pilihanBahasa]+ "\u001B[0m"); //Merubah Tarif Layanan
+                        System.out.println("\u001B[31m[3]. " + multilingual[18][pilihanBahasa]+ "\u001B[0m"); //Menghapus Layanan
+                        System.out.println("[4]. " + multilingual[19][pilihanBahasa]); //Menampilkan Layanan Data
+                        System.out.println("[5]. " + multilingual[20][pilihanBahasa]); //Keluar
 
                         System.out.println("=======================================");
                         System.out.print(multilingual[6][pilihanBahasa]);
