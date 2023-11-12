@@ -205,16 +205,28 @@ public class Main {
 
                                 switch (pilihan) {
                                     case 1:
-                                        System.out.print("Masukan nama pengguna baru: ");
-                                        String usernameBaru = input.next();
-                                        System.out.print("Masukan kata sandi baru: ");
-                                        String katasandiBaru = input.next();
+                                    System.out.print("Masukkan nama pengguna baru: ");
+                                    String usernameBaru = input.next();
+                                    System.out.print("Masukkan kata sandi baru: ");
+                                    String katasandiBaru = input.next();
 
-                                        userData = Arrays.copyOf(userData,userData.length + 1);
-                                        userData[userData.length-1] = new String[]{usernameBaru,katasandiBaru};
+                                    // buat untuk simpan data yang baru
+                                    String[][] newUserData = new String[userData.length + 1][2];
 
-                                        System.out.println("Pengguna baru berhasil ditambahkan!!!");
-                                        break;
+                                    // buat copy ke array yang baru
+                                    for (int i = 0; i < userData.length; i++) {
+                                    newUserData[i][0] = userData[i][0];
+                                    newUserData[i][1] = userData[i][1];
+                                    }
+
+                                    
+                                    newUserData[newUserData.length - 1][0] = usernameBaru;
+                                    newUserData[newUserData.length - 1][1] = katasandiBaru;
+
+                                    userData = newUserData;
+
+                                    System.out.println("Pengguna baru berhasil ditambahkan!!!");
+                                    break;
                                     case 2:
                                         System.out.print("Masukan username yang akan dihapus: ");
                                         String usernameToRemove = input.next();
