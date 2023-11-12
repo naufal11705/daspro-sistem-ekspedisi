@@ -187,91 +187,89 @@ public class Main {
 
             do {
                 switch (menuUtama) {
-                        case 0:
-                            if(isAdmin){
-                                while(!exit) {
-                                System.out.println("=======================================");
-                                System.out.println("Menu");
-                                System.out.println("=======================================");
-                                System.out.println("[1] Tambahkan Pengguna");
-                                System.out.println("[2] Hapus Pengguna");
-                                System.out.println("[3] Data Pengguna");
-                                System.out.println("[4] Keluar");
-                                System.out.println("=======================================");
+                    case 0:
+                        if(isAdmin){
+                            while(!exit) {
+                            System.out.println("=======================================");
+                            System.out.println("Menu");
+                            System.out.println("=======================================");
+                            System.out.println("[1] Tambahkan Pengguna");
+                            System.out.println("[2] Hapus Pengguna");
+                            System.out.println("[3] Data Pengguna");
+                            System.out.println("[4] Keluar");
+                            System.out.println("=======================================");
 
-                                System.out.print("Masukan Pilihan: ");
-                                int pilihan = input.nextInt();
-                                //input.next();
+                            System.out.print("Masukan Pilihan: ");
+                            int pilihan = input.nextInt();
 
-                                switch (pilihan) {
-                                    case 1:
-                                        System.out.print("Masukan nama pengguna baru: ");
-                                        String usernameBaru = input.next();
-                                        System.out.print("Masukan kata sandi baru: ");
-                                        String katasandiBaru = input.next();
+                            switch (pilihan) {
+                                case 1:
+                                    System.out.print("Masukan nama pengguna baru: ");
+                                    String usernameBaru = input.next();
+                                    System.out.print("Masukan kata sandi baru: ");
+                                    String katasandiBaru = input.next();
 
-                                        userData = Arrays.copyOf(userData,userData.length + 1);
-                                        userData[userData.length-1] = new String[]{usernameBaru,katasandiBaru};
+                                    userData = Arrays.copyOf(userData,userData.length + 1);
+                                    userData[userData.length-1] = new String[]{usernameBaru,katasandiBaru};
 
-                                        System.out.println("Pengguna baru berhasil ditambahkan!!!");
-                                        break;
-                                    case 2:
-                                        System.out.print("Masukan username yang akan dihapus: ");
-                                        String usernameToRemove = input.next();
-                        
-                                        for (int i = 0; i < userData.length; i++) {
-                                            if (userData[i][0].equals(usernameToRemove)) {
-                                                // Menghapus user dari array userData
-                                                System.arraycopy(userData, i + 1, userData, i, userData.length - 1 - i);
-                                                userData = Arrays.copyOf(userData, userData.length - 1);
-                                                found = true;
-                                                break;
-                                            }
+                                    System.out.println("Pengguna baru berhasil ditambahkan!!!");
+                                    break;
+                                case 2:
+                                    System.out.print("Masukan username yang akan dihapus: ");
+                                    String usernameToRemove = input.next();
+                    
+                                    for (int i = 0; i < userData.length; i++) {
+                                        if (userData[i][0].equals(usernameToRemove)) {
+                                            // Menghapus user dari array userData
+                                            System.arraycopy(userData, i + 1, userData, i, userData.length - 1 - i);
+                                            userData = Arrays.copyOf(userData, userData.length - 1);
+                                            found = true;
+                                            break;
                                         }
-                        
-                                        if (found) {
-                                            System.out.println("Perngguna berhasi dihapus!");
-                                        } else {
-                                            System.out.println("Pengguna tidak ditemukan.");
-                                        }
-                                        break;   
-                                    case 3:
-                                        System.out.println("=======================================");
-                                        System.out.println("Data Pengguna");
-                                        System.out.println("=======================================");
-                                        for (int i = 0; i < userData.length; i++) {
-                                            System.out.println("Username: " + userData[i][0] + " Password: " + userData[i][1]);
-                                        }
+                                    }
+                    
+                                    if (found) {
+                                        System.out.println("Perngguna berhasi dihapus!");
+                                    } else {
+                                        System.out.println("Pengguna tidak ditemukan.");
+                                    }
+                                    break;   
+                                case 3:
+                                    System.out.println("=======================================");
+                                    System.out.println("Data Pengguna");
+                                    System.out.println("=======================================");
+                                    for (int i = 0; i < userData.length; i++) {
+                                        System.out.println("Username: " + userData[i][0] + " Password: " + userData[i][1]);
+                                    }
 
-                                        break;
-                                    case 4:
-                                        exit = true;
-                                        break;                                     
-                                    default:
-                                        System.out.println("Invalid");
-                                        break;
-                                }                
-                            }
-                            }
-                            exit = false;
-                            break;
+                                    break;
+                                case 4:
+                                    exit = true;
+                                    break;                                     
+                                default:
+                                    System.out.println("Invalid");
+                                    break;
+                            }                
+                        }
+                        }
+                        exit = false;
+                        break;
                             
                             
                     case 1:
+                        System.out.println("=============================================");
+                        System.out.println("\u001B[33m"           + multilingual[1][pilihanBahasa] +          "\u001B[0m");
+                        System.out.println("=============================================");
+                        System.out.println("\u001B[32m[1]. " + multilingual[7][pilihanBahasa]+            "\u001B[0m");
+                        System.out.println("\u001B[33m[2]. " + multilingual[8][pilihanBahasa]+            "\u001B[0m");
+                        System.out.println("\u001B[31m[3]. " + multilingual[9][pilihanBahasa]+            "\u001B[0m");
+                        System.out.println("[4]. " + multilingual[10][pilihanBahasa]);
+                        System.out.println("[5]. " + multilingual[11][pilihanBahasa]);
+                        System.out.println("=============================================");
+                        System.out.print( multilingual[6][pilihanBahasa] );
 
-                    System.out.println("=============================================");
-                    System.out.println("\u001B[33m"           + multilingual[1][pilihanBahasa] +          "\u001B[0m");
-                    System.out.println("=============================================");
-                    System.out.println("\u001B[32m[1]. " + multilingual[7][pilihanBahasa]+            "\u001B[0m");
-                    System.out.println("\u001B[33m[2]. " + multilingual[8][pilihanBahasa]+            "\u001B[0m");
-                    System.out.println("\u001B[31m[3]. " + multilingual[9][pilihanBahasa]+            "\u001B[0m");
-                    System.out.println("[4]. " + multilingual[10][pilihanBahasa]);
-                    System.out.println("[5]. " + multilingual[11][pilihanBahasa]);
-                    System.out.println("=============================================");
-                    System.out.print( multilingual[6][pilihanBahasa] );
-
-                    subMenu = input.nextInt();
-                    input.nextLine();
+                        subMenu = input.nextInt();
+                        input.nextLine();
 
                         switch (subMenu) {
                             case 1:
@@ -420,7 +418,9 @@ public class Main {
                                 System.out.println("=======================================");
                                 System.out.println("[1]. Berdasarkan Rentang Tanggal");
                                 System.out.println("[2]. Hari ini");
-                                System.out.println("[3]. Kembali ke Menu Utama");
+                                System.out.println("[3]. Bulan ini");
+                                System.out.println("[4]. Tahun ini");
+                                System.out.println("[5]. Kembali ke Menu Utama");
                                 System.out.println("=======================================");
                                 System.out.print("Masukkan Pilihan: ");
                                 editMenu = input.nextInt();
@@ -433,6 +433,11 @@ public class Main {
                                             inputanTanggalAkhir = input.next();
                                             Date startDate = dateFormat.parse(inputanTanggalAwal);
                                             Date endDate = dateFormat.parse(inputanTanggalAkhir);
+                                            /*System.out.println("==================================================================================================");
+                                            System.out.println("                              History Transaksi");
+                                            System.out.println("==================================================================================================");
+                                            System.out.println(" No  |  Tanggal Transaksi  |  Nama Pengirim  |  Nomor Kontak  |  Tujuan | Jenis Layanan | Biaya");
+                                            System.out.println("==================================================================================================");*/
                                             for (int i = 0; i < historyTransaksi.length; i++) {
                                                 if (historyTransaksi[i][0] != null){
                                                     Date transaksiDate = dateFormat.parse(historyTransaksi[i][0]);
@@ -446,6 +451,7 @@ public class Main {
                                                         System.out.println("Tujuan Pengiriman: "+historyTransaksi[i][3]);
                                                         System.out.println("Jenis Layanan: "+historyTransaksi[i][4]);
                                                         System.out.println("Total Biaya: "+historyTransaksi[i][5]);
+                                                        //System.out.println(i + " | " + historyTransaksi[i][0] + " | " + historyTransaksi[i][1] + " | " + historyTransaksi[i][2] + " | " + historyTransaksi[i][3] + " | " + historyTransaksi[i][4] + " | " + historyTransaksi[i][5]);
                                                     }
                                                 }
                                             }
@@ -457,23 +463,17 @@ public class Main {
                                     case 2:
                                         System.out.println("Under Develpment");
                                         break;
+                                    case 3:
+                                        System.out.println("Under Develpment");
+                                        break;
+                                    case 4:
+                                        System.out.println("Under Develpment");
+                                        break;
+                                    case 5:
+                                        break;
                                     default:
                                         break;
                                 }
-                                /*for (int i = 0; i < historyTransaksi.length; i++) {
-                                   if (historyTransaksi[i][0] != null) {
-                                        System.out.println("=======================================");
-                                        System.out.println("\u001B[33m           History Transaksi "+(i+1)+"          \u001B[0m");
-                                        System.out.println("=======================================");
-                                        System.out.println("Tanggal Transaksi: "+historyTransaksi[i][0]);
-                                        System.out.println("Nama Pengirim: "+historyTransaksi[i][1]);
-                                        System.out.println("Nomor Kontak: "+historyTransaksi[i][2]);
-                                        System.out.println("Tujuan Pengiriman: "+historyTransaksi[i][3]);
-                                        System.out.println("Jenis Layanan: "+historyTransaksi[i][4]);
-                                        System.out.println("Total Biaya: "+historyTransaksi[i][5]);
-                                        Test Merge
-                                    }
-                                }*/
                                 break;
                             case 5:
                                 isLoop = false;
