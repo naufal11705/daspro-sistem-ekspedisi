@@ -3,6 +3,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Arrays;
+import java.util.Calendar;
 
 public class Main {
 
@@ -67,20 +68,20 @@ public class Main {
 
         // Array History Pemesanan
         String[][] historyTransaksi = {
-            {"29-01-2023", "Nanda", "08866778899", "Yogyakarta", "Reguler", "25700.0"},
-            {"12-02-2023", "Gabriel", "08811223344", "Tangerang", "Ekonomi", "33200.0"},
-            {"03-03-2023", "Afifah", "08876543210", "Makassar", "Reguler", "50900.0"},
+            {"29-01-2022", "Nanda", "08866778899", "Yogyakarta", "Reguler", "25700.0"},
+            {"12-02-2022", "Gabriel", "08811223344", "Tangerang", "Ekonomi", "33200.0"},
+            {"03-03-2022", "Afifah", "08876543210", "Makassar", "Reguler", "50900.0"},
             {"26-04-2023", "Esa", "08822334455", "Medan", "Ekonomi", "65400.0"},
             {"21-05-2023", "Abdi", "08811223344", "Bogor", "Ekonomi", "34800.0"},
             {"17-06-2023", "Naufal", "08822334455", "Semarang", "Sameday", "66500.0"},
-            {"30-06-2023", "Farrel", "08855443322", "Jakarta", "Reguler", "76800.0"},
-            {"14-07-2023", "Atabik", "08855443322", "Bandung", "Ekonomi", "45300.0"},
-            {"05-08-2023", "Dio", "08876543210", "Surabaya", "Sameday", "29100.0"},
+            {"30-06-2021", "Farrel", "08855443322", "Jakarta", "Reguler", "76800.0"},
+            {"14-07-2021", "Atabik", "08855443322", "Bandung", "Ekonomi", "45300.0"},
+            {"05-08-2021", "Dio", "08876543210", "Surabaya", "Sameday", "29100.0"},
             {"09-09-2023", "Pasha", "08899887766", "Serang", "Reguler", "78000.0"},
-            {"18-10-2023", "Farhan", "08866778899", "Denpasar", "Reguler", "55700.0"},
-            {"02-12-2023", "Chiko", "08811223344", "Malang", "Ekonomi", "87600.0"},
-            {"27-09-2023", "Haikal", "08887654321", "Bengkulu", "Sameday", "98800.0"},
-            {"11-11-2023", "Cindy", "08899887766", "Bekasi", "Sameday", "65400.0"},
+            {"18-10-2020", "Farhan", "08866778899", "Denpasar", "Reguler", "55700.0"},
+            {"02-12-2020", "Chiko", "08811223344", "Malang", "Ekonomi", "87600.0"},
+            {"27-09-2020", "Haikal", "08887654321", "Bengkulu", "Sameday", "98800.0"},
+            {"11-11-2020", "Cindy", "08899887766", "Bekasi", "Sameday", "65400.0"},
             {"28-10-2023", "Innam", "08822334455", "Surabaya", "Sameday", "55000.0"},
             {"01-01-2023", "Ivan", "08812345678", "Surabaya", "Ekonomi", "45000.0"},
             {"07-04-2023", "Luthfi", "08887654321", "Jakarta", "Reguler", "60000.0"},
@@ -410,11 +411,86 @@ public class Main {
                                         }
                                         break;
                                     case 3:
-                                        System.out.println("Under Develpment");
-                                        break;
+                                        try {
+                                            Calendar calendar = Calendar.getInstance();
+                                            calendar.set(Calendar.DAY_OF_MONTH, 1); // Set the day of the month to the first day
+                                            Date startDate = calendar.getTime();
+
+                                            calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+                                            Date endDate = calendar.getTime();
+
+                                            System.out.println("=======================================================================================================");
+                                            System.out.println("                                   History Transaksi");
+                                            System.out.println("=======================================================================================================");
+                                            System.out.println(" No  |  Tanggal Transaksi  |  Nama Pengirim  |  Nomor Kontak  |   Tujuan    |  Jenis Layanan  |  Biaya");
+                                            System.out.println("=======================================================================================================");
+
+                                            for (int i = 0; i < historyTransaksi.length; i++) {
+                                                if (historyTransaksi[i][0] != null) {
+                                                    Date transaksiDate = dateFormat.parse(historyTransaksi[i][0]);
+                                                    if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
+                                                        String formattedString = String.format(" %3d | %19s | %15s | %14s | %11s | %15s | %5s",
+                                                                i,
+                                                                historyTransaksi[i][0], // Tanggal
+                                                                historyTransaksi[i][1], // Nama
+                                                                historyTransaksi[i][2], // Nomor Telepon
+                                                                historyTransaksi[i][3], // Lokasi
+                                                                historyTransaksi[i][4], // Jenis Layanan
+                                                                historyTransaksi[i][5]  // Tarif
+                                                        );
+                                                        System.out.println(formattedString);
+                                                    }
+                                                }
+                                            }
+
+                                            System.out.println("=======================================================================================================");
+                                            break;
+                                            } catch (ParseException e) {
+                                                e.printStackTrace();
+                                            }
+                                            break;
                                     case 4:
-                                        System.out.println("Under Develpment");
-                                        break;
+                                        try {
+                                            Calendar calendar = Calendar.getInstance();
+                                            calendar.set(Calendar.MONTH, calendar.JANUARY); 
+                                            calendar.set(calendar.DAY_OF_MONTH,1);
+                                            Date startDate = calendar.getTime();
+
+                                            calendar.set(Calendar.MONTH, Calendar.DECEMBER);
+                                            calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+                                            Date endDate = calendar.getTime();
+
+                                            System.out.println("=======================================================================================================");
+                                            System.out.println("                                   History Transaksi");
+                                            System.out.println("=======================================================================================================");
+                                            System.out.println(" No  |  Tanggal Transaksi  |  Nama Pengirim  |  Nomor Kontak  |   Tujuan    |  Jenis Layanan  |  Biaya");
+                                            System.out.println("=======================================================================================================");
+
+                                            for (int i = 0; i < historyTransaksi.length; i++) {
+                                                if (historyTransaksi[i][0] != null) {
+                                                    Date transaksiDate = dateFormat.parse(historyTransaksi[i][0]);
+                                                    if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
+                                                        String formattedString = String.format(" %3d | %19s | %15s | %14s | %11s | %15s | %5s",
+                                                                i,
+                                                                historyTransaksi[i][0], // Tanggal
+                                                                historyTransaksi[i][1], // Nama
+                                                                historyTransaksi[i][2], // Nomor Telepon
+                                                                historyTransaksi[i][3], // Lokasi
+                                                                historyTransaksi[i][4], // Jenis Layanan
+                                                                historyTransaksi[i][5]  // Tarif
+                                                        );
+                                                        System.out.println(formattedString);
+                                                    }
+                                                }
+                                            }
+
+                                            System.out.println("=======================================================================================================");
+                                            break;
+                                            } catch (ParseException e) {
+                                                e.printStackTrace();
+                                            }
+                                            break; 
+                                        
                                     case 5:
                                         break;
                                     default:
