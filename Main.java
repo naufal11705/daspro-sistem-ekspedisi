@@ -639,12 +639,19 @@ public class Main {
                                     }                                            
                                     break;
                                 case 4:
-                                    System.out.println("=======================================");
-                                    System.out.println("\u001B[33m           Data Layanan           \u001B[0m");
-                                    System.out.println("=======================================");
+                                        System.out.println("==================================");
+                                        System.out.println("\u001B[33m           Data Layanan           \u001B[0m");
+                                        System.out.println("==================================");
+                                        System.out.println(" No  |    Nama Layanan   |  Biaya");
+                                        System.out.println("==================================");
                                     for (int i = 0; i < arrayLayanan.length; i++) {
                                         if (arrayLayanan[i] != null) {
-                                            System.out.println("["+i+"]. "+arrayLayanan[i]+" - "+arrayTarifLayanan[i]);
+                                             String formattedString = String.format(" %3d | %14s | %5s",
+                                                i,
+                                                arrayLayanan[i], // Nama Kota
+                                                arrayTarifLayanan[i] // Tarif
+                                        );
+                                        System.out.println(formattedString);
                                         }
                                     }
                                     break;
