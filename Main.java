@@ -170,7 +170,7 @@ public class Main {
             if(!login){
                 System.out.println("Login Gagal, silahkan coba lagi!");
             }
-        }
+        
 
         do {
             System.out.println("=============================================");
@@ -669,7 +669,8 @@ public class Main {
                         } while (inputPilihanBahasa > multilingual[0].length);
                         break;
                     case 5:
-                        exit = true;
+                        exit=true;
+                        login=false;
                         break;
                     default:
                         System.out.println("Invalid choice. Please try again.");
@@ -677,9 +678,11 @@ public class Main {
                 }
                 break;
             } while (isLoop);
+            
 
 
         } while(!exit);
+    }
     
 
         }
