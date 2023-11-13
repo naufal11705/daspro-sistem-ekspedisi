@@ -17,9 +17,11 @@ public class Main {
         // Akun default
         String[][] userData = {
             {"admin","admin123"},
-            {"naufal", "000"},
-            {"putra", "111"},
-            {"farhan", "222"}};
+            {"Naufal", "000"},
+            {"Putra", "111"},
+            {"Farhan", "222"}};
+
+        String loggedInUsername = "";
 
         // Lokasi default
         String[] arrayLokasi = {
@@ -48,13 +50,17 @@ public class Main {
             arrayTarifLayanan[1] = 6000;
             arrayTarifLayanan[2] = 20000;
 
+        // Deklarasi boolean
         boolean login = false;
         boolean found = false;
         boolean exit = false;
         boolean isLoop = false;
         boolean isAdmin = false;
+        boolean masuk = false;
+
         // Variabel untuk switch case menu
         int menuUtama, subMenu, editMenu;
+
         // Variabel Searching
         String key;
         int beratBarang;
@@ -68,38 +74,50 @@ public class Main {
 
         // Array History Pemesanan
         String[][] historyTransaksi = {
-            {"29-01-2022", "Nanda", "08866778899", "Yogyakarta", "Reguler", "25700.0"},
-            {"12-02-2022", "Gabriel", "08811223344", "Tangerang", "Ekonomi", "33200.0"},
-            {"03-03-2022", "Afifah", "08876543210", "Makassar", "Reguler", "50900.0"},
-            {"26-04-2023", "Esa", "08822334455", "Medan", "Ekonomi", "65400.0"},
-            {"21-05-2023", "Abdi", "08811223344", "Bogor", "Ekonomi", "34800.0"},
-            {"17-06-2023", "Naufal", "08822334455", "Semarang", "Sameday", "66500.0"},
-            {"30-06-2021", "Farrel", "08855443322", "Jakarta", "Reguler", "76800.0"},
-            {"14-07-2021", "Atabik", "08855443322", "Bandung", "Ekonomi", "45300.0"},
-            {"05-08-2021", "Dio", "08876543210", "Surabaya", "Sameday", "29100.0"},
-            {"09-09-2023", "Pasha", "08899887766", "Serang", "Reguler", "78000.0"},
-            {"18-10-2020", "Farhan", "08866778899", "Denpasar", "Reguler", "55700.0"},
-            {"02-12-2020", "Chiko", "08811223344", "Malang", "Ekonomi", "87600.0"},
-            {"27-09-2020", "Haikal", "08887654321", "Bengkulu", "Sameday", "98800.0"},
-            {"11-11-2020", "Cindy", "08899887766", "Bekasi", "Sameday", "65400.0"},
-            {"28-10-2023", "Innam", "08822334455", "Surabaya", "Sameday", "55000.0"},
-            {"01-01-2023", "Ivan", "08812345678", "Surabaya", "Ekonomi", "45000.0"},
-            {"07-04-2023", "Luthfi", "08887654321", "Jakarta", "Reguler", "60000.0"},
-            {"14-06-2023", "Adri", "08811223344", "Bandung", "Ekonomi", "35000.0"},
-            {"21-08-2023", "Alif", "08899887766", "Makassar", "Sameday", "42000.0"},
-            {"03-10-2023", "Dimas", "08876543210", "Denpasar", "Reguler", "58000.0"},
-            {"11-12-2023", "Julian", "08822334455", "Malang", "Sameday", "67000.0"},
-            {"25-02-2023", "Petrus", "08866778899", "Bogor", "Reguler", "73000.0"},
-            {"10-05-2023", "Saputra", "08855443322", "Surabaya", "Ekonomi", "32000.0"},
-            {"15-07-2023", "Reika", "08811223344", "Semarang", "Reguler", "52000.0"},
-            {"20-09-2023", "Rio", "08887654321", "Yogyakarta", "Sameday", "47000.0"},
-            {"05-11-2023", "Saka", "08899887766", "Tangerang", "Sameday", "69000.0"},
-            {"15-01-2023", "Taufik", "08876543210", "Bekasi", "Ekonomi", "40000.0"},
-            {"20-03-2023", "Mera", "08822334455", "Gorontalo", "Sameday", "61000.0"},
-            {"05-05-2023", "Vincent", "08866778899", "Medan", "Reguler", "54000.0"},
-            {"10-07-2023", "Vira", "08855443322", "Bengkulu", "Ekonomi", "37000.0"},
+            {"29-01-2023", "Nanda", "08866778899", "Yogyakarta", "Reguler", "25700.0", "Farhan"},
+            {"12-02-2023", "Gabriel", "08811223344", "Tangerang", "Ekonomi", "33200.0", "Naufal"},
+            {"03-03-2023", "Afifah", "08876543210", "Makassar", "Reguler", "50900.0", "Putra"},
+            {"26-04-2023", "Esa", "08822334455", "Medan", "Ekonomi", "65400.0", "Farhan"},
+            {"21-05-2023", "Abdi", "08811223344", "Bogor", "Ekonomi", "34800.0", "Naufal"},
+            {"17-06-2023", "Naufal", "08822334455", "Semarang", "Sameday", "66500.0", "Putra"},
+            {"30-06-2023", "Farrel", "08855443322", "Jakarta", "Reguler", "76800.0", "Farhan"},
+            {"14-07-2023", "Atabik", "08855443322", "Bandung", "Ekonomi", "45300.0", "Naufal"},
+            {"05-08-2023", "Dio", "08876543210", "Surabaya", "Sameday", "29100.0", "Putra"},
+            {"09-09-2023", "Pasha", "08899887766", "Serang", "Reguler", "78000.0", "Farhan"},
+            {"18-10-2023", "Farhan", "08866778899", "Denpasar", "Reguler", "55700.0", "Naufal"},
+            {"02-12-2023", "Chiko", "08811223344", "Malang", "Ekonomi", "87600.0", "Putra"},
+            {"27-09-2023", "Haikal", "08887654321", "Bengkulu", "Sameday", "98800.0", "Farhan"},
+            {"11-11-2023", "Cindy", "08899887766", "Bekasi", "Sameday", "65400.0", "Naufal"},
+            {"01-01-2023", "Ivan", "08812345678", "Surabaya", "Ekonomi", "45000.0", "Putra"},
+            {"07-04-2023", "Luthfi", "08887654321", "Jakarta", "Reguler", "60000.0", "Farhan"},
+            {"14-06-2023", "Adri", "08811223344", "Bandung", "Ekonomi", "35000.0", "Naufal"},
+            {"21-08-2023", "Alif", "08899887766", "Makassar", "Sameday", "42000.0", "Putra"},
+            {"03-10-2023", "Dimas", "08876543210", "Denpasar", "Reguler", "58000.0", "Farhan"},
+            {"11-12-2023", "Julian", "08822334455", "Malang", "Sameday", "67000.0", "Naufal"},
+            {"25-02-2023", "Petrus", "08866778899", "Bogor", "Reguler", "73000.0", "Putra"},
+            {"10-05-2023", "Saputra", "08855443322", "Surabaya", "Ekonomi", "32000.0", "Farhan"},
+            {"15-07-2023", "Reika", "08811223344", "Semarang", "Reguler", "52000.0", "Naufal"},
+            {"20-09-2023", "Rio", "08887654321", "Yogyakarta", "Sameday", "47000.0", "Putra"},
+            {"05-11-2023", "Saka", "08899887766", "Tangerang", "Sameday", "69000.0", "Farhan"},
+            {"15-01-2023", "Taufik", "08876543210", "Bekasi", "Ekonomi", "40000.0", "Naufal"},
+            {"20-03-2023", "Mera", "08822334455", "Gorontalo", "Sameday", "61000.0", "Putra"},
+            {"05-05-2023", "Vincent", "08866778899", "Medan", "Reguler", "54000.0", "Farhan"},
+            {"10-07-2023", "Vira", "08855443322", "Bengkulu", "Ekonomi", "37000.0", "Naufal"},
+            {"28-10-2023", "Innam", "08822334455", "Surabaya", "Sameday", "55000.0", "Putra"},
         };
         
+        String labelFormat = 
+                "=================================================================================================\n" +
+                "|            POLINEMA EXPEDITION               |  Tanggal: %-37s|\n" +
+                "================================================  Berat: %-39s|\n" +
+                "|            |                                 |  Layanan: %-37s|\n" +
+                "|            |            PENGIRIM             |  Biaya Kirim: %-33s|\n" + 
+                "|            |                                 |  Lokasi Pengiriman: %-27s|\n" +
+                "|            | Nama: %-26s|                                                |\n" +
+                "|            | Nomor Telepon: %-17s|                                                |\n" +
+                "|            |                                 |                                                |\n" +
+                "|            |                                 |                                                |\n" +
+                "=================================================================================================";
 
         int pilihanBahasa = 1, inputPilihanBahasa;
 
@@ -151,27 +169,36 @@ public class Main {
         
 
         while (!login) {
-            System.out.print("Masukkan Username: ");
-            String inputUsername = input.next();
+            login = false;
+            found = false;
+            exit = false;
+            isLoop = false;
+            isAdmin = false;
+            masuk = false;
+            while (!masuk) {
+                System.out.print("Masukkan Username: ");
+                String inputUsername = input.next();
 
-            System.out.print("Masukan Password: ");
-            String inputPassword = input.next();
+                System.out.print("Masukan Password: ");
+                String inputPassword = input.next();
 
-            for (int i = 0; i < userData.length ; i++ ) {
-                if (userData[i][0].equals(inputUsername) && userData[i][1].equals(inputPassword)) {
-                    System.out.println("Login Berhasil");
-                    login = true;
-                    
-                    if("admin".equals(inputUsername)){
-                        isAdmin = true;
+                for (int i = 0; i < userData.length ; i++ ) {
+                    if (userData[i][0].equals(inputUsername) && userData[i][1].equals(inputPassword)) {
+                        System.out.println("Login Berhasil");
+                        login = true;
+                        masuk = true;
+                        loggedInUsername = inputUsername;
+                        
+                        if("admin".equals(inputUsername)){
+                            isAdmin = true;
+                        }
+                        break;
                     }
-                    break;
+                }
+                if(!masuk){
+                    System.out.println("Login Gagal, silahkan coba lagi!");
                 }
             }
-            if(!login){
-                System.out.println("Login Gagal, silahkan coba lagi!");
-            }
-        
 
             do {
                 System.out.println("=============================================");
@@ -319,10 +346,27 @@ public class Main {
                                     tarifLayanan = arrayTarifLayanan[pilihanLayanan];                      
 
                                     biayaAkhir = tarifLayanan + (tarifPerKg * beratBarang) + biayaJarak;
-                                    System.out.println(biayaAkhir);
 
                                     historyTransaksi = Arrays.copyOf(historyTransaksi,historyTransaksi.length + 1);
-                                    historyTransaksi[historyTransaksi.length-1] = new String[]{tanggalHariIni,namaPengirim,nomorKontak,lokasiPengiriman,arrayLayanan[pilihanLayanan],Double.toString(biayaAkhir)};
+                                    historyTransaksi[historyTransaksi.length-1] = new String[]{
+                                        tanggalHariIni,
+                                        namaPengirim,
+                                        nomorKontak,
+                                        lokasiPengiriman,
+                                        arrayLayanan[pilihanLayanan],
+                                        Double.toString(biayaAkhir),
+                                        loggedInUsername};
+
+                                    System.out.println(String.format(
+                                        labelFormat,
+                                        tanggalHariIni, // Tanggal
+                                        beratBarang, // Berat
+                                        arrayLayanan[pilihanLayanan], // Nomor Telepon
+                                        biayaAkhir, // Biaya Akhir
+                                        lokasiPengiriman, // Lokasi
+                                        namaPengirim,
+                                        nomorKontak
+                                    ));                                        
                                     break;
                                 /*case 2:
                                     System.out.println("Under Development"); 
@@ -354,22 +398,22 @@ public class Main {
                                                 System.out.println("=======================================================================================================");
                                                 System.out.println("                                   History Transaksi");
                                                 System.out.println("=======================================================================================================");
-                                                System.out.println(" No  |  Tanggal Transaksi  |  Nama Pengirim  |  Nomor Kontak  |   Tujuan    |  Jenis Layanan  |  Biaya");
+                                                System.out.println(" No  |  Tanggal Transaksi  |  Nama Pengirim  |  Nomor Kontak  |   Tujuan    |  Jenis Layanan  |  Biaya  | Kasir");
                                                 System.out.println("=======================================================================================================");                               
                                                 for (int i = 0; i < historyTransaksi.length; i++) {
                                                     if (historyTransaksi[i][0] != null){
                                                         Date transaksiDate = dateFormat.parse(historyTransaksi[i][0]);
                                                         if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
-                                                            String formattedString = String.format(" %3d | %19s | %15s | %14s | %11s | %15s | %5s",
+                                                            System.out.println(String.format(" %3d | %19s | %15s | %14s | %11s | %15s | %5s | %5s",
                                                                 i,
                                                                 historyTransaksi[i][0], // Tanggal
                                                                 historyTransaksi[i][1], // Nama
                                                                 historyTransaksi[i][2], // Nomor Telepon
                                                                 historyTransaksi[i][3], // Lokasi
                                                                 historyTransaksi[i][4], // Jenis Layanan
-                                                                historyTransaksi[i][5]  // Tarif
-                                                            );
-                                                            System.out.println(formattedString);
+                                                                historyTransaksi[i][5], // Tarif
+                                                                historyTransaksi[i][6]  // Nama Kasir
+                                                            ));
                                                         }
                                                     }
                                                 }
@@ -386,22 +430,22 @@ public class Main {
                                                 System.out.println("=======================================================================================================");
                                                 System.out.println("                                   History Transaksi");
                                                 System.out.println("=======================================================================================================");
-                                                System.out.println(" No  |  Tanggal Transaksi  |  Nama Pengirim  |  Nomor Kontak  |   Tujuan    |  Jenis Layanan  |  Biaya");
+                                                System.out.println(" No  |  Tanggal Transaksi  |  Nama Pengirim  |  Nomor Kontak  |   Tujuan    |  Jenis Layanan  |  Biaya  | Kasir");
                                                 System.out.println("=======================================================================================================");
                                                 for (int i = 0; i < historyTransaksi.length; i++) {
                                                     if (historyTransaksi[i][0] != null){
                                                         Date transaksiDate = dateFormat.parse(historyTransaksi[i][0]);
                                                         if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
-                                                            String formattedString = String.format(" %3d | %19s | %15s | %14s | %11s | %15s | %5s",
+                                                            System.out.println(String.format(" %3d | %19s | %15s | %14s | %11s | %15s | %5s | %5s",
                                                                 i,
                                                                 historyTransaksi[i][0], // Tanggal
                                                                 historyTransaksi[i][1], // Nama
                                                                 historyTransaksi[i][2], // Nomor Telepon
                                                                 historyTransaksi[i][3], // Lokasi
                                                                 historyTransaksi[i][4], // Jenis Layanan
-                                                                historyTransaksi[i][5]  // Tarif
-                                                            );
-                                                            System.out.println(formattedString);
+                                                                historyTransaksi[i][5], // Tarif
+                                                                historyTransaksi[i][6]  // Nama Kasir
+                                                            ));
                                                         }
                                                     }
                                                 }
@@ -423,23 +467,23 @@ public class Main {
                                                 System.out.println("=======================================================================================================");
                                                 System.out.println("                                   History Transaksi");
                                                 System.out.println("=======================================================================================================");
-                                                System.out.println(" No  |  Tanggal Transaksi  |  Nama Pengirim  |  Nomor Kontak  |   Tujuan    |  Jenis Layanan  |  Biaya");
+                                                System.out.println(" No  |  Tanggal Transaksi  |  Nama Pengirim  |  Nomor Kontak  |   Tujuan    |  Jenis Layanan  |  Biaya  | Kasir");
                                                 System.out.println("=======================================================================================================");
 
                                                 for (int i = 0; i < historyTransaksi.length; i++) {
                                                     if (historyTransaksi[i][0] != null) {
                                                         Date transaksiDate = dateFormat.parse(historyTransaksi[i][0]);
                                                         if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
-                                                            String formattedString = String.format(" %3d | %19s | %15s | %14s | %11s | %15s | %5s",
-                                                                    i,
-                                                                    historyTransaksi[i][0], // Tanggal
-                                                                    historyTransaksi[i][1], // Nama
-                                                                    historyTransaksi[i][2], // Nomor Telepon
-                                                                    historyTransaksi[i][3], // Lokasi
-                                                                    historyTransaksi[i][4], // Jenis Layanan
-                                                                    historyTransaksi[i][5]  // Tarif
-                                                            );
-                                                            System.out.println(formattedString);
+                                                            System.out.println(String.format(" %3d | %19s | %15s | %14s | %11s | %15s | %5s | %5s",
+                                                                i,
+                                                                historyTransaksi[i][0], // Tanggal
+                                                                historyTransaksi[i][1], // Nama
+                                                                historyTransaksi[i][2], // Nomor Telepon
+                                                                historyTransaksi[i][3], // Lokasi
+                                                                historyTransaksi[i][4], // Jenis Layanan
+                                                                historyTransaksi[i][5], // Tarif
+                                                                historyTransaksi[i][6]  // Nama Kasir
+                                                            ));
                                                         }
                                                     }
                                                 }
@@ -464,23 +508,23 @@ public class Main {
                                                 System.out.println("=======================================================================================================");
                                                 System.out.println("                                   History Transaksi");
                                                 System.out.println("=======================================================================================================");
-                                                System.out.println(" No  |  Tanggal Transaksi  |  Nama Pengirim  |  Nomor Kontak  |   Tujuan    |  Jenis Layanan  |  Biaya");
+                                                System.out.println(" No  |  Tanggal Transaksi  |  Nama Pengirim  |  Nomor Kontak  |   Tujuan    |  Jenis Layanan  |  Biaya  | Kasir");
                                                 System.out.println("=======================================================================================================");
 
                                                 for (int i = 0; i < historyTransaksi.length; i++) {
                                                     if (historyTransaksi[i][0] != null) {
                                                         Date transaksiDate = dateFormat.parse(historyTransaksi[i][0]);
                                                         if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
-                                                            String formattedString = String.format(" %3d | %19s | %15s | %14s | %11s | %15s | %5s",
-                                                                    i,
-                                                                    historyTransaksi[i][0], // Tanggal
-                                                                    historyTransaksi[i][1], // Nama
-                                                                    historyTransaksi[i][2], // Nomor Telepon
-                                                                    historyTransaksi[i][3], // Lokasi
-                                                                    historyTransaksi[i][4], // Jenis Layanan
-                                                                    historyTransaksi[i][5]  // Tarif
-                                                            );
-                                                            System.out.println(formattedString);
+                                                            System.out.println(String.format(" %3d | %19s | %15s | %14s | %11s | %15s | %5s | %5s",
+                                                                i,
+                                                                historyTransaksi[i][0], // Tanggal
+                                                                historyTransaksi[i][1], // Nama
+                                                                historyTransaksi[i][2], // Nomor Telepon
+                                                                historyTransaksi[i][3], // Lokasi
+                                                                historyTransaksi[i][4], // Jenis Layanan
+                                                                historyTransaksi[i][5], // Tarif
+                                                                historyTransaksi[i][6]  // Nama Kasir
+                                                            ));
                                                         }
                                                     }
                                                 }
@@ -642,11 +686,11 @@ public class Main {
                                         System.out.println("==================================");
                                         System.out.println("\u001B[33m           Data Layanan           \u001B[0m");
                                         System.out.println("==================================");
-                                        System.out.println(" No  |    Nama Layanan   |  Biaya");
+                                        System.out.println(" No  |   Nama Layanan   |  Biaya");
                                         System.out.println("==================================");
                                     for (int i = 0; i < arrayLayanan.length; i++) {
                                         if (arrayLayanan[i] != null) {
-                                             String formattedString = String.format(" %3d | %14s | %5s",
+                                             String formattedString = String.format(" %3d | %16s | %5s",
                                                 i,
                                                 arrayLayanan[i], // Nama Kota
                                                 arrayTarifLayanan[i] // Tarif
@@ -686,6 +730,7 @@ public class Main {
                         case 5:
                             exit=true;
                             login=false;
+                            masuk=false;
                             break;
                         default:
                             System.out.println("Invalid choice. Please try again.");
