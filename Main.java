@@ -285,11 +285,11 @@ public class Main {
                                 System.out.print ("Masukkan Nomor Kontak: ");
                                 nomorKontak = input.next();
 
-                                System.out.print ("Masukkan Berat Barang");
+                                System.out.print ("Masukkan Berat Barang: ");
                                 beratBarang = input.nextInt();
                                 //Mencari Kota Pengiriman pada Array
                                 do {
-                                    System.out.print ("Masukkan Kota Tujuan");
+                                    System.out.print ("Masukkan Kota Tujuan: ");
                                     lokasiPengiriman = input.next();
                                     for (int i = 0; i < arrayLokasi.length; i++) {
                                         if (arrayLokasi[i] != null && arrayLokasi[i].equalsIgnoreCase(lokasiPengiriman)) {
@@ -349,16 +349,16 @@ public class Main {
                                             inputanTanggalAkhir = input.next();
                                             Date startDate = dateFormat.parse(inputanTanggalAwal);
                                             Date endDate = dateFormat.parse(inputanTanggalAkhir);
-                                            System.out.println("==================================================================================================");
+                                            System.out.println("=======================================================================================================");
                                             System.out.println("                                   History Transaksi");
-                                            System.out.println("==================================================================================================");
-                                            System.out.println(" No  |  Tanggal Transaksi  |  Nama Pengirim  |  Nomor Kontak  |  Tujuan   |  Jenis Layanan  |  Biaya");
-                                            System.out.println("==================================================================================================");                               
+                                            System.out.println("=======================================================================================================");
+                                            System.out.println(" No  |  Tanggal Transaksi  |  Nama Pengirim  |  Nomor Kontak  |   Tujuan    |  Jenis Layanan  |  Biaya");
+                                            System.out.println("=======================================================================================================");                               
                                             for (int i = 0; i < historyTransaksi.length; i++) {
                                                 if (historyTransaksi[i][0] != null){
                                                     Date transaksiDate = dateFormat.parse(historyTransaksi[i][0]);
                                                     if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
-                                                        String formattedString = String.format(" %3d | %19s | %15s | %14s | %9s | %15s | %5s",
+                                                        String formattedString = String.format(" %3d | %19s | %15s | %14s | %11s | %15s | %5s",
                                                             i,
                                                             historyTransaksi[i][0], // Tanggal
                                                             historyTransaksi[i][1], // Nama
@@ -371,6 +371,7 @@ public class Main {
                                                     }
                                                 }
                                             }
+                                            System.out.println("=======================================================================================================");
                                             break;
                                         } catch (ParseException e) {
                                             e.printStackTrace();
@@ -380,16 +381,16 @@ public class Main {
                                         try {
                                             Date startDate = dateFormat.parse(tanggalHariIni);
                                             Date endDate = dateFormat.parse(tanggalHariIni);
-                                            System.out.println("==================================================================================================");
+                                            System.out.println("=======================================================================================================");
                                             System.out.println("                                   History Transaksi");
-                                            System.out.println("==================================================================================================");
-                                            System.out.println(" No  |  Tanggal Transaksi  |  Nama Pengirim  |  Nomor Kontak  |  Tujuan   |  Jenis Layanan  |  Biaya");
-                                            System.out.println("==================================================================================================");
+                                            System.out.println("=======================================================================================================");
+                                            System.out.println(" No  |  Tanggal Transaksi  |  Nama Pengirim  |  Nomor Kontak  |   Tujuan    |  Jenis Layanan  |  Biaya");
+                                            System.out.println("=======================================================================================================");
                                             for (int i = 0; i < historyTransaksi.length; i++) {
                                                 if (historyTransaksi[i][0] != null){
                                                     Date transaksiDate = dateFormat.parse(historyTransaksi[i][0]);
                                                     if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
-                                                        String formattedString = String.format(" %3d | %19s | %15s | %14s | %9s | %15s | %5s",
+                                                        String formattedString = String.format(" %3d | %19s | %15s | %14s | %11s | %15s | %5s",
                                                             i,
                                                             historyTransaksi[i][0], // Tanggal
                                                             historyTransaksi[i][1], // Nama
@@ -402,6 +403,7 @@ public class Main {
                                                     }
                                                 }
                                             }
+                                            System.out.println("=======================================================================================================");
                                             break;
                                         } catch (ParseException e) {
                                             e.printStackTrace();
