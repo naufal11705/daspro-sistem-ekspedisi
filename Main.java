@@ -392,7 +392,7 @@ public class Main {
                                                 break;
                                             }
                                         }
-                                        if(found != true) {
+                                        if(!found) {
                                             System.out.print ("Kota Tujuan tidak Ditemukan!");
                                         }    
                                     } while (!found);
@@ -661,7 +661,7 @@ public class Main {
                                             break;
                                         }
                                     }
-                                    if(found == true) {
+                                    if(found) {
                                         found = false;
                                     } else {
                                         System.out.println("Key tidak ditemukan");
@@ -730,7 +730,7 @@ public class Main {
                                             break;
                                         }
                                     }
-                                    if(found == true) {
+                                    if(found) {
                                         found = false;
                                     } else {
                                         System.out.println("Key tidak ditemukan");
@@ -748,7 +748,7 @@ public class Main {
                                             break;
                                         }
                                     }
-                                    if(found == true) {
+                                    if(found) {
                                         found = false;
                                     } else {
                                         System.out.println("Key tidak ditemukan");
