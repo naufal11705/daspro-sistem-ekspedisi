@@ -16,10 +16,10 @@ public class Main {
         
         // Akun default
         String[][] userData = {
-            {"admin","admin123"},
-            {"Naufal", "000"},
-            {"Putra", "111"},
-            {"Farhan", "222"}};
+            {"admin","admin123","ADMIN"},
+            {"Naufal", "000","KASIR"},
+            {"Putra", "111","KASIR"},
+            {"Farhan", "222","KASIR"}};
 
         String loggedInUsername = "";
 
@@ -57,6 +57,7 @@ public class Main {
         boolean isLoop = false;
         boolean isAdmin = false;
         boolean masuk = false;
+        boolean validInput = false;
 
         // Variabel untuk switch case menu
         int menuUtama, subMenu, editMenu;
@@ -239,16 +240,25 @@ public class Main {
 
                                 switch (pilihan) {
                                     case 1:
-                                        System.out.print("Masukan nama pengguna baru: ");
-                                        String usernameBaru = input.next();
-                                        System.out.print("Masukan kata sandi baru: ");
-                                        String katasandiBaru = input.next();
-
-                                        userData = Arrays.copyOf(userData,userData.length + 1);
-                                        userData[userData.length-1] = new String[]{usernameBaru,katasandiBaru};
-
-                                        System.out.println("Pengguna baru berhasil ditambahkan!!!");
-                                        break;
+                                    System.out.print("Masukan nama pengguna baru: ");
+                                    String usernameBaru = input.next();
+                                    System.out.print("Masukan kata sandi baru: ");
+                                    String katasandiBaru = input.next();
+                                    System.out.print("Masukkan jabatan pengguna baru: ");
+                                    String jabatanBaru = input.next();
+                                
+                                    String[][] newUser = {
+                                            {usernameBaru, katasandiBaru, jabatanBaru}
+                                    };
+                                
+                                    // Menggabungkan array userData dengan newUser
+                                    String[][] tempUserData = new String[userData.length + newUser.length][userData[0].length];
+                                    System.arraycopy(userData, 0, tempUserData, 0, userData.length);
+                                    System.arraycopy(newUser, 0, tempUserData, userData.length, newUser.length);
+                                    userData = tempUserData;
+                                
+                                    System.out.println("Pengguna baru berhasil ditambahkan!!!");
+                                    break;
                                     case 2:
                                         System.out.print("Masukan username yang akan dihapus: ");
                                         String usernameToRemove = input.next();
@@ -270,13 +280,15 @@ public class Main {
                                         }
                                         break;   
                                     case 3:
-                                        System.out.println("=======================================");
-                                        System.out.println("Data Pengguna");
-                                        System.out.println("=======================================");
+                                        System.out.println("-------------------------------------------------");
+                                        System.out.println("                  Data Pengguna");
+                                        System.out.println("-------------------------------------------------");
+                                        System.out.println("| Username       | Password       | Jabatan        |");
+                                        System.out.println("-------------------------------------------------");
                                         for (int i = 0; i < userData.length; i++) {
-                                            System.out.println("Username: " + userData[i][0] + " Password: " + userData[i][1]);
+                                            System.out.printf("| %-14s | %-14s | %-14s |%n", userData[i][0], userData[i][1], userData[i][2]);
                                         }
-
+                                        System.out.println("-------------------------------------------------");
                                         break;
                                     case 4:
                                         exit = true;
@@ -314,8 +326,22 @@ public class Main {
                                     System.out.print ("Masukkan Nomor Kontak: ");
                                     nomorKontak = input.next();
 
-                                    System.out.print ("Masukkan Berat Barang: ");
-                                    beratBarang = input.nextInt();
+                                    do {
+                                        System.out.print("Masukkan Berat Barang: ");
+                                        while (!input.hasNextInt()) {
+                                            System.out.println("Input harus berupa bilangan bulat. Silakan coba lagi.");
+                                            System.out.print("Masukkan Berat Barang: ");
+                                            input.next(); // mengonsumsi input yang tidak valid
+                                        }
+                                        beratBarang = input.nextInt();
+                                        input.nextLine(); // membersihkan buffer input
+                                        if (beratBarang <= 0) {
+                                            System.out.println("Berat barang harus lebih besar dari 0. Silakan coba lagi.");
+                                        } else {
+                                            validInput = true;
+                                        }
+                                    } while (!validInput);
+                                    validInput = false;
                                     //Mencari Kota Pengiriman pada Array
                                     do {
                                         System.out.print ("Masukkan Kota Tujuan: ");
