@@ -24,10 +24,28 @@ public class Main {
         String loggedInUsername = "";
 
         // Lokasi default
-        String[] arrayLokasi = {
-            "Malang", "Jakarta", "Surabaya", "Bandung", "Medan",
-            "Makassar", "Yogyakarta", "Semarang", "Denpasar", "Serang",
-            "Tangerang", "Bengkulu", "Gorontalo", "Bekasi", "Bogor"
+        String[][] arrayLokasi = {
+            {"Malang", "1"},
+            {"Surabaya", "2"},
+            {"Semarang", "2"},
+            {"Yogyakarta", "3"},
+            {"Magelang", "3"},
+            {"Pekalongan", "3"},
+            {"Cirebon", "4"},
+            {"Bandung", "4"},
+            {"Bekasi", "4"},
+            {"Bogor", "4"},
+            {"Jakarta", "5"},
+            {"Banten", "5"},
+            {"Serang", "5"},
+            {"Lumajang", "2"},
+            {"Banyuwangi", "3"}
+        };
+
+
+            // "Malang", "Jakarta", "Surabaya", "Bandung", "Medan",
+            // "Makassar", "Yogyakarta", "Semarang", "Denpasar", "Serang",
+            // "Tangerang", "Bengkulu", "Gorontalo", "Bekasi", "Bogor"
         };
         
         // Tarif berdasarkan tujuan pengiriman
@@ -39,10 +57,12 @@ public class Main {
         
             
         // Layanan pengiriman default
-        String[] arrayLayanan = new String[20];
-            arrayLayanan[0] = "Reguler";
-            arrayLayanan[1] = "Ekonomi";
-            arrayLayanan[2] = "Sameday";
+        String[][] arrayLayanan = {
+            {"Reguler", "3"},
+            {"Ekonomi", "2"},
+            {"Sameday", "1"}
+        };
+            
 
         // Tarif berdasarkan jenis layanan
         double[] arrayTarifLayanan = new double[20];
@@ -74,13 +94,13 @@ public class Main {
 
         // Array History Pemesanan
         String[][] historyTransaksi = {
-            {"29-01-2023", "Nanda", "08866778899", "Yogyakarta", "Reguler", "25700.0", "Farhan"},
-            {"12-02-2023", "Gabriel", "08811223344", "Tangerang", "Ekonomi", "33200.0", "Naufal"},
-            {"03-03-2023", "Afifah", "08876543210", "Makassar", "Reguler", "50900.0", "Putra"},
-            {"26-04-2023", "Esa", "08822334455", "Medan", "Ekonomi", "65400.0", "Farhan"},
-            {"21-05-2023", "Abdi", "08811223344", "Bogor", "Ekonomi", "34800.0", "Naufal"},
-            {"17-06-2023", "Naufal", "08822334455", "Semarang", "Sameday", "66500.0", "Putra"},
-            {"30-06-2023", "Farrel", "08855443322", "Jakarta", "Reguler", "76800.0", "Farhan"},
+            {"1", "29-01-2023", "Nanda", "08866778899", "Yogyakarta", "Reguler", "25700.0", "Farhan"},
+            {"2", "12-02-2023", "Gabriel", "08811223344", "Tangerang", "Ekonomi", "33200.0", "Naufal"},
+            {"3", "03-03-2023", "Afifah", "08876543210", "Makassar", "Reguler", "50900.0", "Putra"},
+            {"4", "26-04-2023", "Esa", "08822334455", "Medan", "Ekonomi", "65400.0", "Farhan"},
+            {"5", "21-05-2023", "Abdi", "08811223344", "Bogor", "Ekonomi", "34800.0", "Naufal"},
+            {"6", "17-06-2023", "Naufal", "08822334455", "Semarang", "Sameday", "66500.0", "Putra"},
+            {"7", "30-06-2023", "Farrel", "08855443322", "Jakarta", "Reguler", "76800.0", "Farhan"},
             {"14-07-2023", "Atabik", "08855443322", "Bandung", "Ekonomi", "45300.0", "Naufal"},
             {"05-08-2023", "Dio", "08876543210", "Surabaya", "Sameday", "29100.0", "Putra"},
             {"09-09-2023", "Pasha", "08899887766", "Serang", "Reguler", "78000.0", "Farhan"},
@@ -297,9 +317,9 @@ public class Main {
                             System.out.println("=============================================");
                             System.out.println("[1]. Melakukan Transaksi"); //Melakukan Transaksi
                             //System.out.println("[2]. Mengedit Data Transaksi"); //Mengedit Transaksi
-                            //System.out.println("[3]. Menghapus Data Transaksi"); //Menghapus Transaksi
-                            System.out.println("[2]. Menampilkan Data Transaksi"); //Menampilkan Data Transaksi
-                            System.out.println("[3]. Kembali ke Menu Utama"); //Kembali ke Menu Utama
+                            System.out.println("[2]. Menghapus Data Transaksi"); //Menghapus Transaksi
+                            System.out.println("[3]. Menampilkan Data Transaksi"); //Menampilkan Data Transaksi
+                            System.out.println("[4]. Kembali ke Menu Utama"); //Kembali ke Menu Utama
                             System.out.println("=============================================");
                             System.out.print("Masukkan Pilihan: "); 
 
@@ -346,9 +366,11 @@ public class Main {
                                     tarifLayanan = arrayTarifLayanan[pilihanLayanan];                      
 
                                     biayaAkhir = tarifLayanan + (tarifPerKg * beratBarang) + biayaJarak;
+                                   // int nomorTransaksi=0;
 
                                     historyTransaksi = Arrays.copyOf(historyTransaksi,historyTransaksi.length + 1);
                                     historyTransaksi[historyTransaksi.length-1] = new String[]{
+                                        //Integer.toString(nomorTransaksi),
                                         tanggalHariIni,
                                         namaPengirim,
                                         nomorKontak,
@@ -370,11 +392,26 @@ public class Main {
                                     break;
                                 /*case 2:
                                     System.out.println("Under Development"); 
-                                    break;
-                                case 3:
-                                    System.out.println("Under Development"); 
                                     break;*/
                                 case 2:
+                                    System.out.print("Masukkan Nomor Transaksi yang Ingin dihapus: ");
+                                     key = input.next();
+                                     for (int i = 0; i < historyTransaksi.length; i++) {
+                                        if (historyTransaksi[i] != null && historyTransaksi[i][0].equalsIgnoreCase(key)) {
+                                            System.out.println(historyTransaksi[i]+" Telah Dihapus!");
+                                            System.arraycopy(historyTransaksi, i + 1, historyTransaksi, i, historyTransaksi.length - 1 - i);
+                                            historyTransaksi = Arrays.copyOf(historyTransaksi, historyTransaksi.length - 1);
+                                            found = true;
+                                            break;
+                                        }
+                                    }
+                                    if(found == true) {
+                                        found = false;
+                                    } else {
+                                        System.out.println("Key tidak ditemukan");
+                                    }                                            
+                                    break;
+                                case 3:
                                     System.out.println("=======================================");
                                     System.out.println("\u001B[33m           History Transaksi           \u001B[0m");
                                     System.out.println("=======================================");
@@ -542,7 +579,7 @@ public class Main {
                                             break;
                                     }
                                     break;
-                                case 3:
+                                case 4:
                                     isLoop = false;
                                     break;
                                 default:
