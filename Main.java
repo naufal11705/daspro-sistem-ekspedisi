@@ -64,13 +64,10 @@ public class Main {
 
         // Variabel Searching
         String key;
-        int beratBarang;
-        double biayaAkhir;
-        String lokasiPengiriman;
+        
         double tarifPerKg = 5000;
         int pilihanLayanan;
         double tarifLayanan = 0;
-        String namaPengirim, nomorKontak;
         double biayaJarak = 0;
 
         // Array History Pemesanan
@@ -119,6 +116,37 @@ public class Main {
                 "║            ║                                 ║                                                ║\n" +
                 "║            ║                                 ║                                                ║\n" +
                 "╚════════════╩═════════════════════════════════╩════════════════════════════════════════════════╝";
+
+        String laporanFormat = 
+                "╔══════════════════════════════════════════════════════════════════════════════════════════════╗\n" +
+                "║                                                                                              ║\n" +
+                "╠                                                                                              ║\n" +
+                "║                                                                                              ║\n" +
+                "║                                                                                              ║\n" + 
+                "║                                                                                              ║\n" +
+                "║                                                                                              ║\n" +
+                "║                                                                                              ║\n" +
+                "║                                                                                              ║\n" +
+                "║                                                                                              ║\n" +
+                "║                                                                                              ║\n" +
+                "╠                                                                                              ║\n" +
+                "║                                                                                              ║\n" +
+                "║                                                                                              ║\n" + 
+                "║                                                                                              ║\n" +
+                "║                                                                                              ║\n" +
+                "║                                                                                              ║\n" +
+                "║                                                                                              ║\n" +
+                "║                                                                                              ║\n" +
+                "║                                                                                              ║\n" +
+                "╠                                                                                              ║\n" +
+                "║                                                                                              ║\n" +
+                "║                                                                                              ║\n" + 
+                "║                                                                                              ║\n" +
+                "║                                                                                              ║\n" +
+                "║                                                                                              ║\n" +
+                "║                                                                                              ║\n" +
+                "║                                                                                              ║\n" +
+                "╚══════════════════════════════════════════════════════════════════════════════════════════════╝";
 
         int pilihanBahasa = 1, inputPilihanBahasa;
 
@@ -322,11 +350,14 @@ public class Main {
 
                             switch (subMenu) {
                                 case 1:
+                                    int beratBarang;
+                                    String lokasiPengiriman;
+
                                     System.out.print ("Masukkan Nama Pengirim: ");
-                                    namaPengirim = input.nextLine();
+                                    String namaPengirim = input.nextLine();
 
                                     System.out.print ("Masukkan Nomor Kontak: ");
-                                    nomorKontak = input.next();
+                                    String nomorKontak = input.next();
 
                                     do {
                                         System.out.print("Masukkan Berat Barang: ");
@@ -373,7 +404,7 @@ public class Main {
                                     pilihanLayanan = input.nextInt();
                                     tarifLayanan = arrayTarifLayanan[pilihanLayanan];                      
 
-                                    biayaAkhir = tarifLayanan + (tarifPerKg * beratBarang) + biayaJarak;
+                                    double biayaAkhir = tarifLayanan + (tarifPerKg * beratBarang) + biayaJarak;
 
                                     historyTransaksi = Arrays.copyOf(historyTransaksi,historyTransaksi.length + 1);
                                     historyTransaksi[historyTransaksi.length-1] = new String[]{
