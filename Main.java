@@ -296,10 +296,10 @@ public class Main {
                             System.out.println("\u001B[33m           Pengiriman Barang          \u001B[0m");
                             System.out.println("=============================================");
                             System.out.println("[1]. Melakukan Transaksi"); //Melakukan Transaksi
-                            //System.out.println("[2]. Mengedit Data Transaksi"); //Mengedit Transaksi
-                            //System.out.println("[3]. Menghapus Data Transaksi"); //Menghapus Transaksi
-                            System.out.println("[2]. Menampilkan Data Transaksi"); //Menampilkan Data Transaksi
-                            System.out.println("[3]. Kembali ke Menu Utama"); //Kembali ke Menu Utama
+                            System.out.println("[2]. Mengedit Data Transaksi"); //Mengedit Transaksi
+                            System.out.println("[3]. Menghapus Data Transaksi"); //Menghapus Transaksi
+                            System.out.println("[4]. Menampilkan Data Transaksi"); //Menampilkan Data Transaksi
+                            System.out.println("[5]. Kembali ke Menu Utama"); //Kembali ke Menu Utama
                             System.out.println("=============================================");
                             System.out.print("Masukkan Pilihan: "); 
 
@@ -368,13 +368,13 @@ public class Main {
                                         nomorKontak
                                     ));                                        
                                     break;
-                                /*case 2:
+                                case 2:
                                     System.out.println("Under Development"); 
                                     break;
                                 case 3:
                                     System.out.println("Under Development"); 
-                                    break;*/
-                                case 2:
+                                    break;
+                                case 4:
                                     System.out.println("=======================================");
                                     System.out.println("\u001B[33m           History Transaksi           \u001B[0m");
                                     System.out.println("=======================================");
@@ -542,7 +542,7 @@ public class Main {
                                             break;
                                     }
                                     break;
-                                case 3:
+                                case 5:
                                     isLoop = false;
                                     break;
                                 default:
