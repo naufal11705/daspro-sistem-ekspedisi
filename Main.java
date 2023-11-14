@@ -42,11 +42,6 @@ public class Main {
             {"Banyuwangi", "3"}
         };
 
-
-            // "Malang", "Jakarta", "Surabaya", "Bandung", "Medan",
-            // "Makassar", "Yogyakarta", "Semarang", "Denpasar", "Serang",
-            // "Tangerang", "Bengkulu", "Gorontalo", "Bekasi", "Bogor"
-        };
         
         // Tarif berdasarkan tujuan pengiriman
         double[] arrayTarifLokasi = {
