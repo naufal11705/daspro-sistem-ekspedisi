@@ -108,17 +108,17 @@ public class Main {
         };
         
         String labelFormat = 
-                "=================================================================================================\n" +
-                "|            POLINEMA EXPEDITION               |  Tanggal: %-37s|\n" +
-                "================================================  Berat: %-39s|\n" +
-                "|            |                                 |  Layanan: %-37s|\n" +
-                "|            |            PENGIRIM             |  Biaya Kirim: %-33s|\n" + 
-                "|            |                                 |  Lokasi Pengiriman: %-27s|\n" +
-                "|            | Nama: %-26s|                                                |\n" +
-                "|            | Nomor Telepon: %-17s|                                                |\n" +
-                "|            |                                 |                                                |\n" +
-                "|            |                                 |                                                |\n" +
-                "=================================================================================================";
+                "╔══════════════════════════════════════════════╦════════════════════════════════════════════════╗\n" +
+                "║            POLINEMA EXPEDITION               ║  Tanggal: %-37s║\n" +
+                "╠════════════╦═════════════════════════════════╣  Berat: %-39s║\n" +
+                "║            ║                                 ║  Layanan: %-37s║\n" +
+                "║            ║            PENGIRIM             ║  Biaya Kirim: %-33s║\n" + 
+                "║            ║                                 ║  Lokasi Pengiriman: %-27s║\n" +
+                "║            ║ Nama: %-26s║                                                ║\n" +
+                "║            ║ Nomor Telepon: %-17s║                                                ║\n" +
+                "║            ║                                 ║                                                ║\n" +
+                "║            ║                                 ║                                                ║\n" +
+                "╚════════════╩═════════════════════════════════╩════════════════════════════════════════════════╝";
 
         int pilihanBahasa = 1, inputPilihanBahasa;
 
@@ -164,9 +164,9 @@ public class Main {
         String tanggalHariIni = dateFormat.format(date);
         String inputanTanggalAwal = "00-00-000", inputanTanggalAkhir = "00-00-0000";
 
-        System.out.println("=============================================");
+        System.out.println("═════════════════════════════════════════════");
         System.out.println("\u001B[33m     Selamat Datang di Sistem Ekspedisi     \u001B[0m");
-        System.out.println("=============================================");
+        System.out.println("═════════════════════════════════════════════");
         
 
         while (!login) {
@@ -202,9 +202,9 @@ public class Main {
             }
 
             do {
-                System.out.println("=============================================");
+                System.out.println("═════════════════════════════════════════════");
                 System.out.println("\u001B[33m" + multilingual[0][pilihanBahasa]+   "\u001B[0m");
-                System.out.println("=============================================");
+                System.out.println("═════════════════════════════════════════════");
                 if(isAdmin){
                     System.out.println("[0]. " + "Manajemen Pengguna");
                 }
@@ -213,7 +213,7 @@ public class Main {
                 System.out.println("[3]. " + multilingual[16][pilihanBahasa]); //Manajemen Tarif
                 System.out.println("[4]. " + multilingual[22][pilihanBahasa]); //Ganti Bahasa
                 System.out.println("[5]. " + multilingual[23][pilihanBahasa]); //Keluar
-                System.out.println("=============================================");
+                System.out.println("═════════════════════════════════════════════");
 
                 System.out.print(multilingual[24][pilihanBahasa]);
                 menuUtama = input.nextInt();
@@ -226,14 +226,14 @@ public class Main {
                         case 0:
                             if(isAdmin){
                                 while(!exit) {
-                                System.out.println("=======================================");
+                                System.out.println("═══════════════════════════════════════");
                                 System.out.println("Menu");
-                                System.out.println("=======================================");
+                                System.out.println("═══════════════════════════════════════");
                                 System.out.println("[1] Tambahkan Pengguna");
                                 System.out.println("[2] Hapus Pengguna");
                                 System.out.println("[3] Data Pengguna");
                                 System.out.println("[4] Keluar");
-                                System.out.println("=======================================");
+                                System.out.println("═══════════════════════════════════════");
 
                                 System.out.print("Masukan Pilihan: ");
                                 int pilihan = input.nextInt();
@@ -280,11 +280,13 @@ public class Main {
                                         }
                                         break;   
                                     case 3:
+
                                         System.out.println("-------------------------------------------------");
                                         System.out.println("                  Data Pengguna");
                                         System.out.println("-------------------------------------------------");
                                         System.out.println("| Username       | Password       | Jabatan        |");
                                         System.out.println("-------------------------------------------------");
+
                                         for (int i = 0; i < userData.length; i++) {
                                             System.out.printf("| %-14s | %-14s | %-14s |%n", userData[i][0], userData[i][1], userData[i][2]);
                                         }
@@ -304,15 +306,15 @@ public class Main {
                                 
                                 
                         case 1:
-                            System.out.println("=============================================");
+                            System.out.println("═════════════════════════════════════════════");
                             System.out.println("\u001B[33m           Pengiriman Barang          \u001B[0m");
-                            System.out.println("=============================================");
+                            System.out.println("═════════════════════════════════════════════");
                             System.out.println("[1]. Melakukan Transaksi"); //Melakukan Transaksi
-                            //System.out.println("[2]. Mengedit Data Transaksi"); //Mengedit Transaksi
-                            //System.out.println("[3]. Menghapus Data Transaksi"); //Menghapus Transaksi
-                            System.out.println("[2]. Menampilkan Data Transaksi"); //Menampilkan Data Transaksi
-                            System.out.println("[3]. Kembali ke Menu Utama"); //Kembali ke Menu Utama
-                            System.out.println("=============================================");
+                            System.out.println("[2]. Mengedit Data Transaksi"); //Mengedit Transaksi
+                            System.out.println("[3]. Menghapus Data Transaksi"); //Menghapus Transaksi
+                            System.out.println("[4]. Menampilkan Data Transaksi"); //Menampilkan Data Transaksi
+                            System.out.println("[5]. Kembali ke Menu Utama"); //Kembali ke Menu Utama
+                            System.out.println("═════════════════════════════════════════════");
                             System.out.print("Masukkan Pilihan: "); 
 
                             subMenu = input.nextInt();
@@ -394,22 +396,22 @@ public class Main {
                                         nomorKontak
                                     ));                                        
                                     break;
-                                /*case 2:
+                                case 2:
                                     System.out.println("Under Development"); 
                                     break;
                                 case 3:
                                     System.out.println("Under Development"); 
-                                    break;*/
-                                case 2:
-                                    System.out.println("=======================================");
+                                    break;
+                                case 4:
+                                    System.out.println("═════════════════════════════════════════════");
                                     System.out.println("\u001B[33m           History Transaksi           \u001B[0m");
-                                    System.out.println("=======================================");
+                                    System.out.println("═════════════════════════════════════════════");
                                     System.out.println("[1]. Berdasarkan Rentang Tanggal");
                                     System.out.println("[2]. Hari ini");
                                     System.out.println("[3]. Bulan ini");
                                     System.out.println("[4]. Tahun ini");
                                     System.out.println("[5]. Kembali ke Menu Utama");
-                                    System.out.println("=======================================");
+                                    System.out.println("═════════════════════════════════════════════");
                                     System.out.print("Masukkan Pilihan: ");
                                     editMenu = input.nextInt();
                                     switch (editMenu) {
@@ -421,11 +423,11 @@ public class Main {
                                                 inputanTanggalAkhir = input.next();
                                                 Date startDate = dateFormat.parse(inputanTanggalAwal);
                                                 Date endDate = dateFormat.parse(inputanTanggalAkhir);
-                                                System.out.println("=======================================================================================================");
+                                                System.out.println("═══════════════════════════════════════════════════════════════════════════════════════════════════════");
                                                 System.out.println("                                   History Transaksi");
-                                                System.out.println("=======================================================================================================");
+                                                System.out.println("═══════════════════════════════════════════════════════════════════════════════════════════════════════");
                                                 System.out.println(" No  |  Tanggal Transaksi  |  Nama Pengirim  |  Nomor Kontak  |   Tujuan    |  Jenis Layanan  |  Biaya  | Kasir");
-                                                System.out.println("=======================================================================================================");                               
+                                                System.out.println("═══════════════════════════════════════════════════════════════════════════════════════════════════════");                               
                                                 for (int i = 0; i < historyTransaksi.length; i++) {
                                                     if (historyTransaksi[i][0] != null){
                                                         Date transaksiDate = dateFormat.parse(historyTransaksi[i][0]);
@@ -443,7 +445,7 @@ public class Main {
                                                         }
                                                     }
                                                 }
-                                                System.out.println("=======================================================================================================");
+                                                System.out.println("═══════════════════════════════════════════════════════════════════════════════════════════════════════");
                                                 break;
                                             } catch (ParseException e) {
                                                 e.printStackTrace();
@@ -453,11 +455,11 @@ public class Main {
                                             try {
                                                 Date startDate = dateFormat.parse(tanggalHariIni);
                                                 Date endDate = dateFormat.parse(tanggalHariIni);
-                                                System.out.println("=======================================================================================================");
+                                                System.out.println("═══════════════════════════════════════════════════════════════════════════════════════════════════════");
                                                 System.out.println("                                   History Transaksi");
-                                                System.out.println("=======================================================================================================");
+                                                System.out.println("═══════════════════════════════════════════════════════════════════════════════════════════════════════");
                                                 System.out.println(" No  |  Tanggal Transaksi  |  Nama Pengirim  |  Nomor Kontak  |   Tujuan    |  Jenis Layanan  |  Biaya  | Kasir");
-                                                System.out.println("=======================================================================================================");
+                                                System.out.println("═══════════════════════════════════════════════════════════════════════════════════════════════════════");    
                                                 for (int i = 0; i < historyTransaksi.length; i++) {
                                                     if (historyTransaksi[i][0] != null){
                                                         Date transaksiDate = dateFormat.parse(historyTransaksi[i][0]);
@@ -475,7 +477,7 @@ public class Main {
                                                         }
                                                     }
                                                 }
-                                                System.out.println("=======================================================================================================");
+                                                System.out.println("═══════════════════════════════════════════════════════════════════════════════════════════════════════");
                                                 break;
                                             } catch (ParseException e) {
                                                 e.printStackTrace();
@@ -490,11 +492,11 @@ public class Main {
                                                 calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
                                                 Date endDate = calendar.getTime();
 
-                                                System.out.println("=======================================================================================================");
+                                                System.out.println("═══════════════════════════════════════════════════════════════════════════════════════════════════════");
                                                 System.out.println("                                   History Transaksi");
-                                                System.out.println("=======================================================================================================");
+                                                System.out.println("═══════════════════════════════════════════════════════════════════════════════════════════════════════");
                                                 System.out.println(" No  |  Tanggal Transaksi  |  Nama Pengirim  |  Nomor Kontak  |   Tujuan    |  Jenis Layanan  |  Biaya  | Kasir");
-                                                System.out.println("=======================================================================================================");
+                                                System.out.println("═══════════════════════════════════════════════════════════════════════════════════════════════════════");    
 
                                                 for (int i = 0; i < historyTransaksi.length; i++) {
                                                     if (historyTransaksi[i][0] != null) {
@@ -514,7 +516,7 @@ public class Main {
                                                     }
                                                 }
 
-                                                System.out.println("=======================================================================================================");
+                                                System.out.println("═══════════════════════════════════════════════════════════════════════════════════════════════════════");
                                                 break;
                                                 } catch (ParseException e) {
                                                     e.printStackTrace();
@@ -531,11 +533,11 @@ public class Main {
                                                 calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
                                                 Date endDate = calendar.getTime();
 
-                                                System.out.println("=======================================================================================================");
+                                                System.out.println("═══════════════════════════════════════════════════════════════════════════════════════════════════════");
                                                 System.out.println("                                   History Transaksi");
-                                                System.out.println("=======================================================================================================");
+                                                System.out.println("═══════════════════════════════════════════════════════════════════════════════════════════════════════");
                                                 System.out.println(" No  |  Tanggal Transaksi  |  Nama Pengirim  |  Nomor Kontak  |   Tujuan    |  Jenis Layanan  |  Biaya  | Kasir");
-                                                System.out.println("=======================================================================================================");
+                                                System.out.println("═══════════════════════════════════════════════════════════════════════════════════════════════════════");    
 
                                                 for (int i = 0; i < historyTransaksi.length; i++) {
                                                     if (historyTransaksi[i][0] != null) {
@@ -555,7 +557,7 @@ public class Main {
                                                     }
                                                 }
 
-                                                System.out.println("=======================================================================================================");
+                                                System.out.println("═══════════════════════════════════════════════════════════════════════════════════════════════════════");
                                                 break;
                                                 } catch (ParseException e) {
                                                     e.printStackTrace();
@@ -568,7 +570,7 @@ public class Main {
                                             break;
                                     }
                                     break;
-                                case 3:
+                                case 5:
                                     isLoop = false;
                                     break;
                                 default:
@@ -576,15 +578,15 @@ public class Main {
                             }
                             break;                        
                         case 2:
-                            System.out.println("=======================================");
+                            System.out.println("═════════════════════════════════════════════");
                             System.out.println("\u001B[33m Manajemen Lokasi   \u001B[0m");
-                            System.out.println("=======================================");
+                            System.out.println("═════════════════════════════════════════════");
 
                             System.out.println("[1]. Menambah Lokasi"); //Menambahkan Lokasi
                             System.out.println("[2]. Menghapus Lokasi"); //Menghapus Lokasi
                             System.out.println("[3]. Menampilkan Data Lokasi"); //Menampilkan Data Lokasi
                             System.out.println("[4]. Kembali ke Menu Utama"); //Kembali ke Menu Utama
-                            System.out.println("=======================================");
+                            System.out.println("═════════════════════════════════════════════");
                             System.out.print("Masukkan Pilihan: "); 
                             subMenu = input.nextInt();
 
@@ -622,11 +624,11 @@ public class Main {
                                     }                                            
                                     break;
                                 case 3:
-                                    System.out.println("==================================");
+                                    System.out.println("═════════════════════════════════════════════");
                                     System.out.println("\u001B[33m           Data Lokasi           \u001B[0m");
-                                    System.out.println("==================================");
+                                    System.out.println("═════════════════════════════════════════════");
                                     System.out.println(" No  |    Nama Kota   |  Biaya");
-                                    System.out.println("==================================");
+                                    System.out.println("═════════════════════════════════════════════");
                                     for (int i = 0; i < arrayLokasi.length; i++) {
                                         String formattedString = String.format(" %3d | %14s | %5s",
                                                 i,
@@ -644,9 +646,9 @@ public class Main {
                             }
                             break;
                         case 3:
-                            System.out.println("=======================================");
+                            System.out.println("═════════════════════════════════════════════");
                             System.out.println("\u001B[33mManajemen Tarif\u001B[0m");
-                            System.out.println("=======================================");
+                            System.out.println("═════════════════════════════════════════════");
 
                             System.out.println("[1]. Tambah Jenis Layanan"); //Tambahan Jenis Layanan
                             System.out.println("[2]. Merubah Tarif Layanan"); //Merubah Tarif Layanan
@@ -654,7 +656,7 @@ public class Main {
                             System.out.println("[4]. Menampilkan Layanan Data"); //Menampilkan Layanan Data
                             System.out.println("[5]. Keluar"); //Keluar
 
-                            System.out.println("=======================================");
+                            System.out.println("═════════════════════════════════════════════");
                             System.out.print("Masukkan Pilihan: ");
                             subMenu = input.nextInt();
                             input.nextLine();
@@ -709,11 +711,11 @@ public class Main {
                                     }                                            
                                     break;
                                 case 4:
-                                        System.out.println("==================================");
+                                        System.out.println("═════════════════════════════════════════════");
                                         System.out.println("\u001B[33m           Data Layanan           \u001B[0m");
-                                        System.out.println("==================================");
+                                        System.out.println("═════════════════════════════════════════════");
                                         System.out.println(" No  |   Nama Layanan   |  Biaya");
-                                        System.out.println("==================================");
+                                        System.out.println("═════════════════════════════════════════════");
                                     for (int i = 0; i < arrayLayanan.length; i++) {
                                         if (arrayLayanan[i] != null) {
                                              String formattedString = String.format(" %3d | %16s | %5s",
