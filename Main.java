@@ -336,7 +336,7 @@ public class Main {
                                         System.out.print ("Masukkan Kota Tujuan: ");
                                         lokasiPengiriman = input.next();
                                         for (int i = 0; i < arrayLokasi.length; i++) {
-                                            if (arrayLokasi[i] != null && arrayLokasi[i].equalsIgnoreCase(lokasiPengiriman)) {
+                                            if (arrayLokasi[i] != null && arrayLokasi[i][0].equalsIgnoreCase(lokasiPengiriman)) {
                                                 biayaJarak = arrayTarifLokasi[i];
                                                 found = true;
                                                 break;
@@ -352,7 +352,7 @@ public class Main {
 
                                     for (int i = 0; i < arrayLayanan.length; i++) {
                                         if (arrayLayanan[i] != null) {
-                                            System.out.println("["+i+"]. "+arrayLayanan[i]+" - "+arrayTarifLayanan[i]);
+                                            System.out.println("["+i+"]. "+arrayLayanan[i][0]+" - "+arrayTarifLayanan[i]);
                                             
                                         }
                                     }
@@ -370,7 +370,7 @@ public class Main {
                                         namaPengirim,
                                         nomorKontak,
                                         lokasiPengiriman,
-                                        arrayLayanan[pilihanLayanan],
+                                        arrayLayanan[pilihanLayanan][0],
                                         Double.toString(biayaAkhir),
                                         loggedInUsername};
 
@@ -378,7 +378,7 @@ public class Main {
                                         labelFormat,
                                         tanggalHariIni, // Tanggal
                                         beratBarang, // Berat
-                                        arrayLayanan[pilihanLayanan], // Nomor Telepon
+                                        arrayLayanan[pilihanLayanan][0], // Nomor Telepon
                                         biayaAkhir, // Biaya Akhir
                                         lokasiPengiriman, // Lokasi
                                         namaPengirim,
@@ -603,7 +603,7 @@ public class Main {
                                     System.out.print("Masukkan tarif: ");
                                     double tarifBaru = input.nextDouble();
                                     arrayLokasi = Arrays.copyOf(arrayLokasi,arrayLokasi.length + 1);
-                                    arrayLokasi[arrayLokasi.length-1] = lokasiBaru;
+                                    arrayLokasi[0][arrayLokasi.length-1] = lokasiBaru;
                                     arrayTarifLokasi = Arrays.copyOf(arrayTarifLokasi,arrayTarifLokasi.length + 1);
                                     arrayTarifLokasi[arrayTarifLokasi.length-1] = tarifBaru;
                                     break;
@@ -611,7 +611,7 @@ public class Main {
                                     System.out.print("Masukkan lokasi yang ingin dihapus: ");
                                     key = input.next();
                                     for (int i = 0; i < arrayLokasi.length; i++) {
-                                        if (arrayLokasi[i] != null && arrayLokasi[i].equalsIgnoreCase(key)) {
+                                        if (arrayLokasi[i] != null && arrayLokasi[i][0].equalsIgnoreCase(key)) {
                                             System.out.println(arrayLokasi[i]+" Telah Dihapus!");
                                             System.arraycopy(arrayLokasi, i + 1, arrayLokasi, i, arrayLokasi.length - 1 - i);
                                             arrayLokasi = Arrays.copyOf(arrayLokasi, arrayLokasi.length - 1);
@@ -670,7 +670,7 @@ public class Main {
                                     for (int i = 0; i < arrayLayanan.length; i++) {
                                         if (arrayLayanan[i] == null) {
                                             System.out.print("Masukkan Nama Layanan: ");
-                                            arrayLayanan[i] = input.next();
+                                            arrayLayanan[i][0] = input.next();
                                             System.out.print("Masukkan Tarif: ");
                                             arrayTarifLayanan[i] = input.nextDouble();
                                             break;
@@ -681,9 +681,9 @@ public class Main {
                                     System.out.print("Masukkan nama layanan: ");
                                     key = input.next();
                                     for (int i = 0; i < arrayLayanan.length; i++) {
-                                        if (arrayLayanan[i].equalsIgnoreCase(key)) {
+                                        if (arrayLayanan[i][0].equalsIgnoreCase(key)) {
                                             System.out.print("Masukkan Nama Layanan Baru: ");
-                                            arrayLayanan[i] = input.next();
+                                            arrayLayanan[i][0] = input.next();
                                             System.out.print("Masukkan Tarif Baru: ");
                                             arrayTarifLayanan[i] = input.nextDouble();
                                             found = true;
@@ -700,7 +700,7 @@ public class Main {
                                     System.out.print("Masukkan layanan yang ingin dihapus: ");
                                     key = input.next();
                                     for (int i = 0; i < arrayLayanan.length; i++) {
-                                        if (arrayLayanan[i] != null && arrayLayanan[i].equalsIgnoreCase(key)) {
+                                        if (arrayLayanan[i] != null && arrayLayanan[i][0].equalsIgnoreCase(key)) {
                                             System.out.println(arrayLayanan[i]+" - "+arrayTarifLayanan[i]+" Telah Dihapus!");
                                             arrayLokasi[i] = null;
                                             arrayTarifLayanan[i] = 0;
