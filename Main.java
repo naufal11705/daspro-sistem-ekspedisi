@@ -113,23 +113,21 @@ public class Main {
                 "║            ║                                 ║  Lokasi Pengiriman: %-27s║\n" +
                 "║            ║ Nama: %-26s║                                                ║\n" +
                 "║            ║ Nomor Telepon: %-17s║                                                ║\n" +
-                "║            ║                                 ║                                                ║\n" +
-                "║            ║                                 ║                                                ║\n" +
+                "║            ║                                 ║  Nama Penerima: %-31s║\n" +
+                "║            ║                                 ║  Alamat: %-38s║\n" +
                 "╚════════════╩═════════════════════════════════╩════════════════════════════════════════════════╝";
 
         String laporanFormat = 
                 "╔══════════════════════════════════════════════════════════════════════════════════════════════╗\n" +
                 "║                                                                                              ║\n" +
-                "╠                                                                                              ║\n" +
-                "║                                                                                              ║\n" +
-                "║                                                                                              ║\n" + 
-                "║                                                                                              ║\n" +
-                "║                                                                                              ║\n" +
-                "║                                                                                              ║\n" +
-                "║                                                                                              ║\n" +
+                "║                      __     ___     ____    ____     ____     ___     _   __                 ║\n" + 
+                "║                     / /    /   |   / __ \\  / __ \\   / __ \\   /   |   / | / /                 ║\n" +
+                "║                    / /    / /| |  / /_/ / / / / /  / /_/ /  / /| |  /  |/ /                  ║\n" +
+                "║                   / /___ / ___ | / ____/ / /_/ /  / _, _/  / ___ | / /|  /                   ║\n" +
+                "║                  /_____//_/  |_|/_/      \\____/  /_/ |_|  /_/  |_|/_/ |_/                    ║\n" +
                 "║                                                                                              ║\n" +
                 "║                                                                                              ║\n" +
-                "╠                                                                                              ║\n" +
+                "╠══════════════════════════════════════════════════════════════════════════════════════════════╣\n" +
                 "║                                                                                              ║\n" +
                 "║                                                                                              ║\n" + 
                 "║                                                                                              ║\n" +
@@ -195,7 +193,6 @@ public class Main {
         System.out.println("═════════════════════════════════════════════");
         System.out.println("\u001B[33m     Selamat Datang di Sistem Ekspedisi     \u001B[0m");
         System.out.println("═════════════════════════════════════════════");
-        
 
         while (!login) {
             login = false;
@@ -309,16 +306,16 @@ public class Main {
                                         break;   
                                     case 3:
 
-                                        System.out.println("-------------------------------------------------");
-                                        System.out.println("                  Data Pengguna");
-                                        System.out.println("-------------------------------------------------");
-                                        System.out.println("| Username       | Password       | Jabatan        |");
-                                        System.out.println("-------------------------------------------------");
+                                        System.out.println("╔════════════════════════════════════════════════╗");
+                                        System.out.println("║                 Data Pengguna                  ║");
+                                        System.out.println("╠════════════════╦════════════════╦══════════════╣");
+                                        System.out.println("║ Username       ║ Password       ║ Jabatan      ║");
+                                        System.out.println("╠════════════════╬════════════════╬══════════════╣");
 
                                         for (int i = 0; i < userData.length; i++) {
-                                            System.out.printf("| %-14s | %-14s | %-14s |%n", userData[i][0], userData[i][1], userData[i][2]);
+                                            System.out.printf("║ %-14s ║ %-14s ║ %-12s ║%n", userData[i][0], userData[i][1], userData[i][2]);
                                         }
-                                        System.out.println("-------------------------------------------------");
+                                        System.out.println("╚════════════════╩════════════════╩══════════════╝");
                                         break;
                                     case 4:
                                         exit = true;
@@ -432,7 +429,9 @@ public class Main {
                                         biayaAkhir, // Biaya Akhir
                                         lokasiPengiriman, // Lokasi
                                         namaPengirim,
-                                        nomorKontak
+                                        nomorKontak,
+                                        namaPenerima,
+                                        alamatPenerima
                                     ));                                        
                                     break;
                                 case 2:
