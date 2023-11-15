@@ -148,7 +148,7 @@ public class Main {
                 "║===================================================╦========================╦=================║\n" +
                 "║                                                   ║       Nilai            ║     Satuan      ║\n" +
                 "║                                                   ╠========================╬=================║\n" +
-                "║ Total Pengiriman Per Asset                        ║                 12     ║      Buah       ║\n" +
+                "║ Total Pengiriman Per Asset                        ║                 %-2s     ║      Buah       ║\n" +
                 "║ Total Pengiriman Per kg                           ║                 32     ║       Kg        ║\n" +
                 "║ Total Pendapatan                                  ║      Rp 450.000,00     ║     Rupiah      ║\n" +
                 "║                                                   ║                        ║                 ║\n" +
@@ -812,6 +812,10 @@ public class Main {
                         case 5:
                             int totalAsset=0, totalBerat=0, totalHarga=0;
                             System.out.println(totalAsset=historyTransaksi.length);
+                            System.out.println(String.format(
+                                        laporanFormat,
+                                        totalAsset
+                                    ));               
                             break;
                         case 6:
                             exit=true;
