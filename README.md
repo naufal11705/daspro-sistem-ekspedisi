@@ -40,8 +40,10 @@
 
 - Masukkan informasi pengiriman:
   - Nama Pengirim
+  - Kontak
+  - Nama Penerima
+  - Alamat
   - Berat Barang
-  - Jarak Pengiriman
   - Kota Tujuan
   - Pilih Jenis Layanan
 - Aplikasi akan menghitung biaya pengiriman dan menyimpan data transaksi.
