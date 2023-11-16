@@ -654,19 +654,28 @@ public class Main {
                                     }
                                     break;
                                 case 2:
-                                    System.out.print("Masukkan lokasi yang ingin dihapus: ");
-                                    key = input.next();
+                                    System.out.println("Daftar Lokasi yang Tersedia:");
                                     for (int i = 0; i < arrayLokasi.length; i++) {
-                                        if (arrayLokasi[i] != null && arrayLokasi[i].equalsIgnoreCase(key)) {
-                                            System.out.println(arrayLokasi[i]+" Telah Dihapus!");
-                                            System.arraycopy(arrayLokasi, i + 1, arrayLokasi, i, arrayLokasi.length - 1 - i);
-                                            arrayLokasi = Arrays.copyOf(arrayLokasi, arrayLokasi.length - 1);
-                                            System.arraycopy(arrayTarifLokasi, i + 1, arrayTarifLokasi, i, arrayTarifLokasi.length - 1 - i);
-                                            arrayTarifLokasi = Arrays.copyOf(arrayTarifLokasi, arrayTarifLokasi.length - 1);
-                                            found = true;
-                                            break;
-                                        }
+                                        System.out.println((i + 1) + ". " + arrayLokasi[i]);
                                     }
+                        
+                                    System.out.print("Masukkan nomor lokasi yang ingin dihapus: ");
+                                    int deleteIndex = input.nextInt();
+                        
+                                    if (deleteIndex >= 1 && deleteIndex <= arrayLokasi.length) {
+                                        String deletedLocation = arrayLokasi[deleteIndex - 1];
+                                        System.out.println(deletedLocation + " Telah Dihapus!");
+                            
+                                        System.arraycopy(arrayLokasi, deleteIndex, arrayLokasi, deleteIndex - 1, arrayLokasi.length - deleteIndex);
+                                        arrayLokasi = Arrays.copyOf(arrayLokasi, arrayLokasi.length - 1);
+                            
+                                        System.arraycopy(arrayTarifLokasi, deleteIndex, arrayTarifLokasi, deleteIndex - 1, arrayTarifLokasi.length - deleteIndex);
+                                        arrayTarifLokasi = Arrays.copyOf(arrayTarifLokasi, arrayTarifLokasi.length - 1);
+                                    } else {
+                                        System.out.println("Nomor lokasi tidak valid");
+                                                break;
+                                            }
+                                    
                                     if(found) {
                                         found = false;
                                     } else {
@@ -763,22 +772,30 @@ public class Main {
                                     }                                          
                                     break;
                                 case 3:
-                                    System.out.print("Masukkan layanan yang ingin dihapus: ");
-                                    key = input.next();
+                                    System.out.println("Daftar Layanan yang Tersedia:");
                                     for (int i = 0; i < arrayLayanan.length; i++) {
-                                        if (arrayLayanan[i] != null && arrayLayanan[i].equalsIgnoreCase(key)) {
-                                            System.out.println(arrayLayanan[i]+" - "+arrayTarifLayanan[i]+" Telah Dihapus!");
-                                            arrayLokasi[i] = null;
-                                            arrayTarifLayanan[i] = 0;
-                                            found = true;
-                                            break;
+                                        if (arrayLayanan[i] != null) {
+                                            System.out.println((i + 1) + ". " + arrayLayanan[i]);
                                         }
                                     }
-                                    if(found) {
-                                        found = false;
+                        
+                                    System.out.print("Pilih nomor layanan yang ingin dihapus: ");
+                                    int selectedNumber = input.nextInt();
+                            
+                                    if (selectedNumber > 0 && selectedNumber <= arrayLayanan.length) {
+                                        String selectedService = arrayLayanan[selectedNumber - 1];
+                            
+                                        for (int i = 0; i < arrayLayanan.length; i++) {
+                                            if (arrayLayanan[i] != null && arrayLayanan[i].equalsIgnoreCase(selectedService)) {
+                                                System.out.println(arrayLayanan[i] + " - " + arrayTarifLayanan[i] + " Telah Dihapus!");
+                                                arrayLayanan[i] = null;
+                                                arrayTarifLayanan[i] = 0;
+                                                break;
+                                            }
+                                        }
                                     } else {
-                                        System.out.println("Key tidak ditemukan");
-                                    }                                            
+                                        System.out.println("Nomor layanan tidak valid.");
+                                    }
                                     break;
                                 case 4:
                                         System.out.println("═════════════════════════════════════════════");
