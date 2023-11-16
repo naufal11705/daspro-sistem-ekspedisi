@@ -58,6 +58,7 @@ public class Main {
         boolean isAdmin = false;
         boolean masuk = false;
         boolean validInput = false;
+        boolean inputValid = false;
 
         // Variabel untuk switch case menu
         int menuUtama, subMenu, editMenu;
@@ -69,6 +70,7 @@ public class Main {
         int pilihanLayanan;
         double tarifLayanan = 0;
         double biayaJarak = 0;
+        double tarifBaru = 0.0;
 
         // Array History Pemesanan
         String[][] historyTransaksi = {
@@ -632,12 +634,23 @@ public class Main {
                                 case 1:
                                     System.out.print("Masukkan nama lokasi: ");
                                     String lokasiBaru = input.nextLine();
-                                    System.out.print("Masukkan tarif: ");
-                                    double tarifBaru = input.nextDouble();
+                                    
+                                    
+                                    while (!inputValid) {
+                                        System.out.print("Masukkan tarif: ");
+                                        if (input.hasNextDouble()) {
+                                            tarifBaru = input.nextDouble();
+                                            inputValid = true;
+                                        } else {
+                                            System.out.println("Masukan bukan angka. Mohon masukkan angka.");
+                                            input.next(); // Menghapus input yang tidak valid agar tidak terjadi infinite loop
+                                        }
                                     arrayLokasi = Arrays.copyOf(arrayLokasi,arrayLokasi.length + 1);
                                     arrayLokasi[arrayLokasi.length-1] = lokasiBaru;
                                     arrayTarifLokasi = Arrays.copyOf(arrayTarifLokasi,arrayTarifLokasi.length + 1);
                                     arrayTarifLokasi[arrayTarifLokasi.length-1] = tarifBaru;
+                                
+                                    }
                                     break;
                                 case 2:
                                     System.out.print("Masukkan lokasi yang ingin dihapus: ");
@@ -703,8 +716,18 @@ public class Main {
                                         if (arrayLayanan[i] == null) {
                                             System.out.print("Masukkan Nama Layanan: ");
                                             arrayLayanan[i] = input.next();
-                                            System.out.print("Masukkan Tarif: ");
-                                            arrayTarifLayanan[i] = input.nextDouble();
+                                            while (!inputValid) {
+                                                System.out.print("Masukkan Tarif: ");
+                                                if (input.hasNextDouble()) {
+                                                    tarifLayanan = input.nextDouble();
+                                                    inputValid = true;
+                                                } else {
+                                                    System.out.println("Masukan bukan angka. Mohon masukkan angka.");
+                                                    input.next(); // Membersihkan input yang tidak valid dari buffer
+                                                }
+                                            }
+                            
+                                            arrayTarifLayanan[i] = tarifLayanan;
                                             break;
                                         }
                                     }
@@ -716,17 +739,27 @@ public class Main {
                                         if (arrayLayanan[i].equalsIgnoreCase(key)) {
                                             System.out.print("Masukkan Nama Layanan Baru: ");
                                             arrayLayanan[i] = input.next();
-                                            System.out.print("Masukkan Tarif Baru: ");
-                                            arrayTarifLayanan[i] = input.nextDouble();
+                                            while (!inputValid) {
+                                                System.out.print("Masukkan Tarif Baru: ");
+                                                if (input.hasNextDouble()) {
+                                                    tarifBaru = input.nextDouble();
+                                                    inputValid = true;
+                                                } else {
+                                                    System.out.println("Masukan bukan angka. Mohon masukkan angka.");
+                                                    input.next(); // Menghapus input yang tidak valid agar tidak terjadi infinite loop
+                                                }
+                                            }
+                                            arrayTarifLayanan[i] = tarifBaru;
                                             found = true;
                                             break;
                                         }
                                     }
-                                    if(found) {
-                                        found = false;
+                            
+                                    if (found) {
+                                        System.out.println("Data berhasil diupdate.");
                                     } else {
                                         System.out.println("Key tidak ditemukan");
-                                    }                                            
+                                    }                                          
                                     break;
                                 case 3:
                                     System.out.print("Masukkan layanan yang ingin dihapus: ");
