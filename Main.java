@@ -617,6 +617,8 @@ public class Main {
                             }
                             break;                        
                         case 2:
+                            boolean keluar = true;
+                            while (keluar) {
                             System.out.println("═════════════════════════════════════════════");
                             System.out.println("\u001B[33m Manajemen Lokasi   \u001B[0m");
                             System.out.println("═════════════════════════════════════════════");
@@ -698,12 +700,12 @@ public class Main {
                                     }
                                     break;
                                 case 4:
-                                    isLoop = false;
+                                    keluar = false;
                                     break;
                                 default:
                                 System.out.println("Invalid choice. Please try again.");
-                            }
-                            break;
+                                }
+                        } break;
                         case 3:
                             System.out.println("═════════════════════════════════════════════");
                             System.out.println("\u001B[33mManajemen Tarif\u001B[0m");
