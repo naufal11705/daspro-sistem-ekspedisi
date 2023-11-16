@@ -150,8 +150,8 @@ public class Main {
                 "║                                                   ║       Nilai            ║     Satuan      ║\n" +
                 "║                                                   ╠========================╬=================║\n" +
                 "║ Total Pengiriman Per Asset                        ║                 %-2s     ║      Buah       ║\n" +
-                "║ Total Pengiriman Per kg                           ║                 32     ║       Kg        ║\n" +
-                "║ Total Pendapatan                                  ║      Rp 450.000,00     ║     Rupiah      ║\n" +
+                "║ Total Pengiriman Per kg                           ║                 %-2s     ║       Kg        ║\n" +
+                "║ Total Pendapatan                                  ║      Rp %-10s     ║     Rupiah      ║\n" +
                 "║                                                   ║                        ║                 ║\n" +
                 "╚═══════════════════════════════════════════════════╩════════════════════════╩═════════════════╝";
 
@@ -950,11 +950,36 @@ public class Main {
                             break;
                         case 5:
                             int totalAsset=0, totalBerat=0, totalHarga=0;
-                            System.out.println(totalAsset=historyTransaksi.length);
-                            System.out.println(String.format(
-                                        laporanFormat,
-                                        totalAsset
-                                    ));               
+
+                            try {
+                                Calendar calendar = Calendar.getInstance();
+                                calendar.set(Calendar.DAY_OF_MONTH, 1); // Set the day of the month to the first day
+                                Date startDate = calendar.getTime();
+
+                                calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+                                Date endDate = calendar.getTime();
+
+                                for (int i = 0; i < historyTransaksi.length; i++) {
+                                    if (historyTransaksi[i][0] != null) {
+                                        Date transaksiDate = dateFormat.parse(historyTransaksi[i][0]);
+                                        if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
+                                            totalBerat += Integer.parseInt(historyTransaksi[i][9]);
+                                            totalAsset++;
+                                            totalHarga += Double.parseDouble(historyTransaksi[i][5]);
+                                        }
+                                    }
+                                }
+
+                                System.out.println(String.format(
+                                    laporanFormat,
+                                    totalAsset,
+                                    totalBerat,
+                                    totalHarga));
+
+                                break;
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }            
                             break;
                         case 6:
                             exit=true;
