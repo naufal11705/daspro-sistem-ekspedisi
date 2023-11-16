@@ -135,7 +135,7 @@ public class Main {
                 "║===================================================╦========================╦=================║\n" +
                 "║                                                   ║       Nilai            ║     Satuan      ║\n" +
                 "║                                                   ╠========================╬=================║\n" +
-                "║ Total Pengiriman Per Asset                        ║                 12     ║      Buah       ║\n" +
+                "║ Total Pengiriman Per Asset                        ║                 %-2s     ║      Buah       ║\n" +
                 "║ Total Pengiriman Per kg                           ║                 32     ║       Kg        ║\n" +
                 "║ Total Pendapatan                                  ║      Rp 450.000,00     ║     Rupiah      ║\n" +
                 "║                                                   ║                        ║                 ║\n" +
@@ -232,7 +232,8 @@ public class Main {
                 System.out.println("[2]. " + multilingual[11][pilihanBahasa]); //Manajemen Lokasi
                 System.out.println("[3]. " + multilingual[16][pilihanBahasa]); //Manajemen Tarif
                 System.out.println("[4]. " + multilingual[22][pilihanBahasa]); //Ganti Bahasa
-                System.out.println("[5]. " + multilingual[23][pilihanBahasa]); //Keluar
+                System.out.println("[5]. Laporan Ekspedisi");
+                System.out.println("[6]. " + multilingual[23][pilihanBahasa]); //Keluar
                 System.out.println("═════════════════════════════════════════════");
 
                 System.out.print(multilingual[24][pilihanBahasa]);
@@ -842,6 +843,14 @@ public class Main {
                             } while (inputPilihanBahasa > multilingual[0].length);
                             break;
                         case 5:
+                            int totalAsset=0, totalBerat=0, totalHarga=0;
+                            System.out.println(totalAsset=historyTransaksi.length);
+                            System.out.println(String.format(
+                                        laporanFormat,
+                                        totalAsset
+                                    ));               
+                            break;
+                        case 6:
                             exit=true;
                             login=false;
                             masuk=false;
