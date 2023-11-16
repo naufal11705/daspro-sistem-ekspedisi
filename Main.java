@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.Arrays;
 import java.util.Calendar;
 
@@ -661,28 +662,39 @@ public class Main {
                                         System.out.println((i + 1) + ". " + arrayLokasi[i]);
                                     }
                         
-                                    System.out.print("Masukkan nomor lokasi yang ingin dihapus: ");
-                                    int deleteIndex = input.nextInt();
-                        
+                                    int deleteIndex = 0;
+            
+
+                                    // Validation loop for non-integer input
+                                    while (!validInput) {
+                                        System.out.print("Masukkan nomor lokasi yang ingin dihapus: ");
+                                        try {
+                                            deleteIndex = Integer.parseInt(input.nextLine());
+                                            validInput = true;
+                                        } catch (NumberFormatException e) {
+                                            System.out.println("Input yang dimasukkan bukan angka. Silakan masukkan nomor.");
+                                        }
+                                    }
+
                                     if (deleteIndex >= 1 && deleteIndex <= arrayLokasi.length) {
                                         String deletedLocation = arrayLokasi[deleteIndex - 1];
                                         System.out.println(deletedLocation + " Telah Dihapus!");
-                            
+
                                         System.arraycopy(arrayLokasi, deleteIndex, arrayLokasi, deleteIndex - 1, arrayLokasi.length - deleteIndex);
                                         arrayLokasi = Arrays.copyOf(arrayLokasi, arrayLokasi.length - 1);
-                            
+
                                         System.arraycopy(arrayTarifLokasi, deleteIndex, arrayTarifLokasi, deleteIndex - 1, arrayTarifLokasi.length - deleteIndex);
                                         arrayTarifLokasi = Arrays.copyOf(arrayTarifLokasi, arrayTarifLokasi.length - 1);
                                     } else {
                                         System.out.println("Nomor lokasi tidak valid");
-                                                break;
-                                            }
-                                    
-                                    if(found) {
+                                        continue;
+                                    }
+
+                                    if (found) {
                                         found = false;
                                     } else {
                                         System.out.println("Key tidak ditemukan");
-                                    }                                            
+                                    }                                           
                                     break;
                                 case 3:
                                     System.out.println("═════════════════════════════════════════════");
@@ -755,15 +767,47 @@ public class Main {
                                 }
                         
                                 System.out.print("Masukkan nomor layanan yang ingin diubah: ");
-                                int selectedService = input.nextInt();
-                        
+                                int selectedService = 0;
+
+                                while (!inputValid) {
+                                    if (input.hasNextInt()) {
+                                        selectedService = input.nextInt();
+                                        if (selectedService >= 1 && selectedService <= arrayLayanan.length) {
+                                            inputValid = true;
+                                        } else {
+                                            System.out.println("Nomor layanan tidak valid. Masukkan nomor layanan yang valid:");
+                                            input.nextLine(); // Membersihkan newline di buffer
+                                        }
+                                    } else {
+                                        System.out.println("Input bukan angka. Mohon masukkan nomor layanan yang valid:");
+                                        input.next(); // Membersihkan input yang tidak valid dari buffer
+                                    }
+                                }
+
+                                inputValid = false; // Reset inputValid untuk validasi berikutnya
+
                                 if (selectedService >= 1 && selectedService <= arrayLayanan.length) {
                                     System.out.println("Pilih yang ingin diubah:");
                                     System.out.println("1. Nama Layanan");
                                     System.out.println("2. Tarif Layanan");
                                     System.out.print("Masukkan nomor pilihan: ");
-                                    int changeOption = input.nextInt();
-                        
+                                    int changeOption = 0;
+
+                                    while (!inputValid) {
+                                        if (input.hasNextInt()) {
+                                            changeOption = input.nextInt();
+                                            if (changeOption == 1 || changeOption == 2) {
+                                                inputValid = true;
+                                            } else {
+                                                System.out.println("Pilihan tidak valid. Masukkan nomor pilihan yang valid:");
+                                                input.nextLine(); // Membersihkan newline di buffer
+                                            }
+                                        } else {
+                                            System.out.println("Input bukan angka. Mohon masukkan nomor pilihan yang valid:");
+                                            input.next(); // Membersihkan input yang tidak valid dari buffer
+                                        }
+                                    }
+
                                     if (changeOption == 1) {
                                         System.out.print("Masukkan Nama Layanan Baru: ");
                                         input.nextLine(); // Membersihkan newline di buffer
@@ -771,8 +815,8 @@ public class Main {
                                         System.out.println("Data nama layanan berhasil diupdate.");
                                     } else if (changeOption == 2) {
                                         double newTarif = 0.0;
-                                        
-                        
+                                        inputValid = false; // Reset inputValid untuk validasi berikutnya
+
                                         while (!inputValid) {
                                             System.out.print("Masukkan Tarif Baru: ");
                                             if (input.hasNextDouble()) {
@@ -783,15 +827,15 @@ public class Main {
                                                 input.next(); // Membersihkan input yang tidak valid dari buffer
                                             }
                                         }
-                        
+
                                         arrayTarifLayanan[selectedService - 1] = newTarif;
                                         System.out.println("Data tarif layanan berhasil diupdate.");
-                                    } else {
-                                        System.out.println("Pilihan tidak valid");
+                                        break;
                                     }
                                 } else {
                                     System.out.println("Nomor layanan tidak valid");
                                 }
+                                break;
                                 case 3:
                                     System.out.println("Daftar Layanan yang Tersedia:");
                                     for (int i = 0; i < arrayLayanan.length; i++) {
@@ -800,12 +844,22 @@ public class Main {
                                         }
                                     }
                         
-                                    System.out.print("Pilih nomor layanan yang ingin dihapus: ");
-                                    int selectedNumber = input.nextInt();
-                            
+                                    int selectedNumber = 0;
+        
+                                    while (!validInput) {
+                                        try {
+                                            System.out.print("Pilih nomor layanan yang ingin dihapus: ");
+                                            selectedNumber = input.nextInt();
+                                            validInput = true;
+                                        } catch (InputMismatchException e) {
+                                            System.out.println("Masukan bukan angka. Silakan masukkan nomor layanan yang valid.");
+                                            input.nextLine(); // Membersihkan buffer
+                                        }
+                                    }
+
                                     if (selectedNumber > 0 && selectedNumber <= arrayLayanan.length) {
                                         String pilih = arrayLayanan[selectedNumber - 1];
-                            
+
                                         for (int i = 0; i < arrayLayanan.length; i++) {
                                             if (arrayLayanan[i] != null && arrayLayanan[i].equalsIgnoreCase(pilih)) {
                                                 System.out.println(arrayLayanan[i] + " - " + arrayTarifLayanan[i] + " Telah Dihapus!");
