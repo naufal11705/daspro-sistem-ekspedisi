@@ -24,24 +24,11 @@ public class Main {
         String loggedInUsername = "";
 
         // Lokasi default
-        String[][] arrayLokasi = {
-            {"Malang", "1"},
-            {"Surabaya", "2"},
-            {"Semarang", "2"},
-            {"Yogyakarta", "3"},
-            {"Magelang", "3"},
-            {"Pekalongan", "3"},
-            {"Cirebon", "4"},
-            {"Bandung", "4"},
-            {"Bekasi", "4"},
-            {"Bogor", "4"},
-            {"Jakarta", "5"},
-            {"Banten", "5"},
-            {"Serang", "5"},
-            {"Lumajang", "2"},
-            {"Banyuwangi", "3"}
+        String[] arrayLokasi = {
+            "Malang", "Jakarta", "Surabaya", "Bandung", "Medan",
+            "Makassar", "Yogyakarta", "Semarang", "Denpasar", "Serang",
+            "Tangerang", "Bengkulu", "Gorontalo", "Bekasi", "Bogor"
         };
-
         
         // Tarif berdasarkan tujuan pengiriman
         double[] arrayTarifLokasi = {
@@ -52,12 +39,10 @@ public class Main {
         
             
         // Layanan pengiriman default
-        String[][] arrayLayanan = {
-            {"Reguler", "3"},
-            {"Ekonomi", "2"},
-            {"Sameday", "1"}
-        };
-            
+        String[] arrayLayanan = new String[20];
+            arrayLayanan[0] = "Reguler";
+            arrayLayanan[1] = "Ekonomi";
+            arrayLayanan[2] = "Sameday";
 
         // Tarif berdasarkan jenis layanan
         double[] arrayTarifLayanan = new double[20];
@@ -73,6 +58,7 @@ public class Main {
         boolean isAdmin = false;
         boolean masuk = false;
         boolean validInput = false;
+        boolean inputValid = false;
 
         // Variabel untuk switch case menu
         int menuUtama, subMenu, editMenu;
@@ -84,6 +70,7 @@ public class Main {
         int pilihanLayanan;
         double tarifLayanan = 0;
         double biayaJarak = 0;
+        double tarifBaru = 0.0;
 
         // Array History Pemesanan
         String[][] historyTransaksi = {
@@ -392,7 +379,7 @@ public class Main {
                                         System.out.print ("Masukkan Kota Tujuan: ");
                                         lokasiPengiriman = input.next();
                                         for (int i = 0; i < arrayLokasi.length; i++) {
-                                            if (arrayLokasi[i] != null && arrayLokasi[i][0].equalsIgnoreCase(lokasiPengiriman)) {
+                                            if (arrayLokasi[i] != null && arrayLokasi[i].equalsIgnoreCase(lokasiPengiriman)) {
                                                 biayaJarak = arrayTarifLokasi[i];
                                                 found = true;
                                                 break;
@@ -408,7 +395,7 @@ public class Main {
 
                                     for (int i = 0; i < arrayLayanan.length; i++) {
                                         if (arrayLayanan[i] != null) {
-                                            System.out.println("["+i+"]. "+arrayLayanan[i][0]+" - "+arrayTarifLayanan[i]);
+                                            System.out.println("["+i+"]. "+arrayLayanan[i]+" - "+arrayTarifLayanan[i]);
                                             
                                         }
                                     }
@@ -420,12 +407,11 @@ public class Main {
 
                                     historyTransaksi = Arrays.copyOf(historyTransaksi,historyTransaksi.length + 1);
                                     historyTransaksi[historyTransaksi.length-1] = new String[]{
-                                        //Integer.toString(nomorTransaksi),
                                         tanggalHariIni,
                                         namaPengirim,
                                         nomorKontak,
                                         lokasiPengiriman,
-                                        arrayLayanan[pilihanLayanan][0],
+                                        arrayLayanan[pilihanLayanan],
                                         Double.toString(biayaAkhir),
                                         loggedInUsername,
                                         namaPenerima,
@@ -435,7 +421,7 @@ public class Main {
                                         labelFormat,
                                         tanggalHariIni, // Tanggal
                                         beratBarang, // Berat
-                                        arrayLayanan[pilihanLayanan][0], // Nomor Telepon
+                                        arrayLayanan[pilihanLayanan], // Nomor Telepon
                                         biayaAkhir, // Biaya Akhir
                                         lokasiPengiriman, // Lokasi
                                         namaPengirim,
@@ -623,7 +609,6 @@ public class Main {
                                             break;
                                     }
                                     break;
-
                                 case 5:
                                     isLoop = false;
                                     break;
@@ -650,18 +635,29 @@ public class Main {
                                 case 1:
                                     System.out.print("Masukkan nama lokasi: ");
                                     String lokasiBaru = input.nextLine();
-                                    System.out.print("Masukkan tarif: ");
-                                    double tarifBaru = input.nextDouble();
+                                    
+                                    
+                                    while (!inputValid) {
+                                        System.out.print("Masukkan tarif: ");
+                                        if (input.hasNextDouble()) {
+                                            tarifBaru = input.nextDouble();
+                                            inputValid = true;
+                                        } else {
+                                            System.out.println("Masukan bukan angka. Mohon masukkan angka.");
+                                            input.next(); // Menghapus input yang tidak valid agar tidak terjadi infinite loop
+                                        }
                                     arrayLokasi = Arrays.copyOf(arrayLokasi,arrayLokasi.length + 1);
-                                    arrayLokasi[0][arrayLokasi.length-1] = lokasiBaru;
+                                    arrayLokasi[arrayLokasi.length-1] = lokasiBaru;
                                     arrayTarifLokasi = Arrays.copyOf(arrayTarifLokasi,arrayTarifLokasi.length + 1);
                                     arrayTarifLokasi[arrayTarifLokasi.length-1] = tarifBaru;
+                                
+                                    }
                                     break;
                                 case 2:
                                     System.out.print("Masukkan lokasi yang ingin dihapus: ");
                                     key = input.next();
                                     for (int i = 0; i < arrayLokasi.length; i++) {
-                                        if (arrayLokasi[i] != null && arrayLokasi[i][0].equalsIgnoreCase(key)) {
+                                        if (arrayLokasi[i] != null && arrayLokasi[i].equalsIgnoreCase(key)) {
                                             System.out.println(arrayLokasi[i]+" Telah Dihapus!");
                                             System.arraycopy(arrayLokasi, i + 1, arrayLokasi, i, arrayLokasi.length - 1 - i);
                                             arrayLokasi = Arrays.copyOf(arrayLokasi, arrayLokasi.length - 1);
@@ -720,9 +716,19 @@ public class Main {
                                     for (int i = 0; i < arrayLayanan.length; i++) {
                                         if (arrayLayanan[i] == null) {
                                             System.out.print("Masukkan Nama Layanan: ");
-                                            arrayLayanan[i][0] = input.next();
-                                            System.out.print("Masukkan Tarif: ");
-                                            arrayTarifLayanan[i] = input.nextDouble();
+                                            arrayLayanan[i] = input.next();
+                                            while (!inputValid) {
+                                                System.out.print("Masukkan Tarif: ");
+                                                if (input.hasNextDouble()) {
+                                                    tarifLayanan = input.nextDouble();
+                                                    inputValid = true;
+                                                } else {
+                                                    System.out.println("Masukan bukan angka. Mohon masukkan angka.");
+                                                    input.next(); // Membersihkan input yang tidak valid dari buffer
+                                                }
+                                            }
+                            
+                                            arrayTarifLayanan[i] = tarifLayanan;
                                             break;
                                         }
                                     }
@@ -731,26 +737,36 @@ public class Main {
                                     System.out.print("Masukkan nama layanan: ");
                                     key = input.next();
                                     for (int i = 0; i < arrayLayanan.length; i++) {
-                                        if (arrayLayanan[i][0].equalsIgnoreCase(key)) {
+                                        if (arrayLayanan[i].equalsIgnoreCase(key)) {
                                             System.out.print("Masukkan Nama Layanan Baru: ");
-                                            arrayLayanan[i][0] = input.next();
-                                            System.out.print("Masukkan Tarif Baru: ");
-                                            arrayTarifLayanan[i] = input.nextDouble();
+                                            arrayLayanan[i] = input.next();
+                                            while (!inputValid) {
+                                                System.out.print("Masukkan Tarif Baru: ");
+                                                if (input.hasNextDouble()) {
+                                                    tarifBaru = input.nextDouble();
+                                                    inputValid = true;
+                                                } else {
+                                                    System.out.println("Masukan bukan angka. Mohon masukkan angka.");
+                                                    input.next(); // Menghapus input yang tidak valid agar tidak terjadi infinite loop
+                                                }
+                                            }
+                                            arrayTarifLayanan[i] = tarifBaru;
                                             found = true;
                                             break;
                                         }
                                     }
-                                    if(found) {
-                                        found = false;
+                            
+                                    if (found) {
+                                        System.out.println("Data berhasil diupdate.");
                                     } else {
                                         System.out.println("Key tidak ditemukan");
-                                    }                                            
+                                    }                                          
                                     break;
                                 case 3:
                                     System.out.print("Masukkan layanan yang ingin dihapus: ");
                                     key = input.next();
                                     for (int i = 0; i < arrayLayanan.length; i++) {
-                                        if (arrayLayanan[i] != null && arrayLayanan[i][0].equalsIgnoreCase(key)) {
+                                        if (arrayLayanan[i] != null && arrayLayanan[i].equalsIgnoreCase(key)) {
                                             System.out.println(arrayLayanan[i]+" - "+arrayTarifLayanan[i]+" Telah Dihapus!");
                                             arrayLokasi[i] = null;
                                             arrayTarifLayanan[i] = 0;
