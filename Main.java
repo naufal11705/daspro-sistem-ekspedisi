@@ -39,7 +39,7 @@ public class Main {
         
             
         // Layanan pengiriman default
-        String[] arrayLayanan = new String[20];
+        String[] arrayLayanan = new String[3];
             arrayLayanan[0] = "Reguler";
             arrayLayanan[1] = "Ekonomi";
             arrayLayanan[2] = "Sameday";
@@ -756,34 +756,53 @@ public class Main {
                                     }
                                     break;
                                 case 2:
-                                    System.out.print("Masukkan nama layanan: ");
-                                    key = input.next();
-                                    for (int i = 0; i < arrayLayanan.length; i++) {
-                                        if (arrayLayanan[i].equalsIgnoreCase(key)) {
-                                            System.out.print("Masukkan Nama Layanan Baru: ");
-                                            arrayLayanan[i] = input.next();
-                                            while (!inputValid) {
-                                                System.out.print("Masukkan Tarif Baru: ");
-                                                if (input.hasNextDouble()) {
-                                                    tarifBaru = input.nextDouble();
-                                                    inputValid = true;
-                                                } else {
-                                                    System.out.println("Masukan bukan angka. Mohon masukkan angka.");
-                                                    input.next(); // Menghapus input yang tidak valid agar tidak terjadi infinite loop
-                                                }
-                                            }
-                                            arrayTarifLayanan[i] = tarifBaru;
-                                            found = true;
-                                            break;
-                                        }
+                                System.out.println("Daftar Layanan yang Tersedia:");
+                                for (int i = 0; i < arrayLayanan.length; i++) {
+                                    
+                                    if (arrayLayanan[i] != null){
+                                        System.out.println((i + 1) + ". " + arrayLayanan[i] );
+
                                     }
-                            
-                                    if (found) {
-                                        System.out.println("Data berhasil diupdate.");
+                                }
+                        
+                                System.out.print("Masukkan nomor layanan yang ingin diubah: ");
+                                int selectedService = input.nextInt();
+                        
+                                if (selectedService >= 1 && selectedService <= arrayLayanan.length) {
+                                    System.out.println("Pilih yang ingin diubah:");
+                                    System.out.println("1. Nama Layanan");
+                                    System.out.println("2. Tarif Layanan");
+                                    System.out.print("Masukkan nomor pilihan: ");
+                                    int changeOption = input.nextInt();
+                        
+                                    if (changeOption == 1) {
+                                        System.out.print("Masukkan Nama Layanan Baru: ");
+                                        input.nextLine(); // Membersihkan newline di buffer
+                                        arrayLayanan[selectedService - 1] = input.nextLine();
+                                        System.out.println("Data nama layanan berhasil diupdate.");
+                                    } else if (changeOption == 2) {
+                                        double newTarif = 0.0;
+                                        
+                        
+                                        while (!inputValid) {
+                                            System.out.print("Masukkan Tarif Baru: ");
+                                            if (input.hasNextDouble()) {
+                                                newTarif = input.nextDouble();
+                                                inputValid = true;
+                                            } else {
+                                                System.out.println("Masukan bukan angka. Mohon masukkan angka.");
+                                                input.next(); // Membersihkan input yang tidak valid dari buffer
+                                            }
+                                        }
+                        
+                                        arrayTarifLayanan[selectedService - 1] = newTarif;
+                                        System.out.println("Data tarif layanan berhasil diupdate.");
                                     } else {
-                                        System.out.println("Key tidak ditemukan");
-                                    }                                          
-                                    break;
+                                        System.out.println("Pilihan tidak valid");
+                                    }
+                                } else {
+                                    System.out.println("Nomor layanan tidak valid");
+                                }
                                 case 3:
                                     System.out.println("Daftar Layanan yang Tersedia:");
                                     for (int i = 0; i < arrayLayanan.length; i++) {
@@ -796,10 +815,10 @@ public class Main {
                                     int selectedNumber = input.nextInt();
                             
                                     if (selectedNumber > 0 && selectedNumber <= arrayLayanan.length) {
-                                        String selectedService = arrayLayanan[selectedNumber - 1];
+                                        String pilih = arrayLayanan[selectedNumber - 1];
                             
                                         for (int i = 0; i < arrayLayanan.length; i++) {
-                                            if (arrayLayanan[i] != null && arrayLayanan[i].equalsIgnoreCase(selectedService)) {
+                                            if (arrayLayanan[i] != null && arrayLayanan[i].equalsIgnoreCase(pilih)) {
                                                 System.out.println(arrayLayanan[i] + " - " + arrayTarifLayanan[i] + " Telah Dihapus!");
                                                 arrayLayanan[i] = null;
                                                 arrayTarifLayanan[i] = 0;
