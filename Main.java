@@ -160,8 +160,8 @@ public class Main {
         // Array Multi Bahasa
         String[][] multilingual = {
             {"Welcome to the Expedition System", "Selamat Datang di Sistem Ekspedisi"},
-
-            {"Delivery of Goods", "Pengiriman Barang"}, //1
+            {"", "Manajemen Pengguna"}, //1
+            {"Delivery of Goods", "Pengiriman Barang"}, //2
                 // Bahasa menu pengiriman barang
                 {"Transactions", "Melakukan Transaksi"}, 
                     {"Enter the Sender's Name: ","Masukkan Nama Pengirim: "},
@@ -172,21 +172,22 @@ public class Main {
                 {"Remove Transactions", "Menghapus Data Transaksi"},
                 {"Displyas Transactions' Data", "Menampilkan Data Transaksi"},
                 {"Back to the Main Menu", "Kembali ke Menu Utama"},
-            {"Location Management", "Manajemen Lokasi"}, //11
+            {"Location Management", "Manajemen Lokasi"}, //12
                 // Bahasa menu manajemen lokasi
                 {"Add Location", "Menambahkan Lokasi"},
                 {"Remove Location", "Menghapus Lokasi"},
                 {"Displays Location's Data", "Menampilkan Data Lokasi"},
                 {"Back to the Main Menu", "Kembali ke Menu Utama"},
-            {"Cost Management", "Manajemen Tarif"}, //16
+            {"Cost Management", "Manajemen Tarif"}, //17
                 // Bahasa menu Manajemen Tarif
                 {"Add Service Types", "Tambahkan Jenis Layanan"},
                 {"Change Cost Service", "Merubah Tarif Layanan"},
                 {"Remove Service", "Menghapus Layanan"},
                 {"Displays Services' Data", "Menampilkan Layanan Data"},
                 {"Exit", "Keluar"}, 
-            {"Change Language", "Ganti Bahasa"},
-            {"Exit", "Keluar"},
+            {"Change Language", "Ganti Bahasa"}, //23
+            {"", "Laporan Ekspedisi"}, //24
+            {"Exit", "Keluar"}, //25
 
             // Bahasa input pilihan
             {"Enter Options: ", "Masukkan Pilihan: "}, 
@@ -240,17 +241,17 @@ public class Main {
                 System.out.println("\u001B[33m" + multilingual[0][pilihanBahasa]+   "\u001B[0m");
                 System.out.println("═════════════════════════════════════════════");
                 if(isAdmin){
-                    System.out.println("[0]. " + "Manajemen Pengguna");
+                    System.out.println("[0]. " + multilingual[1][pilihanBahasa]); //Manajemen Pengguna
                 }
-                System.out.println("[1]. " + multilingual[1][pilihanBahasa]); //Pengiriman Barang
-                System.out.println("[2]. " + multilingual[11][pilihanBahasa]); //Manajemen Lokasi
-                System.out.println("[3]. " + multilingual[16][pilihanBahasa]); //Manajemen Tarif
-                System.out.println("[4]. " + multilingual[22][pilihanBahasa]); //Ganti Bahasa
-                System.out.println("[5]. Laporan Ekspedisi");
-                System.out.println("[6]. " + multilingual[23][pilihanBahasa]); //Keluar
+                System.out.println("[1]. " + multilingual[2][pilihanBahasa]); //Pengiriman Barang
+                System.out.println("[2]. " + multilingual[12][pilihanBahasa]); //Manajemen Lokasi
+                System.out.println("[3]. " + multilingual[17][pilihanBahasa]); //Manajemen Tarif
+                System.out.println("[4]. " + multilingual[23][pilihanBahasa]); //Ganti Bahasa
+                System.out.println("[5]. " + multilingual[24][pilihanBahasa]); //Laporan
+                System.out.println("[6]. " + multilingual[25][pilihanBahasa]); //Keluar
                 System.out.println("═════════════════════════════════════════════");
 
-                System.out.print(multilingual[24][pilihanBahasa]);
+                System.out.print(multilingual[26][pilihanBahasa]);
                 menuUtama = input.nextInt();
                 input.nextLine();
 
