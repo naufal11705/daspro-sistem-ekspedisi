@@ -73,6 +73,11 @@ public class Main {
         double biayaJarak = 0;
         double tarifBaru = 0.0;
 
+        String RESET = "\u001B[0m";
+        String RED = "\u001B[31m";
+        String GREEN = "\u001B[32m";
+        String YELLOW = "\u001B[33m";
+
         // Array History Pemesanan
         String[][] historyTransaksi = {
             {"29-01-2023", "Nanda", "08866778899", "Yogyakarta", "Reguler", "25700.0", "Farhan", "Abdi", "Jl. Kembang 5 No. 15", "3", "Makanan"},
