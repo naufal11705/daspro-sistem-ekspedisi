@@ -107,7 +107,7 @@ public class Main {
             {"28-10-2023", "Innam", "08822334455", "Surabaya", "Sameday", "55000.0", "Putra", "Farrel", "Jl. Melati 9 No. 5", "6", "Buku"},            
         };
         
-        String labelFormat = 
+        String labelFormats = 
                 "╔══════════════════════════════════════════════╦════════════════════════════════════════════════╗\n" +
                 "║            POLINEMA EXPEDITION               ║  Tanggal: %-37s║\n" +
                 "╠════════════╦═════════════════════════════════╣  Berat: %-39s║\n" +
@@ -120,18 +120,18 @@ public class Main {
                 "║            ║                                 ║  Alamat: %-38s║\n" +
                 "╚════════════╩═════════════════════════════════╩════════════════════════════════════════════════╝";
 
-        /*String labelFormat = 
+        String labelFormat = 
                 "╔══════════════════════════════════════════════╦════════════════════════════════════════════════╗\n" +
-                "║            POLINEMA EXPEDITION               ║  Tanggal:" +
-                "╠════════════╦═════════════════════════════════╣  Deskripsi" +
-                "║            ║ Pengirim:                       ║  Berat: Jumlah Kiriman:" +
-                "║            ║ Kontak:                         ║  Biaya Kirim: %-33s║\n" + 
-                "║            ║                                 ║  Lokasi Tujuan: %-27s║\n" +
-                "║            ║                                 ║  Alamat:        \n" +
-                "║            ║ Penerima:                       ║                                                ║\n" +
+                "║            POLINEMA EXPEDITION               ║  Tanggal: %-37s║\n" +
+                "╠════════════╦═════════════════════════════════╣  Deskripsi %-36s║\n" +
+                "║            ║ Pengirim: %-22s║  Berat: %-39s║\n" +
+                "║            ║ Kontak: %-24s║  Layanan: %-37s║\n" + 
+                "║            ║                                 ║  Lokasi Tujuan: %-31s║\n" +
+                "║            ║                                 ║  Alamat: %-38s║\n" +
+                "║            ║ Penerima: %-22s║  Biaya Kirim: %-33s║\n" +
                 "║            ║                                 ║                                                ║\n" +
                 "║            ║                                 ║                                                ║\n" +
-                "╚════════════╩═════════════════════════════════╩════════════════════════════════════════════════╝";*/
+                "╚════════════╩═════════════════════════════════╩════════════════════════════════════════════════╝";
 
         String laporanFormat = 
                 "╔══════════════════════════════════════════════════════════════════════════════════════════════╗\n" +
@@ -439,14 +439,16 @@ public class Main {
                                     System.out.println(String.format(
                                         labelFormat,
                                         tanggalHariIni, // Tanggal
-                                        beratBarang, // Berat
-                                        arrayLayanan[pilihanLayanan], // Nomor Telepon
-                                        biayaAkhir, // Biaya Akhir
-                                        lokasiPengiriman, // Lokasi
+                                        deskripsiBarang,
                                         namaPengirim,
+                                        beratBarang, // Berat
                                         nomorKontak,
+                                        arrayLayanan[pilihanLayanan],
+                                        lokasiPengiriman, // Lokasi
+                                        alamatPenerima,
                                         namaPenerima,
-                                        alamatPenerima
+                                        biayaAkhir // Biaya Akhir
+
                                     ));                                        
                                     break;
                                 case 2:
