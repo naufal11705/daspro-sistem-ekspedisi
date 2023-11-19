@@ -40,16 +40,14 @@ public class Main {
         
             
         // Layanan pengiriman default
-        String[] arrayLayanan = new String[3];
-            arrayLayanan[0] = "Reguler";
-            arrayLayanan[1] = "Ekonomi";
-            arrayLayanan[2] = "Sameday";
+        String[] arrayLayanan = {
+            "Reguler", "Ekonomi", "Sameday"
+        };
 
         // Tarif berdasarkan jenis layanan
-        double[] arrayTarifLayanan = new double[20];
-            arrayTarifLayanan[0] = 10000;
-            arrayTarifLayanan[1] = 6000;
-            arrayTarifLayanan[2] = 20000;
+        double[] arrayTarifLayanan = {
+            10000, 6000, 20000
+        };
 
         // Deklarasi boolean
         boolean login = false;
@@ -72,6 +70,11 @@ public class Main {
         double tarifLayanan = 0;
         double biayaJarak = 0;
         double tarifBaru = 0.0;
+
+        String RESET = "\u001B[0m";
+        String RED = "\u001B[31m";
+        String GREEN = "\u001B[32m";
+        String YELLOW = "\u001B[33m";
 
         // Array History Pemesanan
         String[][] historyTransaksi = {
