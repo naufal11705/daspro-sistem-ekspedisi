@@ -40,7 +40,7 @@ public class Main {
         
             
         // Layanan pengiriman default
-        String[] arrayLayanan = new String[3];
+        String[] arrayLayanan = new String[20];
             arrayLayanan[0] = "Reguler";
             arrayLayanan[1] = "Ekonomi";
             arrayLayanan[2] = "Sameday";
@@ -72,6 +72,11 @@ public class Main {
         double tarifLayanan = 0;
         double biayaJarak = 0;
         double tarifBaru = 0.0;
+
+        String RESET = "\u001B[0m";
+        String RED = "\u001B[31m";
+        String GREEN = "\u001B[32m";
+        String YELLOW = "\u001B[33m";
 
         // Array History Pemesanan
         String[][] historyTransaksi = {
@@ -107,31 +112,19 @@ public class Main {
             {"28-10-2023", "Innam", "08822334455", "Surabaya", "Sameday", "55000.0", "Putra", "Farrel", "Jl. Melati 9 No. 5", "6", "Buku"},            
         };
         
+
         String labelFormat = 
                 "╔══════════════════════════════════════════════╦════════════════════════════════════════════════╗\n" +
                 "║            POLINEMA EXPEDITION               ║  Tanggal: %-37s║\n" +
-                "╠════════════╦═════════════════════════════════╣  Berat: %-39s║\n" +
-                "║            ║                                 ║  Layanan: %-37s║\n" +
-                "║            ║            PENGIRIM             ║  Biaya Kirim: %-33s║\n" + 
-                "║            ║                                 ║  Lokasi Pengiriman: %-27s║\n" +
-                "║            ║ Nama: %-26s║                                                ║\n" +
-                "║            ║ Nomor Telepon: %-17s║                                                ║\n" +
-                "║            ║                                 ║  Nama Penerima: %-31s║\n" +
+                "╠════════════╦═════════════════════════════════╣  Deskripsi %-36s║\n" +
+                "║            ║ Pengirim: %-22s║  Berat: %-39s║\n" +
+                "║            ║ Kontak: %-24s║  Layanan: %-37s║\n" + 
+                "║            ║                                 ║  Lokasi Tujuan: %-31s║\n" +
                 "║            ║                                 ║  Alamat: %-38s║\n" +
+                "║            ║ Penerima: %-22s║  Biaya Kirim: %-33s║\n" +
+                "║            ║                                 ║                                                ║\n" +
+                "║            ║                                 ║                                                ║\n" +
                 "╚════════════╩═════════════════════════════════╩════════════════════════════════════════════════╝";
-
-        /*String labelFormat = 
-                "╔══════════════════════════════════════════════╦════════════════════════════════════════════════╗\n" +
-                "║            POLINEMA EXPEDITION               ║  Tanggal:" +
-                "╠════════════╦═════════════════════════════════╣  Deskripsi" +
-                "║            ║ Pengirim:                       ║  Berat: Jumlah Kiriman:" +
-                "║            ║ Kontak:                         ║  Biaya Kirim: %-33s║\n" + 
-                "║            ║                                 ║  Lokasi Tujuan: %-27s║\n" +
-                "║            ║                                 ║  Alamat:        \n" +
-                "║            ║ Penerima:                       ║                                                ║\n" +
-                "║            ║                                 ║                                                ║\n" +
-                "║            ║                                 ║                                                ║\n" +
-                "╚════════════╩═════════════════════════════════╩════════════════════════════════════════════════╝";*/
 
         String laporanFormat = 
                 "╔══════════════════════════════════════════════════════════════════════════════════════════════╗\n" +
@@ -439,14 +432,16 @@ public class Main {
                                     System.out.println(String.format(
                                         labelFormat,
                                         tanggalHariIni, // Tanggal
-                                        beratBarang, // Berat
-                                        arrayLayanan[pilihanLayanan], // Nomor Telepon
-                                        biayaAkhir, // Biaya Akhir
-                                        lokasiPengiriman, // Lokasi
+                                        deskripsiBarang,
                                         namaPengirim,
+                                        beratBarang, // Berat
                                         nomorKontak,
+                                        arrayLayanan[pilihanLayanan],
+                                        lokasiPengiriman, // Lokasi
+                                        alamatPenerima,
                                         namaPenerima,
-                                        alamatPenerima
+                                        biayaAkhir // Biaya Akhir
+
                                     ));                                        
                                     break;
                                 case 2:
