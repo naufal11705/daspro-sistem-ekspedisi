@@ -28,6 +28,13 @@ public class Main {
         "Tangerang", "Bengkulu", "Gorontalo", "Bekasi", "Bogor"
     };
 
+    static String[][] rutePengiriman = {
+        {"Malang", "Bekasi", "818"},
+        {"Malang", "Bandung", "753"},
+        {"Malang", "Medan", "2738"},
+        {"Malang", "Bogor", "875"}
+    };
+
     // Tarif berdasarkan tujuan pengiriman
     static double[] arrayTarifLokasi = {
         8000, 45000, 25000, 16000, 23000, 
@@ -135,13 +142,6 @@ public class Main {
             {"Farhan", "222","KASIR"}};
 
         String loggedInUsername = "";
-
-        String[][] rutePengiriman = {
-            {"Malang", "Bekasi", "818"},
-            {"Malang", "Bandung", "753"},
-            {"Malang", "Medan", "2738"},
-            {"Malang", "Bogor", "875"}
-        };
 
         // Layanan pengiriman default
             arrayLayanan[0] = "Reguler";
@@ -709,25 +709,37 @@ public class Main {
                 
                             switch (subMenu) {
                                 case 1:
-                                    System.out.print("Masukkan nama lokasi: ");
-                                    String lokasiBaru = input.nextLine();
+                                    boolean routeExist = false;
+                                    String origin;
+                                    String destination;
                                     
-                                    
-                                    while (!inputValid) {
-                                        System.out.print("Masukkan tarif: ");
-                                        if (input.hasNextDouble()) {
-                                            tarifBaru = input.nextDouble();
-                                            inputValid = true;
-                                        } else {
-                                            System.out.println("Masukan bukan angka. Mohon masukkan angka.");
-                                            input.next(); // Menghapus input yang tidak valid agar tidak terjadi infinite loop
+                                    do {
+                                        System.out.print("Origin: ");
+                                        origin = input.nextLine();
+                                        System.out.print("Destination: ");
+                                        destination = input.nextLine();
+
+                                        for (int i = 0; i < rutePengiriman.length; i++) {
+                                            if ((rutePengiriman[i][0].equalsIgnoreCase(origin) && rutePengiriman[i][1].equalsIgnoreCase(destination)) || 
+                                            (rutePengiriman[i][1].equalsIgnoreCase(destination) && rutePengiriman[i][0].equalsIgnoreCase(origin))) {
+                                                routeExist = true;
+                                                break;
+                                            } 
                                         }
-                                    arrayLokasi = Arrays.copyOf(arrayLokasi,arrayLokasi.length + 1);
-                                    arrayLokasi[arrayLokasi.length-1] = lokasiBaru;
-                                    arrayTarifLokasi = Arrays.copyOf(arrayTarifLokasi,arrayTarifLokasi.length + 1);
-                                    arrayTarifLokasi[arrayTarifLokasi.length-1] = tarifBaru;
-                                
-                                    }
+
+                                        } while (routeExist); {
+                                            System.out.println("Rute tersebut sudah ada!");
+                                        };
+
+                                        System.out.print("Masukkan Jarak antara "+origin+" dan "+destination+": ");
+                                        String jarak = input.next();
+
+                                        rutePengiriman = Arrays.copyOf(rutePengiriman,rutePengiriman.length + 1);
+                                        rutePengiriman[rutePengiriman.length-1] = new String[] {
+                                            origin,
+                                            destination,
+                                            jarak};
+                                    
                                     break;
                                 case 2:
                                     System.out.println("Daftar Lokasi yang Tersedia:");
@@ -988,13 +1000,14 @@ public class Main {
         System.out.println("═════════════════════════════════════════════");
         System.out.println("\u001B[33m           Data Lokasi           \u001B[0m");
         System.out.println("═════════════════════════════════════════════");
-        System.out.println(" No  |    Nama Kota   |  Biaya");
+        System.out.println(" No  |    Nama Kota   |    Nama Kota   |  Jarak");
         System.out.println("═════════════════════════════════════════════");
-        for (int i = 0; i < arrayLokasi.length; i++) {
-            String formattedString = String.format(" %3d | %14s | %5s",
+        for (int i = 0; i < rutePengiriman.length; i++) {
+            String formattedString = String.format(" %3d | %14s | %14s | %5s Km",
                     i,
-                    arrayLokasi[i], // Nama Kota
-                    arrayTarifLokasi[i] // Tarif
+                    rutePengiriman[i][0], 
+                    rutePengiriman[i][1], 
+                    rutePengiriman[i][2] 
             );
             System.out.println(formattedString);
         }
