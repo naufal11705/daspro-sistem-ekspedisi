@@ -728,7 +728,7 @@ public class Main {
                                     
                                     break;
                                 case 2:
-                                    System.out.println("Daftar Lokasi yang Tersedia:");
+                                    System.out.println("Daftar rute yang Tersedia:");
                                     for (int i = 0; i < rutePengiriman.length; i++) {
                                         System.out.println((i + 1) + ". " + rutePengiriman[i][0] + ". " + rutePengiriman[i][1] + ". " + rutePengiriman[i][2]);
                                     }
@@ -738,7 +738,7 @@ public class Main {
 
                                     // Validation loop for non-integer input
                                     while (!validInput) {
-                                        System.out.print("Masukkan nomor lokasi yang ingin dihapus: ");
+                                        System.out.print("Masukkan nomor rute yang ingin dihapus: ");
                                         try {
                                             deleteIndex = Integer.parseInt(input.nextLine());
                                             validInput = true;
@@ -754,7 +754,7 @@ public class Main {
                                         System.arraycopy(rutePengiriman, deleteIndex, rutePengiriman, deleteIndex - 1, rutePengiriman.length - deleteIndex);
                                         rutePengiriman = Arrays.copyOf(rutePengiriman, rutePengiriman.length - 1);
                                     } else {
-                                        System.out.println("Nomor lokasi tidak valid");
+                                        System.out.println("Nomor rute tidak valid");
                                         continue;
                                     }
 
@@ -765,7 +765,7 @@ public class Main {
                                     }                                           
                                     break;
                                 case 3:
-                                    tampilDataLokasi();
+                                    tampilDataRute();
                                     break;
                                 case 4:
                                     keluar = false;
@@ -979,9 +979,9 @@ public class Main {
             } while(!exit);
         }
     }
-    public static void tampilDataLokasi() {
+    public static void tampilDataRute() {
         System.out.println("═════════════════════════════════════════════");
-        System.out.println("\u001B[33m           Data Lokasi           \u001B[0m");
+        System.out.println("\u001B[33m           Data Rute           \u001B[0m");
         System.out.println("═════════════════════════════════════════════");
         System.out.println(" No  |    Nama Kota   |    Nama Kota   |  Jarak");
         System.out.println("═════════════════════════════════════════════");
