@@ -125,6 +125,13 @@ public class Main {
             "Makassar", "Yogyakarta", "Semarang", "Denpasar", "Serang",
             "Tangerang", "Bengkulu", "Gorontalo", "Bekasi", "Bogor"
         };
+
+        String[][] rutePengiriman = {
+            {"Malang", "Yogyakarta", "355"},
+            {"Malang", "Bandung", "753"},
+            {"Malang", "Medan", "2738"},
+            {"Malang", "Bogor", "875"}
+        };
         
         // Tarif berdasarkan tujuan pengiriman
         double[] arrayTarifLokasi = {
