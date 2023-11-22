@@ -18,6 +18,40 @@ public class Main {
     static String tanggalHariIni = dateFormat.format(date);
     static String inputanTanggalAwal = "00-00-000", inputanTanggalAkhir = "00-00-0000";
 
+     public static void tampilDataLokasi() {
+                                    System.out.println("═════════════════════════════════════════════");
+                                    System.out.println("\u001B[33m           Data Lokasi           \u001B[0m");
+                                    System.out.println("═════════════════════════════════════════════");
+                                    System.out.println(" No  |    Nama Kota   |  Biaya");
+                                    System.out.println("═════════════════════════════════════════════");
+                                    for (int i = 0; i < arrayLokasi.length; i++) {
+                                        String formattedString = String.format(" %3d | %14s | %5s",
+                                                i,
+                                                arrayLokasi[i], // Nama Kota
+                                                arrayTarifLokasi[i] // Tarif
+                                        );
+                                        System.out.println(formattedString);
+                                    }
+                                } 
+    
+    public static void tampilDataTarifLayanan () {
+                                        System.out.println("═════════════════════════════════════════════");
+                                        System.out.println("\u001B[33m           Data Layanan           \u001B[0m");
+                                        System.out.println("═════════════════════════════════════════════");
+                                        System.out.println(" No  |   Nama Layanan   |  Biaya");
+                                        System.out.println("═════════════════════════════════════════════");
+                                    for (int i = 0; i < arrayLayanan.length; i++) {
+                                        if (arrayLayanan[i] != null) {
+                                             String formattedString = String.format(" %3d | %16s | %5s",
+                                                i,
+                                                arrayLayanan[i], // Nama Kota
+                                                arrayTarifLayanan[i] // Tarif
+                                        );
+                                        System.out.println(formattedString);
+                                        }
+                                    }
+    } 
+
     // Array History Pemesanan
     static String[][] historyTransaksi = {
         {"29-01-2023", "Nanda", "08866778899", "Yogyakarta", "Reguler", "25700.0", "Farhan", "Abdi", "Jl. Kembang 5 No. 15", "3", "Makanan"},
@@ -763,19 +797,7 @@ public class Main {
                                     }                                           
                                     break;
                                 case 3:
-                                    System.out.println("═════════════════════════════════════════════");
-                                    System.out.println("\u001B[33m           Data Lokasi           \u001B[0m");
-                                    System.out.println("═════════════════════════════════════════════");
-                                    System.out.println(" No  |    Nama Kota   |  Biaya");
-                                    System.out.println("═════════════════════════════════════════════");
-                                    for (int i = 0; i < arrayLokasi.length; i++) {
-                                        String formattedString = String.format(" %3d | %14s | %5s",
-                                                i,
-                                                arrayLokasi[i], // Nama Kota
-                                                arrayTarifLokasi[i] // Tarif
-                                        );
-                                        System.out.println(formattedString);
-                                    }
+                                    tampilDataLokasi();
                                     break;
                                 case 4:
                                     keluar = false;
@@ -939,21 +961,7 @@ public class Main {
                                     }
                                     break;
                                 case 4:
-                                        System.out.println("═════════════════════════════════════════════");
-                                        System.out.println("\u001B[33m           Data Layanan           \u001B[0m");
-                                        System.out.println("═════════════════════════════════════════════");
-                                        System.out.println(" No  |   Nama Layanan   |  Biaya");
-                                        System.out.println("═════════════════════════════════════════════");
-                                    for (int i = 0; i < arrayLayanan.length; i++) {
-                                        if (arrayLayanan[i] != null) {
-                                             String formattedString = String.format(" %3d | %16s | %5s",
-                                                i,
-                                                arrayLayanan[i], // Nama Kota
-                                                arrayTarifLayanan[i] // Tarif
-                                        );
-                                        System.out.println(formattedString);
-                                        }
-                                    }
+                                    tampilDataTarifLayanan ();
                                     break;
                                 case 5:
                                     isLoop = false;
