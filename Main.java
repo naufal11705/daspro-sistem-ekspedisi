@@ -28,6 +28,13 @@ public class Main {
         "Tangerang", "Bengkulu", "Gorontalo", "Bekasi", "Bogor"
     };
 
+    static String[][] rutePengiriman = {
+        {"Malang", "Bekasi", "818"},
+        {"Malang", "Bandung", "753"},
+        {"Malang", "Medan", "2738"},
+        {"Malang", "Bogor", "875"}
+    };
+
     // Tarif berdasarkan tujuan pengiriman
     static double[] arrayTarifLokasi = {
         8000, 45000, 25000, 16000, 23000, 
@@ -135,13 +142,6 @@ public class Main {
             {"Farhan", "222","KASIR"}};
 
         String loggedInUsername = "";
-
-        String[][] rutePengiriman = {
-            {"Malang", "Bekasi", "818"},
-            {"Malang", "Bandung", "753"},
-            {"Malang", "Medan", "2738"},
-            {"Malang", "Bogor", "875"}
-        };
 
         // Layanan pengiriman default
             arrayLayanan[0] = "Reguler";
@@ -1000,13 +1000,14 @@ public class Main {
         System.out.println("═════════════════════════════════════════════");
         System.out.println("\u001B[33m           Data Lokasi           \u001B[0m");
         System.out.println("═════════════════════════════════════════════");
-        System.out.println(" No  |    Nama Kota   |  Biaya");
+        System.out.println(" No  |    Nama Kota   |    Nama Kota   |  Jarak");
         System.out.println("═════════════════════════════════════════════");
-        for (int i = 0; i < arrayLokasi.length; i++) {
-            String formattedString = String.format(" %3d | %14s | %5s",
+        for (int i = 0; i < rutePengiriman.length; i++) {
+            String formattedString = String.format(" %3d | %14s | %14s | %5s Km",
                     i,
-                    arrayLokasi[i], // Nama Kota
-                    arrayTarifLokasi[i] // Tarif
+                    rutePengiriman[i][0], 
+                    rutePengiriman[i][1], 
+                    rutePengiriman[i][2] 
             );
             System.out.println(formattedString);
         }
