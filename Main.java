@@ -21,25 +21,11 @@ public class Main {
     static String[] arrayLayanan = new String[20];
     static double[] arrayTarifLayanan = new double[20];
 
-    /*// Lokasi default
-    static String[] arrayLokasi = {
-        "Malang", "Jakarta", "Surabaya", "Bandung", "Medan",
-        "Makassar", "Yogyakarta", "Semarang", "Denpasar", "Serang",
-        "Tangerang", "Bengkulu", "Gorontalo", "Bekasi", "Bogor"
-    };*/
-
     static String[][] rutePengiriman = {
         {"Malang", "Bekasi", "818"},
         {"Malang", "Bandung", "753"},
         {"Malang", "Medan", "2738"},
         {"Malang", "Bogor", "875"}
-    };
-
-    // Tarif berdasarkan tujuan pengiriman
-    static double[] arrayTarifLokasi = {
-        8000, 45000, 25000, 16000, 23000, 
-        34000, 36000, 23000, 12000, 18000, 
-        27000, 30000, 22000, 31000, 19000
     };
 
     // Array History Pemesanan
