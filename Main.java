@@ -197,11 +197,11 @@ public class Main {
                 {"Remove Transactions", "Menghapus Data Transaksi"},
                 {"Displyas Transactions' Data", "Menampilkan Data Transaksi"},
                 {"Back to the Main Menu", "Kembali ke Menu Utama"},
-            {"Location Management", "Manajemen Lokasi"}, //12
+            {"Route Management", "Manajemen Rute"}, //12
                 // Bahasa menu manajemen lokasi
-                {"Add Location", "Menambahkan Lokasi"},
-                {"Remove Location", "Menghapus Lokasi"},
-                {"Displays Location's Data", "Menampilkan Data Lokasi"},
+                {"Add Location", "Menambahkan Rute"},
+                {"Remove Location", "Menghapus Rute"},
+                {"Displays Location's Data", "Menampilkan Data Rute Pengiriman"},
                 {"Back to the Main Menu", "Kembali ke Menu Utama"},
             {"Cost Management", "Manajemen Tarif"}, //17
                 // Bahasa menu Manajemen Tarif
@@ -680,12 +680,12 @@ public class Main {
                             boolean keluar = true;
                             while (keluar) {
                             System.out.println("═════════════════════════════════════════════");
-                            System.out.println("\u001B[33m Manajemen Lokasi   \u001B[0m");
+                            System.out.println("\u001B[33m Manajemen Rute   \u001B[0m");
                             System.out.println("═════════════════════════════════════════════");
 
-                            System.out.println("[1]. Menambah Lokasi"); //Menambahkan Lokasi
-                            System.out.println("[2]. Menghapus Lokasi"); //Menghapus Lokasi
-                            System.out.println("[3]. Menampilkan Data Lokasi"); //Menampilkan Data Lokasi
+                            System.out.println("[1]. Menambah Rute"); //Menambahkan Lokasi
+                            System.out.println("[2]. Menghapus Rute"); //Menghapus Lokasi
+                            System.out.println("[3]. Menampilkan Data Rute"); //Menampilkan Data Lokasi
                             System.out.println("[4]. Kembali ke Menu Utama"); //Kembali ke Menu Utama
                             System.out.println("═════════════════════════════════════════════");
                             System.out.print("Masukkan Pilihan: "); 
