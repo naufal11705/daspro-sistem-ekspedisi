@@ -21,12 +21,12 @@ public class Main {
     static String[] arrayLayanan = new String[20];
     static double[] arrayTarifLayanan = new double[20];
 
-    // Lokasi default
+    /*// Lokasi default
     static String[] arrayLokasi = {
         "Malang", "Jakarta", "Surabaya", "Bandung", "Medan",
         "Makassar", "Yogyakarta", "Semarang", "Denpasar", "Serang",
         "Tangerang", "Bengkulu", "Gorontalo", "Bekasi", "Bogor"
-    };
+    };*/
 
     static String[][] rutePengiriman = {
         {"Malang", "Bekasi", "818"},
@@ -743,8 +743,8 @@ public class Main {
                                     break;
                                 case 2:
                                     System.out.println("Daftar Lokasi yang Tersedia:");
-                                    for (int i = 0; i < arrayLokasi.length; i++) {
-                                        System.out.println((i + 1) + ". " + arrayLokasi[i]);
+                                    for (int i = 0; i < rutePengiriman.length; i++) {
+                                        System.out.println((i + 1) + ". " + rutePengiriman[i][0] + ". " + rutePengiriman[i][1] + ". " + rutePengiriman[i][2]);
                                     }
                         
                                     int deleteIndex = 0;
@@ -761,15 +761,12 @@ public class Main {
                                         }
                                     }
 
-                                    if (deleteIndex >= 1 && deleteIndex <= arrayLokasi.length) {
-                                        String deletedLocation = arrayLokasi[deleteIndex - 1];
+                                    if (deleteIndex >= 1 && deleteIndex <= rutePengiriman.length) {
+                                        String[] deletedLocation = rutePengiriman[deleteIndex - 1];
                                         System.out.println(deletedLocation + " Telah Dihapus!");
 
-                                        System.arraycopy(arrayLokasi, deleteIndex, arrayLokasi, deleteIndex - 1, arrayLokasi.length - deleteIndex);
-                                        arrayLokasi = Arrays.copyOf(arrayLokasi, arrayLokasi.length - 1);
-
-                                        System.arraycopy(arrayTarifLokasi, deleteIndex, arrayTarifLokasi, deleteIndex - 1, arrayTarifLokasi.length - deleteIndex);
-                                        arrayTarifLokasi = Arrays.copyOf(arrayTarifLokasi, arrayTarifLokasi.length - 1);
+                                        System.arraycopy(rutePengiriman, deleteIndex, rutePengiriman, deleteIndex - 1, rutePengiriman.length - deleteIndex);
+                                        rutePengiriman = Arrays.copyOf(rutePengiriman, rutePengiriman.length - 1);
                                     } else {
                                         System.out.println("Nomor lokasi tidak valid");
                                         continue;
