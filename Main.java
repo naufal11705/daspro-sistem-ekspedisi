@@ -709,25 +709,37 @@ public class Main {
                 
                             switch (subMenu) {
                                 case 1:
-                                    System.out.print("Masukkan nama lokasi: ");
-                                    String lokasiBaru = input.nextLine();
+                                    boolean routeExist = false;
+                                    String origin;
+                                    String destination;
                                     
-                                    
-                                    while (!inputValid) {
-                                        System.out.print("Masukkan tarif: ");
-                                        if (input.hasNextDouble()) {
-                                            tarifBaru = input.nextDouble();
-                                            inputValid = true;
-                                        } else {
-                                            System.out.println("Masukan bukan angka. Mohon masukkan angka.");
-                                            input.next(); // Menghapus input yang tidak valid agar tidak terjadi infinite loop
+                                    do {
+                                        System.out.print("Origin: ");
+                                        origin = input.nextLine();
+                                        System.out.print("Destination: ");
+                                        destination = input.nextLine();
+
+                                        for (int i = 0; i < rutePengiriman.length; i++) {
+                                            if ((rutePengiriman[i][0].equalsIgnoreCase(origin) && rutePengiriman[i][1].equalsIgnoreCase(destination)) || 
+                                            (rutePengiriman[i][1].equalsIgnoreCase(destination) && rutePengiriman[i][0].equalsIgnoreCase(origin))) {
+                                                routeExist = true;
+                                                break;
+                                            } 
                                         }
-                                    arrayLokasi = Arrays.copyOf(arrayLokasi,arrayLokasi.length + 1);
-                                    arrayLokasi[arrayLokasi.length-1] = lokasiBaru;
-                                    arrayTarifLokasi = Arrays.copyOf(arrayTarifLokasi,arrayTarifLokasi.length + 1);
-                                    arrayTarifLokasi[arrayTarifLokasi.length-1] = tarifBaru;
-                                
-                                    }
+
+                                        } while (routeExist); {
+                                            System.out.println("Rute tersebut sudah ada!");
+                                        };
+
+                                        System.out.print("Masukkan Jarak antara "+origin+" dan "+destination+": ");
+                                        String jarak = input.next();
+
+                                        rutePengiriman = Arrays.copyOf(rutePengiriman,rutePengiriman.length + 1);
+                                        rutePengiriman[rutePengiriman.length-1] = new String[] {
+                                            origin,
+                                            destination,
+                                            jarak};
+                                    
                                     break;
                                 case 2:
                                     System.out.println("Daftar Lokasi yang Tersedia:");
