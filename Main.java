@@ -18,39 +18,22 @@ public class Main {
     static String tanggalHariIni = dateFormat.format(date);
     static String inputanTanggalAwal = "00-00-000", inputanTanggalAkhir = "00-00-0000";
 
-     public static void tampilDataLokasi() {
-                                    System.out.println("═════════════════════════════════════════════");
-                                    System.out.println("\u001B[33m           Data Lokasi           \u001B[0m");
-                                    System.out.println("═════════════════════════════════════════════");
-                                    System.out.println(" No  |    Nama Kota   |  Biaya");
-                                    System.out.println("═════════════════════════════════════════════");
-                                    for (int i = 0; i < arrayLokasi.length; i++) {
-                                        String formattedString = String.format(" %3d | %14s | %5s",
-                                                i,
-                                                arrayLokasi[i], // Nama Kota
-                                                arrayTarifLokasi[i] // Tarif
-                                        );
-                                        System.out.println(formattedString);
-                                    }
-                                } 
-    
-    public static void tampilDataTarifLayanan () {
-                                        System.out.println("═════════════════════════════════════════════");
-                                        System.out.println("\u001B[33m           Data Layanan           \u001B[0m");
-                                        System.out.println("═════════════════════════════════════════════");
-                                        System.out.println(" No  |   Nama Layanan   |  Biaya");
-                                        System.out.println("═════════════════════════════════════════════");
-                                    for (int i = 0; i < arrayLayanan.length; i++) {
-                                        if (arrayLayanan[i] != null) {
-                                             String formattedString = String.format(" %3d | %16s | %5s",
-                                                i,
-                                                arrayLayanan[i], // Nama Kota
-                                                arrayTarifLayanan[i] // Tarif
-                                        );
-                                        System.out.println(formattedString);
-                                        }
-                                    }
-    } 
+    static String[] arrayLayanan = new String[20];
+    static double[] arrayTarifLayanan = new double[20];
+
+    // Lokasi default
+    static String[] arrayLokasi = {
+        "Malang", "Jakarta", "Surabaya", "Bandung", "Medan",
+        "Makassar", "Yogyakarta", "Semarang", "Denpasar", "Serang",
+        "Tangerang", "Bengkulu", "Gorontalo", "Bekasi", "Bogor"
+    };
+
+    // Tarif berdasarkan tujuan pengiriman
+    static double[] arrayTarifLokasi = {
+        8000, 45000, 25000, 16000, 23000, 
+        34000, 36000, 23000, 12000, 18000, 
+        27000, 30000, 22000, 31000, 19000
+    };
 
     // Array History Pemesanan
     static String[][] historyTransaksi = {
@@ -153,39 +136,23 @@ public class Main {
 
         String loggedInUsername = "";
 
-        // Lokasi default
-        String[] arrayLokasi = {
-            "Malang", "Jakarta", "Surabaya", "Bandung", "Medan",
-            "Makassar", "Yogyakarta", "Semarang", "Denpasar", "Serang",
-            "Tangerang", "Bengkulu", "Gorontalo", "Bekasi", "Bogor"
-        };
-
         String[][] rutePengiriman = {
             {"Malang", "Bekasi", "818"},
             {"Malang", "Bandung", "753"},
             {"Malang", "Medan", "2738"},
             {"Malang", "Bogor", "875"}
         };
-        
-        // Tarif berdasarkan tujuan pengiriman
-        double[] arrayTarifLokasi = {
-            8000, 45000, 25000, 16000, 23000, 
-            34000, 36000, 23000, 12000, 18000, 
-            27000, 30000, 22000, 31000, 19000
-        };
-        
-            
+
         // Layanan pengiriman default
-        String[] arrayLayanan = new String[20];
             arrayLayanan[0] = "Reguler";
             arrayLayanan[1] = "Ekonomi";
             arrayLayanan[2] = "Sameday";
 
         // Tarif berdasarkan jenis layanan
-        double[] arrayTarifLayanan = new double[20];
             arrayTarifLayanan[0] = 10000;
             arrayTarifLayanan[1] = 6000;
             arrayTarifLayanan[2] = 20000;
+        
 
         // Deklarasi boolean
         boolean login = false;
@@ -1017,4 +984,37 @@ public class Main {
             } while(!exit);
         }
     }
+    public static void tampilDataLokasi() {
+        System.out.println("═════════════════════════════════════════════");
+        System.out.println("\u001B[33m           Data Lokasi           \u001B[0m");
+        System.out.println("═════════════════════════════════════════════");
+        System.out.println(" No  |    Nama Kota   |  Biaya");
+        System.out.println("═════════════════════════════════════════════");
+        for (int i = 0; i < arrayLokasi.length; i++) {
+            String formattedString = String.format(" %3d | %14s | %5s",
+                    i,
+                    arrayLokasi[i], // Nama Kota
+                    arrayTarifLokasi[i] // Tarif
+            );
+            System.out.println(formattedString);
+        }
+    } 
+    
+    public static void tampilDataTarifLayanan() {
+        System.out.println("═════════════════════════════════════════════");
+        System.out.println("\u001B[33m           Data Layanan           \u001B[0m");
+        System.out.println("═════════════════════════════════════════════");
+        System.out.println(" No  |   Nama Layanan   |  Biaya");
+        System.out.println("═════════════════════════════════════════════");
+        for (int i = 0; i < arrayLayanan.length; i++) {
+            if (arrayLayanan[i] != null) {
+                    String formattedString = String.format(" %3d | %16s | %5s",
+                    i,
+                    arrayLayanan[i], // Nama Kota
+                    arrayTarifLayanan[i] // Tarif
+            );
+            System.out.println(formattedString);
+            }
+        }
+    } 
 }
