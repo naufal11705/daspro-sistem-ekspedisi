@@ -157,6 +157,7 @@ public class Main {
         String key;
         
         double tarifPerKg = 5000;
+        double tarifPerKm = 1000;
         int pilihanLayanan;
         double tarifLayanan = 0;
         double biayaJarak = 0;
@@ -197,13 +198,13 @@ public class Main {
                 {"Remove Transactions", "Menghapus Data Transaksi"},
                 {"Displyas Transactions' Data", "Menampilkan Data Transaksi"},
                 {"Back to the Main Menu", "Kembali ke Menu Utama"},
-            {"Location Management", "Manajemen Lokasi"}, //12
+            {"Route Management", "Manajemen Rute"}, //12
                 // Bahasa menu manajemen lokasi
-                {"Add Location", "Menambahkan Lokasi"},
-                {"Remove Location", "Menghapus Lokasi"},
-                {"Displays Location's Data", "Menampilkan Data Lokasi"},
+                {"Add Location", "Menambahkan Rute"},
+                {"Remove Location", "Menghapus Rute"},
+                {"Displays Location's Data", "Menampilkan Data Rute Pengiriman"},
                 {"Back to the Main Menu", "Kembali ke Menu Utama"},
-            {"Cost Management", "Manajemen Tarif"}, //17
+            {"Cost Management", "Manajemen Layanan"}, //17
                 // Bahasa menu Manajemen Tarif
                 {"Add Service Types", "Tambahkan Jenis Layanan"},
                 {"Change Cost Service", "Merubah Tarif Layanan"},
@@ -266,8 +267,9 @@ public class Main {
                 System.out.println("[2]. " + multilingual[12][pilihanBahasa]); //Manajemen Lokasi
                 System.out.println("[3]. " + multilingual[17][pilihanBahasa]); //Manajemen Tarif
                 System.out.println("[4]. " + multilingual[23][pilihanBahasa]); //Ganti Bahasa
-                System.out.println("[5]. " + multilingual[24][pilihanBahasa]); //Laporan
-                System.out.println("[6]. " + multilingual[25][pilihanBahasa]); //Keluar
+                System.out.println("[5]. Laporan"); //Laporan
+                System.out.println("[6]. Keluar"); //Keluar
+                System.out.println("[7]. Manajemen Tarif Dasar (Under Development)");
                 System.out.println("═════════════════════════════════════════════");
 
                 System.out.print(multilingual[26][pilihanBahasa]);
@@ -680,12 +682,12 @@ public class Main {
                             boolean keluar = true;
                             while (keluar) {
                             System.out.println("═════════════════════════════════════════════");
-                            System.out.println("\u001B[33m Manajemen Lokasi   \u001B[0m");
+                            System.out.println("\u001B[33m Manajemen Rute   \u001B[0m");
                             System.out.println("═════════════════════════════════════════════");
 
-                            System.out.println("[1]. Menambah Lokasi"); //Menambahkan Lokasi
-                            System.out.println("[2]. Menghapus Lokasi"); //Menghapus Lokasi
-                            System.out.println("[3]. Menampilkan Data Lokasi"); //Menampilkan Data Lokasi
+                            System.out.println("[1]. Menambah Rute"); //Menambahkan Lokasi
+                            System.out.println("[2]. Menghapus Rute"); //Menghapus Lokasi
+                            System.out.println("[3]. Menampilkan Data Rute"); //Menampilkan Data Lokasi
                             System.out.println("[4]. Kembali ke Menu Utama"); //Kembali ke Menu Utama
                             System.out.println("═════════════════════════════════════════════");
                             System.out.print("Masukkan Pilihan: "); 
@@ -728,7 +730,7 @@ public class Main {
                                     
                                     break;
                                 case 2:
-                                    System.out.println("Daftar Lokasi yang Tersedia:");
+                                    System.out.println("Daftar rute yang Tersedia:");
                                     for (int i = 0; i < rutePengiriman.length; i++) {
                                         System.out.println((i + 1) + ". " + rutePengiriman[i][0] + ". " + rutePengiriman[i][1] + ". " + rutePengiriman[i][2]);
                                     }
@@ -738,7 +740,7 @@ public class Main {
 
                                     // Validation loop for non-integer input
                                     while (!validInput) {
-                                        System.out.print("Masukkan nomor lokasi yang ingin dihapus: ");
+                                        System.out.print("Masukkan nomor rute yang ingin dihapus: ");
                                         try {
                                             deleteIndex = Integer.parseInt(input.nextLine());
                                             validInput = true;
@@ -754,7 +756,7 @@ public class Main {
                                         System.arraycopy(rutePengiriman, deleteIndex, rutePengiriman, deleteIndex - 1, rutePengiriman.length - deleteIndex);
                                         rutePengiriman = Arrays.copyOf(rutePengiriman, rutePengiriman.length - 1);
                                     } else {
-                                        System.out.println("Nomor lokasi tidak valid");
+                                        System.out.println("Nomor rute tidak valid");
                                         continue;
                                     }
 
@@ -765,7 +767,7 @@ public class Main {
                                     }                                           
                                     break;
                                 case 3:
-                                    tampilDataLokasi();
+                                    tampilDataRute();
                                     break;
                                 case 4:
                                     keluar = false;
@@ -776,13 +778,13 @@ public class Main {
                         } break;
                         case 3:
                             System.out.println("═════════════════════════════════════════════");
-                            System.out.println("\u001B[33mManajemen Tarif\u001B[0m");
+                            System.out.println("\u001B[33mManajemen Layanan\u001B[0m");
                             System.out.println("═════════════════════════════════════════════");
 
                             System.out.println("[1]. Tambah Jenis Layanan"); //Tambahan Jenis Layanan
                             System.out.println("[2]. Merubah Tarif Layanan"); //Merubah Tarif Layanan
                             System.out.println("[3]. Menghapus Layanan"); //Menghapus Layanan
-                            System.out.println("[4]. Menampilkan Layanan Data"); //Menampilkan Layanan Data
+                            System.out.println("[4]. Menampilkan Data Layanan"); //Menampilkan Layanan Data
                             System.out.println("[5]. Keluar"); //Keluar
 
                             System.out.println("═════════════════════════════════════════════");
@@ -967,6 +969,36 @@ public class Main {
                             login=false;
                             masuk=false;
                             break;
+                        case 7:
+                            System.out.println("═════════════════════════════════════════════");
+                            System.out.println("\u001B[33mManajemen Tarif Dasar\u001B[0m");
+                            System.out.println("═════════════════════════════════════════════");
+
+                            System.out.println("[1]. Tarif Dasar per Kg"); //Tambahan Jenis Layanan
+                            System.out.println("[2]. Tarif Dasar per Km"); //Merubah Tarif Layanan
+                            System.out.println("[3]. Keluar"); //Keluar
+
+                            System.out.println("═════════════════════════════════════════════");
+                            System.out.print("Masukkan Pilihan: ");
+                            subMenu = input.nextInt();
+
+                            switch (subMenu) {
+                                case 1:
+                                    System.out.print("Masukkan tarif dasar per Kg: ");
+                                    tarifPerKg = input.nextInt();
+                                    break;
+                                case 2:
+                                    System.out.print("Masukkan tarif dasar per Km: ");
+                                    tarifPerKm = input.nextInt();
+                                    break;
+                                case 3:
+                                    isLoop = false;
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                            break;
                         default:
                             System.out.println("Invalid choice. Please try again.");
                             break;
@@ -979,9 +1011,9 @@ public class Main {
             } while(!exit);
         }
     }
-    public static void tampilDataLokasi() {
+    public static void tampilDataRute() {
         System.out.println("═════════════════════════════════════════════");
-        System.out.println("\u001B[33m           Data Lokasi           \u001B[0m");
+        System.out.println("\u001B[33m           Data Rute           \u001B[0m");
         System.out.println("═════════════════════════════════════════════");
         System.out.println(" No  |    Nama Kota   |    Nama Kota   |  Jarak");
         System.out.println("═════════════════════════════════════════════");
