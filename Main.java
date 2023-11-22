@@ -127,7 +127,7 @@ public class Main {
         };
 
         String[][] rutePengiriman = {
-            {"Malang", "Yogyakarta", "355"},
+            {"Malang", "Bekasi", "818"},
             {"Malang", "Bandung", "753"},
             {"Malang", "Medan", "2738"},
             {"Malang", "Bogor", "875"}
@@ -391,7 +391,9 @@ public class Main {
                             switch (subMenu) {
                                 case 1:
                                     int beratBarang;
-                                    String lokasiPengiriman;
+                                    String origin;
+                                    String destination;
+                                    int jarak;
 
                                     System.out.print ("Masukkan Nama Pengirim: ");
                                     String namaPengirim = input.nextLine();
@@ -425,17 +427,21 @@ public class Main {
                                     validInput = false;
                                     //Mencari Kota Pengiriman pada Array
                                     do {
-                                        System.out.print ("Masukkan Kota Tujuan: ");
-                                        lokasiPengiriman = input.next();
-                                        for (int i = 0; i < arrayLokasi.length; i++) {
-                                            if (arrayLokasi[i] != null && arrayLokasi[i].equalsIgnoreCase(lokasiPengiriman)) {
-                                                biayaJarak = arrayTarifLokasi[i];
+                                        System.out.print ("Origin: ");
+                                        origin = input.nextLine();
+                                        System.out.print (("Destination: "));
+                                        destination = input.nextLine();
+                                        for (int i = 0; i < rutePengiriman.length; i++) {
+                                            if ((rutePengiriman[i][0].equalsIgnoreCase(origin) && rutePengiriman[i][1].equalsIgnoreCase(destination)) || 
+                                            (rutePengiriman[i][1].equalsIgnoreCase(destination) && rutePengiriman[i][0].equalsIgnoreCase(origin))) {
+                                                jarak = Integer.parseInt(rutePengiriman[i][2]);
+                                                biayaJarak = jarak * 2000;
                                                 found = true;
                                                 break;
                                             }
                                         }
                                         if(!found) {
-                                            System.out.print ("Kota Tujuan tidak Ditemukan!");
+                                            System.out.println ("Kota Tujuan tidak Ditemukan!");
                                         }    
                                     } while (!found);
                                     found = false;
@@ -459,7 +465,7 @@ public class Main {
                                         tanggalHariIni,
                                         namaPengirim,
                                         nomorKontak,
-                                        lokasiPengiriman,
+                                        origin,
                                         arrayLayanan[pilihanLayanan],
                                         Double.toString(biayaAkhir),
                                         loggedInUsername,
@@ -476,7 +482,7 @@ public class Main {
                                         beratBarang, // Berat
                                         nomorKontak,
                                         arrayLayanan[pilihanLayanan],
-                                        lokasiPengiriman, // Lokasi
+                                        origin, // Lokasi
                                         alamatPenerima,
                                         namaPenerima,
                                         biayaAkhir // Biaya Akhir
