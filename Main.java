@@ -28,6 +28,10 @@ public class Main {
         {"Malang", "Bogor", "875"}
     };
 
+    static Date startDate;
+    static Date endDate;
+
+
     // Array History Pemesanan
     static String[][] historyTransaksi = {
         {"29-01-2023", "Nanda", "08866778899", "Yogyakarta", "Reguler", "25700.0", "Farhan", "Abdi", "Jl. Kembang 5 No. 15", "3", "Makanan"},
@@ -485,6 +489,7 @@ public class Main {
                                     System.out.println("Under Development"); 
                                     break;
                                 case 4:
+                                    Calendar calendar = Calendar.getInstance();
                                     System.out.println("═════════════════════════════════════════════");
                                     System.out.println("\u001B[33m           History Transaksi           \u001B[0m");
                                     System.out.println("═════════════════════════════════════════════");
@@ -498,142 +503,47 @@ public class Main {
                                     editMenu = input.nextInt();
                                     switch (editMenu) {
                                         case 1:
-                                            try {
+                                            
                                                 System.out.print("Masukkan Tanggal Awal (dd-MM-yyyy): ");
                                                 inputanTanggalAwal = input.next();
                                                 System.out.print("Masukkan Tanggal Akhir (dd-MM-yyyy): ");
                                                 inputanTanggalAkhir = input.next();
-                                                Date startDate = dateFormat.parse(inputanTanggalAwal);
-                                                Date endDate = dateFormat.parse(inputanTanggalAkhir);
-                                                System.out.println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════"); 
-                                                System.out.println("                                                                                        History Transaksi");
-                                                System.out.println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════"); 
-                                                System.out.println(" No  |   Tanggal   |  Nama Pengirim  |  Nomor Kontak  |   Layanan   |      Tujuan      | Berat |      Deskripsi      |    Biaya    |    Kasir    |  Nama Penerima  |         Alamat Penerima");
-                                                System.out.println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════");              
-                                                for (int i = 0; i < historyTransaksi.length; i++) {
-                                                    if (historyTransaksi[i][0] != null){
-                                                        Date transaksiDate = dateFormat.parse(historyTransaksi[i][0]);
-                                                        if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
-                                                            System.out.println(String.format(" %3d ║ %11s ║ %15s ║ %14s ║ %11s ║ %16s ║ %5s ║ %19s ║ %11s ║ %11s ║ %15s ║ %30s",
-                                                                i,
-                                                                historyTransaksi[i][0], // Tanggal
-                                                                historyTransaksi[i][1], // Nama
-                                                                historyTransaksi[i][2], // Nomor Kontak
-                                                                historyTransaksi[i][4], // Jenis Layanan
-                                                                historyTransaksi[i][3], // Lokasi
-                                                                historyTransaksi[i][9], // Berat Barang
-                                                                historyTransaksi[i][10],  //Deskripsi
-                                                                historyTransaksi[i][5], // Tarif
-                                                                historyTransaksi[i][6], // Nama Kasir
-                                                                historyTransaksi[i][7], // Nama Penerima
-                                                                historyTransaksi[i][8] // Alamat Penerima
-
-                                                            ));
-                                                        }
-                                                    }
-                                                }
-                                                System.out.println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════"); 
-                                                break;
-                                            } catch (ParseException e) {
-                                                e.printStackTrace();
+                                                try {
+                                                startDate = dateFormat.parse(tanggalHariIni);
+                                                endDate = dateFormat.parse(tanggalHariIni);
+                                                tampilHistory(startDate, endDate);
+                                            } catch (Exception e) {
+                                                // TODO: handle exception
                                             }
                                             break;
                                         case 2:
                                             try {
-                                                Date startDate = dateFormat.parse(tanggalHariIni);
-                                                Date endDate = dateFormat.parse(tanggalHariIni);
-                                                System.out.println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════"); 
-                                                System.out.println("                                                                                        History Transaksi");
-                                                System.out.println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════"); 
-                                                System.out.println(" No  |   Tanggal   |  Nama Pengirim  |  Nomor Kontak  |   Layanan   |      Tujuan      | Berat |      Deskripsi      |    Biaya    |    Kasir    |  Nama Penerima  |         Alamat Penerima");
-                                                System.out.println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════");                                                
-                                                for (int i = 0; i < historyTransaksi.length; i++) {
-                                                    if (historyTransaksi[i][0] != null){
-                                                        Date transaksiDate = dateFormat.parse(historyTransaksi[i][0]);
-                                                        if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
-                                                            System.out.println(String.format(" %3d ║ %11s ║ %15s ║ %14s ║ %11s ║ %16s ║ %5s ║ %19s ║ %11s ║ %11s ║ %15s ║ %30s",
-                                                                i,
-                                                                historyTransaksi[i][0], // Tanggal
-                                                                historyTransaksi[i][1], // Nama
-                                                                historyTransaksi[i][2], // Nomor Kontak
-                                                                historyTransaksi[i][4], // Jenis Layanan
-                                                                historyTransaksi[i][3], // Lokasi
-                                                                historyTransaksi[i][9], // Berat Barang
-                                                                historyTransaksi[i][10],  //Deskripsi
-                                                                historyTransaksi[i][5], // Tarif
-                                                                historyTransaksi[i][6], // Nama Kasir
-                                                                historyTransaksi[i][7], // Nama Penerima
-                                                                historyTransaksi[i][8] // Alamat Penerima
-
-                                                            ));
-                                                        }
-                                                    }
-                                                }
-                                                System.out.println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════"); 
-                                                break;
-                                            } catch (ParseException e) {
-                                                e.printStackTrace();
+                                                startDate = dateFormat.parse(tanggalHariIni);
+                                                endDate = dateFormat.parse(tanggalHariIni);
+                                                tampilHistory(startDate, endDate);
+                                            } catch (Exception e) {
+                                                // TODO: handle exception
                                             }
                                             break;
                                         case 3:
-                                            try {
-                                                Calendar calendar = Calendar.getInstance();
                                                 calendar.set(Calendar.DAY_OF_MONTH, 1); // Set the day of the month to the first day
-                                                Date startDate = calendar.getTime();
+                                                startDate = calendar.getTime();
 
                                                 calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-                                                Date endDate = calendar.getTime();
-
-                                                System.out.println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════"); 
-                                                System.out.println("                                                                                        History Transaksi");
-                                                System.out.println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════"); 
-                                                System.out.println(" No  |   Tanggal   |  Nama Pengirim  |  Nomor Kontak  |   Layanan   |      Tujuan      | Berat |      Deskripsi      |    Biaya    |    Kasir    |  Nama Penerima  |         Alamat Penerima");
-                                                System.out.println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════");  
-                                                for (int i = 0; i < historyTransaksi.length; i++) {
-                                                    if (historyTransaksi[i][0] != null) {
-                                                        Date transaksiDate = dateFormat.parse(historyTransaksi[i][0]);
-                                                        if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
-                                                            System.out.println(String.format(" %3d ║ %11s ║ %15s ║ %14s ║ %11s ║ %16s ║ %5s ║ %19s ║ %11s ║ %11s ║ %15s ║ %30s",
-                                                                i,
-                                                                historyTransaksi[i][0], // Tanggal
-                                                                historyTransaksi[i][1], // Nama
-                                                                historyTransaksi[i][2], // Nomor Kontak
-                                                                historyTransaksi[i][4], // Jenis Layanan
-                                                                historyTransaksi[i][3], // Lokasi
-                                                                historyTransaksi[i][9], // Berat Barang
-                                                                historyTransaksi[i][10],  //Deskripsi
-                                                                historyTransaksi[i][5], // Tarif
-                                                                historyTransaksi[i][6], // Nama Kasir
-                                                                historyTransaksi[i][7], // Nama Penerima
-                                                                historyTransaksi[i][8] // Alamat Penerima
-
-                                                            ));
-                                                        }
-                                                    }
-                                                }
-
-                                                System.out.println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════"); 
-                                                break;
-                                                } catch (ParseException e) {
-                                                    e.printStackTrace();
-                                                }
-                                                break;
+                                                 endDate = calendar.getTime();
+                                                tampilHistory(startDate, endDate);
+                                            break;
                                         case 4:
-                                            
-                                                Calendar calendar = Calendar.getInstance();
                                                 calendar.set(Calendar.MONTH, calendar.JANUARY); 
                                                 calendar.set(calendar.DAY_OF_MONTH,1);
-                                                Date startDate = calendar.getTime();
+                                                startDate = calendar.getTime();
 
                                                 calendar.set(Calendar.MONTH, Calendar.DECEMBER);
                                                 calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-                                                Date endDate = calendar.getTime();
-
-                                               tampilHistory(startDate, endDate); 
-                                               break;
-                                                
-                                                
-                                            
+                                                endDate = calendar.getTime();
+                                               
+                                                tampilHistory(startDate, endDate);
+                                            break;
                                         case 5:
                                             break;
                                         default:
