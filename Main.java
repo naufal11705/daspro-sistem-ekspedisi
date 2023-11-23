@@ -91,25 +91,27 @@ public class Main {
             "╚═══════════════════════════════════════════════════╩════════════════════════╩═════════════════╝";
 
             static String formulirTransaksi =
-                "╔══════════════════════════════════════════════════════════════════════════════════════════════╗\n" +
-                "║                                                                                              ║\n" +
-                "║  Nama Pengirim:      [%-20s]                                                  ║\n" +
-                "║                                                                                              ║\n" +
-                "║  Nomor Kontak:       [%-20s]                                                  ║\n" +
-                "║                                                                                              ║\n" +
-                "║  Nama Penerima:      [%-20s]                                                  ║\n" +
-                "║                                                                                              ║\n" +
-                "║  Alamat Tujuan:      [%-20s]                                                  ║\n" +
-                "║                                                                                              ║\n" +
-                "║  Deskripsi Barang:   [%-20s]                                                  ║\n" +
-                "║                                                                                              ║\n" +
-                "║  Berat Barang:       [%-20s]                                                  ║\n" +
-                "║                                                                                              ║\n" +
-                "║  Rute:               [%-20s]        ->         [%-20s]         ║\n" +
-                "║                                                                                              ║\n" +
-                "║  Layanan:            [%-20s]                                                  ║\n" +
-                "║                                                                                              ║\n" +
-                "╚══════════════════════════════════════════════════════════════════════════════════════════════╝";
+                "╔════════════════════════════════════════════════════════════════════════════════════╗\n" +
+                "║                                                                                    ║\n" +
+                "║  Nama Pengirim:      [%-40s]                    ║\n" +
+                "║                                                                                    ║\n" +
+                "║  Nomor Kontak:       [%-40s]                    ║\n" +
+                "║                                                                                    ║\n" +
+                "║  Nama Penerima:      [%-40s]                    ║\n" +
+                "║                                                                                    ║\n" +
+                "║  Alamat Tujuan:      [%-40s]                    ║\n" +
+                "║                                                                                    ║\n" +
+                "║  Deskripsi Barang:   [%-40s]                    ║\n" +
+                "║                                                                                    ║\n" +
+                "║  Berat Barang:       [%-40s]                    ║\n" +
+                "║                                                                                    ║\n" +
+                "║  Origin:             [%-40s]                    ║\n" +
+                "║                                                                                    ║\n" +
+                "║  Destination:        [%-40s]                    ║\n" +
+                "║                                                                                    ║\n" +
+                "║  Layanan:            [%-40s]                    ║\n" +
+                "║                                                                                    ║\n" +
+                "╚════════════════════════════════════════════════════════════════════════════════════╝";
 
     public static void CetakLaporan(){
         int totalAsset=0, totalBerat=0, totalHarga=0;
@@ -1005,7 +1007,7 @@ public class Main {
     }
 
     public static String centerText(String text) {
-        int totalWidth = 20;
+        int totalWidth = 40;
         int spaces = (totalWidth - text.length()) / 2;
         return String.format("%" + spaces + "s%s%" + spaces + "s", "", text, "");
     }
