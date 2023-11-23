@@ -69,49 +69,49 @@ public class Main {
     };
 
     static String laporanFormat = 
-            "╔══════════════════════════════════════════════════════════════════════════════════════════════╗\n" +
-            "║                                                                                              ║\n" +
-            "║                      __     ___     ____    ____     ____     ___     _   __                 ║\n" + 
-            "║                     / /    /   |   / __ \\  / __ \\   / __ \\   /   |   / | / /                 ║\n" +
-            "║                    / /    / /| |  / /_/ / / / / /  / /_/ /  / /| |  /  |/ /                  ║\n" +
-            "║                   / /___ / ___ | / ____/ / /_/ /  / _, _/  / ___ | / /|  /                   ║\n" +
-            "║                  /_____//_/  |_|/_/      \\____/  /_/ |_|  /_/  |_|/_/ |_/                    ║\n" +
-            "║                                                                                              ║\n" +
-            "║                                                                                              ║\n" +
-            "╠══════════════════════════════════════════════════════════════════════════════════════════════╣\n" +
-            "║ POLINEMA EKPEDITION                                                                          ║\n" +
-            "║ Laporan Pengiriman Per Bulan                                                                 ║\n" + 
-            "║===================================================╦========================╦=================║\n" +
-            "║                                                   ║       Nilai            ║     Satuan      ║\n" +
-            "║                                                   ╠========================╬=================║\n" +
-            "║ Total Pengiriman Per Asset                        ║                 %-2s     ║      Buah       ║\n" +
-            "║ Total Pengiriman Per kg                           ║                 %-2s     ║       Kg        ║\n" +
-            "║ Total Pendapatan                                  ║      Rp %-10s     ║     Rupiah      ║\n" +
-            "║                                                   ║                        ║                 ║\n" +
-            "╚═══════════════════════════════════════════════════╩════════════════════════╩═════════════════╝";
+        "╔══════════════════════════════════════════════════════════════════════════════════════════════╗\n" +
+        "║                                                                                              ║\n" +
+        "║                      __     ___     ____    ____     ____     ___     _   __                 ║\n" + 
+        "║                     / /    /   |   / __ \\  / __ \\   / __ \\   /   |   / | / /                 ║\n" +
+        "║                    / /    / /| |  / /_/ / / / / /  / /_/ /  / /| |  /  |/ /                  ║\n" +
+        "║                   / /___ / ___ | / ____/ / /_/ /  / _, _/  / ___ | / /|  /                   ║\n" +
+        "║                  /_____//_/  |_|/_/      \\____/  /_/ |_|  /_/  |_|/_/ |_/                    ║\n" +
+        "║                                                                                              ║\n" +
+        "║                                                                                              ║\n" +
+        "╠══════════════════════════════════════════════════════════════════════════════════════════════╣\n" +
+        "║ POLINEMA EKPEDITION                                                                          ║\n" +
+        "║ Laporan Pengiriman Per Bulan                                                                 ║\n" + 
+        "║===================================================╦========================╦=================║\n" +
+        "║                                                   ║       Nilai            ║     Satuan      ║\n" +
+        "║                                                   ╠========================╬=================║\n" +
+        "║ Total Pengiriman Per Asset                        ║                 %-2s     ║      Buah       ║\n" +
+        "║ Total Pengiriman Per kg                           ║                 %-2s     ║       Kg        ║\n" +
+        "║ Total Pendapatan                                  ║      Rp %-10s     ║     Rupiah      ║\n" +
+        "║                                                   ║                        ║                 ║\n" +
+        "╚═══════════════════════════════════════════════════╩════════════════════════╩═════════════════╝";
 
-            static String formulirTransaksi =
-                "╔══════════════════════════════════════════════════════════════════════════════════════════════════╗\n" +
-                "║                                                                                                  ║\n" +
-                "║  Nama Pengirim:      [%-40s]                                  ║\n" +
-                "║                                                                                                  ║\n" +
-                "║  Nomor Kontak:       [%-40s]                                  ║\n" +
-                "║                                                                                                  ║\n" +
-                "║  Nama Penerima:      [%-40s]                                  ║\n" +
-                "║                                                                                                  ║\n" +
-                "║  Alamat Tujuan:      [%-40s]                                  ║\n" +
-                "║                                                                                                  ║\n" +
-                "║  Deskripsi Barang:   [%-40s]                                  ║\n" +
-                "║                                                                                                  ║\n" +
-                "║  Berat Barang:       [%-40s]                                  ║\n" +
-                "║                                                                                                  ║\n" +
-                "║  Origin:             [%-40s]                                  ║\n" +
-                "║                                                                                                  ║\n" +
-                "║  Destination:        [%-40s]                                  ║\n" +
-                "║                                                                                                  ║\n" +
-                "║  Layanan:            [%-40s]                                  ║\n" +
-                "║                                                                                                  ║\n" +
-                "╚══════════════════════════════════════════════════════════════════════════════════════════════════╝";
+    static String formulirTransaksi =
+        "╔══════════════════════════════════════════════════════════════════════════════════════════════════╗\n" +
+        "║                                                                                                  ║\n" +
+        "║  Nama Pengirim:      [%-40s]                                  ║\n" +
+        "║                                                                                                  ║\n" +
+        "║  Nomor Kontak:       [%-40s]                                  ║\n" +
+        "║                                                                                                  ║\n" +
+        "║  Nama Penerima:      [%-40s]                                  ║\n" +
+        "║                                                                                                  ║\n" +
+        "║  Alamat Tujuan:      [%-40s]                                  ║\n" +
+        "║                                                                                                  ║\n" +
+        "║  Deskripsi Barang:   [%-40s]                                  ║\n" +
+        "║                                                                                                  ║\n" +
+        "║  Berat Barang:       [%-40s]                                  ║\n" +
+        "║                                                                                                  ║\n" +
+        "║  Origin:             [%-40s]                                  ║\n" +
+        "║                                                                                                  ║\n" +
+        "║  Destination:        [%-40s]                                  ║\n" +
+        "║                                                                                                  ║\n" +
+        "║  Layanan:            [%-40s]                                  ║\n" +
+        "║                                                                                                  ║\n" +
+        "╚══════════════════════════════════════════════════════════════════════════════════════════════════╝";
 
     public static void CetakLaporan(){
         int totalAsset=0, totalBerat=0, totalHarga=0;
@@ -392,16 +392,16 @@ public class Main {
                                 
                                 
                         case 1:
-                            System.out.println("═════════════════════════════════════════════");
-                            System.out.println("\u001B[33m           Pengiriman Barang          \u001B[0m");
-                            System.out.println("═════════════════════════════════════════════");
-                            System.out.println("[1]. Melakukan Transaksi"); //Melakukan Transaksi
-                            System.out.println("[2]. Mengedit Data Transaksi (Under Development)"); //Mengedit Transaksi
-                            System.out.println("[3]. Menghapus Data Transaksi"); //Menghapus Transaksi
-                            System.out.println("[4]. Menampilkan Data Transaksi"); //Menampilkan Data Transaksi
-                            System.out.println("[5]. Kembali ke Menu Utama"); //Kembali ke Menu Utama
-                            System.out.println("═════════════════════════════════════════════");
-                            System.out.print("Masukkan Pilihan: "); 
+                            System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════════════╗");
+                            System.out.println("║"+YELLOW+centerString(98,"Pengiriman Barang")+RESET+"║");
+                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                            System.out.println("║ [1]. Melakukan Transaksi"); //Melakukan Transaksi
+                            System.out.println("║ [2]. Mengedit Data Transaksi (Under Development)"); //Mengedit Transaksi
+                            System.out.println("║ [3]. Menghapus Data Transaksi"); //Menghapus Transaksi
+                            System.out.println("║ [4]. Menampilkan Data Transaksi"); //Menampilkan Data Transaksi
+                            System.out.println("║ [5]. Kembali ke Menu Utama"); //Kembali ke Menu Utama
+                            System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                            System.out.print("-> Masukkan Pilihan: "); 
 
                             subMenu = input.nextInt();
                             input.nextLine();
@@ -491,7 +491,7 @@ public class Main {
                                             
                                         }
                                     }
-                                    System.out.print ("Masukkan Pilihan: ");
+                                    System.out.print ("-> Masukkan Pilihan: ");
                                     pilihanLayanan = input.nextInt();
                                     layanan = arrayLayanan[pilihanLayanan];
                                     tampilFormulirEkspedisi(namaPengirim, nomorKontak, namaPenerima, alamatPenerima, deskripsiBarang, beratBarang, origin, destination, layanan);
@@ -536,16 +536,16 @@ public class Main {
                                     break;
                                 case 4:
                                     Calendar calendar = Calendar.getInstance();
-                                    System.out.println("═════════════════════════════════════════════");
-                                    System.out.println("\u001B[33m           History Transaksi           \u001B[0m");
-                                    System.out.println("═════════════════════════════════════════════");
-                                    System.out.println("[1]. Berdasarkan Rentang Tanggal");
-                                    System.out.println("[2]. Hari ini");
-                                    System.out.println("[3]. Bulan ini");
-                                    System.out.println("[4]. Tahun ini");
-                                    System.out.println("[5]. Kembali ke Menu Utama");
-                                    System.out.println("═════════════════════════════════════════════");
-                                    System.out.print("Masukkan Pilihan: ");
+                                    System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════════════╗");
+                                    System.out.println("║"+YELLOW+centerString(98,"History Transaksi")+RESET+"║");
+                                    System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                    System.out.println("║ [1]. Berdasarkan Rentang Tanggal");
+                                    System.out.println("║ [2]. Hari ini");
+                                    System.out.println("║ [3]. Bulan ini");
+                                    System.out.println("║ [4]. Tahun ini");
+                                    System.out.println("║ [5]. Kembali ke Menu Utama");
+                                    System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                                    System.out.print("-> Masukkan Pilihan: ");
                                     editMenu = input.nextInt();
                                     switch (editMenu) {
                                         case 1:
@@ -605,16 +605,16 @@ public class Main {
                         case 2:
                             boolean keluar = true;
                             while (keluar) {
-                            System.out.println("═════════════════════════════════════════════");
-                            System.out.println("\u001B[33m Manajemen Rute   \u001B[0m");
-                            System.out.println("═════════════════════════════════════════════");
+                            System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════════════╗");
+                            System.out.println("║"+YELLOW+centerString(98,"Manajemen Rute")+RESET+"║");
+                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
 
-                            System.out.println("[1]. Menambah Rute"); //Menambahkan Lokasi
-                            System.out.println("[2]. Menghapus Rute"); //Menghapus Lokasi
-                            System.out.println("[3]. Menampilkan Data Rute"); //Menampilkan Data Lokasi
-                            System.out.println("[4]. Kembali ke Menu Utama"); //Kembali ke Menu Utama
-                            System.out.println("═════════════════════════════════════════════");
-                            System.out.print("Masukkan Pilihan: "); 
+                            System.out.println("║ [1]. Menambah Rute"); //Menambahkan Lokasi
+                            System.out.println("║ [2]. Menghapus Rute"); //Menghapus Lokasi
+                            System.out.println("║ [3]. Menampilkan Data Rute"); //Menampilkan Data Lokasi
+                            System.out.println("║ [4]. Kembali ke Menu Utama"); //Kembali ke Menu Utama
+                            System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                            System.out.print("-> Masukkan Pilihan: "); 
                             subMenu = input.nextInt();
 
                             input.nextLine();
@@ -702,18 +702,18 @@ public class Main {
                                 }
                         } break;
                         case 3:
-                            System.out.println("═════════════════════════════════════════════");
-                            System.out.println("\u001B[33mManajemen Layanan\u001B[0m");
-                            System.out.println("═════════════════════════════════════════════");
+                            System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════════════╗");
+                            System.out.println("║"+YELLOW+centerString(98,"Manajemen Layaban")+RESET+"║");
+                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
 
-                            System.out.println("[1]. Tambah Jenis Layanan"); //Tambahan Jenis Layanan
-                            System.out.println("[2]. Merubah Tarif Layanan"); //Merubah Tarif Layanan
-                            System.out.println("[3]. Menghapus Layanan"); //Menghapus Layanan
-                            System.out.println("[4]. Menampilkan Data Layanan"); //Menampilkan Layanan Data
-                            System.out.println("[5]. Keluar"); //Keluar
+                            System.out.println("║ [1]. Tambah Jenis Layanan"); //Tambahan Jenis Layanan
+                            System.out.println("║ [2]. Merubah Tarif Layanan"); //Merubah Tarif Layanan
+                            System.out.println("║ [3]. Menghapus Layanan"); //Menghapus Layanan
+                            System.out.println("║ [4]. Menampilkan Data Layanan"); //Menampilkan Layanan Data
+                            System.out.println("║ [5]. Keluar"); //Keluar
 
-                            System.out.println("═════════════════════════════════════════════");
-                            System.out.print("Masukkan Pilihan: ");
+                            System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                            System.out.print("-> Masukkan Pilihan: ");
                             subMenu = input.nextInt();
                             input.nextLine();
 
@@ -871,7 +871,7 @@ public class Main {
                                 System.out.println("Pilih bahasa (Choose a language):");
                                 System.out.println("1. English");
                                 System.out.println("2. Indonesian");
-                                System.out.print("Masukkan Pilihan: ");
+                                System.out.print("-> Masukkan Pilihan: ");
                                 inputPilihanBahasa = input.nextInt();
 
                                 switch (inputPilihanBahasa) {
@@ -895,16 +895,16 @@ public class Main {
                             masuk=false;
                             break;
                         case 7:
-                            System.out.println("═════════════════════════════════════════════");
-                            System.out.println("\u001B[33mManajemen Tarif Dasar\u001B[0m");
-                            System.out.println("═════════════════════════════════════════════");
+                            System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════════════╗");
+                            System.out.println("║"+YELLOW+centerString(98,"Manajemen Tarif Dasar")+RESET+"║");
+                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
 
-                            System.out.println("[1]. Tarif Dasar per Kg"); //Tambahan Jenis Layanan
-                            System.out.println("[2]. Tarif Dasar per Km"); //Merubah Tarif Layanan
-                            System.out.println("[3]. Keluar"); //Keluar
+                            System.out.println("║ [1]. Tarif Dasar per Kg"); //Tambahan Jenis Layanan
+                            System.out.println("║ [2]. Tarif Dasar per Km"); //Merubah Tarif Layanan
+                            System.out.println("║ [3]. Keluar"); //Keluar
 
-                            System.out.println("═════════════════════════════════════════════");
-                            System.out.print("Masukkan Pilihan: ");
+                            System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                            System.out.print("-> Masukkan Pilihan: ");
                             subMenu = input.nextInt();
 
                             switch (subMenu) {
@@ -1014,7 +1014,7 @@ public class Main {
 
     private static String centerString(int width, String s) {
         int padSize = (width - s.length()) / 2;
-        return String.format("%" + padSize + "s%s%" + padSize + "s", "", s, "");
+        return String.format("%" + padSize + "s%s%" + (padSize + (width - s.length()) % 2) + "s", "", s, "");
     }
 
     public static void tampilFormulirEkspedisi(String namaPengirim, String nomorKontak, String namaPenerima, String alamatPenerima, String deskripsibarang, int beratBarang, String origin, String destination, String layanan){
