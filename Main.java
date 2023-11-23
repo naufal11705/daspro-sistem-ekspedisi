@@ -103,7 +103,7 @@ public class Main {
             "║                                                                                              ║\n" + 
             "║  Berat Barang:       [                    ]                                                  ║\n" + 
             "║                                                                                              ║\n" + 
-            "║  Rute:          [                    ]        ->         [                    ]              ║\n" + 
+            "║  Rute:               [                    ]        ->         [                    ]         ║\n" + 
             "║                                                                                              ║\n" + 
             "║  Layanan:            [                    ]                                                  ║\n" +
             "║                                                                                              ║\n" +
