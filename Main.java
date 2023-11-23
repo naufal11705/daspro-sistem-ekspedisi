@@ -31,6 +31,8 @@ public class Main {
     static Date startDate;
     static Date endDate;
 
+    static String CLEAR = "\u001B[2J";
+
 
     // Array History Pemesanan
     static String[][] historyTransaksi = {
@@ -88,26 +90,26 @@ public class Main {
             "║                                                   ║                        ║                 ║\n" +
             "╚═══════════════════════════════════════════════════╩════════════════════════╩═════════════════╝";
 
-    static String formulirTransaksi = 
-            "╔══════════════════════════════════════════════════════════════════════════════════════════════╗\n" +
-            "║                                                                                              ║\n" + 
-            "║  Nama Pengirim:      [                    ]                                                  ║\n" + 
-            "║                                                                                              ║\n" + 
-            "║  Nomor Kontak:       [                    ]                                                  ║\n" + 
-            "║                                                                                              ║\n" + 
-            "║  Nama Penerima:      [                    ]                                                  ║\n" + 
-            "║                                                                                              ║\n" + 
-            "║  Alamat Tujuan:      [                    ]                                                  ║\n" +
-            "║                                                                                              ║\n" + 
-            "║  Deskripsi Barang:   [                    ]                                                  ║\n" + 
-            "║                                                                                              ║\n" + 
-            "║  Berat Barang:       [                    ]                                                  ║\n" + 
-            "║                                                                                              ║\n" + 
-            "║  Rute:               [                    ]        ->         [                    ]         ║\n" + 
-            "║                                                                                              ║\n" + 
-            "║  Layanan:            [                    ]                                                  ║\n" +
-            "║                                                                                              ║\n" +
-            "╚══════════════════════════════════════════════════════════════════════════════════════════════╝";
+            static String formulirTransaksi =
+                "╔══════════════════════════════════════════════════════════════════════════════════════════════╗\n" +
+                "║                                                                                              ║\n" +
+                "║  Nama Pengirim:      [%-20s]                                                  ║\n" +
+                "║                                                                                              ║\n" +
+                "║  Nomor Kontak:       [%-20s]                                                  ║\n" +
+                "║                                                                                              ║\n" +
+                "║  Nama Penerima:      [%-20s]                                                  ║\n" +
+                "║                                                                                              ║\n" +
+                "║  Alamat Tujuan:      [%-20s]                                                  ║\n" +
+                "║                                                                                              ║\n" +
+                "║  Deskripsi Barang:   [%-20s]                                                  ║\n" +
+                "║                                                                                              ║\n" +
+                "║  Berat Barang:       [%-20s]                                                  ║\n" +
+                "║                                                                                              ║\n" +
+                "║  Rute:               [%-20s]        ->         [%-20s]         ║\n" +
+                "║                                                                                              ║\n" +
+                "║  Layanan:            [%-20s]                                                  ║\n" +
+                "║                                                                                              ║\n" +
+                "╚══════════════════════════════════════════════════════════════════════════════════════════════╝";
 
     public static void CetakLaporan(){
         int totalAsset=0, totalBerat=0, totalHarga=0;
@@ -404,25 +406,38 @@ public class Main {
 
                             switch (subMenu) {
                                 case 1:
-                                    int beratBarang;
-                                    String origin;
-                                    String destination;
-                                    int jarak;
+                                    String namaPengirim = "";
+                                    String nomorKontak = "";
+                                    String namaPenerima = "";
+                                    String alamatPenerima = "";
+                                    String deskripsiBarang = "";
+                                    String layanan = "";
+                                    int beratBarang = 0;
+                                    String origin = "";
+                                    String destination = "";
+                                    int jarak = 0;
+
+                                    tampilFormulirEkspedisi(namaPengirim, nomorKontak, namaPenerima, alamatPenerima, deskripsiBarang, beratBarang, origin, destination, layanan);
 
                                     System.out.print ("Masukkan Nama Pengirim: ");
-                                    String namaPengirim = input.nextLine();
+                                    namaPengirim = input.nextLine();
+                                    tampilFormulirEkspedisi(namaPengirim, nomorKontak, namaPenerima, alamatPenerima, deskripsiBarang, beratBarang, origin, destination, layanan);
 
                                     System.out.print ("Masukkan Nomor Kontak: ");
-                                    String nomorKontak = input.nextLine();
+                                    nomorKontak = input.nextLine();
+                                    tampilFormulirEkspedisi(namaPengirim, nomorKontak, namaPenerima, alamatPenerima, deskripsiBarang, beratBarang, origin, destination, layanan);
 
                                     System.out.print ("Masukkan Nama Penerima: ");
-                                    String namaPenerima = input.nextLine();
+                                    namaPenerima = input.nextLine();
+                                    tampilFormulirEkspedisi(namaPengirim, nomorKontak, namaPenerima, alamatPenerima, deskripsiBarang, beratBarang, origin, destination, layanan);
 
                                     System.out.print ("Masukkan Alamat: ");
-                                    String alamatPenerima = input.nextLine();
+                                    alamatPenerima = input.nextLine();
+                                    tampilFormulirEkspedisi(namaPengirim, nomorKontak, namaPenerima, alamatPenerima, deskripsiBarang, beratBarang, origin, destination, layanan);
 
                                     System.out.print("Masukkan Deskripsi Barang: ");
-                                    String deskripsiBarang = input.nextLine();
+                                    deskripsiBarang = input.nextLine();
+                                    tampilFormulirEkspedisi(namaPengirim, nomorKontak, namaPenerima, alamatPenerima, deskripsiBarang, beratBarang, origin, destination, layanan);
                                     do {
                                         System.out.print("Masukkan Berat Barang: ");
                                         while (!input.hasNextInt()) {
@@ -431,6 +446,7 @@ public class Main {
                                             input.next(); // mengonsumsi input yang tidak valid
                                         }
                                         beratBarang = input.nextInt();
+                                        tampilFormulirEkspedisi(namaPengirim, nomorKontak, namaPenerima, alamatPenerima, deskripsiBarang, beratBarang, origin, destination, layanan);
                                         input.nextLine(); // membersihkan buffer input
                                         if (beratBarang <= 0) {
                                             System.out.println("Berat barang harus lebih besar dari 0. Silakan coba lagi.");
@@ -443,11 +459,13 @@ public class Main {
                                     do {
                                         System.out.print ("Origin: ");
                                         origin = input.nextLine();
+                                        tampilFormulirEkspedisi(namaPengirim, nomorKontak, namaPenerima, alamatPenerima, deskripsiBarang, beratBarang, origin, destination, layanan);
                                         System.out.print (("Destination: "));
                                         destination = input.nextLine();
+                                        tampilFormulirEkspedisi(namaPengirim, nomorKontak, namaPenerima, alamatPenerima, deskripsiBarang, beratBarang, origin, destination, layanan);
                                         for (int i = 0; i < rutePengiriman.length; i++) {
                                             if ((rutePengiriman[i][0].equalsIgnoreCase(origin) && rutePengiriman[i][1].equalsIgnoreCase(destination)) || 
-                                            (rutePengiriman[i][1].equalsIgnoreCase(destination) && rutePengiriman[i][0].equalsIgnoreCase(origin))) {
+                                            (rutePengiriman[i][0].equalsIgnoreCase(destination) && rutePengiriman[i][1].equalsIgnoreCase(origin))) {
                                                 jarak = Integer.parseInt(rutePengiriman[i][2]);
                                                 biayaJarak = jarak * tarifPerKm;
                                                 found = true;
@@ -455,6 +473,9 @@ public class Main {
                                             }
                                         }
                                         if(!found) {
+                                            origin = "";
+                                            destination = "";
+                                            tampilFormulirEkspedisi(namaPengirim, nomorKontak, namaPenerima, alamatPenerima, deskripsiBarang, beratBarang, origin, destination, layanan);
                                             System.out.println ("Kota Tujuan tidak Ditemukan!");
                                         }    
                                     } while (!found);
@@ -470,6 +491,8 @@ public class Main {
                                     }
                                     System.out.print ("Masukkan Pilihan: ");
                                     pilihanLayanan = input.nextInt();
+                                    layanan = arrayLayanan[pilihanLayanan];
+                                    tampilFormulirEkspedisi(namaPengirim, nomorKontak, namaPenerima, alamatPenerima, deskripsiBarang, beratBarang, origin, destination, layanan);
                                     tarifLayanan = arrayTarifLayanan[pilihanLayanan];                      
 
                                     double biayaAkhir = tarifLayanan + (tarifPerKg * beratBarang) + biayaJarak;
@@ -979,6 +1002,44 @@ public class Main {
         }catch (ParseException e){
             e.printStackTrace();
         }
+    }
+
+    public static String centerText(String text) {
+        int totalWidth = 20;
+        int spaces = (totalWidth - text.length()) / 2;
+        return String.format("%" + spaces + "s%s%" + spaces + "s", "", text, "");
+    }
+
+    public static void tampilFormulirEkspedisi(String namaPengirim, String nomorKontak, String namaPenerima, String alamatPenerima, String deskripsibarang, int beratBarang, String origin, String destination, String layanan){
+
+        if (beratBarang != 0) {
+            System.out.println(String.format(
+                formulirTransaksi,
+                centerText(namaPengirim),
+                centerText(nomorKontak),
+                centerText(namaPenerima),
+                centerText(alamatPenerima),
+                centerText(deskripsibarang),
+                centerText(Integer.toString(beratBarang)),
+                centerText(origin),
+                centerText(destination),
+                centerText(layanan)
+            ));
+        } else {
+            System.out.println(String.format(
+                formulirTransaksi,
+                centerText(namaPengirim),
+                centerText(nomorKontak),
+                centerText(namaPenerima),
+                centerText(alamatPenerima),
+                centerText(deskripsibarang),
+                centerText(""),
+                centerText(origin),
+                centerText(destination),
+                centerText(layanan)
+            ));
+        }
+
     }
 
 }
