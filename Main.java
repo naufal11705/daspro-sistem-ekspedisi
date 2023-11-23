@@ -580,6 +580,7 @@ public class Main {
                                     String destination;
                                     
                                     do {
+                                        routeExist = false;
                                         System.out.print("Origin: ");
                                         origin = input.nextLine();
                                         System.out.print("Destination: ");
@@ -588,12 +589,12 @@ public class Main {
                                         for (int i = 0; i < rutePengiriman.length; i++) {
                                             if ((rutePengiriman[i][0].equalsIgnoreCase(origin) && rutePengiriman[i][1].equalsIgnoreCase(destination)) || 
                                             (rutePengiriman[i][1].equalsIgnoreCase(destination) && rutePengiriman[i][0].equalsIgnoreCase(origin))) {
+                                                System.out.println("Rute tersebut sudah ada!");
                                                 routeExist = true;
                                                 break;
                                             } 
                                         }
 
-                                        System.out.println("Rute tersebut sudah ada!");
 
                                         } while (routeExist); 
 
