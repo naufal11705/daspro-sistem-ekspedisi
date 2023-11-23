@@ -715,9 +715,9 @@ public class Main {
                                             } 
                                         }
 
-                                        } while (routeExist); {
-                                            System.out.println("Rute tersebut sudah ada!");
-                                        };
+                                        System.out.println("Rute tersebut sudah ada!");
+
+                                        } while (routeExist); 
 
                                         System.out.print("Masukkan Jarak antara "+origin+" dan "+destination+": ");
                                         String jarak = input.next();
