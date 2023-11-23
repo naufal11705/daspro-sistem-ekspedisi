@@ -157,7 +157,7 @@ public class Main {
         String key;
         
         double tarifPerKg = 5000;
-        double tarifPerKm = 1000;
+        double tarifPerKm = 200;
         int pilihanLayanan;
         double tarifLayanan = 0;
         double biayaJarak = 0;
@@ -269,7 +269,7 @@ public class Main {
                 System.out.println("[4]. " + multilingual[23][pilihanBahasa]); //Ganti Bahasa
                 System.out.println("[5]. Laporan"); //Laporan
                 System.out.println("[6]. Keluar"); //Keluar
-                System.out.println("[7]. Manajemen Tarif Dasar (Under Development)");
+                System.out.println("[7]. Manajemen Tarif Dasar");
                 System.out.println("═════════════════════════════════════════════");
 
                 System.out.print(multilingual[26][pilihanBahasa]);
@@ -367,7 +367,7 @@ public class Main {
                             System.out.println("\u001B[33m           Pengiriman Barang          \u001B[0m");
                             System.out.println("═════════════════════════════════════════════");
                             System.out.println("[1]. Melakukan Transaksi"); //Melakukan Transaksi
-                            System.out.println("[2]. Mengedit Data Transaksi"); //Mengedit Transaksi
+                            System.out.println("[2]. Mengedit Data Transaksi (Under Development)"); //Mengedit Transaksi
                             System.out.println("[3]. Menghapus Data Transaksi"); //Menghapus Transaksi
                             System.out.println("[4]. Menampilkan Data Transaksi"); //Menampilkan Data Transaksi
                             System.out.println("[5]. Kembali ke Menu Utama"); //Kembali ke Menu Utama
@@ -424,7 +424,7 @@ public class Main {
                                             if ((rutePengiriman[i][0].equalsIgnoreCase(origin) && rutePengiriman[i][1].equalsIgnoreCase(destination)) || 
                                             (rutePengiriman[i][1].equalsIgnoreCase(destination) && rutePengiriman[i][0].equalsIgnoreCase(origin))) {
                                                 jarak = Integer.parseInt(rutePengiriman[i][2]);
-                                                biayaJarak = jarak * 2000;
+                                                biayaJarak = jarak * tarifPerKm;
                                                 found = true;
                                                 break;
                                             }
@@ -454,7 +454,7 @@ public class Main {
                                         tanggalHariIni,
                                         namaPengirim,
                                         nomorKontak,
-                                        origin,
+                                        destination,
                                         arrayLayanan[pilihanLayanan],
                                         Double.toString(biayaAkhir),
                                         loggedInUsername,
@@ -471,7 +471,7 @@ public class Main {
                                         beratBarang, // Berat
                                         nomorKontak,
                                         arrayLayanan[pilihanLayanan],
-                                        origin, // Lokasi
+                                        destination, // Lokasi
                                         alamatPenerima,
                                         namaPenerima,
                                         biayaAkhir // Biaya Akhir
