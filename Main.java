@@ -634,7 +634,7 @@ public class Main {
 
                                         for (int i = 0; i < rutePengiriman.length; i++) {
                                             if ((rutePengiriman[i][0].equalsIgnoreCase(origin) && rutePengiriman[i][1].equalsIgnoreCase(destination)) || 
-                                            (rutePengiriman[i][1].equalsIgnoreCase(destination) && rutePengiriman[i][0].equalsIgnoreCase(origin))) {
+                                            (rutePengiriman[i][0].equalsIgnoreCase(destination) && rutePengiriman[i][1].equalsIgnoreCase(origin))) {
                                                 System.out.println("Rute tersebut sudah ada!");
                                                 routeExist = true;
                                                 break;
