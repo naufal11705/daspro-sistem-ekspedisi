@@ -14,10 +14,12 @@ public class Main {
 
     // Akun default
     static String[][] userData = {
-        {"admin","admin123","ADMIN"},
-        {"Naufal", "000","KASIR"},
-        {"Putra", "111","KASIR"},
-        {"Farhan", "222","KASIR"},
+        {"Naufal", "000","ADMIN"},
+        {"Putra", "111","ADMIN"},
+        {"Farhan", "222","ADMIN"},
+        {"Haikal", "333", "KASIR"},
+        {"Esa", "444", "KASIR"},
+        {"Taufik", "555", "KASIR"}
     };
 
     // Format tanggal
@@ -260,7 +262,7 @@ public class Main {
                         masuk = true;
                         loggedInUsername = inputUsername;
                         
-                        if("admin".equals(inputUsername)){
+                        if("ADMIN".equals(userData[1][2])){
                             isAdmin = true;
                         }
                         break;
