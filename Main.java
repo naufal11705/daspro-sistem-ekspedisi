@@ -12,6 +12,14 @@ public class Main {
      * @param args
      */
 
+    // Akun default
+    static String[][] userData = {
+        {"admin","admin123","ADMIN"},
+        {"Naufal", "000","KASIR"},
+        {"Putra", "111","KASIR"},
+        {"Farhan", "222","KASIR"},
+    };
+
     // Format tanggal
     static SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
     static Date date = new Date();
@@ -19,9 +27,9 @@ public class Main {
     static String inputanTanggalAwal = "00-00-000", inputanTanggalAkhir = "00-00-0000";
 
     static String[][] arrayLayanan = {
-        {"Ekonomi","5000"},
-        {"Reguler", "10000"},
-        {"Sameday", "20000"}
+        {"Ekonomi","5000", "1", "5"},
+        {"Reguler", "10000", "1", "3"},
+        {"Sameday", "20000", "1", "1"}
     };
 
     static String[][] rutePengiriman = {
@@ -151,13 +159,6 @@ public class Main {
     public static void main(String[] args) {
         // Deklarasi scanner untuk memasukkan inputan
         Scanner input = new Scanner(System.in);
-        
-        // Akun default
-        String[][] userData = {
-            {"admin","admin123","ADMIN"},
-            {"Naufal", "000","KASIR"},
-            {"Putra", "111","KASIR"},
-            {"Farhan", "222","KASIR"}};
 
         String loggedInUsername = "";
 
@@ -472,16 +473,17 @@ public class Main {
                                     //Memilih Jenis Layanan pada Array
 
                                     for (int i = 0; i < arrayLayanan.length; i++) {
-                                        if (arrayLayanan[i] != null) {
-                                            System.out.println("║ ["+i+"]. "+arrayLayanan[i][0]+" - "+arrayLayanan[i][1]);
-                                            
+                                        if (arrayLayanan[i][2] != arrayLayanan[i][3]) {
+                                            System.out.println("║ ["+i+"]. "+arrayLayanan[i][0]+" - "+arrayLayanan[i][1]+ " - Estimasi: "+arrayLayanan[i][2]+" - "+arrayLayanan[i][3]+" hari");
+                                        } else {
+                                            System.out.println("║ ["+i+"]. "+arrayLayanan[i][0]+" - "+arrayLayanan[i][1]+ " - Estimasi: "+arrayLayanan[i][2]+" hari");
                                         }
                                     }
                                     System.out.print ("║ -> Masukkan Pilihan: ");
                                     pilihanLayanan = input.nextInt();
                                     layanan = arrayLayanan[pilihanLayanan][0];
                                     tampilFormulirEkspedisi(namaPengirim, nomorKontak, namaPenerima, alamatPenerima, deskripsiBarang, beratBarang, origin, destination, layanan);
-                                    tarifLayanan = Integer.parseInt(arrayLayanan[pilihanLayanan][1]);                      
+                                    tarifLayanan = Double.parseDouble(arrayLayanan[pilihanLayanan][1]);                      
 
                                     double biayaAkhir = tarifLayanan + (tarifPerKg * beratBarang) + biayaJarak;
 
@@ -707,6 +709,8 @@ public class Main {
                                 case 1:
                                     String namaLayanan = "";
                                     double tarifLayanan = 0;
+                                    int startEstimation = 0;
+                                    int endEstimation = 0;
                                     for (int i = 0; i < arrayLayanan.length; i++) {
                                         System.out.print("║ -> Masukkan Nama Layanan: ");
                                         namaLayanan = input.next();
@@ -720,6 +724,11 @@ public class Main {
                                                 input.next(); // Membersihkan input yang tidak valid dari buffer
                                             }
                                         }
+
+                                        System.out.print("║ -> Masukkan Waktu Pengiriman Minimum: ");
+                                        startEstimation = input.nextInt();
+                                        System.out.print("║ -> Masukkan Waktu Pengiriman Maximum: ");
+                                        endEstimation = input.nextInt();
                         
                                         arrayLayanan[i][1] = String.valueOf(tarifLayanan);
                                         break;
@@ -728,7 +737,9 @@ public class Main {
                                         arrayLayanan = Arrays.copyOf(arrayLayanan,arrayLayanan.length + 1);
                                         arrayLayanan[arrayLayanan.length-1] = new String[] {
                                             namaLayanan,
-                                            String.valueOf(tarifLayanan)};
+                                            String.valueOf(tarifLayanan),
+                                            String.valueOf(startEstimation),
+                                            String.valueOf(endEstimation)};
                                     break;
                                 case 2:
                                 System.out.println("║ Daftar Layanan yang Tersedia:");
