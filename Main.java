@@ -262,7 +262,7 @@ public class Main {
                         masuk = true;
                         loggedInUsername = inputUsername;
                         
-                        if("ADMIN".equals(userData[1][2])){
+                        if("ADMIN".equals(userData[i][2])){
                             isAdmin = true;
                         }
                         break;
