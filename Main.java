@@ -18,9 +18,6 @@ public class Main {
     static String tanggalHariIni = dateFormat.format(date);
     static String inputanTanggalAwal = "00-00-000", inputanTanggalAkhir = "00-00-0000";
 
-    //static String[] arrayLayanan = new String[20];
-    //static double[] arrayTarifLayanan = new double[20];
-
     static String[][] arrayLayanan = {
         {"Ekonomi","5000"},
         {"Reguler", "10000"},
@@ -163,17 +160,6 @@ public class Main {
             {"Farhan", "222","KASIR"}};
 
         String loggedInUsername = "";
-
-        // // Layanan pengiriman default
-        //     arrayLayanan[0] = "Reguler";
-        //     arrayLayanan[1] = "Ekonomi";
-        //     arrayLayanan[2] = "Sameday";
-
-        // // Tarif berdasarkan jenis layanan
-        //     arrayTarifLayanan[0] = 10000;
-        //     arrayTarifLayanan[1] = 6000;
-        //     arrayTarifLayanan[2] = 20000;
-        
 
         // Deklarasi boolean
         boolean login = false;
