@@ -18,8 +18,14 @@ public class Main {
     static String tanggalHariIni = dateFormat.format(date);
     static String inputanTanggalAwal = "00-00-000", inputanTanggalAkhir = "00-00-0000";
 
-    static String[] arrayLayanan = new String[20];
-    static double[] arrayTarifLayanan = new double[20];
+    //static String[] arrayLayanan = new String[20];
+    //static double[] arrayTarifLayanan = new double[20];
+
+    static String[][] arrayLayanan = {
+        {"Ekonomi","5000"},
+        {"Reguler", "10000"},
+        {"Sameday", "20000"}
+    };
 
     static String[][] rutePengiriman = {
         {"Malang", "Bekasi", "818"},
@@ -93,23 +99,23 @@ public class Main {
     static String formulirTransaksi =
         "╔══════════════════════════════════════════════════════════════════════════════════════════════════╗\n" +
         "║                                                                                                  ║\n" +
-        "║  Nama Pengirim:      [%-40s]                                  ║\n" +
+        "║  Nama Pengirim:                [%-40s]                        ║\n" +
         "║                                                                                                  ║\n" +
-        "║  Nomor Kontak:       [%-40s]                                  ║\n" +
+        "║  Nomor Kontak:                 [%-40s]                        ║\n" +
         "║                                                                                                  ║\n" +
-        "║  Nama Penerima:      [%-40s]                                  ║\n" +
+        "║  Nama Penerima:                [%-40s]                        ║\n" +
         "║                                                                                                  ║\n" +
-        "║  Alamat Tujuan:      [%-40s]                                  ║\n" +
+        "║  Alamat Tujuan:                [%-40s]                        ║\n" +
         "║                                                                                                  ║\n" +
-        "║  Deskripsi Barang:   [%-40s]                                  ║\n" +
+        "║  Deskripsi Barang:             [%-40s]                        ║\n" +
         "║                                                                                                  ║\n" +
-        "║  Berat Barang:       [%-40s]                                  ║\n" +
+        "║  Berat Barang:                 [%-40s]                        ║\n" +
         "║                                                                                                  ║\n" +
-        "║  Origin:             [%-40s]                                  ║\n" +
+        "║  Origin:                       [%-40s]                        ║\n" +
         "║                                                                                                  ║\n" +
-        "║  Destination:        [%-40s]                                  ║\n" +
+        "║  Destination:                  [%-40s]                        ║\n" +
         "║                                                                                                  ║\n" +
-        "║  Layanan:            [%-40s]                                  ║\n" +
+        "║  Layanan:                      [%-40s]                        ║\n" +
         "║                                                                                                  ║\n" +
         "╚══════════════════════════════════════════════════════════════════════════════════════════════════╝";
 
@@ -158,15 +164,15 @@ public class Main {
 
         String loggedInUsername = "";
 
-        // Layanan pengiriman default
-            arrayLayanan[0] = "Reguler";
-            arrayLayanan[1] = "Ekonomi";
-            arrayLayanan[2] = "Sameday";
+        // // Layanan pengiriman default
+        //     arrayLayanan[0] = "Reguler";
+        //     arrayLayanan[1] = "Ekonomi";
+        //     arrayLayanan[2] = "Sameday";
 
-        // Tarif berdasarkan jenis layanan
-            arrayTarifLayanan[0] = 10000;
-            arrayTarifLayanan[1] = 6000;
-            arrayTarifLayanan[2] = 20000;
+        // // Tarif berdasarkan jenis layanan
+        //     arrayTarifLayanan[0] = 10000;
+        //     arrayTarifLayanan[1] = 6000;
+        //     arrayTarifLayanan[2] = 20000;
         
 
         // Deklarasi boolean
@@ -487,15 +493,15 @@ public class Main {
 
                                     for (int i = 0; i < arrayLayanan.length; i++) {
                                         if (arrayLayanan[i] != null) {
-                                            System.out.println("["+i+"]. "+arrayLayanan[i]+" - "+arrayTarifLayanan[i]);
+                                            System.out.println("["+i+"]. "+arrayLayanan[i][0]+" - "+arrayLayanan[i][1]);
                                             
                                         }
                                     }
                                     System.out.print ("-> Masukkan Pilihan: ");
                                     pilihanLayanan = input.nextInt();
-                                    layanan = arrayLayanan[pilihanLayanan];
+                                    layanan = arrayLayanan[pilihanLayanan][0];
                                     tampilFormulirEkspedisi(namaPengirim, nomorKontak, namaPenerima, alamatPenerima, deskripsiBarang, beratBarang, origin, destination, layanan);
-                                    tarifLayanan = arrayTarifLayanan[pilihanLayanan];                      
+                                    tarifLayanan = Integer.parseInt(arrayLayanan[pilihanLayanan][1]);                      
 
                                     double biayaAkhir = tarifLayanan + (tarifPerKg * beratBarang) + biayaJarak;
 
@@ -505,7 +511,7 @@ public class Main {
                                         namaPengirim,
                                         nomorKontak,
                                         destination,
-                                        arrayLayanan[pilihanLayanan],
+                                        arrayLayanan[pilihanLayanan][0],
                                         Double.toString(biayaAkhir),
                                         loggedInUsername,
                                         namaPenerima,
@@ -520,7 +526,7 @@ public class Main {
                                         namaPengirim,
                                         beratBarang, // Berat
                                         nomorKontak,
-                                        arrayLayanan[pilihanLayanan],
+                                        arrayLayanan[pilihanLayanan][0],
                                         destination, // Lokasi
                                         alamatPenerima,
                                         namaPenerima,
@@ -707,7 +713,7 @@ public class Main {
                             System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
 
                             System.out.println("║ [1]. Tambah Jenis Layanan"); //Tambahan Jenis Layanan
-                            System.out.println("║ [2]. Merubah Tarif Layanan"); //Merubah Tarif Layanan
+                            System.out.println("║ [2]. Mengedit Layanan"); //Merubah Tarif Layanan
                             System.out.println("║ [3]. Menghapus Layanan"); //Menghapus Layanan
                             System.out.println("║ [4]. Menampilkan Data Layanan"); //Menampilkan Layanan Data
                             System.out.println("║ [5]. Keluar"); //Keluar
@@ -719,34 +725,34 @@ public class Main {
 
                             switch (subMenu) {
                                 case 1:
+                                    String namaLayanan = "";
                                     for (int i = 0; i < arrayLayanan.length; i++) {
-                                        if (arrayLayanan[i] == null) {
-                                            System.out.print("Masukkan Nama Layanan: ");
-                                            arrayLayanan[i] = input.next();
-                                            while (!inputValid) {
-                                                System.out.print("Masukkan Tarif: ");
-                                                if (input.hasNextDouble()) {
-                                                    tarifLayanan = input.nextDouble();
-                                                    inputValid = true;
-                                                } else {
-                                                    System.out.println("Masukan bukan angka. Mohon masukkan angka.");
-                                                    input.next(); // Membersihkan input yang tidak valid dari buffer
-                                                }
+                                        System.out.print("Masukkan Nama Layanan: ");
+                                        namaLayanan = input.next();
+                                        while (!inputValid) {
+                                            System.out.print("Masukkan Tarif: ");
+                                            if (input.hasNextDouble()) {
+                                                tarifLayanan = input.nextDouble();
+                                                inputValid = true;
+                                            } else {
+                                                System.out.println("Masukan bukan angka. Mohon masukkan angka.");
+                                                input.next(); // Membersihkan input yang tidak valid dari buffer
                                             }
-                            
-                                            arrayTarifLayanan[i] = tarifLayanan;
-                                            break;
                                         }
+                        
+                                        arrayLayanan[i][1] = String.valueOf(tarifLayanan);
+                                        break;
                                     }
+
+                                        arrayLayanan = Arrays.copyOf(arrayLayanan,arrayLayanan.length + 1);
+                                        arrayLayanan[arrayLayanan.length-1] = new String[] {
+                                            namaLayanan,
+                                            String.valueOf(tarifLayanan)};
                                     break;
                                 case 2:
                                 System.out.println("Daftar Layanan yang Tersedia:");
                                 for (int i = 0; i < arrayLayanan.length; i++) {
-                                    
-                                    if (arrayLayanan[i] != null){
-                                        System.out.println((i + 1) + ". " + arrayLayanan[i] );
-
-                                    }
+                                    System.out.println((i + 1) + ". " + arrayLayanan[i][0] );
                                 }
                         
                                 System.out.print("Masukkan nomor layanan yang ingin diubah: ");
@@ -794,7 +800,7 @@ public class Main {
                                     if (changeOption == 1) {
                                         System.out.print("Masukkan Nama Layanan Baru: ");
                                         input.nextLine(); // Membersihkan newline di buffer
-                                        arrayLayanan[selectedService - 1] = input.nextLine();
+                                        arrayLayanan[selectedService - 1][0] = input.nextLine();
                                         System.out.println("Data nama layanan berhasil diupdate.");
                                     } else if (changeOption == 2) {
                                         double newTarif = 0.0;
@@ -811,7 +817,7 @@ public class Main {
                                             }
                                         }
 
-                                        arrayTarifLayanan[selectedService - 1] = newTarif;
+                                        arrayLayanan[selectedService - 1][1] = String.valueOf(newTarif);
                                         System.out.println("Data tarif layanan berhasil diupdate.");
                                         break;
                                     }
@@ -823,7 +829,7 @@ public class Main {
                                     System.out.println("Daftar Layanan yang Tersedia:");
                                     for (int i = 0; i < arrayLayanan.length; i++) {
                                         if (arrayLayanan[i] != null) {
-                                            System.out.println((i + 1) + ". " + arrayLayanan[i]);
+                                            System.out.println((i + 1) + ". " + arrayLayanan[i][0]);
                                         }
                                     }
                         
@@ -841,13 +847,12 @@ public class Main {
                                     }
 
                                     if (selectedNumber > 0 && selectedNumber <= arrayLayanan.length) {
-                                        String pilih = arrayLayanan[selectedNumber - 1];
+                                        String pilih = arrayLayanan[selectedNumber - 1][0];
 
                                         for (int i = 0; i < arrayLayanan.length; i++) {
-                                            if (arrayLayanan[i] != null && arrayLayanan[i].equalsIgnoreCase(pilih)) {
-                                                System.out.println(arrayLayanan[i] + " - " + arrayTarifLayanan[i] + " Telah Dihapus!");
+                                            if (arrayLayanan[i][0].equalsIgnoreCase(pilih)) {
+                                                System.out.println(arrayLayanan[i][0] + " - " + arrayLayanan[i][1] + " Telah Dihapus!");
                                                 arrayLayanan[i] = null;
-                                                arrayTarifLayanan[i] = 0;
                                                 break;
                                             }
                                         }
@@ -963,8 +968,8 @@ public class Main {
             if (arrayLayanan[i] != null) {
                     String formattedString = String.format(" %3d | %16s | %5s",
                     i,
-                    arrayLayanan[i], // Nama Kota
-                    arrayTarifLayanan[i] // Tarif
+                    arrayLayanan[i][1], // Nama Kota
+                    arrayLayanan[i][0] // Tarif
             );
             System.out.println(formattedString);
             }
