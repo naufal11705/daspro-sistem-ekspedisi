@@ -929,13 +929,13 @@ public class Main {
         }
     }
     public static void tampilDataRute() {
-        System.out.println("═════════════════════════════════════════════");
-        System.out.println("\u001B[33m           Data Rute           \u001B[0m");
-        System.out.println("═════════════════════════════════════════════");
-        System.out.println(" No  |    Nama Kota   |    Nama Kota   |  Jarak");
-        System.out.println("═════════════════════════════════════════════");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║"+centerString(98,"Data Rute")+"║");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║ No  ║       Nama Kota      ║       Nama Kota      ║  Jarak");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
         for (int i = 0; i < rutePengiriman.length; i++) {
-            String formattedString = String.format(" %3d | %14s | %14s | %5s Km",
+            String formattedString = String.format("║ %3d ║ %20s ║ %20s ║ %5s Km",
                     i,
                     rutePengiriman[i][0], 
                     rutePengiriman[i][1], 
@@ -946,14 +946,14 @@ public class Main {
     } 
     
     public static void tampilDataTarifLayanan() {
-        System.out.println("═════════════════════════════════════════════");
-        System.out.println("\u001B[33m           Data Layanan           \u001B[0m");
-        System.out.println("═════════════════════════════════════════════");
-        System.out.println(" No  |   Nama Layanan   |  Biaya");
-        System.out.println("═════════════════════════════════════════════");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║"+centerString(98,"Data Layanan")+"║");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║ No  ║   Nama Layanan   ║  Biaya");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
         for (int i = 0; i < arrayLayanan.length; i++) {
             if (arrayLayanan[i] != null) {
-                    String formattedString = String.format(" %3d | %16s | %5s",
+                    String formattedString = String.format("║ %3d ║ %16s ║ %5s",
                     i,
                     arrayLayanan[i][1], // Nama Kota
                     arrayLayanan[i][0] // Tarif
@@ -965,16 +965,16 @@ public class Main {
 
     public static void tampilHistory(Date startDate, Date endDate){
         try{
-            System.out.println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════"); 
-            System.out.println("                                                                                        History Transaksi");
-            System.out.println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════"); 
-            System.out.println(" No  |   Tanggal   |  Nama Pengirim  |  Nomor Kontak  |   Layanan   |      Tujuan      | Berat |      Deskripsi      |    Biaya    |    Kasir    |  Nama Penerima  |         Alamat Penerima");
-            System.out.println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════");              
+            System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+            System.out.println("║                                                                                       History Transaksi");
+            System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+            System.out.println("║ No  |   Tanggal   |  Nama Pengirim  |  Nomor Kontak  |   Layanan   |      Tujuan      | Berat |      Deskripsi      |    Biaya    |    Kasir    |  Nama Penerima  |         Alamat Penerima");
+            System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");              
             for (int i = 0; i < historyTransaksi.length; i++) {
                 if (historyTransaksi[i][0] != null){
                     Date transaksiDate = dateFormat.parse(historyTransaksi[i][0]);
                     if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
-                        System.out.println(String.format(" %3d ║ %11s ║ %15s ║ %14s ║ %11s ║ %16s ║ %5s ║ %19s ║ %11s ║ %11s ║ %15s ║ %30s",
+                        System.out.println(String.format("║ %3d ║ %11s ║ %15s ║ %14s ║ %11s ║ %16s ║ %5s ║ %19s ║ %11s ║ %11s ║ %15s ║ %30s",
                             i,
                             historyTransaksi[i][0], // Tanggal
                             historyTransaksi[i][1], // Nama
@@ -992,7 +992,7 @@ public class Main {
                     }
                 }
             }
-            System.out.println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════"); 
+            System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
         }catch (ParseException e){
             e.printStackTrace();
         }
