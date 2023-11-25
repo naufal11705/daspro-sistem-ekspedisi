@@ -354,17 +354,16 @@ public class Main {
                                         }
                                         break;   
                                     case 3:
-
-                                        System.out.println("╔════════════════════════════════════════════════╗");
-                                        System.out.println("║                 Data Pengguna                  ║");
-                                        System.out.println("╠════════════════╦════════════════╦══════════════╣");
+                                        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                        System.out.println("║"+YELLOW+centerString(98,"Manajemen Pengguna")+RESET+"║");
+                                        System.out.println("╠════════════════╦════════════════╦══════════════╦═════════════════════════════════════════════════╣");
                                         System.out.println("║ Username       ║ Password       ║ Jabatan      ║");
                                         System.out.println("╠════════════════╬════════════════╬══════════════╣");
 
                                         for (int i = 0; i < userData.length; i++) {
                                             System.out.printf("║ %-14s ║ %-14s ║ %-12s ║%n", userData[i][0], userData[i][1], userData[i][2]);
                                         }
-                                        System.out.println("╚════════════════╩════════════════╩══════════════╝");
+                                        System.out.println("╠════════════════╩════════════════╩══════════════╝");
                                         break;
                                     case 4:
                                         exit = true;
