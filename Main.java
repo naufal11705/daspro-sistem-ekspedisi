@@ -173,19 +173,13 @@ public class Main {
 
         // Variabel untuk switch case menu
         int menuUtama, subMenu, editMenu;
-
-        // Variabel Searching
-        String key;
         
         double tarifPerKg = 5000;
         double tarifPerKm = 200;
         int pilihanLayanan;
         double biayaJarak = 0;
-        double tarifBaru = 0.0;
 
         String RESET = "\u001B[0m";
-        String RED = "\u001B[31m";
-        String GREEN = "\u001B[32m";
         String YELLOW = "\u001B[33m";
 
         String labelFormat = 
