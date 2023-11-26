@@ -17,9 +17,7 @@ public class Main {
         {"Naufal", "000","ADMIN"},
         {"Putra", "111","ADMIN"},
         {"Farhan", "222","ADMIN"},
-        {"Haikal", "333", "KASIR"},
-        {"Esa", "444", "KASIR"},
-        {"Taufik", "555", "KASIR"}
+        {"Kasir", "333", "KASIR"}
     };
 
     // Format tanggal
