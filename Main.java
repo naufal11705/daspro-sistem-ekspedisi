@@ -549,13 +549,25 @@ public class Main {
                                             }
                                             break;
                                         case 2:
-                                            try {
-                                                startDate = dateFormat.parse(tanggalHariIni);
-                                                endDate = dateFormat.parse(tanggalHariIni);
-                                                tampilHistory(startDate, endDate);
-                                            } catch (Exception e) {
-                                                e.printStackTrace();
+                                        //  System.out.print("Masukkan Tanggal (dd-MM-yyyy): ");
+                                        //  String tanggalYangDiinginkan = input.nextLine();
+                                        try {
+                                            
+                                           
+                                            System.out.print("Masukkan Tanggal (dd-MM-yyyy): ");
+                                            String tanggalYangDiinginkan = input.next();
+
+                                            if (tanggalYangDiinginkan.isEmpty()) {
+                                                System.out.println("Tanggal tidak boleh kosong. Silakan coba lagi.");
+                                            } else {
+                                                Date startDate = dateFormat.parse(tanggalYangDiinginkan);
+                                                Date endDate = dateFormat.parse(tanggalYangDiinginkan);
+                                                tampilHistoryhari(startDate, endDate);
                                             }
+                                            } catch (Exception e) {}
+                                                
+                                            
+                                        
                                             break;
                                         case 3:
                                             calendar.set(Calendar.DAY_OF_MONTH, 1);
@@ -1043,6 +1055,52 @@ public class Main {
             ));
         }
 
+    }
+    public static void tampilHistoryhari(Date startDate, Date endDate) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        boolean dataDitemukan = false;
+
+        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+        System.out.println("║                                                                                       History Transaksi");
+        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+        System.out.println("║ No  |   Tanggal   |  Nama Pengirim  |  Nomor Kontak  |   Layanan   |      Tujuan      | Berat |      Deskripsi      |    Biaya    |    Kasir    |  Nama Penerima  |         Alamat Penerima");
+        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+        
+    
+       
+    
+        for (int i = 0; i < historyTransaksi.length; i++) {
+            if (historyTransaksi[i][0] != null) {
+                try {
+                       
+                    Date transaksiDate = dateFormat.parse(historyTransaksi[i][0]);
+                    if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
+                        System.out.println(String.format(" %3d ║ %11s ║ %15s ║ %14s ║ %11s ║ %16s ║ %5s ║ %19s ║ %11s ║ %11s ║ %15s ║ %30s",
+                                i,
+                                historyTransaksi[i][0], // Tanggal
+                                historyTransaksi[i][1], // Nama
+                                historyTransaksi[i][2], // Nomor Kontak
+                                historyTransaksi[i][4], // Jenis Layanan
+                                historyTransaksi[i][3], // Lokasi
+                                historyTransaksi[i][9], // Berat Barang
+                                historyTransaksi[i][10], // Deskripsi
+                                historyTransaksi[i][5], // Tarif
+                                historyTransaksi[i][6], // Nama Kasir
+                                historyTransaksi[i][7], // Nama Penerima
+                                historyTransaksi[i][8] // Alamat Penerima
+                        ));
+                        dataDitemukan = true;
+                    }
+                     System.out.println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════"); 
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    
+        if (!dataDitemukan) {
+            System.out.println("Tidak ada transaksi pada rentang tanggal tersebut.");
+        }
     }
 
 }
