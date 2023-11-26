@@ -125,6 +125,19 @@ public class Main {
         "║                                                                                                  ║\n" +
         "╠══════════════════════════════════════════════════════════════════════════════════════════════════╣";
 
+    static String labelFormat = 
+        "╔══════════════════════════════════════════════════════════════════════════════════════════════════╗\n" +
+        "║  %44s║  Tanggal: %-40s║\n" +
+        "╠════════════╦═════════════════════════════════╣  Layanan: %-40s║\n" +
+        "║            ║ Pengirim:                       ║  Berat: %-42s║\n" +
+        "║            ║ %-32s║  Deskripsi:                                       ║\n" + 
+        "║            ║                                 ║  %-49s║\n" +
+        "║            ║                                 ║                                                   ║\n" +
+        "║            ║ Penerima:                       ║  Biaya Kirim: %-36s║\n" +
+        "║            ║ %-32s║  Lokasi Tujuan: %-34s║\n" +
+        "║            ║                                 ║  Alamat: %-41s║\n" +
+        "╚════════════╩═════════════════════════════════╩═══════════════════════════════════════════════════╝";
+
     public static void CetakLaporan(){
         int totalAsset=0, totalBerat=0, totalHarga=0;
 
@@ -183,19 +196,6 @@ public class Main {
 
         String RESET = "\u001B[0m";
         String YELLOW = "\u001B[33m";
-
-        String labelFormat = 
-                "╔══════════════════════════════════════════════════════════════════════════════════════════════════╗\n" +
-                "║            POLINEMA EXPEDITION               ║  Tanggal: %-37s║\n" +
-                "╠════════════╦═════════════════════════════════╣  Deskripsi %-36s║\n" +
-                "║            ║ Pengirim: %-22s║  Berat: %-39s║\n" +
-                "║            ║ Kontak: %-24s║  Layanan: %-37s║\n" + 
-                "║            ║                                 ║  Lokasi Tujuan: %-31s║\n" +
-                "║            ║                                 ║  Alamat: %-38s║\n" +
-                "║            ║ Penerima: %-22s║  Biaya Kirim: %-33s║\n" +
-                "║            ║                                 ║                                                  ║\n" +
-                "║            ║                                 ║                                                  ║\n" +
-                "╚════════════╩═════════════════════════════════╩═══════════════════════════════════════════════════╝";
 
         int pilihanBahasa = 1, inputPilihanBahasa;
 
@@ -405,6 +405,7 @@ public class Main {
                                     String origin = "";
                                     String destination = "";
                                     int jarak = 0;
+                                    String nomorResi;
 
                                     tampilFormulirEkspedisi(namaPengirim, nomorKontak, namaPenerima, alamatPenerima, deskripsiBarang, beratBarang, origin, destination, layanan);
 
@@ -486,10 +487,11 @@ public class Main {
                                     tarifLayanan = Double.parseDouble(arrayLayanan[pilihanLayanan][1]);                      
 
                                     double biayaAkhir = tarifLayanan + (tarifPerKg * beratBarang) + biayaJarak;
+                                    nomorResi = generateNomorResi();
 
                                     historyTransaksi = Arrays.copyOf(historyTransaksi,historyTransaksi.length + 1);
                                     historyTransaksi[historyTransaksi.length-1] = new String[]{
-                                        generateNomorResi(),
+                                        nomorResi,
                                         tanggalHariIni,
                                         namaPengirim,
                                         nomorKontak,
@@ -504,16 +506,19 @@ public class Main {
 
                                     System.out.println(String.format(
                                         labelFormat,
+                                        nomorResi,
                                         tanggalHariIni, // Tanggal
-                                        deskripsiBarang,
-                                        namaPengirim,
-                                        beratBarang, // Berat
-                                        nomorKontak,
                                         arrayLayanan[pilihanLayanan][0],
-                                        destination, // Lokasi
-                                        alamatPenerima,
+                                        beratBarang, // Berat
+                                        namaPengirim,
+                                        deskripsiBarang,
+                                        biayaAkhir, // Biaya Akhir
                                         namaPenerima,
-                                        biayaAkhir // Biaya Akhir
+                                        destination, // Lokasi
+                                        alamatPenerima
+
+                                        
+
 
                                     ));                                        
                                     break;
