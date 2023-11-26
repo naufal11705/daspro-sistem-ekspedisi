@@ -562,7 +562,7 @@ public class Main {
                                             } else {
                                                 Date startDate = dateFormat.parse(tanggalYangDiinginkan);
                                                 Date endDate = dateFormat.parse(tanggalYangDiinginkan);
-                                                tampilHistoryhari(startDate, endDate);
+                                                tampilHistoryhari(startDate, endDate, historyTransaksi);
                                             }
                                             } catch (Exception e) {}
                                                 
@@ -1056,7 +1056,7 @@ public class Main {
         }
 
     }
-    public static void tampilHistoryhari(Date startDate, Date endDate) {
+    public static void tampilHistoryhari(Date startDate, Date endDate, String[][] historyTransaksi) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         boolean dataDitemukan = false;
 
