@@ -566,9 +566,9 @@ public class Main {
                                     System.out.println("║"+YELLOW+centerString(98,"History Transaksi")+RESET+"║");
                                     System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
                                     System.out.println("║ [1]. Berdasarkan Rentang Tanggal");
-                                    System.out.println("║ [2]. Hari ini");
-                                    System.out.println("║ [3]. Bulan ini");
-                                    System.out.println("║ [4]. Tahun ini");
+                                    System.out.println("║ [2]. Hari");
+                                    System.out.println("║ [3]. Bulan");
+                                    System.out.println("║ [4]. Tahun");
                                     System.out.println("║ [5]. Kembali ke Menu Utama");
                                     System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
                                     System.out.print("║ -> Masukkan Pilihan: ");
