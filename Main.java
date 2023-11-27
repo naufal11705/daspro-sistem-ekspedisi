@@ -17,9 +17,7 @@ public class Main {
         {"Naufal", "000","ADMIN"},
         {"Putra", "111","ADMIN"},
         {"Farhan", "222","ADMIN"},
-        {"Haikal", "333", "KASIR"},
-        {"Esa", "444", "KASIR"},
-        {"Taufik", "555", "KASIR"}
+        {"Kasir", "333", "KASIR"}
     };
 
     // Format tanggal
@@ -49,36 +47,36 @@ public class Main {
 
     // Array History Pemesanan
     static String[][] historyTransaksi = {
-        {"29-01-2023", "Nanda", "08866778899", "Yogyakarta", "Reguler", "25700.0", "Farhan", "Abdi", "Jl. Kembang 5 No. 15", "3", "Makanan"},
-        {"12-02-2023", "Gabriel", "08811223344", "Tangerang", "Ekonomi", "33200.0", "Naufal", "Afifah", "Jl. Anggrek 12 No. 8", "7", "Elektronik"},
-        {"03-03-2023", "Afifah", "08876543210", "Makassar", "Reguler", "50900.0", "Putra", "Naufal", "Jl. Melati 9 No. 21", "5", "Pakaian"},
-        {"26-04-2023", "Esa", "08822334455", "Medan", "Ekonomi", "65400.0", "Farhan", "Luthfi", "Jl. Seroja 3 No. 7", "2", "Buku"},
-        {"21-05-2023", "Abdi", "08811223344", "Bogor", "Ekonomi", "34800.0", "Naufal", "Julian", "Jl. Mawar 17 No. 5", "9", "Mainan"},
-        {"17-06-2023", "Naufal", "08822334455", "Semarang", "Sameday", "66500.0", "Putra", "Gabriel", "Jl. Anggrek 7 No. 12", "8", "Kesehatan"},
-        {"30-06-2023", "Farrel", "08855443322", "Jakarta", "Reguler", "76800.0", "Farhan", "Chiko", "Jl. Melati 15 No. 10", "4", "Alat Tulis"},
-        {"14-07-2023", "Atabik", "08855443322", "Bandung", "Ekonomi", "45300.0", "Naufal", "Vincent", "Jl. Kembang 2 No. 19", "1", "Elektronik"},
-        {"05-08-2023", "Dio", "08876543210", "Surabaya", "Sameday", "29100.0", "Putra", "Saputra", "Jl. Seroja 11 No. 14", "6", "Makanan"},
-        {"09-09-2023", "Pasha", "08899887766", "Serang", "Reguler", "78000.0", "Farhan", "Naufal", "Jl. Anggrek 8 No. 5", "10", "Pakaian"},
-        {"18-10-2023", "Farhan", "08866778899", "Denpasar", "Reguler", "55700.0", "Naufal", "Petrus", "Jl. Mawar 5 No. 11", "2", "Mainan"},
-        {"02-12-2023", "Chiko", "08811223344", "Malang", "Ekonomi", "87600.0", "Putra", "Saka", "Jl. Kembang 10 No. 17", "7", "Elektronik"},
-        {"27-09-2023", "Haikal", "08887654321", "Bengkulu", "Sameday", "98800.0", "Farhan", "Vincent", "Jl. Melati 3 No. 9", "3", "Kesehatan"},
-        {"11-11-2023", "Cindy", "08899887766", "Bekasi", "Sameday", "65400.0", "Naufal", "Naufal", "Jl. Seroja 8 No. 6", "5", "Makanan"},
-        {"01-01-2023", "Ivan", "08812345678", "Surabaya", "Ekonomi", "45000.0", "Putra", "Abdi", "Jl. Anggrek 14 No. 20", "9", "Buku"},
-        {"07-04-2023", "Luthfi", "08887654321", "Jakarta", "Reguler", "60000.0", "Farhan", "Farrel", "Jl. Kembang 1 No. 18", "1", "Elektronik"},
-        {"14-06-2023", "Adri", "08811223344", "Bandung", "Ekonomi", "35000.0", "Naufal", "Petrus", "Jl. Melati 6 No. 13", "6", "Makanan"},
-        {"21-08-2023", "Alif", "08899887766", "Makassar", "Sameday", "42000.0", "Putra", "Saputra", "Jl. Anggrek 20 No. 3", "4", "Buku"},
-        {"03-10-2023", "Dimas", "08876543210", "Denpasar", "Reguler", "58000.0", "Farhan", "Farrel", "Jl. Mawar 13 No. 16", "10", "Mainan"},
-        {"11-12-2023", "Julian", "08822334455", "Malang", "Sameday", "67000.0", "Naufal", "Naufal", "Jl. Seroja 2 No. 4", "8", "Kesehatan"},
-        {"25-02-2023", "Petrus", "08866778899", "Bogor", "Reguler", "73000.0", "Putra", "Saka", "Jl. Kembang 8 No. 1", "3", "Elektronik"},
-        {"10-05-2023", "Saputra", "08855443322", "Surabaya", "Ekonomi", "32000.0", "Farhan", "Rio", "Jl. Mawar 14 No. 7", "5", "Makanan"},
-        {"15-07-2023", "Reika", "08811223344", "Semarang", "Reguler", "52000.0", "Naufal", "Chiko", "Jl. Anggrek 11 No. 15", "2", "Alat Tulis"},
-        {"20-09-2023", "Rio", "08887654321", "Yogyakarta", "Sameday", "47000.0", "Putra", "Naufal", "Jl. Seroja 10 No. 2", "9", "Elektronik"},
-        {"05-11-2023", "Saka", "08899887766", "Tangerang", "Sameday", "69000.0", "Farhan", "Chiko", "Jl. Melati 20 No. 16", "1", "Pakaian"},
-        {"15-01-2023", "Taufik", "08876543210", "Bekasi", "Ekonomi", "40000.0", "Naufal", "Vincent", "Jl. Kembang 7 No. 19", "10", "Buku"},
-        {"20-03-2023", "Mera", "08822334455", "Gorontalo", "Sameday", "61000.0", "Putra", "Saputra", "Jl. Seroja 4 No. 11", "4", "Kesehatan"},
-        {"05-05-2023", "Vincent", "08866778899", "Medan", "Reguler", "54000.0", "Farhan", "Petrus", "Jl. Anggrek 3 No. 14", "7", "Makanan"},
-        {"10-07-2023", "Vira", "08855443322", "Bengkulu", "Ekonomi", "37000.0", "Naufal", "Haikal", "Jl. Kembang 12 No. 9", "1", "Elektronik"},
-        {"28-10-2023", "Innam", "08822334455", "Surabaya", "Sameday", "55000.0", "Putra", "Farrel", "Jl. Melati 9 No. 5", "6", "Buku"},            
+        {"8032468109752", "29-01-2023", "Nanda", "08866778899", "Yogyakarta", "Reguler", "25700.0", "Farhan", "Abdi", "Jl. Kembang 5 No. 15", "3", "Makanan"},
+        {"9276354185046", "12-02-2023", "Gabriel", "08811223344", "Tangerang", "Ekonomi", "33200.0", "Naufal", "Afifah", "Jl. Anggrek 12 No. 8", "7", "Elektronik"},
+        {"1492578034685", "03-03-2023", "Afifah", "08876543210", "Makassar", "Reguler", "50900.0", "Putra", "Naufal", "Jl. Melati 9 No. 21", "5", "Pakaian"},
+        {"5283176490254", "26-04-2023", "Esa", "08822334455", "Medan", "Ekonomi", "65400.0", "Farhan", "Luthfi", "Jl. Seroja 3 No. 7", "2", "Buku"},
+        {"3091754682351", "21-05-2023", "Abdi", "08811223344", "Bogor", "Ekonomi", "34800.0", "Naufal", "Julian", "Jl. Mawar 17 No. 5", "9", "Mainan"},
+        {"6750912348526", "17-06-2023", "Naufal", "08822334455", "Semarang", "Sameday", "66500.0", "Putra", "Gabriel", "Jl. Anggrek 7 No. 12", "8", "Kesehatan"},
+        {"8013564729835", "30-06-2023", "Farrel", "08855443322", "Jakarta", "Reguler", "76800.0", "Farhan", "Chiko", "Jl. Melati 15 No. 10", "4", "Alat Tulis"},
+        {"2674853902164", "14-07-2023", "Atabik", "08855443322", "Bandung", "Ekonomi", "45300.0", "Naufal", "Vincent", "Jl. Kembang 2 No. 19", "1", "Elektronik"},
+        {"4501628397517", "05-08-2023", "Dio", "08876543210", "Surabaya", "Sameday", "29100.0", "Putra", "Saputra", "Jl. Seroja 11 No. 14", "6", "Makanan"},
+        {"7246109385273", "09-09-2023", "Pasha", "08899887766", "Serang", "Reguler", "78000.0", "Farhan", "Naufal", "Jl. Anggrek 8 No. 5", "10", "Pakaian"},
+        {"3751928643058", "18-10-2023", "Farhan", "08866778899", "Denpasar", "Reguler", "55700.0", "Naufal", "Petrus", "Jl. Mawar 5 No. 11", "2", "Mainan"},
+        {"5038921467584", "02-12-2023", "Chiko", "08811223344", "Malang", "Ekonomi", "87600.0", "Putra", "Saka", "Jl. Kembang 10 No. 17", "7", "Elektronik"},
+        {"6904715283142", "27-09-2023", "Haikal", "08887654321", "Bengkulu", "Sameday", "98800.0", "Farhan", "Vincent", "Jl. Melati 3 No. 9", "3", "Kesehatan"},
+        {"4892307162453", "11-11-2023", "Cindy", "08899887766", "Bekasi", "Sameday", "65400.0", "Naufal", "Petrus", "Jl. Seroja 8 No. 6", "5", "Makanan"},
+        {"1234567890123", "01-01-2023", "Ivan", "08812345678", "Surabaya", "Ekonomi", "45000.0", "Putra", "Abdi", "Jl. Anggrek 14 No. 20", "9", "Buku"},
+        {"9876543210987", "07-04-2023", "Luthfi", "08887654321", "Jakarta", "Reguler", "60000.0", "Farhan", "Farrel", "Jl. Kembang 1 No. 18", "1", "Elektronik"},
+        {"3456789012345", "14-06-2023", "Adri", "08811223344", "Bandung", "Ekonomi", "35000.0", "Naufal", "Petrus", "Jl. Melati 6 No. 13", "6", "Makanan"},
+        {"8765432109876", "21-08-2023", "Alif", "08899887766", "Makassar", "Sameday", "42000.0", "Putra", "Saputra", "Jl. Anggrek 20 No. 3", "4", "Buku"},
+        {"6543210987654", "03-10-2023", "Dimas", "08876543210", "Denpasar", "Reguler", "58000.0", "Farhan", "Farrel", "Jl. Mawar 13 No. 16", "10", "Mainan"},
+        {"8765432109876", "11-12-2023", "Julian", "08822334455", "Malang", "Sameday", "67000.0", "Naufal", "Naufal", "Jl. Seroja 2 No. 4", "8", "Kesehatan"},
+        {"5432109876543", "25-02-2023", "Petrus", "08866778899", "Bogor", "Reguler", "73000.0", "Putra", "Saka", "Jl. Kembang 8 No. 1", "3", "Elektronik"},
+        {"3210987654325", "10-05-2023", "Saputra", "08855443322", "Surabaya", "Ekonomi", "32000.0", "Farhan", "Rio", "Jl. Mawar 14 No. 7", "5", "Makanan"},
+        {"9876543210987", "15-07-2023", "Reika", "08811223344", "Semarang", "Reguler", "52000.0", "Naufal", "Chiko", "Jl. Anggrek 11 No. 15", "2", "Alat Tulis"},
+        {"3456789012345", "20-09-2023", "Rio", "08887654321", "Yogyakarta", "Sameday", "47000.0", "Putra", "Naufal", "Jl. Seroja 10 No. 2", "9", "Elektronik"},
+        {"9876543210987", "05-11-2023", "Saka", "08899887766", "Tangerang", "Sameday", "69000.0", "Farhan", "Chiko", "Jl. Melati 20 No. 16", "1", "Pakaian"},
+        {"3210987654321", "15-01-2023", "Taufik", "08876543210", "Bekasi", "Ekonomi", "40000.0", "Naufal", "Vincent", "Jl. Kembang 7 No. 19", "10", "Buku"},
+        {"9876543210987", "20-03-2023", "Mera", "08822334455", "Gorontalo", "Sameday", "61000.0", "Putra", "Saputra", "Jl. Seroja 4 No. 11", "4", "Kesehatan"},
+        {"3456789012345", "05-05-2023", "Vincent", "08866778899", "Medan", "Reguler", "54000.0", "Farhan", "Petrus", "Jl. Anggrek 3 No. 14", "7", "Makanan"},
+        {"3210987654324", "10-07-2023", "Vira", "08855443322", "Bengkulu", "Ekonomi", "37000.0", "Naufal", "Haikal", "Jl. Kembang 12 No. 9", "1", "Elektronik"},
+        {"9876543210987", "28-10-2023", "Innam", "08822334455", "Surabaya", "Sameday", "55000.0", "Putra", "Farrel", "Jl. Melati 9 No. 5", "6", "Buku"},               
     };
 
     static String laporanFormat = 
@@ -125,6 +123,19 @@ public class Main {
         "║  Layanan:                      [%-40s]                        ║\n" +
         "║                                                                                                  ║\n" +
         "╠══════════════════════════════════════════════════════════════════════════════════════════════════╣";
+
+    static String labelFormat = 
+        "╔══════════════════════════════════════════════════════════════════════════════════════════════════╗\n" +
+        "║  %44s║  Tanggal: %-40s║\n" +
+        "╠════════════╦═════════════════════════════════╣  Layanan: %-40s║\n" +
+        "║            ║ Pengirim:                       ║  Berat: %-42s║\n" +
+        "║            ║ %-32s║  Deskripsi:                                       ║\n" + 
+        "║            ║                                 ║  %-49s║\n" +
+        "║            ║                                 ║                                                   ║\n" +
+        "║            ║ Penerima:                       ║  Biaya Kirim: %-36s║\n" +
+        "║            ║ %-32s║  Lokasi Tujuan: %-34s║\n" +
+        "║            ║                                 ║  Alamat: %-41s║\n" +
+        "╚════════════╩═════════════════════════════════╩═══════════════════════════════════════════════════╝";
 
     public static void CetakLaporan(){
         int totalAsset=0, totalBerat=0, totalHarga=0;
@@ -184,19 +195,6 @@ public class Main {
 
         String RESET = "\u001B[0m";
         String YELLOW = "\u001B[33m";
-
-        String labelFormat = 
-                "╔══════════════════════════════════════════════════════════════════════════════════════════════════╗\n" +
-                "║            POLINEMA EXPEDITION               ║  Tanggal: %-37s║\n" +
-                "╠════════════╦═════════════════════════════════╣  Deskripsi %-36s║\n" +
-                "║            ║ Pengirim: %-22s║  Berat: %-39s║\n" +
-                "║            ║ Kontak: %-24s║  Layanan: %-37s║\n" + 
-                "║            ║                                 ║  Lokasi Tujuan: %-31s║\n" +
-                "║            ║                                 ║  Alamat: %-38s║\n" +
-                "║            ║ Penerima: %-22s║  Biaya Kirim: %-33s║\n" +
-                "║            ║                                 ║                                                  ║\n" +
-                "║            ║                                 ║                                                  ║\n" +
-                "╚════════════╩═════════════════════════════════╩═══════════════════════════════════════════════════╝";
 
         int pilihanBahasa = 1, inputPilihanBahasa;
 
@@ -406,6 +404,7 @@ public class Main {
                                     String origin = "";
                                     String destination = "";
                                     int jarak = 0;
+                                    String nomorResi;
 
                                     tampilFormulirEkspedisi(namaPengirim, nomorKontak, namaPenerima, alamatPenerima, deskripsiBarang, beratBarang, origin, destination, layanan);
 
@@ -487,9 +486,11 @@ public class Main {
                                     tarifLayanan = Double.parseDouble(arrayLayanan[pilihanLayanan][1]);                      
 
                                     double biayaAkhir = tarifLayanan + (tarifPerKg * beratBarang) + biayaJarak;
+                                    nomorResi = generateNomorResi();
 
                                     historyTransaksi = Arrays.copyOf(historyTransaksi,historyTransaksi.length + 1);
                                     historyTransaksi[historyTransaksi.length-1] = new String[]{
+                                        nomorResi,
                                         tanggalHariIni,
                                         namaPengirim,
                                         nomorKontak,
@@ -504,24 +505,60 @@ public class Main {
 
                                     System.out.println(String.format(
                                         labelFormat,
+                                        nomorResi,
                                         tanggalHariIni, // Tanggal
-                                        deskripsiBarang,
-                                        namaPengirim,
-                                        beratBarang, // Berat
-                                        nomorKontak,
                                         arrayLayanan[pilihanLayanan][0],
-                                        destination, // Lokasi
-                                        alamatPenerima,
+                                        beratBarang, // Berat
+                                        namaPengirim,
+                                        deskripsiBarang,
+                                        biayaAkhir, // Biaya Akhir
                                         namaPenerima,
-                                        biayaAkhir // Biaya Akhir
+                                        destination, // Lokasi
+                                        alamatPenerima
+
+                                        
+
 
                                     ));                                        
                                     break;
                                 case 2:
                                     System.out.println("Under Development"); 
                                     break;
-                                case 3:
-                                    System.out.println("Under Development"); 
+                                case 3: 
+                                    // menghapus transaksi berdasarkan nomor resi
+                                    validInput = false;
+                                    int deleteIndex = -1;
+
+                                    while (!validInput) {
+                                        System.out.print("║ -> Masukkan nomor resi: ");
+                                        try {
+                                            String deleteString = input.nextLine();
+                                            validInput = true;
+
+                                            for (int i=0; i<historyTransaksi.length; i++) {
+                                                if (historyTransaksi[i][0].equals(deleteString)) {
+                                                    deleteIndex = i;
+                                                    break;
+                                            }
+                                        } 
+                                        if (deleteIndex != -1) {
+                                            validInput = true;
+                                        } else { System.out.println("║ Data tidak ditemukan. Silakan coba lagi."); }
+
+                                    } catch (NumberFormatException exception) {
+                                            System.out.println("║ Input yang dimasukkan tidak valid. Silakan masukkan nomor resi kembali!.");
+                                        }
+                                    }
+
+                                    // Hapus elemen jika validInput adalah true
+                                    if (deleteIndex >= 0 && deleteIndex < historyTransaksi.length) {
+                                        System.out.println("║ Transaksi dengan nomor resi yang sesuai telah dihapus!");
+                                        System.arraycopy(historyTransaksi, deleteIndex + 1, historyTransaksi, deleteIndex, historyTransaksi.length - deleteIndex - 1);
+                                        historyTransaksi = Arrays.copyOf(historyTransaksi, historyTransaksi.length - 1);
+                                    } else {
+                                        System.out.println("║ Data tidak ditemukan.");
+                                    }   
+                                                                        
                                     break;
                                 case 4:
                                     Calendar calendar = Calendar.getInstance();
@@ -1057,34 +1094,37 @@ public class Main {
 
     public static void tampilHistory(Date startDate, Date endDate){
         try{
-            System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+            System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
             System.out.println("║                                                                                       History Transaksi");
-            System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
-            System.out.println("║ No  |   Tanggal   |  Nama Pengirim  |  Nomor Kontak  |   Layanan   |      Tujuan      | Berat |      Deskripsi      |    Biaya    |    Kasir    |  Nama Penerima  |         Alamat Penerima");
-            System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");              
+            System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+            System.out.println("║ No  |     No Resi     |   Tanggal   |  Nama Pengirim  |  Nomor Kontak  |   Layanan   |      Tujuan      | Berat |      Deskripsi      |    Biaya    |    Kasir    |  Nama Penerima  |         Alamat Penerima");
+            System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");              
             for (int i = 0; i < historyTransaksi.length; i++) {
                 if (historyTransaksi[i][0] != null){
-                    Date transaksiDate = dateFormat.parse(historyTransaksi[i][0]);
+                    Date transaksiDate = dateFormat.parse(historyTransaksi[i][1]);
                     if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
-                        System.out.println(String.format("║ %3d ║ %11s ║ %15s ║ %14s ║ %11s ║ %16s ║ %5s ║ %19s ║ %11s ║ %11s ║ %15s ║ %30s",
+                        System.out.println(String.format("║ %3d ║ %15s ║ %11s ║ %15s ║ %14s ║ %11s ║ %16s ║ %5s ║ %19s ║ %11s ║ %11s ║ %15s ║ %30s",
                             i,
-                            historyTransaksi[i][0], // Tanggal
-                            historyTransaksi[i][1], // Nama
-                            historyTransaksi[i][2], // Nomor Kontak
-                            historyTransaksi[i][4], // Jenis Layanan
-                            historyTransaksi[i][3], // Lokasi
-                            historyTransaksi[i][9], // Berat Barang
-                            historyTransaksi[i][10],  //Deskripsi
-                            historyTransaksi[i][5], // Tarif
-                            historyTransaksi[i][6], // Nama Kasir
-                            historyTransaksi[i][7], // Nama Penerima
-                            historyTransaksi[i][8] // Alamat Penerima
+                            historyTransaksi[i][0], // Nomor Resi
+                            historyTransaksi[i][1], // Tanggal
+                            historyTransaksi[i][2], // Nama Pengirim
+                            historyTransaksi[i][3], // Nomor Kontak
+                            historyTransaksi[i][5],  //Jenis Layanan
+                            historyTransaksi[i][4], // Tujuan
+                            historyTransaksi[i][10], // Berat
+                            historyTransaksi[i][11], // Deskripsi
+                            historyTransaksi[i][6], // Tarif
+                            historyTransaksi[i][7], // Nama Kasir
+                            historyTransaksi[i][8], // Nama Penerima
+                            historyTransaksi[i][9] // Alamat
+
+
 
                         ));
                     }
                 }
             }
-            System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+            System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
         }catch (ParseException e){
             e.printStackTrace();
         }
@@ -1276,4 +1316,10 @@ public class Main {
             System.out.println("Tidak ada transaksi pada tahun tersebut.");
         }
     }
+
+    private static String generateNomorResi() {
+        long timestamp = System.currentTimeMillis();
+        return String.valueOf(timestamp);
+    }
+
 }
