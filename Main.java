@@ -69,14 +69,14 @@ public class Main {
         {"8765432109876", "11-12-2023", "Julian", "08822334455", "Malang", "Sameday", "67000.0", "Naufal", "Naufal", "Jl. Seroja 2 No. 4", "8", "Kesehatan"},
         {"5432109876543", "25-02-2023", "Petrus", "08866778899", "Bogor", "Reguler", "73000.0", "Putra", "Saka", "Jl. Kembang 8 No. 1", "3", "Elektronik"},
         {"3210987654325", "10-05-2023", "Saputra", "08855443322", "Surabaya", "Ekonomi", "32000.0", "Farhan", "Rio", "Jl. Mawar 14 No. 7", "5", "Makanan"},
-        {"9876543210987", "15-07-2023", "Reika", "08811223344", "Semarang", "Reguler", "52000.0", "Naufal", "Chiko", "Jl. Anggrek 11 No. 15", "2", "Alat Tulis"},
+        {"9876543210986", "15-07-2023", "Reika", "08811223344", "Semarang", "Reguler", "52000.0", "Naufal", "Chiko", "Jl. Anggrek 11 No. 15", "2", "Alat Tulis"},
         {"3456789012345", "20-09-2023", "Rio", "08887654321", "Yogyakarta", "Sameday", "47000.0", "Putra", "Naufal", "Jl. Seroja 10 No. 2", "9", "Elektronik"},
-        {"9876543210987", "05-11-2023", "Saka", "08899887766", "Tangerang", "Sameday", "69000.0", "Farhan", "Chiko", "Jl. Melati 20 No. 16", "1", "Pakaian"},
+        {"9876543210985", "05-11-2023", "Saka", "08899887766", "Tangerang", "Sameday", "69000.0", "Farhan", "Chiko", "Jl. Melati 20 No. 16", "1", "Pakaian"},
         {"3210987654321", "15-01-2023", "Taufik", "08876543210", "Bekasi", "Ekonomi", "40000.0", "Naufal", "Vincent", "Jl. Kembang 7 No. 19", "10", "Buku"},
-        {"9876543210987", "20-03-2023", "Mera", "08822334455", "Gorontalo", "Sameday", "61000.0", "Putra", "Saputra", "Jl. Seroja 4 No. 11", "4", "Kesehatan"},
+        {"9876543210984", "20-03-2023", "Mera", "08822334455", "Gorontalo", "Sameday", "61000.0", "Putra", "Saputra", "Jl. Seroja 4 No. 11", "4", "Kesehatan"},
         {"3456789012345", "05-05-2023", "Vincent", "08866778899", "Medan", "Reguler", "54000.0", "Farhan", "Petrus", "Jl. Anggrek 3 No. 14", "7", "Makanan"},
         {"3210987654324", "10-07-2023", "Vira", "08855443322", "Bengkulu", "Ekonomi", "37000.0", "Naufal", "Haikal", "Jl. Kembang 12 No. 9", "1", "Elektronik"},
-        {"9876543210987", "28-10-2023", "Innam", "08822334455", "Surabaya", "Sameday", "55000.0", "Putra", "Farrel", "Jl. Melati 9 No. 5", "6", "Buku"},               
+        {"9876543210983", "28-10-2023", "Innam", "08822334455", "Surabaya", "Sameday", "55000.0", "Putra", "Farrel", "Jl. Melati 9 No. 5", "6", "Buku"},               
     };
 
     static String laporanFormat = 
@@ -569,7 +569,8 @@ public class Main {
                                     System.out.println("║ [2]. Hari");
                                     System.out.println("║ [3]. Bulan");
                                     System.out.println("║ [4]. Tahun");
-                                    System.out.println("║ [5]. Kembali ke Menu Utama");
+                                    System.out.println("║ [5]. Nomor Resi");
+                                    System.out.println("║ [6]. Kembali ke Menu Utama");
                                     System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
                                     System.out.print("║ -> Masukkan Pilihan: ");
                                     editMenu = input.nextInt();
@@ -702,6 +703,34 @@ public class Main {
                                             }
                                             break;
                                         case 5:
+                                            // mencari transaksi berdasarkan nomor resi
+                                            validInput = false;
+                                            int searchIndex = -1;
+                                            String searchString = "";
+
+                                            while (!validInput) {
+                                                System.out.print("║ -> Masukkan nomor resi: ");
+                                                input.nextLine();
+                                                try {
+                                                    searchString = input.nextLine();
+                                                    validInput = true;
+
+                                                    for (int i=0; i<historyTransaksi.length; i++) {
+                                                        if (historyTransaksi[i][0].equals(searchString)) {
+                                                            tampilHistoryResi(searchString);
+                                                            searchIndex = i;
+                                                            break;
+                                                    }
+                                                } 
+                                                if (searchIndex != -1) {
+                                                    validInput = true;
+                                                } else { System.out.println("║ Data tidak ditemukan. Silakan coba lagi."); }
+
+                                            } catch (NumberFormatException exception) {
+                                                    System.out.println("║ Input yang dimasukkan tidak valid. Silakan masukkan nomor resi kembali!.");
+                                                }
+                                            }
+                                                                                
                                             break;
                                         default:
                                             break;
@@ -1325,6 +1354,34 @@ public class Main {
         if (!dataDitemukan) {
             System.out.println("Tidak ada transaksi pada tahun tersebut.");
         }
+    }
+
+    public static void tampilHistoryResi(String resi){
+        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+        System.out.println("║                                                                                       History Transaksi");
+        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+        System.out.println("║ No  |     No Resi     |   Tanggal   |  Nama Pengirim  |  Nomor Kontak  |   Layanan   |      Tujuan      | Berat |      Deskripsi      |    Biaya    |    Kasir    |  Nama Penerima  |         Alamat Penerima");
+        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");              
+        for (int i = 0; i < historyTransaksi.length; i++) {
+            if (historyTransaksi[i][0].equals(resi)) {
+                System.out.println(String.format("║ %3d ║ %15s ║ %11s ║ %15s ║ %14s ║ %11s ║ %16s ║ %5s ║ %19s ║ %11s ║ %11s ║ %15s ║ %30s",
+                    i,
+                    historyTransaksi[i][0], // Nomor Resi
+                    historyTransaksi[i][1], // Tanggal
+                    historyTransaksi[i][2], // Nama Pengirim
+                    historyTransaksi[i][3], // Nomor Kontak
+                    historyTransaksi[i][5],  //Jenis Layanan
+                    historyTransaksi[i][4], // Tujuan
+                    historyTransaksi[i][10], // Berat
+                    historyTransaksi[i][11], // Deskripsi
+                    historyTransaksi[i][6], // Tarif
+                    historyTransaksi[i][7], // Nama Kasir
+                    historyTransaksi[i][8], // Nama Penerima
+                    historyTransaksi[i][9] // Alamat
+                ));
+            }
+        }
+        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
     }
 
     private static String generateNomorResi() {
