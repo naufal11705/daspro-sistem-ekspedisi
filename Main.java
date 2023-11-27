@@ -60,7 +60,7 @@ public class Main {
         {"3751928643058", "18-10-2023", "Farhan", "08866778899", "Denpasar", "Reguler", "55700.0", "Naufal", "Petrus", "Jl. Mawar 5 No. 11", "2", "Mainan"},
         {"5038921467584", "02-12-2023", "Chiko", "08811223344", "Malang", "Ekonomi", "87600.0", "Putra", "Saka", "Jl. Kembang 10 No. 17", "7", "Elektronik"},
         {"6904715283142", "27-09-2023", "Haikal", "08887654321", "Bengkulu", "Sameday", "98800.0", "Farhan", "Vincent", "Jl. Melati 3 No. 9", "3", "Kesehatan"},
-        {"4892307162453", "11-11-2023", "Cindy", "08899887766", "Bekasi", "Sameday", "65400.0", "Naufal", "Naufal", "Jl. Seroja 8 No. 6", "5", "Makanan"},
+        {"4892307162453", "11-11-2023", "Cindy", "08899887766", "Bekasi", "Sameday", "65400.0", "Naufal", "Petrus", "Jl. Seroja 8 No. 6", "5", "Makanan"},
         {"1234567890123", "01-01-2023", "Ivan", "08812345678", "Surabaya", "Ekonomi", "45000.0", "Putra", "Abdi", "Jl. Anggrek 14 No. 20", "9", "Buku"},
         {"9876543210987", "07-04-2023", "Luthfi", "08887654321", "Jakarta", "Reguler", "60000.0", "Farhan", "Farrel", "Jl. Kembang 1 No. 18", "1", "Elektronik"},
         {"3456789012345", "14-06-2023", "Adri", "08811223344", "Bandung", "Ekonomi", "35000.0", "Naufal", "Petrus", "Jl. Melati 6 No. 13", "6", "Makanan"},
@@ -68,16 +68,15 @@ public class Main {
         {"6543210987654", "03-10-2023", "Dimas", "08876543210", "Denpasar", "Reguler", "58000.0", "Farhan", "Farrel", "Jl. Mawar 13 No. 16", "10", "Mainan"},
         {"8765432109876", "11-12-2023", "Julian", "08822334455", "Malang", "Sameday", "67000.0", "Naufal", "Naufal", "Jl. Seroja 2 No. 4", "8", "Kesehatan"},
         {"5432109876543", "25-02-2023", "Petrus", "08866778899", "Bogor", "Reguler", "73000.0", "Putra", "Saka", "Jl. Kembang 8 No. 1", "3", "Elektronik"},
-        {"3210987654321", "10-05-2023", "Saputra", "08855443322", "Surabaya", "Ekonomi", "32000.0", "Farhan", "Rio", "Jl. Mawar 14 No. 7", "5", "Makanan"},
+        {"3210987654325", "10-05-2023", "Saputra", "08855443322", "Surabaya", "Ekonomi", "32000.0", "Farhan", "Rio", "Jl. Mawar 14 No. 7", "5", "Makanan"},
         {"9876543210987", "15-07-2023", "Reika", "08811223344", "Semarang", "Reguler", "52000.0", "Naufal", "Chiko", "Jl. Anggrek 11 No. 15", "2", "Alat Tulis"},
         {"3456789012345", "20-09-2023", "Rio", "08887654321", "Yogyakarta", "Sameday", "47000.0", "Putra", "Naufal", "Jl. Seroja 10 No. 2", "9", "Elektronik"},
         {"9876543210987", "05-11-2023", "Saka", "08899887766", "Tangerang", "Sameday", "69000.0", "Farhan", "Chiko", "Jl. Melati 20 No. 16", "1", "Pakaian"},
         {"3210987654321", "15-01-2023", "Taufik", "08876543210", "Bekasi", "Ekonomi", "40000.0", "Naufal", "Vincent", "Jl. Kembang 7 No. 19", "10", "Buku"},
         {"9876543210987", "20-03-2023", "Mera", "08822334455", "Gorontalo", "Sameday", "61000.0", "Putra", "Saputra", "Jl. Seroja 4 No. 11", "4", "Kesehatan"},
         {"3456789012345", "05-05-2023", "Vincent", "08866778899", "Medan", "Reguler", "54000.0", "Farhan", "Petrus", "Jl. Anggrek 3 No. 14", "7", "Makanan"},
-        {"3210987654321", "10-07-2023", "Vira", "08855443322", "Bengkulu", "Ekonomi", "37000.0", "Naufal", "Haikal", "Jl. Kembang 12 No. 9", "1", "Elektronik"},
-        {"9876543210987", "28-10-2023", "Innam", "08822334455", "Surabaya", "Sameday", "55000.0", "Putra", "Farrel", "Jl. Melati 9 No. 5", "6", "Buku"},
-               
+        {"3210987654324", "10-07-2023", "Vira", "08855443322", "Bengkulu", "Ekonomi", "37000.0", "Naufal", "Haikal", "Jl. Kembang 12 No. 9", "1", "Elektronik"},
+        {"9876543210987", "28-10-2023", "Innam", "08822334455", "Surabaya", "Sameday", "55000.0", "Putra", "Farrel", "Jl. Melati 9 No. 5", "6", "Buku"},               
     };
 
     static String laporanFormat = 
@@ -526,79 +525,40 @@ public class Main {
                                     System.out.println("Under Development"); 
                                     break;
                                 case 3: 
-                                try {
-                                                System.out.println("Data Transaksi yang tersedia: ");
-                                                System.out.println();
-                                                Date startDate = dateFormat.parse(tanggalHariIni);
-                                                Date endDate = dateFormat.parse(tanggalHariIni);
-                                                System.out.println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════"); 
-                                                System.out.println("                                                                                        History Transaksi");
-                                                System.out.println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════"); 
-                                                System.out.println(" No  |   Tanggal   |  Nama Pengirim  |  Nomor Kontak  |   Layanan   |      Tujuan      | Berat |      Deskripsi      |    Biaya    |    Kasir    |  Nama Penerima  |         Alamat Penerima");
-                                                System.out.println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════");                                                
-                                                for (int i = 0; i < historyTransaksi.length; i++) {
-                                                    if (historyTransaksi[i][0] != null){
-                                                        Date transaksiDate = dateFormat.parse(historyTransaksi[i][0]);
-                                                        if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
-                                                            System.out.println(String.format(" %3d ║ %11s ║ %15s ║ %14s ║ %11s ║ %16s ║ %5s ║ %19s ║ %11s ║ %11s ║ %15s ║ %30s",
-                                                                i,
-                                                                historyTransaksi[i][0], // Tanggal
-                                                                historyTransaksi[i][1], // Nama
-                                                                historyTransaksi[i][2], // Nomor Kontak
-                                                                historyTransaksi[i][4], // Jenis Layanan
-                                                                historyTransaksi[i][3], // Lokasi
-                                                                historyTransaksi[i][9], // Berat Barang
-                                                                historyTransaksi[i][10],  //Deskripsi
-                                                                historyTransaksi[i][5], // Tarif
-                                                                historyTransaksi[i][6], // Nama Kasir
-                                                                historyTransaksi[i][7], // Nama Penerima
-                                                                historyTransaksi[i][8] // Alamat Penerima
-
-                                                            ));
-                                                        }
-                                                    }
-                                                }
-                                                System.out.println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════"); 
-                                                break;
-                                            } catch (ParseException e) {
-                                                e.printStackTrace();
-                                    // menghapus transaksi berdasarkan nama dan berat barang
+                                    // menghapus transaksi berdasarkan nomor resi
                                     validInput = false;
                                     int deleteIndex = -1;
 
-                                    // Validation loop for non-integer input
                                     while (!validInput) {
-                                        System.out.print("Masukkan nama dan berat barang yang ingin dihapus: ");
+                                        System.out.print("║ -> Masukkan nomor resi: ");
                                         try {
                                             String deleteString = input.nextLine();
                                             validInput = true;
 
                                             for (int i=0; i<historyTransaksi.length; i++) {
-                                                if (historyTransaksi[i][1] != null && historyTransaksi[i][9] != null &&
-                                                historyTransaksi [i][1].equalsIgnoreCase(deleteString.split(" ")[0]) &&
-                                                historyTransaksi[i][9].equalsIgnoreCase(deleteString.split(" ")[1])) {
+                                                if (historyTransaksi[i][0].equals(deleteString)) {
                                                     deleteIndex = i;
                                                     break;
                                             }
                                         } 
                                         if (deleteIndex != -1) {
                                             validInput = true;
-                                        } else { System.out.println("Data tidak ditemukan. Silakan coba lagi."); }
+                                        } else { System.out.println("║ Data tidak ditemukan. Silakan coba lagi."); }
 
                                     } catch (NumberFormatException exception) {
-                                            System.out.println("IInput yang dimasukkan tidak valid. Silakan masukkan nama dan berat barang.");
+                                            System.out.println("║ Input yang dimasukkan tidak valid. Silakan masukkan nomor resi kembali!.");
                                         }
                                     }
 
                                     // Hapus elemen jika validInput adalah true
                                     if (deleteIndex >= 0 && deleteIndex < historyTransaksi.length) {
-                                        System.out.println("Transaksi dengan nama dan berat barang yang sesuai telah dihapus!");
+                                        System.out.println("║ Transaksi dengan nomor resi yang sesuai telah dihapus!");
                                         System.arraycopy(historyTransaksi, deleteIndex + 1, historyTransaksi, deleteIndex, historyTransaksi.length - deleteIndex - 1);
                                         historyTransaksi = Arrays.copyOf(historyTransaksi, historyTransaksi.length - 1);
                                     } else {
-                                        System.out.println("Data tidak ditemukan.");
+                                        System.out.println("║ Data tidak ditemukan.");
                                     }   
-                                }                                        
+                                                                        
                                     break;
                                 case 4:
                                     Calendar calendar = Calendar.getInstance();
