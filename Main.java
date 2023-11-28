@@ -383,7 +383,7 @@ public class Main {
                             System.out.println("║"+YELLOW+centerString(98,"Pengiriman Barang")+RESET+"║");
                             System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
                             System.out.println("║ [1]. Melakukan Transaksi"); //Melakukan Transaksi
-                            System.out.println("║ [2]. Manajemen Status Pengiriman"); //Mengedit status pengiriman
+                            System.out.println("║ [2]. Manajemen Status Pengiriman (Beta)"); //Mengedit status pengiriman
                             System.out.println("║ [3]. Menghapus Data Transaksi"); //Menghapus Transaksi
                             System.out.println("║ [4]. Menampilkan Data Transaksi"); //Menampilkan Data Transaksi
                             System.out.println("║ [5]. Kembali ke Menu Utama"); //Kembali ke Menu Utama
@@ -548,7 +548,7 @@ public class Main {
                                     System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
 
                                     int indexKirim;
-                                    System.out.println("Masukkan index: ");
+                                    System.out.print("║ -> Masukkan index: ");
                                     indexKirim = input.nextInt();
 
                                     boolean adaKesamaanData = false;           
@@ -563,7 +563,7 @@ public class Main {
                                     }
                                     
                                     if (adaKesamaanData){
-                                        System.out.println("Ada kesamaan data");
+                                        System.out.println("║ -> Terdapat beberapa barang yang dapat dikirim bersama dengan paket ini!");
                                         for (int i = 0; i < historyTransaksi.length; i++) {
                                             if (historyTransaksi[i][12].equals("On Process" ) && 
                                                     historyTransaksi[i][4].equals(historyTransaksi[indexKirim][4]) && 
@@ -572,10 +572,36 @@ public class Main {
                                                     historyTransaksi[i][13].equals(historyTransaksi[indexKirim][13])) {
                                                     historyTransaksi[i][12] = "Shipping";
                                                     historyTransaksi[indexKirim][12] = "Shipping";
+                                                    System.out.println(String.format("║ %15s ║ %11s ║ %11s ║ %16s ║ %5s ║ %19s ║ %11s ║ %15s ║ %30s ║ %15s ║ %15s",
+                                                        historyTransaksi[i][0], // Nomor Resi
+                                                        historyTransaksi[i][1], // Tanggal
+                                                        historyTransaksi[i][5],  //Jenis Layanan
+                                                        historyTransaksi[i][4], // Tujuan
+                                                        historyTransaksi[i][10], // Berat
+                                                        historyTransaksi[i][11], // Deskripsi
+                                                        historyTransaksi[i][6], // Tarif
+                                                        historyTransaksi[i][8], // Nama Penerima
+                                                        historyTransaksi[i][9], // Alamat
+                                                        historyTransaksi[i][12],
+                                                        historyTransaksi[i][13]
+                                                    ));
                                             }
                                         }
+                                        System.out.println(String.format("║ %15s ║ %11s ║ %11s ║ %16s ║ %5s ║ %19s ║ %11s ║ %15s ║ %30s ║ %15s ║ %15s",
+                                            historyTransaksi[indexKirim][0], // Nomor Resi
+                                            historyTransaksi[indexKirim][1], // Tanggal
+                                            historyTransaksi[indexKirim][5],  //Jenis Layanan
+                                            historyTransaksi[indexKirim][4], // Tujuan
+                                            historyTransaksi[indexKirim][10], // Berat
+                                            historyTransaksi[indexKirim][11], // Deskripsi
+                                            historyTransaksi[indexKirim][6], // Tarif
+                                            historyTransaksi[indexKirim][8], // Nama Penerima
+                                            historyTransaksi[indexKirim][9], // Alamat
+                                            historyTransaksi[indexKirim][12],
+                                            historyTransaksi[indexKirim][13]
+                                        ));
                                     } else {
-                                        System.out.println("Fitur apaan dah ini, kodenya panjang banget");
+                                        System.out.println("║ -> Fitur apaan dah ini, kodenya panjang banget");
                                     }
 
                                     break;
