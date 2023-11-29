@@ -946,7 +946,7 @@ public class Main {
                                     double tarifLayanan = 0;
                                     int startEstimation = 0;
                                     int endEstimation = 0;
-                                    for (int i = 0; i < arrayLayanan.length; i++) {
+
                                         System.out.print("║ -> Masukkan Nama Layanan: ");
                                         namaLayanan = input.next();
                                         while (!inputValid) {
@@ -964,10 +964,6 @@ public class Main {
                                         startEstimation = input.nextInt();
                                         System.out.print("║ -> Masukkan Waktu Pengiriman Maximum: ");
                                         endEstimation = input.nextInt();
-                        
-                                        arrayLayanan[i][1] = String.valueOf(tarifLayanan);
-                                        break;
-                                    }
 
                                         arrayLayanan = Arrays.copyOf(arrayLayanan,arrayLayanan.length + 1);
                                         arrayLayanan[arrayLayanan.length-1] = new String[] {
