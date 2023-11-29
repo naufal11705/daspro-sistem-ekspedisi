@@ -152,11 +152,11 @@ public class Main {
 
             for (int i = 0; i < historyTransaksi.length; i++) {
                 if (historyTransaksi[i][0] != null) {
-                    Date transaksiDate = dateFormat.parse(historyTransaksi[i][0]);
+                    Date transaksiDate = dateFormat.parse(historyTransaksi[i][1]);
                     if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
-                        totalBerat += Integer.parseInt(historyTransaksi[i][9]);
+                        totalBerat += Integer.parseInt(historyTransaksi[i][10]);
                         totalAsset++;
-                        totalHarga += Double.parseDouble(historyTransaksi[i][5]);
+                        totalHarga += Double.parseDouble(historyTransaksi[i][6]);
                     }
                 }
             }
