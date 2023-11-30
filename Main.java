@@ -488,7 +488,7 @@ public class Main {
                                     tarifLayanan = Double.parseDouble(arrayLayanan[pilihanLayanan][1]);                      
 
                                     double biayaAkhir = tarifLayanan + (tarifPerKg * beratBarang) + biayaJarak;
-                                    nomorResi = generateNomorResi();
+                                    nomorResi = generateTrackingNumber();
 
                                     historyTransaksi = Arrays.copyOf(historyTransaksi,historyTransaksi.length + 1);
                                     historyTransaksi[historyTransaksi.length-1] = new String[]{
@@ -1178,6 +1178,11 @@ public class Main {
         return String.format("%" + padSize + "s%s%" + (padSize + (width - s.length()) % 2) + "s", "", s, "");
     }
 
+    private static String generateTrackingNumber() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyyHHmmss");
+        String timestamp = dateFormat.format(new Date());
+        return timestamp;
+    }
 
 
 
@@ -1493,9 +1498,5 @@ public class Main {
         System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
     }
 
-    private static String generateNomorResi() {
-        long timestamp = System.currentTimeMillis();
-        return String.valueOf(timestamp);
-    }
 
 }
