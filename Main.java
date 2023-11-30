@@ -20,6 +20,42 @@ public class Main {
         {"Kasir", "333", "KASIR"}
     };
 
+    static String[][] languageModule = {
+        {"Welcome to the Expedition System", "Selamat Datang di Sistem Ekspedisi"},
+        {"", "Manajemen Pengguna"}, //1
+        {"Delivery of Goods", "Pengiriman Barang"}, //2
+            // Bahasa menu pengiriman barang
+            {"Transactions", "Melakukan Transaksi"}, 
+                {"Enter the Sender's Name: ","Masukkan Nama Pengirim: "},
+                {"Enter the weight of the item: ", "Masukkan Berat Barang: "},
+                {"Enter Destination: ", "Masukkan Kota Tujuan: "},
+                {"Destination not Found", "Kota Tujuan tidak ditemukan"},
+            {"Editing Transactions", "Mengedit Data Transaksi"},
+            {"Remove Transactions", "Menghapus Data Transaksi"},
+            {"Displyas Transactions' Data", "Menampilkan Data Transaksi"},
+            {"Back to the Main Menu", "Kembali ke Menu Utama"},
+        {"Route Management", "Manajemen Rute"}, //12
+            // Bahasa menu manajemen lokasi
+            {"Add Location", "Menambahkan Rute"},
+            {"Remove Location", "Menghapus Rute"},
+            {"Displays Location's Data", "Menampilkan Data Rute Pengiriman"},
+            {"Back to the Main Menu", "Kembali ke Menu Utama"},
+        {"Cost Management", "Manajemen Layanan"}, //17
+            // Bahasa menu Manajemen Tarif
+            {"Add Service Types", "Tambahkan Jenis Layanan"},
+            {"Change Cost Service", "Merubah Tarif Layanan"},
+            {"Remove Service", "Menghapus Layanan"},
+            {"Displays Services' Data", "Menampilkan Layanan Data"},
+            {"Exit", "Keluar"}, 
+        {"Change Language", "Ganti Bahasa"}, //23
+        {"", "Laporan Ekspedisi"}, //24
+        {"Exit", "Keluar"}, //25
+
+        // Bahasa input pilihan
+        {"-> Enter Options: ", "-> Masukkan Pilihan: "}, 
+
+    };
+
     // Format tanggal
     static SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
     static Date date = new Date();
@@ -43,6 +79,8 @@ public class Main {
     static Date endDate;
 
     static String CLEAR = "\u001B[2J";
+
+    static int selectedLanguage = 1;
 
 
     // Array History Pemesanan
@@ -198,47 +236,13 @@ public class Main {
         String RESET = "\u001B[0m";
         String YELLOW = "\u001B[33m";
 
-        int pilihanBahasa = 1, inputPilihanBahasa;
+        int inputselectedLanguage;
 
         // Array Multi Bahasa
-        String[][] multilingual = {
-            {"Welcome to the Expedition System", "Selamat Datang di Sistem Ekspedisi"},
-            {"", "Manajemen Pengguna"}, //1
-            {"Delivery of Goods", "Pengiriman Barang"}, //2
-                // Bahasa menu pengiriman barang
-                {"Transactions", "Melakukan Transaksi"}, 
-                    {"Enter the Sender's Name: ","Masukkan Nama Pengirim: "},
-                    {"Enter the weight of the item: ", "Masukkan Berat Barang: "},
-                    {"Enter Destination: ", "Masukkan Kota Tujuan: "},
-                    {"Destination not Found", "Kota Tujuan tidak ditemukan"},
-                {"Editing Transactions", "Mengedit Data Transaksi"},
-                {"Remove Transactions", "Menghapus Data Transaksi"},
-                {"Displyas Transactions' Data", "Menampilkan Data Transaksi"},
-                {"Back to the Main Menu", "Kembali ke Menu Utama"},
-            {"Route Management", "Manajemen Rute"}, //12
-                // Bahasa menu manajemen lokasi
-                {"Add Location", "Menambahkan Rute"},
-                {"Remove Location", "Menghapus Rute"},
-                {"Displays Location's Data", "Menampilkan Data Rute Pengiriman"},
-                {"Back to the Main Menu", "Kembali ke Menu Utama"},
-            {"Cost Management", "Manajemen Layanan"}, //17
-                // Bahasa menu Manajemen Tarif
-                {"Add Service Types", "Tambahkan Jenis Layanan"},
-                {"Change Cost Service", "Merubah Tarif Layanan"},
-                {"Remove Service", "Menghapus Layanan"},
-                {"Displays Services' Data", "Menampilkan Layanan Data"},
-                {"Exit", "Keluar"}, 
-            {"Change Language", "Ganti Bahasa"}, //23
-            {"", "Laporan Ekspedisi"}, //24
-            {"Exit", "Keluar"}, //25
 
-            // Bahasa input pilihan
-            {"-> Enter Options: ", "-> Masukkan Pilihan: "}, 
-
-        };
 
         System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════════════╗");
-        System.out.println("║"+YELLOW+centerString(98, multilingual[0][pilihanBahasa])+RESET+"║");
+        System.out.println("║"+YELLOW+centerString(98, languageModule[0][selectedLanguage])+RESET+"║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
 
         while (!login) {
@@ -275,21 +279,21 @@ public class Main {
 
             do {
                 System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╗");
-                System.out.println("║"+YELLOW+centerString(98, multilingual[0][pilihanBahasa])+RESET+"║");
+                System.out.println("║"+YELLOW+centerString(98,getLanguageModuleText(0))+RESET+"║");
                 System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
                 if(isAdmin){
-                    System.out.println("║ [0]. " + multilingual[1][pilihanBahasa]); //Manajemen Pengguna
+                    System.out.println("║ [0]. " + getLanguageModuleText(1)); //Manajemen Pengguna
                 }
-                System.out.println("║ [1]. " + multilingual[2][pilihanBahasa]); //Pengiriman Barang
-                System.out.println("║ [2]. " + multilingual[12][pilihanBahasa]); //Manajemen Lokasi
-                System.out.println("║ [3]. " + multilingual[17][pilihanBahasa]); //Manajemen Tarif
-                System.out.println("║ [4]. " + multilingual[23][pilihanBahasa]); //Ganti Bahasa
+                System.out.println("║ [1]. " + getLanguageModuleText(2)); //Pengiriman Barang
+                System.out.println("║ [2]. " + getLanguageModuleText(12)); //Manajemen Lokasi
+                System.out.println("║ [3]. " + getLanguageModuleText(17)); //Manajemen Tarif
+                System.out.println("║ [4]. " + getLanguageModuleText(23)); //Ganti Bahasa
                 System.out.println("║ [5]. Laporan"); //Laporan
                 System.out.println("║ [6]. Keluar"); //Keluar
                 System.out.println("║ [7]. Manajemen Tarif Dasar");
                 System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
 
-                System.out.print("║ " + multilingual[26][pilihanBahasa]);
+                System.out.print("║ " + languageModule[26][selectedLanguage]);
                 menuUtama = input.nextInt();
                 input.nextLine();
 
@@ -488,7 +492,7 @@ public class Main {
                                     tarifLayanan = Double.parseDouble(arrayLayanan[pilihanLayanan][1]);                      
 
                                     double biayaAkhir = tarifLayanan + (tarifPerKg * beratBarang) + biayaJarak;
-                                    nomorResi = generateNomorResi();
+                                    nomorResi = generateTrackingNumber();
 
                                     historyTransaksi = Arrays.copyOf(historyTransaksi,historyTransaksi.length + 1);
                                     historyTransaksi[historyTransaksi.length-1] = new String[]{
@@ -898,7 +902,7 @@ public class Main {
                                     }
 
                                     if (deleteIndex >= 1 && deleteIndex <= rutePengiriman.length) {
-                                        String[] deletedLocation = rutePengiriman[deleteIndex - 1];
+                                        String deletedLocation = rutePengiriman[deleteIndex - 1][0]+" "+rutePengiriman[deleteIndex - 1][1];
                                         System.out.println("║ " + deletedLocation + " Telah Dihapus!");
 
                                         System.arraycopy(rutePengiriman, deleteIndex, rutePengiriman, deleteIndex - 1, rutePengiriman.length - deleteIndex);
@@ -907,15 +911,10 @@ public class Main {
                                         System.out.println("║ Nomor rute tidak valid");
                                         continue;
                                     }
-
-                                    if (found) {
-                                        found = false;
-                                    } else {
-                                        System.out.println("║ Key tidak ditemukan");
-                                    }                                           
+                                         
                                     break;
                                 case 3:
-                                    tampilDataRute();
+                                    viewExpeditionRoutes();
                                     break;
                                 case 4:
                                     keluar = false;
@@ -946,7 +945,7 @@ public class Main {
                                     double tarifLayanan = 0;
                                     int startEstimation = 0;
                                     int endEstimation = 0;
-                                    for (int i = 0; i < arrayLayanan.length; i++) {
+
                                         System.out.print("║ -> Masukkan Nama Layanan: ");
                                         namaLayanan = input.next();
                                         while (!inputValid) {
@@ -964,10 +963,6 @@ public class Main {
                                         startEstimation = input.nextInt();
                                         System.out.print("║ -> Masukkan Waktu Pengiriman Maximum: ");
                                         endEstimation = input.nextInt();
-                        
-                                        arrayLayanan[i][1] = String.valueOf(tarifLayanan);
-                                        break;
-                                    }
 
                                         arrayLayanan = Arrays.copyOf(arrayLayanan,arrayLayanan.length + 1);
                                         arrayLayanan[arrayLayanan.length-1] = new String[] {
@@ -979,7 +974,7 @@ public class Main {
                                 case 2:
                                 System.out.println("║ Daftar Layanan yang Tersedia:");
                                 for (int i = 0; i < arrayLayanan.length; i++) {
-                                    System.out.println((i + 1) + ". " + arrayLayanan[i][0] );
+                                    System.out.println("║ "+(i + 1) + ". " + arrayLayanan[i][0] );
                                 }
                         
                                 System.out.print("║ -> Masukkan nomor layanan yang ingin diubah: ");
@@ -1088,7 +1083,7 @@ public class Main {
                                     }
                                     break;
                                 case 4:
-                                    tampilDataTarifLayanan ();
+                                    viewExpeditionServices();
                                     break;
                                 case 5:
                                     isLoop = false;
@@ -1104,19 +1099,19 @@ public class Main {
                                 System.out.println("║ [1]. English");
                                 System.out.println("║ [2]. Indonesian");
                                 System.out.print("║ -> Masukkan Pilihan: ");
-                                inputPilihanBahasa = input.nextInt();
+                                inputselectedLanguage = input.nextInt();
 
-                                switch (inputPilihanBahasa) {
+                                switch (inputselectedLanguage) {
                                     case 1:
-                                        pilihanBahasa = inputPilihanBahasa-1;
+                                        selectedLanguage = inputselectedLanguage-1;
                                         break;
                                     case 2:
-                                        pilihanBahasa = inputPilihanBahasa-1;
+                                        selectedLanguage = inputselectedLanguage-1;
                                         break;
                                     default:
                                         System.out.println("║ Invalid choice. Please try again.");
                                 }
-                            } while (inputPilihanBahasa > multilingual[0].length);
+                            } while (inputselectedLanguage > languageModule[0].length);
                             break;
                         case 5:
                             CetakLaporan();
@@ -1168,14 +1163,64 @@ public class Main {
             } while(!exit);
         }
     }
-    public static void tampilDataRute() {
+
+
+
+
+
+
+
+
+
+
+
+
+    private static int[] calculateColumnWidths(String[][] array) {
+        int[] columnWidths = new int[array[0].length];
+    
+        for (int j = 0; j < array[0].length; j++) {
+            int maxWidth = 0;
+            for (String[] row : array) {
+                if(maxWidth < row[j].length()){
+                    maxWidth = row[j].length();
+                }
+            }
+            columnWidths[j] = maxWidth + 4;
+        }
+    
+        return columnWidths;
+    }
+
+    private static String centerString(int width, String s) {
+        int padSize = (width - s.length()) / 2;
+        return String.format("%" + padSize + "s%s%" + (padSize + (width - s.length()) % 2) + "s", "", s, "");
+    }
+
+    private static String generateTrackingNumber() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyyHHmmss");
+        String timestamp = dateFormat.format(new Date());
+        return timestamp;
+    }
+
+    private static String getLanguageModuleText(int row) {
+        return languageModule[row][selectedLanguage];
+    }
+
+    public static void viewExpeditionRoutes() {
+        int[] columnWidths = calculateColumnWidths(rutePengiriman);
+        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s",
+            "No", 
+            "Nama Kota", 
+            "Nama Kota",
+            "Jarak" 
+        );
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
         System.out.println("║"+centerString(98,"Data Rute")+"║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ No  ║       Nama Kota      ║       Nama Kota      ║  Jarak");
+        System.out.println(formattedHeader);
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
         for (int i = 0; i < rutePengiriman.length; i++) {
-            String formattedString = String.format("║ %3d ║ %20s ║ %20s ║ %5s Km",
+            String formattedString = String.format("║ %3d ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s Km",
                     i,
                     rutePengiriman[i][0], 
                     rutePengiriman[i][1], 
@@ -1185,23 +1230,52 @@ public class Main {
         }
     } 
     
-    public static void tampilDataTarifLayanan() {
+    public static void viewExpeditionServices() {
+        int[] columnWidths = calculateColumnWidths(rutePengiriman);
+        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s",
+            "No", 
+            "Layanan", 
+            "Biaya" 
+        );
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
         System.out.println("║"+centerString(98,"Data Layanan")+"║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ No  ║   Nama Layanan   ║  Biaya");
+        System.out.println(formattedHeader);
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
         for (int i = 0; i < arrayLayanan.length; i++) {
             if (arrayLayanan[i] != null) {
-                    String formattedString = String.format("║ %3d ║ %16s ║ %5s",
+                    String formattedString = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s",
                     i,
-                    arrayLayanan[i][1], // Nama Kota
-                    arrayLayanan[i][0] // Tarif
+                    arrayLayanan[i][0], // Nama Kota
+                    arrayLayanan[i][1] // Tarif
             );
             System.out.println(formattedString);
             }
         }
     } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public static void tampilHistory(Date startDate, Date endDate){
         try{
@@ -1241,44 +1315,33 @@ public class Main {
         }
     }
 
-    public static String centerText(String text) {
-        int totalWidth = 40;
-        int spaces = (totalWidth - text.length()) / 2;
-        return String.format("%" + spaces + "s%s%" + spaces + "s", "", text, "");
-    }
-
-    private static String centerString(int width, String s) {
-        int padSize = (width - s.length()) / 2;
-        return String.format("%" + padSize + "s%s%" + (padSize + (width - s.length()) % 2) + "s", "", s, "");
-    }
-
     public static void tampilFormulirEkspedisi(String namaPengirim, String nomorKontak, String namaPenerima, String alamatPenerima, String deskripsibarang, int beratBarang, String origin, String destination, String layanan){
 
         if (beratBarang != 0) {
             System.out.println(String.format(
                 formulirTransaksi,
-                centerText(namaPengirim),
-                centerText(nomorKontak),
-                centerText(namaPenerima),
-                centerText(alamatPenerima),
-                centerText(deskripsibarang),
-                centerText(Integer.toString(beratBarang)),
-                centerText(origin),
-                centerText(destination),
-                centerText(layanan)
+                centerString(40,namaPengirim),
+                centerString(40,nomorKontak),
+                centerString(40,namaPenerima),
+                centerString(40,alamatPenerima),
+                centerString(40,deskripsibarang),
+                centerString(40,Integer.toString(beratBarang)),
+                centerString(40,origin),
+                centerString(40,destination),
+                centerString(40,layanan)
             ));
         } else {
             System.out.println(String.format(
                 formulirTransaksi,
-                centerText(namaPengirim),
-                centerText(nomorKontak),
-                centerText(namaPenerima),
-                centerText(alamatPenerima),
-                centerText(deskripsibarang),
-                centerText(""),
-                centerText(origin),
-                centerText(destination),
-                centerText(layanan)
+                centerString(40,namaPengirim),
+                centerString(40,nomorKontak),
+                centerString(40,namaPenerima),
+                centerString(40,alamatPenerima),
+                centerString(40,deskripsibarang),
+                centerString(40,""),
+                centerString(40,origin),
+                centerString(40,destination),
+                centerString(40,layanan)
             ));
         }
 
@@ -1466,9 +1529,5 @@ public class Main {
         System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
     }
 
-    private static String generateNomorResi() {
-        long timestamp = System.currentTimeMillis();
-        return String.valueOf(timestamp);
-    }
 
 }
