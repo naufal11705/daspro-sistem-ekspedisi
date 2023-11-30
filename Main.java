@@ -914,13 +914,7 @@ public class Main {
                                          
                                     break;
                                 case 3:
-                                    System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                                    System.out.println("║"+centerString(98,"Data Rute")+"║");
-                                    System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                                    System.out.println("║ No  ║       Nama Kota      ║       Nama Kota      ║  Jarak");
-                                    System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                                    displayExpeditionRoutes();
-                                    System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                    viewExpeditionRoutes();
                                     break;
                                 case 4:
                                     keluar = false;
@@ -1089,7 +1083,7 @@ public class Main {
                                     }
                                     break;
                                 case 4:
-                                    tampilDataTarifLayanan ();
+                                    viewExpeditionServices();
                                     break;
                                 case 5:
                                     isLoop = false;
@@ -1181,7 +1175,19 @@ public class Main {
 
 
 
-
+    private static int[] calculateColumnWidths(String[][] array) {
+        int[] columnWidths = new int[array[0].length];
+    
+        for (int j = 0; j < array[0].length; j++) {
+            int maxWidth = 0;
+            for (String[] row : array) {
+                maxWidth = Math.max(maxWidth, row[j].length());
+            }
+            columnWidths[j] = maxWidth + 4;
+        }
+    
+        return columnWidths;
+    }
 
     private static String centerString(int width, String s) {
         int padSize = (width - s.length()) / 2;
@@ -1198,9 +1204,21 @@ public class Main {
         return languageModule[row][selectedLanguage];
     }
 
-    public static void displayExpeditionRoutes() {
+    public static void viewExpeditionRoutes() {
+        int[] columnWidths = calculateColumnWidths(rutePengiriman);
+        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s",
+            "No", 
+            "Nama Kota", 
+            "Nama Kota",
+            "Jarak" 
+        );
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║"+centerString(98,"Data Rute")+"║");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println(formattedHeader);
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
         for (int i = 0; i < rutePengiriman.length; i++) {
-            String formattedString = String.format("║ %3d ║ %20s ║ %20s ║ %5s Km",
+            String formattedString = String.format("║ %3d ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s Km",
                     i,
                     rutePengiriman[i][0], 
                     rutePengiriman[i][1], 
@@ -1210,46 +1228,52 @@ public class Main {
         }
     } 
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public static void tampilDataTarifLayanan() {
+    public static void viewExpeditionServices() {
+        int[] columnWidths = calculateColumnWidths(rutePengiriman);
+        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s",
+            "No", 
+            "Layanan", 
+            "Biaya" 
+        );
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
         System.out.println("║"+centerString(98,"Data Layanan")+"║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ No  ║   Nama Layanan   ║  Biaya");
+        System.out.println(formattedHeader);
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
         for (int i = 0; i < arrayLayanan.length; i++) {
             if (arrayLayanan[i] != null) {
-                    String formattedString = String.format("║ %3d ║ %16s ║ %5s",
+                    String formattedString = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s",
                     i,
-                    arrayLayanan[i][1], // Nama Kota
-                    arrayLayanan[i][0] // Tarif
+                    arrayLayanan[i][0], // Nama Kota
+                    arrayLayanan[i][1] // Tarif
             );
             System.out.println(formattedString);
             }
         }
     } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public static void tampilHistory(Date startDate, Date endDate){
         try{
