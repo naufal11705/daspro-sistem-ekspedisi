@@ -82,6 +82,12 @@ public class Main {
 
     static int selectedLanguage = 1;
 
+    static boolean login = false;
+    static boolean isAdmin = false;
+    static boolean masuk = false;
+
+    static String loggedInUsername = "";
+
 
     // Array History Pemesanan
     static String[][] historyTransaksi = {
@@ -213,15 +219,11 @@ public class Main {
         // Deklarasi scanner untuk memasukkan inputan
         Scanner input = new Scanner(System.in);
 
-        String loggedInUsername = "";
-
         // Deklarasi boolean
-        boolean login = false;
         boolean found = false;
         boolean exit = false;
         boolean isLoop = false;
-        boolean isAdmin = false;
-        boolean masuk = false;
+
         boolean validInput = false;
         boolean inputValid = false;
 
@@ -259,19 +261,8 @@ public class Main {
                 System.out.print("║ -> Masukan Password: ");
                 String inputPassword = input.next();
 
-                for (int i = 0; i < userData.length ; i++ ) {
-                    if (userData[i][0].equals(inputUsername) && userData[i][1].equals(inputPassword)) {
-                        System.out.println("║ Login Berhasil");
-                        login = true;
-                        masuk = true;
-                        loggedInUsername = inputUsername;
-                        
-                        if("ADMIN".equals(userData[i][2])){
-                            isAdmin = true;
-                        }
-                        break;
-                    }
-                }
+                loginValidation(inputUsername, inputPassword);
+
                 if(!masuk){
                     System.out.println("Login Gagal, silahkan coba lagi!");
                 }
@@ -1204,6 +1195,22 @@ public class Main {
 
     private static String getLanguageModuleText(int row) {
         return languageModule[row][selectedLanguage];
+    }
+
+    private static void loginValidation(String username, String password) {
+        for (int i = 0; i < userData.length ; i++ ) {
+            if (userData[i][0].equals(username) && userData[i][1].equals(password)) {
+                System.out.println("║ Login Berhasil");
+                login = true;
+                masuk = true;
+                loggedInUsername = username;
+                
+                if("ADMIN".equals(userData[i][2])){
+                    isAdmin = true;
+                }
+                break;
+            }
+        }
     }
 
     public static void viewExpeditionRoutes() {
