@@ -20,6 +20,42 @@ public class Main {
         {"Kasir", "333", "KASIR"}
     };
 
+    static String[][] languageModule = {
+        {"Welcome to the Expedition System", "Selamat Datang di Sistem Ekspedisi"},
+        {"", "Manajemen Pengguna"}, //1
+        {"Delivery of Goods", "Pengiriman Barang"}, //2
+            // Bahasa menu pengiriman barang
+            {"Transactions", "Melakukan Transaksi"}, 
+                {"Enter the Sender's Name: ","Masukkan Nama Pengirim: "},
+                {"Enter the weight of the item: ", "Masukkan Berat Barang: "},
+                {"Enter Destination: ", "Masukkan Kota Tujuan: "},
+                {"Destination not Found", "Kota Tujuan tidak ditemukan"},
+            {"Editing Transactions", "Mengedit Data Transaksi"},
+            {"Remove Transactions", "Menghapus Data Transaksi"},
+            {"Displyas Transactions' Data", "Menampilkan Data Transaksi"},
+            {"Back to the Main Menu", "Kembali ke Menu Utama"},
+        {"Route Management", "Manajemen Rute"}, //12
+            // Bahasa menu manajemen lokasi
+            {"Add Location", "Menambahkan Rute"},
+            {"Remove Location", "Menghapus Rute"},
+            {"Displays Location's Data", "Menampilkan Data Rute Pengiriman"},
+            {"Back to the Main Menu", "Kembali ke Menu Utama"},
+        {"Cost Management", "Manajemen Layanan"}, //17
+            // Bahasa menu Manajemen Tarif
+            {"Add Service Types", "Tambahkan Jenis Layanan"},
+            {"Change Cost Service", "Merubah Tarif Layanan"},
+            {"Remove Service", "Menghapus Layanan"},
+            {"Displays Services' Data", "Menampilkan Layanan Data"},
+            {"Exit", "Keluar"}, 
+        {"Change Language", "Ganti Bahasa"}, //23
+        {"", "Laporan Ekspedisi"}, //24
+        {"Exit", "Keluar"}, //25
+
+        // Bahasa input pilihan
+        {"-> Enter Options: ", "-> Masukkan Pilihan: "}, 
+
+    };
+
     // Format tanggal
     static SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
     static Date date = new Date();
@@ -43,6 +79,8 @@ public class Main {
     static Date endDate;
 
     static String CLEAR = "\u001B[2J";
+
+    static int selectedLanguage = 1;
 
 
     // Array History Pemesanan
@@ -198,47 +236,13 @@ public class Main {
         String RESET = "\u001B[0m";
         String YELLOW = "\u001B[33m";
 
-        int pilihanBahasa = 1, inputPilihanBahasa;
+        int inputselectedLanguage;
 
         // Array Multi Bahasa
-        String[][] multilingual = {
-            {"Welcome to the Expedition System", "Selamat Datang di Sistem Ekspedisi"},
-            {"", "Manajemen Pengguna"}, //1
-            {"Delivery of Goods", "Pengiriman Barang"}, //2
-                // Bahasa menu pengiriman barang
-                {"Transactions", "Melakukan Transaksi"}, 
-                    {"Enter the Sender's Name: ","Masukkan Nama Pengirim: "},
-                    {"Enter the weight of the item: ", "Masukkan Berat Barang: "},
-                    {"Enter Destination: ", "Masukkan Kota Tujuan: "},
-                    {"Destination not Found", "Kota Tujuan tidak ditemukan"},
-                {"Editing Transactions", "Mengedit Data Transaksi"},
-                {"Remove Transactions", "Menghapus Data Transaksi"},
-                {"Displyas Transactions' Data", "Menampilkan Data Transaksi"},
-                {"Back to the Main Menu", "Kembali ke Menu Utama"},
-            {"Route Management", "Manajemen Rute"}, //12
-                // Bahasa menu manajemen lokasi
-                {"Add Location", "Menambahkan Rute"},
-                {"Remove Location", "Menghapus Rute"},
-                {"Displays Location's Data", "Menampilkan Data Rute Pengiriman"},
-                {"Back to the Main Menu", "Kembali ke Menu Utama"},
-            {"Cost Management", "Manajemen Layanan"}, //17
-                // Bahasa menu Manajemen Tarif
-                {"Add Service Types", "Tambahkan Jenis Layanan"},
-                {"Change Cost Service", "Merubah Tarif Layanan"},
-                {"Remove Service", "Menghapus Layanan"},
-                {"Displays Services' Data", "Menampilkan Layanan Data"},
-                {"Exit", "Keluar"}, 
-            {"Change Language", "Ganti Bahasa"}, //23
-            {"", "Laporan Ekspedisi"}, //24
-            {"Exit", "Keluar"}, //25
 
-            // Bahasa input pilihan
-            {"-> Enter Options: ", "-> Masukkan Pilihan: "}, 
-
-        };
 
         System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════════════╗");
-        System.out.println("║"+YELLOW+centerString(98, multilingual[0][pilihanBahasa])+RESET+"║");
+        System.out.println("║"+YELLOW+centerString(98, languageModule[0][selectedLanguage])+RESET+"║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
 
         while (!login) {
@@ -275,21 +279,21 @@ public class Main {
 
             do {
                 System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╗");
-                System.out.println("║"+YELLOW+centerString(98, multilingual[0][pilihanBahasa])+RESET+"║");
+                System.out.println("║"+YELLOW+centerString(98,getLanguageModuleText(0))+RESET+"║");
                 System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
                 if(isAdmin){
-                    System.out.println("║ [0]. " + multilingual[1][pilihanBahasa]); //Manajemen Pengguna
+                    System.out.println("║ [0]. " + getLanguageModuleText(1)); //Manajemen Pengguna
                 }
-                System.out.println("║ [1]. " + multilingual[2][pilihanBahasa]); //Pengiriman Barang
-                System.out.println("║ [2]. " + multilingual[12][pilihanBahasa]); //Manajemen Lokasi
-                System.out.println("║ [3]. " + multilingual[17][pilihanBahasa]); //Manajemen Tarif
-                System.out.println("║ [4]. " + multilingual[23][pilihanBahasa]); //Ganti Bahasa
+                System.out.println("║ [1]. " + getLanguageModuleText(2)); //Pengiriman Barang
+                System.out.println("║ [2]. " + getLanguageModuleText(12)); //Manajemen Lokasi
+                System.out.println("║ [3]. " + getLanguageModuleText(17)); //Manajemen Tarif
+                System.out.println("║ [4]. " + getLanguageModuleText(23)); //Ganti Bahasa
                 System.out.println("║ [5]. Laporan"); //Laporan
                 System.out.println("║ [6]. Keluar"); //Keluar
                 System.out.println("║ [7]. Manajemen Tarif Dasar");
                 System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
 
-                System.out.print("║ " + multilingual[26][pilihanBahasa]);
+                System.out.print("║ " + languageModule[26][selectedLanguage]);
                 menuUtama = input.nextInt();
                 input.nextLine();
 
@@ -1095,19 +1099,19 @@ public class Main {
                                 System.out.println("║ [1]. English");
                                 System.out.println("║ [2]. Indonesian");
                                 System.out.print("║ -> Masukkan Pilihan: ");
-                                inputPilihanBahasa = input.nextInt();
+                                inputselectedLanguage = input.nextInt();
 
-                                switch (inputPilihanBahasa) {
+                                switch (inputselectedLanguage) {
                                     case 1:
-                                        pilihanBahasa = inputPilihanBahasa-1;
+                                        selectedLanguage = inputselectedLanguage-1;
                                         break;
                                     case 2:
-                                        pilihanBahasa = inputPilihanBahasa-1;
+                                        selectedLanguage = inputselectedLanguage-1;
                                         break;
                                     default:
                                         System.out.println("║ Invalid choice. Please try again.");
                                 }
-                            } while (inputPilihanBahasa > multilingual[0].length);
+                            } while (inputselectedLanguage > languageModule[0].length);
                             break;
                         case 5:
                             CetakLaporan();
@@ -1184,7 +1188,9 @@ public class Main {
         return timestamp;
     }
 
-
+    private static String getLanguageModuleText(int row) {
+        return languageModule[row][selectedLanguage];
+    }
 
 
 
