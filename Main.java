@@ -914,7 +914,13 @@ public class Main {
                                          
                                     break;
                                 case 3:
-                                    tampilDataRute();
+                                    System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                    System.out.println("║"+centerString(98,"Data Rute")+"║");
+                                    System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                    System.out.println("║ No  ║       Nama Kota      ║       Nama Kota      ║  Jarak");
+                                    System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                    displayExpeditionRoutes();
+                                    System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
                                     break;
                                 case 4:
                                     keluar = false;
@@ -1192,37 +1198,7 @@ public class Main {
         return languageModule[row][selectedLanguage];
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-    public static void tampilDataRute() {
-        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║"+centerString(98,"Data Rute")+"║");
-        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ No  ║       Nama Kota      ║       Nama Kota      ║  Jarak");
-        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+    public static void displayExpeditionRoutes() {
         for (int i = 0; i < rutePengiriman.length; i++) {
             String formattedString = String.format("║ %3d ║ %20s ║ %20s ║ %5s Km",
                     i,
@@ -1234,6 +1210,29 @@ public class Main {
         }
     } 
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public static void tampilDataTarifLayanan() {
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
         System.out.println("║"+centerString(98,"Data Layanan")+"║");
