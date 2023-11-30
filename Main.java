@@ -1159,6 +1159,53 @@ public class Main {
             } while(!exit);
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private static String centerString(int width, String s) {
+        int padSize = (width - s.length()) / 2;
+        return String.format("%" + padSize + "s%s%" + (padSize + (width - s.length()) % 2) + "s", "", s, "");
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
     public static void tampilDataRute() {
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
         System.out.println("║"+centerString(98,"Data Rute")+"║");
@@ -1230,11 +1277,6 @@ public class Main {
         }catch (ParseException e){
             e.printStackTrace();
         }
-    }
-
-    private static String centerString(int width, String s) {
-        int padSize = (width - s.length()) / 2;
-        return String.format("%" + padSize + "s%s%" + (padSize + (width - s.length()) % 2) + "s", "", s, "");
     }
 
     public static void tampilFormulirEkspedisi(String namaPengirim, String nomorKontak, String namaPenerima, String alamatPenerima, String deskripsibarang, int beratBarang, String origin, String destination, String layanan){
