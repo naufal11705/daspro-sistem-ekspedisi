@@ -1181,7 +1181,9 @@ public class Main {
         for (int j = 0; j < array[0].length; j++) {
             int maxWidth = 0;
             for (String[] row : array) {
-                maxWidth = Math.max(maxWidth, row[j].length());
+                if(maxWidth < row[j].length()){
+                    maxWidth = row[j].length();
+                }
             }
             columnWidths[j] = maxWidth + 4;
         }
