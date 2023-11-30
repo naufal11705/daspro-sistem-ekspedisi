@@ -970,7 +970,7 @@ public class Main {
                                 case 2:
                                 System.out.println("║ Daftar Layanan yang Tersedia:");
                                 for (int i = 0; i < arrayLayanan.length; i++) {
-                                    System.out.println((i + 1) + ". " + arrayLayanan[i][0] );
+                                    System.out.println("║ "+(i + 1) + ". " + arrayLayanan[i][0] );
                                 }
                         
                                 System.out.print("║ -> Masukkan nomor layanan yang ingin diubah: ");
@@ -1232,12 +1232,6 @@ public class Main {
         }
     }
 
-    public static String centerText(String text) {
-        int totalWidth = 40;
-        int spaces = (totalWidth - text.length()) / 2;
-        return String.format("%" + spaces + "s%s%" + spaces + "s", "", text, "");
-    }
-
     private static String centerString(int width, String s) {
         int padSize = (width - s.length()) / 2;
         return String.format("%" + padSize + "s%s%" + (padSize + (width - s.length()) % 2) + "s", "", s, "");
@@ -1248,28 +1242,28 @@ public class Main {
         if (beratBarang != 0) {
             System.out.println(String.format(
                 formulirTransaksi,
-                centerText(namaPengirim),
-                centerText(nomorKontak),
-                centerText(namaPenerima),
-                centerText(alamatPenerima),
-                centerText(deskripsibarang),
-                centerText(Integer.toString(beratBarang)),
-                centerText(origin),
-                centerText(destination),
-                centerText(layanan)
+                centerString(40,namaPengirim),
+                centerString(40,nomorKontak),
+                centerString(40,namaPenerima),
+                centerString(40,alamatPenerima),
+                centerString(40,deskripsibarang),
+                centerString(40,Integer.toString(beratBarang)),
+                centerString(40,origin),
+                centerString(40,destination),
+                centerString(40,layanan)
             ));
         } else {
             System.out.println(String.format(
                 formulirTransaksi,
-                centerText(namaPengirim),
-                centerText(nomorKontak),
-                centerText(namaPenerima),
-                centerText(alamatPenerima),
-                centerText(deskripsibarang),
-                centerText(""),
-                centerText(origin),
-                centerText(destination),
-                centerText(layanan)
+                centerString(40,namaPengirim),
+                centerString(40,nomorKontak),
+                centerString(40,namaPenerima),
+                centerString(40,alamatPenerima),
+                centerString(40,deskripsibarang),
+                centerString(40,""),
+                centerString(40,origin),
+                centerString(40,destination),
+                centerString(40,layanan)
             ));
         }
 
