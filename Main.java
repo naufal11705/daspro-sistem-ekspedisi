@@ -898,7 +898,7 @@ public class Main {
                                     }
 
                                     if (deleteIndex >= 1 && deleteIndex <= rutePengiriman.length) {
-                                        String[] deletedLocation = rutePengiriman[deleteIndex - 1];
+                                        String deletedLocation = rutePengiriman[deleteIndex - 1][0]+" "+rutePengiriman[deleteIndex - 1][1];
                                         System.out.println("║ " + deletedLocation + " Telah Dihapus!");
 
                                         System.arraycopy(rutePengiriman, deleteIndex, rutePengiriman, deleteIndex - 1, rutePengiriman.length - deleteIndex);
@@ -907,12 +907,7 @@ public class Main {
                                         System.out.println("║ Nomor rute tidak valid");
                                         continue;
                                     }
-
-                                    if (found) {
-                                        found = false;
-                                    } else {
-                                        System.out.println("║ Key tidak ditemukan");
-                                    }                                           
+                                         
                                     break;
                                 case 3:
                                     tampilDataRute();
