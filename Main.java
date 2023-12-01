@@ -1080,17 +1080,7 @@ public class Main {
                                 System.out.println("║ [2]. Indonesian");
                                 System.out.print("║ -> Masukkan Pilihan: ");
                                 inputselectedLanguage = input.nextInt();
-
-                                switch (inputselectedLanguage) {
-                                    case 1:
-                                        selectedLanguage = inputselectedLanguage-1;
-                                        break;
-                                    case 2:
-                                        selectedLanguage = inputselectedLanguage-1;
-                                        break;
-                                    default:
-                                        System.out.println("║ Invalid choice. Please try again.");
-                                }
+                                changeLanguage(inputselectedLanguage);
                             } while (inputselectedLanguage > languageModule[0].length);
                             break;
                         case 5:
@@ -1180,6 +1170,10 @@ public class Main {
         SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyyHHmmss");
         String timestamp = dateFormat.format(new Date());
         return timestamp;
+    }
+
+    private static void changeLanguage(int languageIndex) {
+        selectedLanguage = languageIndex - 1; 
     }
 
     private static String getLanguageModuleText(int row) {
