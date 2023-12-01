@@ -680,7 +680,7 @@ public class Main {
                                             } while (!validInputTanggalAkhir);
                                         
                                             try {
-                                                tampilHistory(startDate, endDate);
+                                                viewExpeditionHistoryByRange(startDate, endDate);
                                             } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
@@ -1305,7 +1305,7 @@ public class Main {
         System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
     }
 
-    private static void viewExpeditionHistoryByYear(int tahunInput) {
+    private static void viewExpeditionHistoryByRange(Date startDate, Date endDate){
         int[] columnWidths = calculateColumnWidths(historyTransaksi);
         String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[3] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[10] + "s ║ %-" + columnWidths[11] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s",
             "No", 
@@ -1322,49 +1322,40 @@ public class Main {
             "Penerima",
             "Alamat Penerima"
         );
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        boolean dataDitemukan = false;
+        try{
+            System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+            System.out.println("║                                                                                       History Transaksi");
+            System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+            System.out.println(formattedHeader);
+            System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");              
+            for (int i = 0; i < historyTransaksi.length; i++) {
+                if (historyTransaksi[i][0] != null){
+                    Date transaksiDate = dateFormat.parse(historyTransaksi[i][1]);
+                    if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
+                        System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[3] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[10] + "s ║ %-" + columnWidths[11] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s",
+                            i,
+                            historyTransaksi[i][0], // Nomor Resi
+                            historyTransaksi[i][1], // Tanggal
+                            historyTransaksi[i][2], // Nama Pengirim
+                            historyTransaksi[i][3], // Nomor Kontak
+                            historyTransaksi[i][5],  //Jenis Layanan
+                            historyTransaksi[i][4], // Tujuan
+                            historyTransaksi[i][10], // Berat
+                            historyTransaksi[i][11], // Deskripsi
+                            historyTransaksi[i][6], // Tarif
+                            historyTransaksi[i][7], // Nama Kasir
+                            historyTransaksi[i][8], // Nama Penerima
+                            historyTransaksi[i][9] // Alamat
 
-        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
-        System.out.println("║                                                                                       History Transaksi");
-        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
-        System.out.println(formattedHeader);
-        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");  
 
-        for (int i = 0; i < historyTransaksi.length; i++) {
-            try {
-                Date transaksiDate = dateFormat.parse(historyTransaksi[i][1]);
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(transaksiDate);
-                int tahunTransaksi = cal.get(Calendar.YEAR);
 
-                if (tahunTransaksi == tahunInput) {
-                    System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[3] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[10] + "s ║ %-" + columnWidths[11] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s",
-                        i,
-                        historyTransaksi[i][0], // Nomor Resi
-                        historyTransaksi[i][1], // Tanggal
-                        historyTransaksi[i][2], // Nama Pengirim
-                        historyTransaksi[i][3], // Nomor Kontak
-                        historyTransaksi[i][5],  //Jenis Layanan
-                        historyTransaksi[i][4], // Tujuan
-                        historyTransaksi[i][10], // Berat
-                        historyTransaksi[i][11], // Deskripsi
-                        historyTransaksi[i][6], // Tarif
-                        historyTransaksi[i][7], // Nama Kasir
-                        historyTransaksi[i][8], // Nama Penerima
-                        historyTransaksi[i][9] // Alamat
-                    ));
-                    dataDitemukan = true;
+                        ));
+                    }
                 }
-            } catch (ParseException e) {
-                e.printStackTrace();
             }
-        }
-
-        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
-
-        if (!dataDitemukan) {
-            System.out.println("Tidak ada transaksi pada tahun tersebut.");
+            System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+        }catch (ParseException e){
+            e.printStackTrace();
         }
     }
 
@@ -1503,58 +1494,85 @@ public class Main {
 
     }
 
+    private static void viewExpeditionHistoryByYear(int tahunInput) {
+        int[] columnWidths = calculateColumnWidths(historyTransaksi);
+        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[3] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[10] + "s ║ %-" + columnWidths[11] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s",
+            "No", 
+            "No Resi", 
+            "Tanggal",
+            "Pengirim",
+            "Kontak",
+            "Layanan",
+            "Tujuan",
+            "Berat",
+            "Deskripsi",
+            "Biaya",
+            "Kasir",
+            "Penerima",
+            "Alamat Penerima"
+        );
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        boolean dataDitemukan = false;
 
+        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+        System.out.println("║                                                                                       History Transaksi");
+        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+        System.out.println(formattedHeader);
+        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");  
 
+        for (int i = 0; i < historyTransaksi.length; i++) {
+            try {
+                Date transaksiDate = dateFormat.parse(historyTransaksi[i][1]);
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(transaksiDate);
+                int tahunTransaksi = cal.get(Calendar.YEAR);
 
-
-
-
-
-
-
-
-
-
-
-
-
-    public static void tampilHistory(Date startDate, Date endDate){
-        try{
-            System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
-            System.out.println("║                                                                                       History Transaksi");
-            System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
-            System.out.println("║ No  |     No Resi     |   Tanggal   |  Nama Pengirim  |  Nomor Kontak  |   Layanan   |      Tujuan      | Berat |      Deskripsi      |    Biaya    |    Kasir    |  Nama Penerima  |         Alamat Penerima");
-            System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");              
-            for (int i = 0; i < historyTransaksi.length; i++) {
-                if (historyTransaksi[i][0] != null){
-                    Date transaksiDate = dateFormat.parse(historyTransaksi[i][1]);
-                    if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
-                        System.out.println(String.format("║ %3d ║ %15s ║ %11s ║ %15s ║ %14s ║ %11s ║ %16s ║ %5s ║ %19s ║ %11s ║ %11s ║ %15s ║ %30s",
-                            i,
-                            historyTransaksi[i][0], // Nomor Resi
-                            historyTransaksi[i][1], // Tanggal
-                            historyTransaksi[i][2], // Nama Pengirim
-                            historyTransaksi[i][3], // Nomor Kontak
-                            historyTransaksi[i][5],  //Jenis Layanan
-                            historyTransaksi[i][4], // Tujuan
-                            historyTransaksi[i][10], // Berat
-                            historyTransaksi[i][11], // Deskripsi
-                            historyTransaksi[i][6], // Tarif
-                            historyTransaksi[i][7], // Nama Kasir
-                            historyTransaksi[i][8], // Nama Penerima
-                            historyTransaksi[i][9] // Alamat
-
-
-
-                        ));
-                    }
+                if (tahunTransaksi == tahunInput) {
+                    System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[3] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[10] + "s ║ %-" + columnWidths[11] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s",
+                        i,
+                        historyTransaksi[i][0], // Nomor Resi
+                        historyTransaksi[i][1], // Tanggal
+                        historyTransaksi[i][2], // Nama Pengirim
+                        historyTransaksi[i][3], // Nomor Kontak
+                        historyTransaksi[i][5],  //Jenis Layanan
+                        historyTransaksi[i][4], // Tujuan
+                        historyTransaksi[i][10], // Berat
+                        historyTransaksi[i][11], // Deskripsi
+                        historyTransaksi[i][6], // Tarif
+                        historyTransaksi[i][7], // Nama Kasir
+                        historyTransaksi[i][8], // Nama Penerima
+                        historyTransaksi[i][9] // Alamat
+                    ));
+                    dataDitemukan = true;
                 }
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
-            System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
-        }catch (ParseException e){
-            e.printStackTrace();
+        }
+
+        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+
+        if (!dataDitemukan) {
+            System.out.println("Tidak ada transaksi pada tahun tersebut.");
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public static void tampilFormulirEkspedisi(String namaPengirim, String nomorKontak, String namaPenerima, String alamatPenerima, String deskripsibarang, int beratBarang, String origin, String destination, String layanan){
 
