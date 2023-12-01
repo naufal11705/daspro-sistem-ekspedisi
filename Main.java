@@ -125,25 +125,22 @@ public class Main {
         {"8032468109798", "29-01-2023", "NandaTest", "08866778899", "Yogyakarta", "Reguler", "25700.0", "Farhan", "Abdi", "Jl. Kembang 5 No. 15", "3", "Makanan", "On Process", "Malang"},
     };
 
-    static String laporanFormat = 
+    static String reportFormat = 
         "╔══════════════════════════════════════════════════════════════════════════════════════════════╗\n" +
         "║                                                                                              ║\n" +
-        "║                      __     ___     ____    ____     ____     ___     _   __                 ║\n" + 
-        "║                     / /    /   |   / __ \\  / __ \\   / __ \\   /   |   / | / /                 ║\n" +
-        "║                    / /    / /| |  / /_/ / / / / /  / /_/ /  / /| |  /  |/ /                  ║\n" +
-        "║                   / /___ / ___ | / ____/ / /_/ /  / _, _/  / ___ | / /|  /                   ║\n" +
-        "║                  /_____//_/  |_|/_/      \\____/  /_/ |_|  /_/  |_|/_/ |_/                    ║\n" +
-        "║                                                                                              ║\n" +
+        "║                                      ╦═╗╔═╗╔═╗╔═╗╦═╗╔╦╗                                      ║\n" + 
+        "║                                      ╠╦╝║╣ ╠═╝║ ║╠╦╝ ║                                       ║\n" +
+        "║                                      ╩╚═╚═╝╩  ╚═╝╩╚═ ╩                                       ║\n" +
         "║                                                                                              ║\n" +
         "╠══════════════════════════════════════════════════════════════════════════════════════════════╣\n" +
         "║ POLINEMA EKPEDITION                                                                          ║\n" +
         "║ Laporan Pengiriman Per Bulan                                                                 ║\n" + 
-        "║===================================================╦========================╦=================║\n" +
+        "╠═══════════════════════════════════════════════════╦══════════════════════════════════════════╣\n" +
         "║                                                   ║       Nilai            ║     Satuan      ║\n" +
-        "║                                                   ╠========================╬=================║\n" +
-        "║ Total Pengiriman Per Asset                        ║                 %-2s     ║      Buah       ║\n" +
-        "║ Total Pengiriman Per kg                           ║                 %-2s     ║       Kg        ║\n" +
-        "║ Total Pendapatan                                  ║      Rp %-10s     ║     Rupiah      ║\n" +
+        "║                                                   ╠════════════════════════╬═════════════════╣\n" +
+        "║ Total Pengiriman Per Asset                        ║      %s      ║      Buah       ║\n" +
+        "║ Total Pengiriman Per kg                           ║      %s      ║       Kg        ║\n" +
+        "║ Total Pendapatan                                  ║      %s      ║     Rupiah      ║\n" +
         "║                                                   ║                        ║                 ║\n" +
         "╚═══════════════════════════════════════════════════╩════════════════════════╩═════════════════╝";
 
@@ -206,10 +203,11 @@ public class Main {
             }
 
             System.out.println(String.format(
-                laporanFormat,
-                totalAsset,
-                totalBerat,
-                totalHarga));
+                reportFormat,
+                centerString(12, Integer.toString(totalAsset)),
+                centerString(12, Integer.toString(totalBerat)),
+                centerString(12, "Rp "+Integer.toString(totalHarga))
+            ));
 
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -1171,9 +1169,9 @@ public class Main {
     
         for (int j = 0; j < array[0].length; j++) {
             int maxWidth = 0;
-            for (String[] row : array) {
-                if(maxWidth < row[j].length()){
-                    maxWidth = row[j].length();
+            for (int i = 0; i < array.length; i++) {
+                if (maxWidth < array[i][j].length()) {
+                    maxWidth = array[i][j].length();
                 }
             }
             columnWidths[j] = maxWidth + 4;
