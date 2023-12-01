@@ -347,16 +347,7 @@ public class Main {
                                         }
                                         break;   
                                     case 3:
-                                        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                                        System.out.println("║"+YELLOW+centerString(98,"Manajemen Pengguna")+RESET+"║");
-                                        System.out.println("╠════════════════╦════════════════╦══════════════╦═════════════════════════════════════════════════╣");
-                                        System.out.println("║ Username       ║ Password       ║ Jabatan      ║");
-                                        System.out.println("╠════════════════╬════════════════╬══════════════╣");
-
-                                        for (int i = 0; i < userData.length; i++) {
-                                            System.out.printf("║ %-14s ║ %-14s ║ %-12s ║%n", userData[i][0], userData[i][1], userData[i][2]);
-                                        }
-                                        System.out.println("╠════════════════╩════════════════╩══════════════╝");
+                                        viewUserAccounts();
                                         break;
                                     case 4:
                                         exit = true;
@@ -1208,6 +1199,24 @@ public class Main {
                 }
                 break;
             }
+        }
+    }
+
+    private static void viewUserAccounts() {
+        int[] columnWidths = calculateColumnWidths(rutePengiriman);
+        String formattedHeader = String.format("║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s",
+            "Username", 
+            "Password", 
+            "Role" 
+        );
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║"+centerString(98,"Manajemen Pengguna")+"║");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println(formattedHeader);
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+
+        for (int i = 0; i < userData.length; i++) {
+            System.out.printf("║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s\n", userData[i][0], userData[i][1], userData[i][2]);
         }
     }
 
