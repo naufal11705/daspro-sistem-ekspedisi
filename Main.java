@@ -79,9 +79,10 @@ public class Main {
     static Date endDate;
 
     static String RESET = "\u001B[0m";
-    static String CLEAR = "\u001B[2J";
+    static String CLEAR = "\033[H\033[2J";
     static String GREEN = "\u001B[32m";
     static String RED = "\u001B[31m";
+    static String YELLOW = "\u001B[33m";
 
     static int selectedLanguage = 1;
 
@@ -173,13 +174,9 @@ public class Main {
         // Variabel untuk switch case menu
         int menuUtama, subMenu, editMenu;
 
-        String YELLOW = "\u001B[33m";
-
         int inputselectedLanguage;
 
-        System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════════════╗");
-        System.out.println("║"+YELLOW+centerString(98, languageModule[0][selectedLanguage])+RESET+"║");
-        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+        clearTerminal();
 
         while (!login) {
             login = false;
@@ -188,25 +185,34 @@ public class Main {
             isAdmin = false;
             masuk = false;
             while (!masuk) {
+                displayHeader();
+                displayIndonesianMap();
+
                 System.out.print("║ -> Masukkan Username\t: ");
                 String inputUsername = input.next();
 
                 System.out.print("║ -> Masukan Password\t: ");
                 String inputPassword = input.next();
+                input.nextLine();
 
                 loginValidation(inputUsername, inputPassword);
 
                 if(!masuk){
                     System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
                     System.out.println("║"+RED+centerString(98, "Login Gagal, silahkan coba lagi!")+RESET);
-                    System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                    System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                    System.out.print("Enter: ");
+                    input.nextLine();
+                    clearTerminal();
                 }
             }
 
+            clearTerminal();
+
             do {
-                System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╗");
-                System.out.println("║"+YELLOW+centerString(98,getLanguageModuleText(0))+RESET+"║");
-                System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                displayHeader();
+                displayIndonesianMap();
+
                 if(isAdmin){
                     System.out.println("║ [0]. " + getLanguageModuleText(1)); //Manajemen Pengguna
                 }
@@ -222,15 +228,17 @@ public class Main {
                 System.out.print("║ " + languageModule[26][selectedLanguage]);
                 menuUtama = input.nextInt();
                 input.nextLine();
+                clearTerminal();
 
                 isLoop = true;
-
                 do {
                     switch (menuUtama) {
                         case 0:
                             if(isAdmin){
                                 while(!exit) {
-                                System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╗");
+                                displayHeader();
+                                displayIndonesianMap();
+
                                 System.out.println("║"+YELLOW+centerString(98,"Manajemen Pengguna")+RESET+"║");
                                 System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
                                 System.out.println("║ [1] Tambahkan Pengguna");
@@ -250,6 +258,7 @@ public class Main {
                                     String katasandiBaru = input.next();
                                     System.out.print("║ -> Masukkan jabatan pengguna baru: ");
                                     String jabatanBaru = input.next();
+                                    input.nextLine();
                                                                 
                                     userData = Arrays.copyOf(userData,userData.length + 1);
                                     userData[userData.length-1] = new String[] {
@@ -257,12 +266,20 @@ public class Main {
                                         katasandiBaru,
                                         jabatanBaru};
                                 
-                                    System.out.println("║ Pengguna baru berhasil ditambahkan!!!");
+                                    System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                    System.out.println("║"+GREEN+centerString(98, "Pengguna baru berhasil ditambahkan!!!")+RESET);
+                                    System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+
+                                    System.out.print("Enter: ");
+                                    input.nextLine();
+                                    clearTerminal();
+                                    
                                     break;
                                     case 2:
                                         boolean found = false;
                                         System.out.print("║ -> Masukan username yang akan dihapus: ");
                                         String usernameToRemove = input.next();
+                                        input.nextLine(); //konsumsi
                         
                                         for (int i = 0; i < userData.length; i++) {
                                             if (userData[i][0].equals(usernameToRemove)) {
@@ -275,16 +292,28 @@ public class Main {
                                         }
                         
                                         if (found) {
-                                            System.out.println("║ Perngguna berhasi dihapus!");
+                                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                            System.out.println("║"+RED+centerString(98, "Pengguna berhasil dihapus")+RESET);
+                                            System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
                                         } else {
-                                            System.out.println("║ Pengguna tidak ditemukan.");
+                                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                            System.out.println("║"+YELLOW+centerString(98, "Pengguna tidak ditemukan")+RESET);
+                                            System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
                                         }
+                                        System.out.print("Enter: ");
+                                        input.nextLine();
+                                        clearTerminal();
                                         break;   
                                     case 3:
+                                        input.nextLine(); //konsumsi
                                         viewUserAccounts();
+                                        System.out.print("Enter: ");
+                                        input.nextLine();
+                                        clearTerminal();
                                         break;
                                     case 4:
                                         exit = true;
+                                        clearTerminal();
                                         break;                                     
                                     default:
                                         System.out.println("Invalid");
@@ -297,7 +326,9 @@ public class Main {
                                 
                                 
                         case 1:
-                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╗");
+                            displayHeader();
+                            displayIndonesianMap();
+
                             System.out.println("║"+YELLOW+centerString(98,"Pengiriman Barang")+RESET+"║");
                             System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
                             System.out.println("║ [1]. Melakukan Transaksi"); //Melakukan Transaksi
@@ -423,7 +454,12 @@ public class Main {
                                         destination, // Lokasi
                                         alamatPenerima
 
-                                    ));                                        
+                                    ));       
+                                    input.nextLine(); //konsumsi
+
+                                    System.out.print("Enter: ");
+                                    input.nextLine();   
+                                    clearTerminal();                                 
                                     break;
                                 case 2:
                                     validInput = false;
@@ -443,33 +479,40 @@ public class Main {
                                         } 
                                         if (index != -1) {
                                             validInput = true;
-                                        } else { System.out.println("║ Data tidak ditemukan. Silakan coba lagi."); }
+                                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╗");
+                                            System.out.println("║"+YELLOW+centerString(98,"Status Pengiriman")+RESET+"║");
+                                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                            System.out.println("║ [1]. On Process"); //Melakukan Transaksi
+                                            System.out.println("║ [2]. Shipping"); //Mengedit status pengiriman
+                                            System.out.println("║ [3]. Delivered"); //Menghapus Transaksi
+                                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                            System.out.print("║ -> Masukkan Pilihan: ");
+                                            String selected = input.nextLine();
+
+                                            if(selected.equals("1")){
+                                                historyTransaksi[index][12] = "On Process";
+                                            } else if(selected.equals("2")) {
+                                                historyTransaksi[index][12] = "Shipping";
+                                            } else if(selected.equals("3")) {
+                                                historyTransaksi[index][12] = "Delivered";
+                                            } else {
+                                                break;
+                                            }
+                                        } else {
+                                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                            System.out.println("║"+YELLOW+centerString(98, "Data tidak ditemukan")+RESET);
+                                            System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                                        }
 
                                     } catch (NumberFormatException exception) {
                                             System.out.println("║ Input yang dimasukkan tidak valid. Silakan masukkan nomor resi kembali!.");
                                         }
                                     }
 
-                                    System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╗");
-                                    System.out.println("║"+YELLOW+centerString(98,"Status Pengiriman")+RESET+"║");
-                                    System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                                    System.out.println("║ [1]. On Process"); //Melakukan Transaksi
-                                    System.out.println("║ [2]. Shipping"); //Mengedit status pengiriman
-                                    System.out.println("║ [3]. Delivered"); //Menghapus Transaksi
-                                    System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                                    System.out.print("║ -> Masukkan Pilihan: ");
-                                    String selected = input.nextLine();
-
-                                    if(selected.equals("1")){
-                                        historyTransaksi[index][12] = "On Process";
-                                    } else if(selected.equals("2")) {
-                                        historyTransaksi[index][12] = "Shipping";
-                                    } else if(selected.equals("3")) {
-                                        historyTransaksi[index][12] = "Delivered";
-                                    } else {
-                                        break;
-                                    }
-                                    break;
+                                    System.out.print("Enter: ");
+                                    input.nextLine();   
+                                    clearTerminal(); 
+                                break;
 
                                 case 3: 
                                     // menghapus transaksi berdasarkan nomor resi
@@ -488,23 +531,30 @@ public class Main {
                                                     break;
                                             }
                                         } 
-                                        if (deleteIndex != -1) {
-                                            validInput = true;
-                                        } else { System.out.println("║ Data tidak ditemukan. Silakan coba lagi."); }
 
                                     } catch (NumberFormatException exception) {
-                                            System.out.println("║ Input yang dimasukkan tidak valid. Silakan masukkan nomor resi kembali!.");
+                                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                            System.out.println("║"+YELLOW+centerString(98, "Input yang dimasukkan tidak valid. Silahkan masukkan nomor resi kembali!")+RESET);
+                                            System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
                                         }
                                     }
 
                                     // Hapus elemen jika validInput adalah true
                                     if (deleteIndex >= 0 && deleteIndex < historyTransaksi.length) {
-                                        System.out.println("║ Transaksi dengan nomor resi yang sesuai telah dihapus!");
+                                        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                        System.out.println("║"+RED+centerString(98, "Data dengan nomor resi yang sesuai sudah dihapus")+RESET);
+                                        System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
                                         System.arraycopy(historyTransaksi, deleteIndex + 1, historyTransaksi, deleteIndex, historyTransaksi.length - deleteIndex - 1);
                                         historyTransaksi = Arrays.copyOf(historyTransaksi, historyTransaksi.length - 1);
                                     } else {
-                                        System.out.println("║ Data tidak ditemukan.");
-                                    }   
+                                        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                        System.out.println("║"+YELLOW+centerString(98, "Data tidak ditemukan")+RESET);
+                                        System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                                    }
+
+                                    System.out.print("Enter: ");
+                                    input.nextLine();   
+                                    clearTerminal(); 
 
                                 break;
                                 case 4:
@@ -1495,5 +1545,40 @@ public class Main {
         return count;  
     }
 
+    private static void displayHeader(){
+        System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║");
+        System.out.println("║"+YELLOW+centerString(98, "╔═╗╦╔═╗╔╦╗╔═╗╔╦╗  ╔═╗╦╔═╔═╗╔═╗╔═╗╔╦╗╦╔═╗╦"+RESET));
+        System.out.println("║"+YELLOW+centerString(98, "╚═╗║╚═╗ ║ ║╣ ║║║  ║╣ ╠╩╗╚═╗╠═╝║╣  ║║║╚═╗║"+RESET));
+        System.out.println("║"+YELLOW+centerString(98, "╚═╝╩╚═╝ ╩ ╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩  ╚═╝═╩╝╩╚═╝╩"+RESET));
+        System.out.println("║");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+    }
 
+    private static void clearTerminal(){
+        System.out.println(CLEAR);
+        System.out.flush();
+    }
+
+    private static void displayIndonesianMap(){
+        System.out.println("║   ..                                                                                              \r\n" + //
+                "║   .-===-                                                                                          \r\n" + //
+                "║     .:===:.                 .              ===-                                                   \r\n" + //
+                "║        -===-.                             -====:                                                  \r\n" + //
+                "║          -====-:              :.    ..  .-======.            .     :..                            \r\n" + //
+                "║        .  =======-.           ===-=============:..  ::-::.:::.     ::.                            \r\n" + //
+                "║            :======-           -================    .               :     .  .:.                   \r\n" + //
+                "║          :  .======-:          .=============:     ==::=-..        .      .-====:   .  .          \r\n" + //
+                "║              .=======::-:       -===========-     -====:                .   .:-::    :-===-:..    \r\n" + //
+                "║                :=======-   .       .::.::===:     -=- ==:       .-. .::::.   :=-=-.:==========.   \r\n" + //
+                "║                  :=====:                 .         --  =-..                   .  .:-==========.   \r\n" + //
+                "║                    .===:                           =:    :                             :======.   \r\n" + //
+                "║                        :---:.    .                                              .:       -====    \r\n" + //
+                "║                         .--==-==-====:..                                   .             :====    \r\n" + //
+                "║                                 .:::--:--.: ......  ...  .   .                          -:.::=.   \r\n" + //
+                "║                                               ..  ...       .:                                    \r\n" + //
+                "║                                                     :.     ::                                     \r\n" + //
+                "╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+    }
+    
 }
