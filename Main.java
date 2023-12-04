@@ -745,7 +745,7 @@ public class Main {
                             while (keluar) {
 
                             displayHeader();
-                            displayRoute();
+                            displayIndonesianMap();
 
                             System.out.println("║"+YELLOW+centerString(98,"Manajemen Rute")+RESET+"║");
                             System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
@@ -793,7 +793,8 @@ public class Main {
                                             origin,
                                             destination,
                                             jarak};
-                                    
+
+                                    clearTerminal(); 
                                     break;
                                 case 2:
                                     System.out.println("║ Daftar rute yang Tersedia:");
@@ -803,8 +804,6 @@ public class Main {
                         
                                     int deleteIndex = 0;
             
-
-                                    // Validation loop for non-integer input
                                     while (!validInput) {
                                         System.out.print("║ -> Masukkan nomor rute yang ingin dihapus: ");
                                         try {
@@ -825,20 +824,30 @@ public class Main {
                                         System.out.println("║ Nomor rute tidak valid");
                                         continue;
                                     }
+
+                                    System.out.print("Enter: ");
+                                    input.nextLine();   
+                                    clearTerminal(); 
                                          
                                     break;
                                 case 3:
                                     viewExpeditionRoutes();
+                                    System.out.print("Enter: ");
+                                    input.nextLine();   
+                                    clearTerminal(); 
                                     break;
                                 case 4:
                                     keluar = false;
+                                    clearTerminal();
                                     break;
                                 default:
                                 System.out.println("║ Invalid choice. Please try again.");
                                 }
                         } break;
                         case 3:
-                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                            displayHeader();
+                            displayIndonesianMap();
+
                             System.out.println("║"+YELLOW+centerString(98,"Manajemen Layanan")+RESET+"║");
                             System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
 
@@ -869,7 +878,7 @@ public class Main {
                                                 inputValid = true;
                                             } else {
                                                 System.out.println("║ Masukan bukan angka. Mohon masukkan angka.");
-                                                input.next(); // Membersihkan input yang tidak valid dari buffer
+                                                input.next();
                                             }
                                         }
 
@@ -884,6 +893,10 @@ public class Main {
                                             String.valueOf(tarifLayanan),
                                             String.valueOf(startEstimation),
                                             String.valueOf(endEstimation)};
+
+                                    System.out.print("Enter: ");
+                                    input.nextLine();   
+                                    clearTerminal(); 
                                     break;
                                 case 2:
                                 System.out.println("║ Daftar Layanan yang Tersedia:");
@@ -901,15 +914,15 @@ public class Main {
                                             inputValid = true;
                                         } else {
                                             System.out.println("║ Nomor layanan tidak valid. Masukkan nomor layanan yang valid:");
-                                            input.nextLine(); // Membersihkan newline di buffer
+                                            input.nextLine();
                                         }
                                     } else {
                                         System.out.println("║ Input bukan angka. Mohon masukkan nomor layanan yang valid:");
-                                        input.next(); // Membersihkan input yang tidak valid dari buffer
+                                        input.next();
                                     }
                                 }
 
-                                inputValid = false; // Reset inputValid untuk validasi berikutnya
+                                inputValid = false;
 
                                 if (selectedService >= 1 && selectedService <= arrayLayanan.length) {
                                     System.out.println("║ Pilih yang ingin diubah:");
@@ -925,22 +938,22 @@ public class Main {
                                                 inputValid = true;
                                             } else {
                                                 System.out.println("║ Pilihan tidak valid. Masukkan nomor pilihan yang valid:");
-                                                input.nextLine(); // Membersihkan newline di buffer
+                                                input.nextLine();
                                             }
                                         } else {
                                             System.out.println("║ Input bukan angka. Mohon masukkan nomor pilihan yang valid:");
-                                            input.next(); // Membersihkan input yang tidak valid dari buffer
+                                            input.next();
                                         }
                                     }
 
                                     if (changeOption == 1) {
                                         System.out.print("║ -> Masukkan Nama Layanan Baru: ");
-                                        input.nextLine(); // Membersihkan newline di buffer
+                                        input.nextLine();
                                         arrayLayanan[selectedService - 1][0] = input.nextLine();
                                         System.out.println("║ Data nama layanan berhasil diupdate.");
                                     } else if (changeOption == 2) {
                                         double newTarif = 0.0;
-                                        inputValid = false; // Reset inputValid untuk validasi berikutnya
+                                        inputValid = false;
 
                                         while (!inputValid) {
                                             System.out.print("║ -> Masukkan Tarif Baru: ");
@@ -949,17 +962,21 @@ public class Main {
                                                 inputValid = true;
                                             } else {
                                                 System.out.println("║ Masukan bukan angka. Mohon masukkan angka.");
-                                                input.next(); // Membersihkan input yang tidak valid dari buffer
+                                                input.next();
                                             }
                                         }
 
                                         arrayLayanan[selectedService - 1][1] = String.valueOf(newTarif);
                                         System.out.println("║ Data tarif layanan berhasil diupdate.");
+
                                         break;
                                     }
                                 } else {
                                     System.out.println("║ Nomor layanan tidak valid");
                                 }
+                                System.out.print("Enter: ");
+                                input.nextLine();   
+                                clearTerminal(); 
                                 break;
                                 case 3:
                                     System.out.println("║ Daftar Layanan yang Tersedia:");
@@ -978,7 +995,7 @@ public class Main {
                                             validInput = true;
                                         } catch (InputMismatchException e) {
                                             System.out.println("║ Masukan bukan angka. Silakan masukkan nomor layanan yang valid.");
-                                            input.nextLine(); // Membersihkan buffer
+                                            input.nextLine();
                                         }
                                     }
 
@@ -995,12 +1012,19 @@ public class Main {
                                     } else {
                                         System.out.println("║ Nomor layanan tidak valid.");
                                     }
+                                    System.out.print("Enter: ");
+                                    input.nextLine();   
+                                    clearTerminal(); 
                                     break;
                                 case 4:
                                     viewExpeditionServices();
+                                    System.out.print("Enter: ");
+                                    input.nextLine();   
+                                    clearTerminal(); 
                                     break;
                                 case 5:
                                     isLoop = false;
+                                    clearTerminal();
                                     break;
                                 default:
                                 System.out.println("║ Invalid choice. Please try again.");
@@ -1023,7 +1047,7 @@ public class Main {
                             break;
                         case 5:
                             Calendar calendar = Calendar.getInstance();
-                            calendar.set(Calendar.DAY_OF_MONTH, 1); // Set the day of the month to the first day
+                            calendar.set(Calendar.DAY_OF_MONTH, 1);
                             Date startDate = calendar.getTime();
 
                             calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
@@ -1591,7 +1615,7 @@ public class Main {
                 "╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
     }
 
-    private static void displayRoute() {
+    /*private static void displayRoute() {
         System.out.println("║                                           @@@@                                             \r\n" + //
                 "║                                         @@@@@@@@                                            \r\n" + //
                 "║            ╔══════════════════════════@@@@@@@@@@@@════════════════════@@@@@@═══════╗        \r\n" + //
@@ -1611,6 +1635,6 @@ public class Main {
                 "║      ╚═══════════════════════════════════════════════════════════════════════════════════╝  \r\n" + //
                 "║                                                                                             \r\n" + //
                 "╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-    }
+    }*/
     
 }
