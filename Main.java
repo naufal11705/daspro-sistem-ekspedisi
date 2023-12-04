@@ -20,6 +20,42 @@ public class Main {
         {"Kasir", "333", "KASIR"}
     };
 
+    static String[][] languageModule = {
+        {"Welcome to the Expedition System", "Selamat Datang di Sistem Ekspedisi"},
+        {"", "Manajemen Pengguna"}, //1
+        {"Delivery of Goods", "Pengiriman Barang"}, //2
+            // Bahasa menu pengiriman barang
+            {"Transactions", "Melakukan Transaksi"}, 
+                {"Enter the Sender's Name: ","Masukkan Nama Pengirim: "},
+                {"Enter the weight of the item: ", "Masukkan Berat Barang: "},
+                {"Enter Destination: ", "Masukkan Kota Tujuan: "},
+                {"Destination not Found", "Kota Tujuan tidak ditemukan"},
+            {"Editing Transactions", "Mengedit Data Transaksi"},
+            {"Remove Transactions", "Menghapus Data Transaksi"},
+            {"Displyas Transactions' Data", "Menampilkan Data Transaksi"},
+            {"Back to the Main Menu", "Kembali ke Menu Utama"},
+        {"Route Management", "Manajemen Rute"}, //12
+            // Bahasa menu manajemen lokasi
+            {"Add Location", "Menambahkan Rute"},
+            {"Remove Location", "Menghapus Rute"},
+            {"Displays Location's Data", "Menampilkan Data Rute Pengiriman"},
+            {"Back to the Main Menu", "Kembali ke Menu Utama"},
+        {"Cost Management", "Manajemen Layanan"}, //17
+            // Bahasa menu Manajemen Tarif
+            {"Add Service Types", "Tambahkan Jenis Layanan"},
+            {"Change Cost Service", "Merubah Tarif Layanan"},
+            {"Remove Service", "Menghapus Layanan"},
+            {"Displays Services' Data", "Menampilkan Layanan Data"},
+            {"Exit", "Keluar"}, 
+        {"Change Language", "Ganti Bahasa"}, //23
+        {"", "Laporan Ekspedisi"}, //24
+        {"Exit", "Keluar"}, //25
+
+        // Bahasa input pilihan
+        {"-> Enter Options: ", "-> Masukkan Pilihan: "}, 
+
+    };
+
     // Format tanggal
     static SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
     static Date date = new Date();
@@ -42,12 +78,25 @@ public class Main {
     static Date startDate;
     static Date endDate;
 
-    static String CLEAR = "\u001B[2J";
+    static String RESET = "\u001B[0m";
+    static String CLEAR = "\033[H\033[2J";
+    static String GREEN = "\u001B[32m";
+    static String RED = "\u001B[31m";
+    static String YELLOW = "\u001B[33m";
 
+    static int selectedLanguage = 1;
+
+    static boolean login = false;
+    static boolean isAdmin = false;
+    static boolean masuk = false;
+
+    static String loggedInUsername = "";
+
+    static double tarifPerKg = 5000;
+    static double tarifPerKm = 200;
 
     // Array History Pemesanan
     static String[][] historyTransaksi = {
-        {"9876543210995", "28-10-2023", "InnamTest", "08822334455", "Surabaya", "Sameday", "55000.0", "Putra", "Farrel2", "Jl. Melati 10 No. 9", "3", "Buku2", "On Process", "Bekasi"},
         {"8032468109752", "29-01-2023", "Nanda", "08866778899", "Yogyakarta", "Reguler", "25700.0", "Farhan", "Abdi", "Jl. Kembang 5 No. 15", "3", "Makanan", "On Process", "Malang"},
         {"9276354185046", "12-02-2023", "Gabriel", "08811223344", "Tangerang", "Ekonomi", "33200.0", "Naufal", "Afifah", "Jl. Anggrek 12 No. 8", "7", "Elektronik", "On Process", "Bekasi"},
         {"1492578034685", "03-03-2023", "Afifah", "08876543210", "Makassar", "Reguler", "50900.0", "Putra", "Naufal", "Jl. Melati 9 No. 21", "5", "Pakaian", "On Process", "Bandung"},
@@ -78,53 +127,26 @@ public class Main {
         {"3456789012345", "05-05-2023", "Vincent", "08866778899", "Medan", "Reguler", "54000.0", "Farhan", "Petrus", "Jl. Anggrek 3 No. 14", "7", "Makanan", "On Process", "Medan"},
         {"3210987654321", "10-07-2023", "Vira", "08855443322", "Bengkulu", "Ekonomi", "37000.0", "Naufal", "Haikal", "Jl. Kembang 12 No. 9", "1", "Elektronik", "On Process", "Bogor"},
         {"9876543210987", "28-10-2023", "Innam", "08822334455", "Surabaya", "Sameday", "55000.0", "Putra", "Farrel", "Jl. Melati 9 No. 5", "6", "Buku", "On Process", "Bekasi"},
-        {"8032468109798", "29-01-2023", "NandaTest", "08866778899", "Yogyakarta", "Reguler", "25700.0", "Farhan", "Abdi", "Jl. Kembang 5 No. 15", "3", "Makanan", "On Process", "Malang"},
     };
 
-    static String laporanFormat = 
-        "╔══════════════════════════════════════════════════════════════════════════════════════════════╗\n" +
-        "║                                                                                              ║\n" +
-        "║                      __     ___     ____    ____     ____     ___     _   __                 ║\n" + 
-        "║                     / /    /   |   / __ \\  / __ \\   / __ \\   /   |   / | / /                 ║\n" +
-        "║                    / /    / /| |  / /_/ / / / / /  / /_/ /  / /| |  /  |/ /                  ║\n" +
-        "║                   / /___ / ___ | / ____/ / /_/ /  / _, _/  / ___ | / /|  /                   ║\n" +
-        "║                  /_____//_/  |_|/_/      \\____/  /_/ |_|  /_/  |_|/_/ |_/                    ║\n" +
-        "║                                                                                              ║\n" +
-        "║                                                                                              ║\n" +
-        "╠══════════════════════════════════════════════════════════════════════════════════════════════╣\n" +
-        "║ POLINEMA EKPEDITION                                                                          ║\n" +
-        "║ Laporan Pengiriman Per Bulan                                                                 ║\n" + 
-        "║===================================================╦========================╦=================║\n" +
-        "║                                                   ║       Nilai            ║     Satuan      ║\n" +
-        "║                                                   ╠========================╬=================║\n" +
-        "║ Total Pengiriman Per Asset                        ║                 %-2s     ║      Buah       ║\n" +
-        "║ Total Pengiriman Per kg                           ║                 %-2s     ║       Kg        ║\n" +
-        "║ Total Pendapatan                                  ║      Rp %-10s     ║     Rupiah      ║\n" +
-        "║                                                   ║                        ║                 ║\n" +
-        "╚═══════════════════════════════════════════════════╩════════════════════════╩═════════════════╝";
-
-    static String formulirTransaksi =
+    static String reportFormat = 
+        "╔══════════════════════════════════════════════════════════════════════════════════════════════════╗\n" +
+        "║                                                                                                  ║\n" +
+        "║                                        ╦═╗╔═╗╔═╗╔═╗╦═╗╔╦╗                                        ║\n" + 
+        "║                                        ╠╦╝║╣ ╠═╝║ ║╠╦╝ ║                                         ║\n" +
+        "║                                        ╩╚═╚═╝╩  ╚═╝╩╚═ ╩                                         ║\n" +
+        "║                                                                                                  ║\n" +
         "╠══════════════════════════════════════════════════════════════════════════════════════════════════╣\n" +
-        "║                                                                                                  ║\n" +
-        "║  Nama Pengirim:                [%-40s]                        ║\n" +
-        "║                                                                                                  ║\n" +
-        "║  Nomor Kontak:                 [%-40s]                        ║\n" +
-        "║                                                                                                  ║\n" +
-        "║  Nama Penerima:                [%-40s]                        ║\n" +
-        "║                                                                                                  ║\n" +
-        "║  Alamat Tujuan:                [%-40s]                        ║\n" +
-        "║                                                                                                  ║\n" +
-        "║  Deskripsi Barang:             [%-40s]                        ║\n" +
-        "║                                                                                                  ║\n" +
-        "║  Berat Barang:                 [%-40s]                        ║\n" +
-        "║                                                                                                  ║\n" +
-        "║  Origin:                       [%-40s]                        ║\n" +
-        "║                                                                                                  ║\n" +
-        "║  Destination:                  [%-40s]                        ║\n" +
-        "║                                                                                                  ║\n" +
-        "║  Layanan:                      [%-40s]                        ║\n" +
-        "║                                                                                                  ║\n" +
-        "╠══════════════════════════════════════════════════════════════════════════════════════════════════╣";
+        "║ POLINEMA EKPEDITION                                                                              ║\n" +
+        "║ Laporan Pengiriman Per Bulan                                                                     ║\n" + 
+        "╠═══════════════════════════════════════════════════════╦════════════════════════╦═════════════════╣\n" +
+        "║                                                       ║       Nilai            ║     Satuan      ║\n" +
+        "║                                                       ╠════════════════════════╬═════════════════╣\n" +
+        "║ Total Pengiriman Per Asset                            ║      %s   ║      Buah       ║\n" +
+        "║ Total Pengiriman Per kg                               ║      %s   ║       Kg        ║\n" +
+        "║ Total Pendapatan                                      ║      %s   ║     Rupiah      ║\n" +
+        "║                                                       ║                        ║                 ║\n" +
+        "╚═══════════════════════════════════════════════════════╩════════════════════════╩═════════════════╝";
 
     static String labelFormat = 
         "╔══════════════════════════════════════════════════════════════════════════════════════════════════╗\n" +
@@ -139,168 +161,84 @@ public class Main {
         "║            ║                                 ║  Alamat: %-41s║\n" +
         "╚════════════╩═════════════════════════════════╩═══════════════════════════════════════════════════╝";
 
-    public static void CetakLaporan(){
-        int totalAsset=0, totalBerat=0, totalHarga=0;
-
-        try {
-            Calendar calendar = Calendar.getInstance();
-            calendar.set(Calendar.DAY_OF_MONTH, 1); // Set the day of the month to the first day
-            Date startDate = calendar.getTime();
-
-            calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-            Date endDate = calendar.getTime();
-
-            for (int i = 0; i < historyTransaksi.length; i++) {
-                if (historyTransaksi[i][0] != null) {
-                    Date transaksiDate = dateFormat.parse(historyTransaksi[i][1]);
-                    if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
-                        totalBerat += Integer.parseInt(historyTransaksi[i][10]);
-                        totalAsset++;
-                        totalHarga += Double.parseDouble(historyTransaksi[i][6]);
-                    }
-                }
-            }
-
-            System.out.println(String.format(
-                laporanFormat,
-                totalAsset,
-                totalBerat,
-                totalHarga));
-
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }  
-    }
     public static void main(String[] args) {
         // Deklarasi scanner untuk memasukkan inputan
         Scanner input = new Scanner(System.in);
 
-        String loggedInUsername = "";
-
         // Deklarasi boolean
-        boolean login = false;
-        boolean found = false;
         boolean exit = false;
         boolean isLoop = false;
-        boolean isAdmin = false;
-        boolean masuk = false;
         boolean validInput = false;
         boolean inputValid = false;
 
         // Variabel untuk switch case menu
         int menuUtama, subMenu, editMenu;
-        
-        double tarifPerKg = 5000;
-        double tarifPerKm = 200;
-        int pilihanLayanan;
-        double biayaJarak = 0;
 
-        String RESET = "\u001B[0m";
-        String YELLOW = "\u001B[33m";
+        int inputselectedLanguage;
 
-        int pilihanBahasa = 1, inputPilihanBahasa;
-
-        // Array Multi Bahasa
-        String[][] multilingual = {
-            {"Welcome to the Expedition System", "Selamat Datang di Sistem Ekspedisi"},
-            {"", "Manajemen Pengguna"}, //1
-            {"Delivery of Goods", "Pengiriman Barang"}, //2
-                // Bahasa menu pengiriman barang
-                {"Transactions", "Melakukan Transaksi"}, 
-                    {"Enter the Sender's Name: ","Masukkan Nama Pengirim: "},
-                    {"Enter the weight of the item: ", "Masukkan Berat Barang: "},
-                    {"Enter Destination: ", "Masukkan Kota Tujuan: "},
-                    {"Destination not Found", "Kota Tujuan tidak ditemukan"},
-                {"Editing Transactions", "Mengedit Data Transaksi"},
-                {"Remove Transactions", "Menghapus Data Transaksi"},
-                {"Displyas Transactions' Data", "Menampilkan Data Transaksi"},
-                {"Back to the Main Menu", "Kembali ke Menu Utama"},
-            {"Route Management", "Manajemen Rute"}, //12
-                // Bahasa menu manajemen lokasi
-                {"Add Location", "Menambahkan Rute"},
-                {"Remove Location", "Menghapus Rute"},
-                {"Displays Location's Data", "Menampilkan Data Rute Pengiriman"},
-                {"Back to the Main Menu", "Kembali ke Menu Utama"},
-            {"Cost Management", "Manajemen Layanan"}, //17
-                // Bahasa menu Manajemen Tarif
-                {"Add Service Types", "Tambahkan Jenis Layanan"},
-                {"Change Cost Service", "Merubah Tarif Layanan"},
-                {"Remove Service", "Menghapus Layanan"},
-                {"Displays Services' Data", "Menampilkan Layanan Data"},
-                {"Exit", "Keluar"}, 
-            {"Change Language", "Ganti Bahasa"}, //23
-            {"", "Laporan Ekspedisi"}, //24
-            {"Exit", "Keluar"}, //25
-
-            // Bahasa input pilihan
-            {"-> Enter Options: ", "-> Masukkan Pilihan: "}, 
-
-        };
-
-        System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════════════╗");
-        System.out.println("║"+YELLOW+centerString(98, multilingual[0][pilihanBahasa])+RESET+"║");
-        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+        clearTerminal();
 
         while (!login) {
             login = false;
-            found = false;
             exit = false;
             isLoop = false;
             isAdmin = false;
             masuk = false;
             while (!masuk) {
-                System.out.print("║ -> Masukkan Username: ");
+                displayHeader();
+                displayIndonesianMap();
+
+                System.out.print("║ -> Masukkan Username\t: ");
                 String inputUsername = input.next();
 
-                System.out.print("║ -> Masukan Password: ");
+                System.out.print("║ -> Masukan Password\t: ");
                 String inputPassword = input.next();
+                input.nextLine();
 
-                for (int i = 0; i < userData.length ; i++ ) {
-                    if (userData[i][0].equals(inputUsername) && userData[i][1].equals(inputPassword)) {
-                        System.out.println("║ Login Berhasil");
-                        login = true;
-                        masuk = true;
-                        loggedInUsername = inputUsername;
-                        
-                        if("ADMIN".equals(userData[i][2])){
-                            isAdmin = true;
-                        }
-                        break;
-                    }
-                }
+                loginValidation(inputUsername, inputPassword);
+
                 if(!masuk){
-                    System.out.println("Login Gagal, silahkan coba lagi!");
+                    System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                    System.out.println("║"+RED+centerString(98, "Login Gagal, silahkan coba lagi!")+RESET);
+                    System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                    System.out.print("Enter: ");
+                    input.nextLine();
+                    clearTerminal();
                 }
             }
 
+            clearTerminal();
+
             do {
-                System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╗");
-                System.out.println("║"+YELLOW+centerString(98, multilingual[0][pilihanBahasa])+RESET+"║");
-                System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                displayHeader();
+                displayIndonesianMap();
+
                 if(isAdmin){
-                    System.out.println("║ [0]. " + multilingual[1][pilihanBahasa]); //Manajemen Pengguna
+                    System.out.println("║ [0]. " + getLanguageModuleText(1)); //Manajemen Pengguna
                 }
-                System.out.println("║ [1]. " + multilingual[2][pilihanBahasa]); //Pengiriman Barang
-                System.out.println("║ [2]. " + multilingual[12][pilihanBahasa]); //Manajemen Lokasi
-                System.out.println("║ [3]. " + multilingual[17][pilihanBahasa]); //Manajemen Tarif
-                System.out.println("║ [4]. " + multilingual[23][pilihanBahasa]); //Ganti Bahasa
+                System.out.println("║ [1]. " + getLanguageModuleText(2)); //Pengiriman Barang
+                System.out.println("║ [2]. " + getLanguageModuleText(12)); //Manajemen Lokasi
+                System.out.println("║ [3]. " + getLanguageModuleText(17)); //Manajemen Tarif
+                System.out.println("║ [4]. " + getLanguageModuleText(23)); //Ganti Bahasa
                 System.out.println("║ [5]. Laporan"); //Laporan
                 System.out.println("║ [6]. Keluar"); //Keluar
                 System.out.println("║ [7]. Manajemen Tarif Dasar");
                 System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
 
-                System.out.print("║ " + multilingual[26][pilihanBahasa]);
+                System.out.print("║ " + languageModule[26][selectedLanguage]);
                 menuUtama = input.nextInt();
                 input.nextLine();
+                clearTerminal();
 
                 isLoop = true;
-
                 do {
                     switch (menuUtama) {
                         case 0:
                             if(isAdmin){
                                 while(!exit) {
-                                System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╗");
+                                displayHeader();
+                                displayIndonesianMap();
+
                                 System.out.println("║"+YELLOW+centerString(98,"Manajemen Pengguna")+RESET+"║");
                                 System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
                                 System.out.println("║ [1] Tambahkan Pengguna");
@@ -320,22 +258,28 @@ public class Main {
                                     String katasandiBaru = input.next();
                                     System.out.print("║ -> Masukkan jabatan pengguna baru: ");
                                     String jabatanBaru = input.next();
+                                    input.nextLine();
+                                                                
+                                    userData = Arrays.copyOf(userData,userData.length + 1);
+                                    userData[userData.length-1] = new String[] {
+                                        usernameBaru,
+                                        katasandiBaru,
+                                        jabatanBaru};
                                 
-                                    String[][] newUser = {
-                                            {usernameBaru, katasandiBaru, jabatanBaru}
-                                    };
-                                
-                                    // Menggabungkan array userData dengan newUser
-                                    String[][] tempUserData = new String[userData.length + newUser.length][userData[0].length];
-                                    System.arraycopy(userData, 0, tempUserData, 0, userData.length);
-                                    System.arraycopy(newUser, 0, tempUserData, userData.length, newUser.length);
-                                    userData = tempUserData;
-                                
-                                    System.out.println("║ Pengguna baru berhasil ditambahkan!!!");
+                                    System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                    System.out.println("║"+GREEN+centerString(98, "Pengguna baru berhasil ditambahkan!!!")+RESET);
+                                    System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+
+                                    System.out.print("Enter: ");
+                                    input.nextLine();
+                                    clearTerminal();
+                                    
                                     break;
                                     case 2:
+                                        boolean found = false;
                                         System.out.print("║ -> Masukan username yang akan dihapus: ");
                                         String usernameToRemove = input.next();
+                                        input.nextLine(); //konsumsi
                         
                                         for (int i = 0; i < userData.length; i++) {
                                             if (userData[i][0].equals(usernameToRemove)) {
@@ -348,25 +292,28 @@ public class Main {
                                         }
                         
                                         if (found) {
-                                            System.out.println("║ Perngguna berhasi dihapus!");
+                                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                            System.out.println("║"+RED+centerString(98, "Pengguna berhasil dihapus")+RESET);
+                                            System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
                                         } else {
-                                            System.out.println("║ Pengguna tidak ditemukan.");
+                                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                            System.out.println("║"+YELLOW+centerString(98, "Pengguna tidak ditemukan")+RESET);
+                                            System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
                                         }
+                                        System.out.print("Enter: ");
+                                        input.nextLine();
+                                        clearTerminal();
                                         break;   
                                     case 3:
-                                        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                                        System.out.println("║"+YELLOW+centerString(98,"Manajemen Pengguna")+RESET+"║");
-                                        System.out.println("╠════════════════╦════════════════╦══════════════╦═════════════════════════════════════════════════╣");
-                                        System.out.println("║ Username       ║ Password       ║ Jabatan      ║");
-                                        System.out.println("╠════════════════╬════════════════╬══════════════╣");
-
-                                        for (int i = 0; i < userData.length; i++) {
-                                            System.out.printf("║ %-14s ║ %-14s ║ %-12s ║%n", userData[i][0], userData[i][1], userData[i][2]);
-                                        }
-                                        System.out.println("╠════════════════╩════════════════╩══════════════╝");
+                                        input.nextLine(); //konsumsi
+                                        viewUserAccounts();
+                                        System.out.print("Enter: ");
+                                        input.nextLine();
+                                        clearTerminal();
                                         break;
                                     case 4:
                                         exit = true;
+                                        clearTerminal();
                                         break;                                     
                                     default:
                                         System.out.println("Invalid");
@@ -379,11 +326,13 @@ public class Main {
                                 
                                 
                         case 1:
-                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╗");
+                            displayHeader();
+                            displayIndonesianMap();
+
                             System.out.println("║"+YELLOW+centerString(98,"Pengiriman Barang")+RESET+"║");
                             System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
                             System.out.println("║ [1]. Melakukan Transaksi"); //Melakukan Transaksi
-                            System.out.println("║ [2]. Manajemen Status Pengiriman (Beta)"); //Mengedit status pengiriman
+                            System.out.println("║ [2]. Manajemen Status Pengiriman"); //Mengedit status pengiriman
                             System.out.println("║ [3]. Menghapus Data Transaksi"); //Menghapus Transaksi
                             System.out.println("║ [4]. Menampilkan Data Transaksi"); //Menampilkan Data Transaksi
                             System.out.println("║ [5]. Kembali ke Menu Utama"); //Kembali ke Menu Utama
@@ -395,49 +344,36 @@ public class Main {
 
                             switch (subMenu) {
                                 case 1:
-                                    String namaPengirim = "";
-                                    String nomorKontak = "";
-                                    String namaPenerima = "";
-                                    String alamatPenerima = "";
-                                    String deskripsiBarang = "";
-                                    double tarifLayanan = 0;
-                                    String layanan = "";
-                                    int beratBarang = 0;
-                                    String origin = "";
-                                    String destination = "";
-                                    int jarak = 0;
                                     String nomorResi;
+                                    int pilihanLayanan;
+                                    double biayaJarak = 0;
 
-                                    tampilFormulirEkspedisi(namaPengirim, nomorKontak, namaPenerima, alamatPenerima, deskripsiBarang, beratBarang, origin, destination, layanan);
+                                    System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
 
-                                    System.out.print ("║ -> Masukkan Nama Pengirim: ");
-                                    namaPengirim = input.nextLine();
-                                    tampilFormulirEkspedisi(namaPengirim, nomorKontak, namaPenerima, alamatPenerima, deskripsiBarang, beratBarang, origin, destination, layanan);
+                                    System.out.print ("║ Masukkan Nama Pengirim: ");
+                                    String namaPengirim = input.nextLine();
 
-                                    System.out.print ("║ -> Masukkan Nomor Kontak: ");
-                                    nomorKontak = input.nextLine();
-                                    tampilFormulirEkspedisi(namaPengirim, nomorKontak, namaPenerima, alamatPenerima, deskripsiBarang, beratBarang, origin, destination, layanan);
+                                    System.out.print ("║ Masukkan Nomor Kontak: ");
+                                    String nomorKontak = input.nextLine();
 
-                                    System.out.print ("║ -> Masukkan Nama Penerima: ");
-                                    namaPenerima = input.nextLine();
-                                    tampilFormulirEkspedisi(namaPengirim, nomorKontak, namaPenerima, alamatPenerima, deskripsiBarang, beratBarang, origin, destination, layanan);
+                                    System.out.print ("║ Masukkan Nama Penerima: ");
+                                    String namaPenerima = input.nextLine();
 
-                                    System.out.print ("║ -> Masukkan Alamat: ");
-                                    alamatPenerima = input.nextLine();
-                                    tampilFormulirEkspedisi(namaPengirim, nomorKontak, namaPenerima, alamatPenerima, deskripsiBarang, beratBarang, origin, destination, layanan);
+                                    System.out.print ("║ Masukkan Alamat: ");
+                                    String alamatPenerima = input.nextLine();
 
-                                    System.out.print("║ -> Masukkan Deskripsi Barang: ");
-                                    deskripsiBarang = input.nextLine();
-                                    tampilFormulirEkspedisi(namaPengirim, nomorKontak, namaPenerima, alamatPenerima, deskripsiBarang, beratBarang, origin, destination, layanan);
+                                    System.out.print("║ Masukkan Deskripsi Barang: ");
+                                    String deskripsiBarang = input.nextLine();
+                                    int beratBarang;
                                     do {
-                                        System.out.print("║ -> Masukkan Berat Barang: ");
+                                        System.out.print("║ Masukkan Berat Barang: ");
                                         while (!input.hasNextInt()) {
                                             System.out.println("Input harus berupa bilangan bulat. Silakan coba lagi.");
                                             System.out.print("Masukkan Berat Barang: ");
                                             input.next(); // mengonsumsi input yang tidak valid
                                         }
                                         beratBarang = input.nextInt();
-                                        tampilFormulirEkspedisi(namaPengirim, nomorKontak, namaPenerima, alamatPenerima, deskripsiBarang, beratBarang, origin, destination, layanan);
+
                                         input.nextLine(); // membersihkan buffer input
                                         if (beratBarang <= 0) {
                                             System.out.println("Berat barang harus lebih besar dari 0. Silakan coba lagi.");
@@ -447,17 +383,20 @@ public class Main {
                                     } while (!validInput);
                                     validInput = false;
                                     //Mencari Kota Pengiriman pada Array
+                                    boolean found = false;
+                                    String origin;
+                                    String destination;
                                     do {
-                                        System.out.print ("║ -> Origin: ");
+                                        System.out.print ("║ Origin: ");
                                         origin = input.nextLine();
-                                        tampilFormulirEkspedisi(namaPengirim, nomorKontak, namaPenerima, alamatPenerima, deskripsiBarang, beratBarang, origin, destination, layanan);
-                                        System.out.print (("║ -> Destination: "));
+
+                                        System.out.print (("║ Destination: "));
                                         destination = input.nextLine();
-                                        tampilFormulirEkspedisi(namaPengirim, nomorKontak, namaPenerima, alamatPenerima, deskripsiBarang, beratBarang, origin, destination, layanan);
+
                                         for (int i = 0; i < rutePengiriman.length; i++) {
                                             if ((rutePengiriman[i][0].equalsIgnoreCase(origin) && rutePengiriman[i][1].equalsIgnoreCase(destination)) || 
                                             (rutePengiriman[i][0].equalsIgnoreCase(destination) && rutePengiriman[i][1].equalsIgnoreCase(origin))) {
-                                                jarak = Integer.parseInt(rutePengiriman[i][2]);
+                                                int jarak = Integer.parseInt(rutePengiriman[i][2]);
                                                 biayaJarak = jarak * tarifPerKm;
                                                 found = true;
                                                 break;
@@ -466,11 +405,10 @@ public class Main {
                                         if(!found) {
                                             origin = "";
                                             destination = "";
-                                            tampilFormulirEkspedisi(namaPengirim, nomorKontak, namaPenerima, alamatPenerima, deskripsiBarang, beratBarang, origin, destination, layanan);
+    
                                             System.out.println ("║ Kota Tujuan tidak Ditemukan!");
                                         }    
                                     } while (!found);
-                                    found = false;
 
                                     //Memilih Jenis Layanan pada Array
 
@@ -483,12 +421,10 @@ public class Main {
                                     }
                                     System.out.print ("║ -> Masukkan Pilihan: ");
                                     pilihanLayanan = input.nextInt();
-                                    layanan = arrayLayanan[pilihanLayanan][0];
-                                    tampilFormulirEkspedisi(namaPengirim, nomorKontak, namaPenerima, alamatPenerima, deskripsiBarang, beratBarang, origin, destination, layanan);
-                                    tarifLayanan = Double.parseDouble(arrayLayanan[pilihanLayanan][1]);                      
+                                    double tarifLayanan = Double.parseDouble(arrayLayanan[pilihanLayanan][1]);                      
 
                                     double biayaAkhir = tarifLayanan + (tarifPerKg * beratBarang) + biayaJarak;
-                                    nomorResi = generateNomorResi();
+                                    nomorResi = generateTrackingNumber();
 
                                     historyTransaksi = Arrays.copyOf(historyTransaksi,historyTransaksi.length + 1);
                                     historyTransaksi[historyTransaksi.length-1] = new String[]{
@@ -518,93 +454,65 @@ public class Main {
                                         destination, // Lokasi
                                         alamatPenerima
 
-                                        
+                                    ));       
+                                    input.nextLine(); //konsumsi
 
-
-                                    ));                                        
+                                    System.out.print("Enter: ");
+                                    input.nextLine();   
+                                    clearTerminal();                                 
                                     break;
                                 case 2:
-                                    System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
-                                    System.out.println("║                                                                                       History Transaksi");
-                                    System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
-                                    System.out.println("║ No  |     No Resi     |   Tanggal   |   Layanan   |      Tujuan      | Berat |      Deskripsi      |    Biaya    |  Nama Penerima  |  Alamat  ");
-                                    System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");              
-                                    for (int i = 0; i < historyTransaksi.length; i++) {
-                                        System.out.println(String.format("║ %3d ║ %15s ║ %11s ║ %11s ║ %16s ║ %5s ║ %19s ║ %11s ║ %15s ║ %30s ║ %15s ║ %15s",
-                                            i,
-                                            historyTransaksi[i][0], // Nomor Resi
-                                            historyTransaksi[i][1], // Tanggal
-                                            historyTransaksi[i][5],  //Jenis Layanan
-                                            historyTransaksi[i][4], // Tujuan
-                                            historyTransaksi[i][10], // Berat
-                                            historyTransaksi[i][11], // Deskripsi
-                                            historyTransaksi[i][6], // Tarif
-                                            historyTransaksi[i][8], // Nama Penerima
-                                            historyTransaksi[i][9], // Alamat
-                                            historyTransaksi[i][12],
-                                            historyTransaksi[i][13]
-                                        ));
-                                    }  
-                                    System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+                                    validInput = false;
+                                    int index = -1;
 
-                                    int indexKirim;
-                                    System.out.print("║ -> Masukkan index: ");
-                                    indexKirim = input.nextInt();
+                                    while (!validInput) {
+                                        System.out.print("║ -> Masukkan nomor resi: ");
+                                        try {
+                                            String trackingNumber = input.nextLine();
+                                            validInput = true;
 
-                                    boolean adaKesamaanData = false;           
-                                    for (int i = 0; i < historyTransaksi.length; i++) {
-                                        if (i != indexKirim && historyTransaksi[i][12].equals("On Process" ) && 
-                                                historyTransaksi[i][4].equals(historyTransaksi[indexKirim][4]) && 
-                                                historyTransaksi[i][5].equals(historyTransaksi[indexKirim][5]) && 
-                                                historyTransaksi[i][0] != historyTransaksi[indexKirim][0] &&
-                                                historyTransaksi[i][13].equals(historyTransaksi[indexKirim][13])) {
-                                                adaKesamaanData = true;
-                                        }
-                                    }
-                                    
-                                    if (adaKesamaanData){
-                                        System.out.println("║ -> Terdapat beberapa barang yang dapat dikirim bersama dengan paket ini!");
-                                        for (int i = 0; i < historyTransaksi.length; i++) {
-                                            if (historyTransaksi[i][12].equals("On Process" ) && 
-                                                    historyTransaksi[i][4].equals(historyTransaksi[indexKirim][4]) && 
-                                                    historyTransaksi[i][5].equals(historyTransaksi[indexKirim][5]) && 
-                                                    historyTransaksi[i][0] != historyTransaksi[indexKirim][0] &&
-                                                    historyTransaksi[i][13].equals(historyTransaksi[indexKirim][13])) {
-                                                    historyTransaksi[i][12] = "Shipping";
-                                                    historyTransaksi[indexKirim][12] = "Shipping";
-                                                    System.out.println(String.format("║ %15s ║ %11s ║ %11s ║ %16s ║ %5s ║ %19s ║ %11s ║ %15s ║ %30s ║ %15s ║ %15s",
-                                                        historyTransaksi[i][0], // Nomor Resi
-                                                        historyTransaksi[i][1], // Tanggal
-                                                        historyTransaksi[i][5],  //Jenis Layanan
-                                                        historyTransaksi[i][4], // Tujuan
-                                                        historyTransaksi[i][10], // Berat
-                                                        historyTransaksi[i][11], // Deskripsi
-                                                        historyTransaksi[i][6], // Tarif
-                                                        historyTransaksi[i][8], // Nama Penerima
-                                                        historyTransaksi[i][9], // Alamat
-                                                        historyTransaksi[i][12],
-                                                        historyTransaksi[i][13]
-                                                    ));
+                                            for (int i=0; i<historyTransaksi.length; i++) {
+                                                if (historyTransaksi[i][0].equals(trackingNumber)) {
+                                                    index = i;
+                                                    break;
                                             }
+                                        } 
+                                        if (index != -1) {
+                                            validInput = true;
+                                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╗");
+                                            System.out.println("║"+YELLOW+centerString(98,"Status Pengiriman")+RESET+"║");
+                                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                            System.out.println("║ [1]. On Process"); //Melakukan Transaksi
+                                            System.out.println("║ [2]. Shipping"); //Mengedit status pengiriman
+                                            System.out.println("║ [3]. Delivered"); //Menghapus Transaksi
+                                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                            System.out.print("║ -> Masukkan Pilihan: ");
+                                            String selected = input.nextLine();
+
+                                            if(selected.equals("1")){
+                                                historyTransaksi[index][12] = "On Process";
+                                            } else if(selected.equals("2")) {
+                                                historyTransaksi[index][12] = "Shipping";
+                                            } else if(selected.equals("3")) {
+                                                historyTransaksi[index][12] = "Delivered";
+                                            } else {
+                                                break;
+                                            }
+                                        } else {
+                                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                            System.out.println("║"+YELLOW+centerString(98, "Data tidak ditemukan")+RESET);
+                                            System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
                                         }
-                                        System.out.println(String.format("║ %15s ║ %11s ║ %11s ║ %16s ║ %5s ║ %19s ║ %11s ║ %15s ║ %30s ║ %15s ║ %15s",
-                                            historyTransaksi[indexKirim][0], // Nomor Resi
-                                            historyTransaksi[indexKirim][1], // Tanggal
-                                            historyTransaksi[indexKirim][5],  //Jenis Layanan
-                                            historyTransaksi[indexKirim][4], // Tujuan
-                                            historyTransaksi[indexKirim][10], // Berat
-                                            historyTransaksi[indexKirim][11], // Deskripsi
-                                            historyTransaksi[indexKirim][6], // Tarif
-                                            historyTransaksi[indexKirim][8], // Nama Penerima
-                                            historyTransaksi[indexKirim][9], // Alamat
-                                            historyTransaksi[indexKirim][12],
-                                            historyTransaksi[indexKirim][13]
-                                        ));
-                                    } else {
-                                        System.out.println("║ -> Fitur apaan dah ini, kodenya panjang banget");
+
+                                    } catch (NumberFormatException exception) {
+                                            System.out.println("║ Input yang dimasukkan tidak valid. Silakan masukkan nomor resi kembali!.");
+                                        }
                                     }
 
-                                    break;
+                                    System.out.print("Enter: ");
+                                    input.nextLine();   
+                                    clearTerminal(); 
+                                break;
 
                                 case 3: 
                                     // menghapus transaksi berdasarkan nomor resi
@@ -623,23 +531,30 @@ public class Main {
                                                     break;
                                             }
                                         } 
-                                        if (deleteIndex != -1) {
-                                            validInput = true;
-                                        } else { System.out.println("║ Data tidak ditemukan. Silakan coba lagi."); }
 
                                     } catch (NumberFormatException exception) {
-                                            System.out.println("║ Input yang dimasukkan tidak valid. Silakan masukkan nomor resi kembali!.");
+                                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                            System.out.println("║"+YELLOW+centerString(98, "Input yang dimasukkan tidak valid. Silahkan masukkan nomor resi kembali!")+RESET);
+                                            System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
                                         }
                                     }
 
                                     // Hapus elemen jika validInput adalah true
                                     if (deleteIndex >= 0 && deleteIndex < historyTransaksi.length) {
-                                        System.out.println("║ Transaksi dengan nomor resi yang sesuai telah dihapus!");
+                                        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                        System.out.println("║"+RED+centerString(98, "Data dengan nomor resi yang sesuai sudah dihapus")+RESET);
+                                        System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
                                         System.arraycopy(historyTransaksi, deleteIndex + 1, historyTransaksi, deleteIndex, historyTransaksi.length - deleteIndex - 1);
                                         historyTransaksi = Arrays.copyOf(historyTransaksi, historyTransaksi.length - 1);
                                     } else {
-                                        System.out.println("║ Data tidak ditemukan.");
-                                    }   
+                                        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                        System.out.println("║"+YELLOW+centerString(98, "Data tidak ditemukan")+RESET);
+                                        System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                                    }
+
+                                    System.out.print("Enter: ");
+                                    input.nextLine();   
+                                    clearTerminal(); 
 
                                 break;
                                 case 4:
@@ -685,7 +600,7 @@ public class Main {
                                             } while (!validInputTanggalAkhir);
                                         
                                             try {
-                                                tampilHistory(startDate, endDate);
+                                                viewExpeditionHistoryByRange(startDate, endDate);
                                             } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
@@ -711,7 +626,7 @@ public class Main {
                                                         Date startDate = dateFormat.parse(tanggalYangDiinginkan);
                                                         Date endDate = dateFormat.parse(tanggalYangDiinginkan);
                                         
-                                                        tampilHistoryhari(startDate, endDate);
+                                                        viewExpeditionHistoryByDay(startDate, endDate);
                                                     }
                                                 } else {
                                                     System.out.println("Input harus berupa angka.");
@@ -752,7 +667,7 @@ public class Main {
                                                 Date startDate = dateFormat.parse(tanggalAwal);
                                                 Date endDate = dateFormat.parse(tanggalAkhir);
                                     
-                                                tampilHistoryBulan(startDate, endDate);
+                                                viewExpeditionHistoryByMonth(startDate, endDate);
                                             } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
@@ -778,7 +693,7 @@ public class Main {
                                                     }
                                                 }
                                     
-                                                tampilHistoryTahun(tahunInput);
+                                                viewExpeditionHistoryByYear(tahunInput);
                                     
                                             } catch (Exception e) {
                                                 e.printStackTrace();
@@ -799,7 +714,7 @@ public class Main {
 
                                                     for (int i=0; i<historyTransaksi.length; i++) {
                                                         if (historyTransaksi[i][0].equals(searchString)) {
-                                                            tampilHistoryResi(searchString);
+                                                            viewExpeditionHistoryByTrackingNumber(searchString);
                                                             searchIndex = i;
                                                             break;
                                                     }
@@ -828,7 +743,10 @@ public class Main {
                         case 2:
                             boolean keluar = true;
                             while (keluar) {
-                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+
+                            displayHeader();
+                            displayRoute();
+
                             System.out.println("║"+YELLOW+centerString(98,"Manajemen Rute")+RESET+"║");
                             System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
 
@@ -898,7 +816,7 @@ public class Main {
                                     }
 
                                     if (deleteIndex >= 1 && deleteIndex <= rutePengiriman.length) {
-                                        String[] deletedLocation = rutePengiriman[deleteIndex - 1];
+                                        String deletedLocation = rutePengiriman[deleteIndex - 1][0]+" "+rutePengiriman[deleteIndex - 1][1];
                                         System.out.println("║ " + deletedLocation + " Telah Dihapus!");
 
                                         System.arraycopy(rutePengiriman, deleteIndex, rutePengiriman, deleteIndex - 1, rutePengiriman.length - deleteIndex);
@@ -907,15 +825,10 @@ public class Main {
                                         System.out.println("║ Nomor rute tidak valid");
                                         continue;
                                     }
-
-                                    if (found) {
-                                        found = false;
-                                    } else {
-                                        System.out.println("║ Key tidak ditemukan");
-                                    }                                           
+                                         
                                     break;
                                 case 3:
-                                    tampilDataRute();
+                                    viewExpeditionRoutes();
                                     break;
                                 case 4:
                                     keluar = false;
@@ -946,7 +859,7 @@ public class Main {
                                     double tarifLayanan = 0;
                                     int startEstimation = 0;
                                     int endEstimation = 0;
-                                    for (int i = 0; i < arrayLayanan.length; i++) {
+
                                         System.out.print("║ -> Masukkan Nama Layanan: ");
                                         namaLayanan = input.next();
                                         while (!inputValid) {
@@ -964,10 +877,6 @@ public class Main {
                                         startEstimation = input.nextInt();
                                         System.out.print("║ -> Masukkan Waktu Pengiriman Maximum: ");
                                         endEstimation = input.nextInt();
-                        
-                                        arrayLayanan[i][1] = String.valueOf(tarifLayanan);
-                                        break;
-                                    }
 
                                         arrayLayanan = Arrays.copyOf(arrayLayanan,arrayLayanan.length + 1);
                                         arrayLayanan[arrayLayanan.length-1] = new String[] {
@@ -979,7 +888,7 @@ public class Main {
                                 case 2:
                                 System.out.println("║ Daftar Layanan yang Tersedia:");
                                 for (int i = 0; i < arrayLayanan.length; i++) {
-                                    System.out.println((i + 1) + ". " + arrayLayanan[i][0] );
+                                    System.out.println("║ "+(i + 1) + ". " + arrayLayanan[i][0] );
                                 }
                         
                                 System.out.print("║ -> Masukkan nomor layanan yang ingin diubah: ");
@@ -1088,7 +997,7 @@ public class Main {
                                     }
                                     break;
                                 case 4:
-                                    tampilDataTarifLayanan ();
+                                    viewExpeditionServices();
                                     break;
                                 case 5:
                                     isLoop = false;
@@ -1100,26 +1009,35 @@ public class Main {
 
                         case 4:
                             do {
+                                displayHeader();
+                                displayIndonesianMap();
+
                                 System.out.println("║ Pilih bahasa (Choose a language):");
                                 System.out.println("║ [1]. English");
                                 System.out.println("║ [2]. Indonesian");
                                 System.out.print("║ -> Masukkan Pilihan: ");
-                                inputPilihanBahasa = input.nextInt();
-
-                                switch (inputPilihanBahasa) {
-                                    case 1:
-                                        pilihanBahasa = inputPilihanBahasa-1;
-                                        break;
-                                    case 2:
-                                        pilihanBahasa = inputPilihanBahasa-1;
-                                        break;
-                                    default:
-                                        System.out.println("║ Invalid choice. Please try again.");
-                                }
-                            } while (inputPilihanBahasa > multilingual[0].length);
+                                inputselectedLanguage = input.nextInt();
+                                changeLanguage(inputselectedLanguage);
+                            } while (inputselectedLanguage > languageModule[0].length);
+                            clearTerminal();
                             break;
                         case 5:
-                            CetakLaporan();
+                            Calendar calendar = Calendar.getInstance();
+                            calendar.set(Calendar.DAY_OF_MONTH, 1); // Set the day of the month to the first day
+                            Date startDate = calendar.getTime();
+
+                            calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+                            Date endDate = calendar.getTime();
+
+                            System.out.println(String.format(
+                                reportFormat,
+                                centerString(15, Integer.toString(getExpeditionCount(startDate, endDate))),
+                                centerString(15, Integer.toString(getTotalWeight(startDate, endDate))),
+                                centerString(15, "Rp "+Double.toString(getRevenue(startDate, endDate)))
+                            ));
+                            System.out.print("Enter: ");
+                            input.nextLine();   
+                            clearTerminal(); 
                             break;
                         case 6:
                             exit=true;
@@ -1168,14 +1086,101 @@ public class Main {
             } while(!exit);
         }
     }
-    public static void tampilDataRute() {
+
+
+
+
+
+
+
+
+
+
+
+
+    private static int[] calculateColumnWidths(String[][] array) {
+        int[] columnWidths = new int[array[0].length];
+    
+        for (int j = 0; j < array[0].length; j++) {
+            int maxWidth = 0;
+            for (int i = 0; i < array.length; i++) {
+                if (maxWidth < array[i][j].length()) {
+                    maxWidth = array[i][j].length();
+                }
+            }
+            columnWidths[j] = maxWidth + 4;
+        }
+    
+        return columnWidths;
+    }
+
+    private static String centerString(int width, String s) {
+        int padSize = (width - s.length()) / 2;
+        return String.format("%" + padSize + "s%s%" + (padSize + (width - s.length()) % 2) + "s", "", s, "");
+    }
+
+    private static String generateTrackingNumber() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyyHHmmss");
+        String timestamp = dateFormat.format(new Date());
+        return timestamp;
+    }
+
+    private static void changeLanguage(int languageIndex) {
+        selectedLanguage = languageIndex - 1; 
+    }
+
+    private static String getLanguageModuleText(int row) {
+        return languageModule[row][selectedLanguage];
+    }
+
+    private static void loginValidation(String username, String password) {
+        for (int i = 0; i < userData.length ; i++ ) {
+            if (userData[i][0].equals(username) && userData[i][1].equals(password)) {
+                login = true;
+                masuk = true;
+                loggedInUsername = username;
+                
+                if("ADMIN".equals(userData[i][2])){
+                    isAdmin = true;
+                }
+                break;
+            }
+        }
+    }
+
+    private static void viewUserAccounts() {
+        int[] columnWidths = calculateColumnWidths(rutePengiriman);
+        String formattedHeader = String.format("║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s",
+            "Username", 
+            "Password", 
+            "Role" 
+        );
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║"+centerString(98,"Manajemen Pengguna")+"║");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println(formattedHeader);
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+
+        for (int i = 0; i < userData.length; i++) {
+            System.out.printf("║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s\n", userData[i][0], userData[i][1], userData[i][2]);
+        }
+    }
+
+    private static void viewExpeditionRoutes() {
+        int[] columnWidths = calculateColumnWidths(rutePengiriman);
+        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s",
+            "No", 
+            "Nama Kota", 
+            "Nama Kota",
+            "Jarak" 
+        );
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
         System.out.println("║"+centerString(98,"Data Rute")+"║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ No  ║       Nama Kota      ║       Nama Kota      ║  Jarak");
+        System.out.println(formattedHeader);
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
         for (int i = 0; i < rutePengiriman.length; i++) {
-            String formattedString = String.format("║ %3d ║ %20s ║ %20s ║ %5s Km",
+            String formattedString = String.format("║ %3d ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s Km",
                     i,
                     rutePengiriman[i][0], 
                     rutePengiriman[i][1], 
@@ -1185,36 +1190,102 @@ public class Main {
         }
     } 
     
-    public static void tampilDataTarifLayanan() {
+    private static void viewExpeditionServices() {
+        int[] columnWidths = calculateColumnWidths(rutePengiriman);
+        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s",
+            "No", 
+            "Layanan", 
+            "Biaya" 
+        );
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
         System.out.println("║"+centerString(98,"Data Layanan")+"║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ No  ║   Nama Layanan   ║  Biaya");
+        System.out.println(formattedHeader);
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
         for (int i = 0; i < arrayLayanan.length; i++) {
             if (arrayLayanan[i] != null) {
-                    String formattedString = String.format("║ %3d ║ %16s ║ %5s",
+                    String formattedString = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s",
                     i,
-                    arrayLayanan[i][1], // Nama Kota
-                    arrayLayanan[i][0] // Tarif
+                    arrayLayanan[i][0], // Nama Kota
+                    arrayLayanan[i][1] // Tarif
             );
             System.out.println(formattedString);
             }
         }
     } 
 
-    public static void tampilHistory(Date startDate, Date endDate){
+    private static void viewExpeditionHistoryByTrackingNumber(String resi){
+        int[] columnWidths = calculateColumnWidths(historyTransaksi);
+        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[3] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[10] + "s ║ %-" + columnWidths[11] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s",
+            "No", 
+            "No Resi", 
+            "Tanggal",
+            "Pengirim",
+            "Kontak",
+            "Layanan",
+            "Tujuan",
+            "Berat",
+            "Deskripsi",
+            "Biaya",
+            "Kasir",
+            "Penerima",
+            "Alamat Penerima"
+        );
+        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+        System.out.println("║                                                                                       History Transaksi");
+        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+        System.out.println(formattedHeader);
+        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");              
+        for (int i = 0; i < historyTransaksi.length; i++) {
+            if (historyTransaksi[i][0].equals(resi)) {
+                System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[3] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[10] + "s ║ %-" + columnWidths[11] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s",
+                    i,
+                    historyTransaksi[i][0], // Nomor Resi
+                    historyTransaksi[i][1], // Tanggal
+                    historyTransaksi[i][2], // Nama Pengirim
+                    historyTransaksi[i][3], // Nomor Kontak
+                    historyTransaksi[i][5],  //Jenis Layanan
+                    historyTransaksi[i][4], // Tujuan
+                    historyTransaksi[i][10], // Berat
+                    historyTransaksi[i][11], // Deskripsi
+                    historyTransaksi[i][6], // Tarif
+                    historyTransaksi[i][7], // Nama Kasir
+                    historyTransaksi[i][8], // Nama Penerima
+                    historyTransaksi[i][9] // Alamat
+                ));
+            }
+        }
+        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+    }
+
+    private static void viewExpeditionHistoryByRange(Date startDate, Date endDate){
+        int[] columnWidths = calculateColumnWidths(historyTransaksi);
+        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[3] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[10] + "s ║ %-" + columnWidths[11] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s",
+            "No", 
+            "No Resi", 
+            "Tanggal",
+            "Pengirim",
+            "Kontak",
+            "Layanan",
+            "Tujuan",
+            "Berat",
+            "Deskripsi",
+            "Biaya",
+            "Kasir",
+            "Penerima",
+            "Alamat Penerima"
+        );
         try{
             System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
             System.out.println("║                                                                                       History Transaksi");
             System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
-            System.out.println("║ No  |     No Resi     |   Tanggal   |  Nama Pengirim  |  Nomor Kontak  |   Layanan   |      Tujuan      | Berat |      Deskripsi      |    Biaya    |    Kasir    |  Nama Penerima  |         Alamat Penerima");
+            System.out.println(formattedHeader);
             System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");              
             for (int i = 0; i < historyTransaksi.length; i++) {
                 if (historyTransaksi[i][0] != null){
                     Date transaksiDate = dateFormat.parse(historyTransaksi[i][1]);
                     if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
-                        System.out.println(String.format("║ %3d ║ %15s ║ %11s ║ %15s ║ %14s ║ %11s ║ %16s ║ %5s ║ %19s ║ %11s ║ %11s ║ %15s ║ %30s",
+                        System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[3] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[10] + "s ║ %-" + columnWidths[11] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s",
                             i,
                             historyTransaksi[i][0], // Nomor Resi
                             historyTransaksi[i][1], // Tanggal
@@ -1241,125 +1312,42 @@ public class Main {
         }
     }
 
-    public static String centerText(String text) {
-        int totalWidth = 40;
-        int spaces = (totalWidth - text.length()) / 2;
-        return String.format("%" + spaces + "s%s%" + spaces + "s", "", text, "");
-    }
-
-    private static String centerString(int width, String s) {
-        int padSize = (width - s.length()) / 2;
-        return String.format("%" + padSize + "s%s%" + (padSize + (width - s.length()) % 2) + "s", "", s, "");
-    }
-
-    public static void tampilFormulirEkspedisi(String namaPengirim, String nomorKontak, String namaPenerima, String alamatPenerima, String deskripsibarang, int beratBarang, String origin, String destination, String layanan){
-
-        if (beratBarang != 0) {
-            System.out.println(String.format(
-                formulirTransaksi,
-                centerText(namaPengirim),
-                centerText(nomorKontak),
-                centerText(namaPenerima),
-                centerText(alamatPenerima),
-                centerText(deskripsibarang),
-                centerText(Integer.toString(beratBarang)),
-                centerText(origin),
-                centerText(destination),
-                centerText(layanan)
-            ));
-        } else {
-            System.out.println(String.format(
-                formulirTransaksi,
-                centerText(namaPengirim),
-                centerText(nomorKontak),
-                centerText(namaPenerima),
-                centerText(alamatPenerima),
-                centerText(deskripsibarang),
-                centerText(""),
-                centerText(origin),
-                centerText(destination),
-                centerText(layanan)
-            ));
-        }
-
-    }
-    public static void tampilHistoryhari(Date startDate, Date endDate) {
+    private static void viewExpeditionHistoryByDay(Date startDate, Date endDate) {
+        int[] columnWidths = calculateColumnWidths(historyTransaksi);
+        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[3] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[10] + "s ║ %-" + columnWidths[11] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s",
+            "No", 
+            "No Resi", 
+            "Tanggal",
+            "Pengirim",
+            "Kontak",
+            "Layanan",
+            "Tujuan",
+            "Berat",
+            "Deskripsi",
+            "Biaya",
+            "Kasir",
+            "Penerima",
+            "Alamat Penerima"
+        );
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         boolean dataDitemukan = false;
 
         System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
         System.out.println("║                                                                                       History Transaksi");
         System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
-        System.out.println("║ No  |     No Resi     |   Tanggal   |  Nama Pengirim  |  Nomor Kontak  |   Layanan   |      Tujuan      | Berat |      Deskripsi      |    Biaya    |    Kasir    |  Nama Penerima  |         Alamat Penerima");
+        System.out.println(formattedHeader);
         System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");  
 
         for (int i = 0; i < historyTransaksi.length; i++) {
-            if (historyTransaksi[i][0] != null) {
-                try {
-                    Date transaksiDate = dateFormat.parse(historyTransaksi[i][1]);
-                    Calendar cal = Calendar.getInstance();
-                    int bulanSekarang = cal.get(Calendar.MONTH) + 1; // Bulan dimulai dari 0
-                    int tahunSekarang = cal.get(Calendar.YEAR);
+            try {
+                Date transaksiDate = dateFormat.parse(historyTransaksi[i][1]);
+                Calendar cal = Calendar.getInstance();
+                int bulanSekarang = cal.get(Calendar.MONTH) + 1; // Bulan dimulai dari 0
+                int tahunSekarang = cal.get(Calendar.YEAR);
 
-                    if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0
-                            && dateFormat.format(transaksiDate).startsWith(String.format("%02d-%02d", startDate.getDate(), bulanSekarang))) {
-                            System.out.println(String.format("║ %3d ║ %15s ║ %11s ║ %15s ║ %14s ║ %11s ║ %16s ║ %5s ║ %19s ║ %11s ║ %11s ║ %15s ║ %30s",
-                                i,
-                                historyTransaksi[i][0], // Nomor Resi
-                                historyTransaksi[i][1], // Tanggal
-                                historyTransaksi[i][2], // Nama Pengirim
-                                historyTransaksi[i][3], // Nomor Kontak
-                                historyTransaksi[i][5],  //Jenis Layanan
-                                historyTransaksi[i][4], // Tujuan
-                                historyTransaksi[i][10], // Berat
-                                historyTransaksi[i][11], // Deskripsi
-                                historyTransaksi[i][6], // Tarif
-                                historyTransaksi[i][7], // Nama Kasir
-                                historyTransaksi[i][8], // Nama Penerima
-                                historyTransaksi[i][9] // Alamat
-
-
-
-                            ));
-                        dataDitemukan = true;
-                    }
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
-
-
-        if (!dataDitemukan) {
-            System.out.println("Tidak ada transaksi pada rentang tanggal tersebut atau yang sesuai dengan bulan dan tahun ini.");
-        }
-    }
-
-    public static void tampilHistoryBulan(Date startDate, Date endDate) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        boolean dataDitemukan = false;
-
-        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
-        System.out.println("║                                                                                       History Transaksi");
-        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
-        System.out.println("║ No  |     No Resi     |   Tanggal   |  Nama Pengirim  |  Nomor Kontak  |   Layanan   |      Tujuan      | Berat |      Deskripsi      |    Biaya    |    Kasir    |  Nama Penerima  |         Alamat Penerima");
-        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");  
-
-        for (int i = 0; i < historyTransaksi.length; i++) {
-            if (historyTransaksi[i][0] != null) {
-                try {
-                    Date transaksiDate = dateFormat.parse(historyTransaksi[i][1]);
-
-                    Calendar cal = Calendar.getInstance();
-                    cal.setTime(transaksiDate);
-                    int transaksiBulan = cal.get(Calendar.MONTH) + 1; // Bulan dimulai dari 0
-                    int transaksiTahun = cal.get(Calendar.YEAR);
-
-                    if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0
-                            && transaksiBulan == startDate.getMonth() + 1 && transaksiTahun == startDate.getYear() + 1900) {
-                        System.out.println(String.format("║ %3d ║ %15s ║ %11s ║ %15s ║ %14s ║ %11s ║ %16s ║ %5s ║ %19s ║ %11s ║ %11s ║ %15s ║ %30s",
+                if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0
+                        && dateFormat.format(transaksiDate).startsWith(String.format("%02d-%02d", startDate.getDate(), bulanSekarang))) {
+                        System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[3] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[10] + "s ║ %-" + columnWidths[11] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s",
                             i,
                             historyTransaksi[i][0], // Nomor Resi
                             historyTransaksi[i][1], // Tanggal
@@ -1373,12 +1361,81 @@ public class Main {
                             historyTransaksi[i][7], // Nama Kasir
                             historyTransaksi[i][8], // Nama Penerima
                             historyTransaksi[i][9] // Alamat
+
+
+
                         ));
-                        dataDitemukan = true;
-                    }
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                    dataDitemukan = true;
                 }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+
+
+        if (!dataDitemukan) {
+            System.out.println("Tidak ada transaksi pada rentang tanggal tersebut atau yang sesuai dengan bulan dan tahun ini.");
+        }
+    }
+
+    private static void viewExpeditionHistoryByMonth(Date startDate, Date endDate) {
+        int[] columnWidths = calculateColumnWidths(historyTransaksi);
+        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[3] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[10] + "s ║ %-" + columnWidths[11] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s",
+            "No", 
+            "No Resi", 
+            "Tanggal",
+            "Pengirim",
+            "Kontak",
+            "Layanan",
+            "Tujuan",
+            "Berat",
+            "Deskripsi",
+            "Biaya",
+            "Kasir",
+            "Penerima",
+            "Alamat Penerima"
+        );
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        boolean dataDitemukan = false;
+
+        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+        System.out.println("║                                                                                       History Transaksi");
+        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+        System.out.println(formattedHeader);
+        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");  
+
+        for (int i = 0; i < historyTransaksi.length; i++) {
+            try {
+                Date transaksiDate = dateFormat.parse(historyTransaksi[i][1]);
+
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(transaksiDate);
+                int transaksiBulan = cal.get(Calendar.MONTH) + 1; // Bulan dimulai dari 0
+                int transaksiTahun = cal.get(Calendar.YEAR);
+
+                if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0
+                        && transaksiBulan == startDate.getMonth() + 1 && transaksiTahun == startDate.getYear() + 1900) {
+                    System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[3] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[10] + "s ║ %-" + columnWidths[11] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s",
+                        i,
+                        historyTransaksi[i][0], // Nomor Resi
+                        historyTransaksi[i][1], // Tanggal
+                        historyTransaksi[i][2], // Nama Pengirim
+                        historyTransaksi[i][3], // Nomor Kontak
+                        historyTransaksi[i][5],  //Jenis Layanan
+                        historyTransaksi[i][4], // Tujuan
+                        historyTransaksi[i][10], // Berat
+                        historyTransaksi[i][11], // Deskripsi
+                        historyTransaksi[i][6], // Tarif
+                        historyTransaksi[i][7], // Nama Kasir
+                        historyTransaksi[i][8], // Nama Penerima
+                        historyTransaksi[i][9] // Alamat
+                    ));
+                    dataDitemukan = true;
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
         }
 
@@ -1389,45 +1446,60 @@ public class Main {
         }
 
     }
-    public static void tampilHistoryTahun(int tahunInput) {
+
+    private static void viewExpeditionHistoryByYear(int tahunInput) {
+        int[] columnWidths = calculateColumnWidths(historyTransaksi);
+        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[3] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[10] + "s ║ %-" + columnWidths[11] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s",
+            "No", 
+            "No Resi", 
+            "Tanggal",
+            "Pengirim",
+            "Kontak",
+            "Layanan",
+            "Tujuan",
+            "Berat",
+            "Deskripsi",
+            "Biaya",
+            "Kasir",
+            "Penerima",
+            "Alamat Penerima"
+        );
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         boolean dataDitemukan = false;
 
         System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
         System.out.println("║                                                                                       History Transaksi");
         System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
-        System.out.println("║ No  |     No Resi     |   Tanggal   |  Nama Pengirim  |  Nomor Kontak  |   Layanan   |      Tujuan      | Berat |      Deskripsi      |    Biaya    |    Kasir    |  Nama Penerima  |         Alamat Penerima");
+        System.out.println(formattedHeader);
         System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");  
 
         for (int i = 0; i < historyTransaksi.length; i++) {
-            if (historyTransaksi[i][0] != null) {
-                try {
-                    Date transaksiDate = dateFormat.parse(historyTransaksi[i][1]);
-                    Calendar cal = Calendar.getInstance();
-                    cal.setTime(transaksiDate);
-                    int tahunTransaksi = cal.get(Calendar.YEAR);
+            try {
+                Date transaksiDate = dateFormat.parse(historyTransaksi[i][1]);
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(transaksiDate);
+                int tahunTransaksi = cal.get(Calendar.YEAR);
 
-                    if (tahunTransaksi == tahunInput) {
-                        System.out.println(String.format("║ %3d ║ %15s ║ %11s ║ %15s ║ %14s ║ %11s ║ %16s ║ %5s ║ %19s ║ %11s ║ %11s ║ %15s ║ %30s",
-                            i,
-                            historyTransaksi[i][0], // Nomor Resi
-                            historyTransaksi[i][1], // Tanggal
-                            historyTransaksi[i][2], // Nama Pengirim
-                            historyTransaksi[i][3], // Nomor Kontak
-                            historyTransaksi[i][5],  //Jenis Layanan
-                            historyTransaksi[i][4], // Tujuan
-                            historyTransaksi[i][10], // Berat
-                            historyTransaksi[i][11], // Deskripsi
-                            historyTransaksi[i][6], // Tarif
-                            historyTransaksi[i][7], // Nama Kasir
-                            historyTransaksi[i][8], // Nama Penerima
-                            historyTransaksi[i][9] // Alamat
-                        ));
-                        dataDitemukan = true;
-                    }
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                if (tahunTransaksi == tahunInput) {
+                    System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[3] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[10] + "s ║ %-" + columnWidths[11] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s",
+                        i,
+                        historyTransaksi[i][0], // Nomor Resi
+                        historyTransaksi[i][1], // Tanggal
+                        historyTransaksi[i][2], // Nama Pengirim
+                        historyTransaksi[i][3], // Nomor Kontak
+                        historyTransaksi[i][5],  //Jenis Layanan
+                        historyTransaksi[i][4], // Tujuan
+                        historyTransaksi[i][10], // Berat
+                        historyTransaksi[i][11], // Deskripsi
+                        historyTransaksi[i][6], // Tarif
+                        historyTransaksi[i][7], // Nama Kasir
+                        historyTransaksi[i][8], // Nama Penerima
+                        historyTransaksi[i][9] // Alamat
+                    ));
+                    dataDitemukan = true;
                 }
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
         }
 
@@ -1438,37 +1510,107 @@ public class Main {
         }
     }
 
-    public static void tampilHistoryResi(String resi){
-        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
-        System.out.println("║                                                                                       History Transaksi");
-        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
-        System.out.println("║ No  |     No Resi     |   Tanggal   |  Nama Pengirim  |  Nomor Kontak  |   Layanan   |      Tujuan      | Berat |      Deskripsi      |    Biaya    |    Kasir    |  Nama Penerima  |         Alamat Penerima");
-        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");              
-        for (int i = 0; i < historyTransaksi.length; i++) {
-            if (historyTransaksi[i][0].equals(resi)) {
-                System.out.println(String.format("║ %3d ║ %15s ║ %11s ║ %15s ║ %14s ║ %11s ║ %16s ║ %5s ║ %19s ║ %11s ║ %11s ║ %15s ║ %30s",
-                    i,
-                    historyTransaksi[i][0], // Nomor Resi
-                    historyTransaksi[i][1], // Tanggal
-                    historyTransaksi[i][2], // Nama Pengirim
-                    historyTransaksi[i][3], // Nomor Kontak
-                    historyTransaksi[i][5],  //Jenis Layanan
-                    historyTransaksi[i][4], // Tujuan
-                    historyTransaksi[i][10], // Berat
-                    historyTransaksi[i][11], // Deskripsi
-                    historyTransaksi[i][6], // Tarif
-                    historyTransaksi[i][7], // Nama Kasir
-                    historyTransaksi[i][8], // Nama Penerima
-                    historyTransaksi[i][9] // Alamat
-                ));
+    private static double getRevenue(Date startDate, Date endDate) {
+        int revenue = 0;
+        try {
+            for (int i = 0; i < historyTransaksi.length; i++) {
+                Date transaksiDate = dateFormat.parse(historyTransaksi[i][1]);
+                if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
+                    revenue += Double.parseDouble(historyTransaksi[i][6]);
+                }
             }
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+        return revenue;  
     }
 
-    private static String generateNomorResi() {
-        long timestamp = System.currentTimeMillis();
-        return String.valueOf(timestamp);
+    private static int getTotalWeight(Date startDate, Date endDate) {
+        int weight = 0;
+        try {
+            for (int i = 0; i < historyTransaksi.length; i++) {
+                Date transaksiDate = dateFormat.parse(historyTransaksi[i][1]);
+                if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
+                    weight += Double.parseDouble(historyTransaksi[i][10]);
+                }
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return weight;  
     }
 
+    private static int getExpeditionCount(Date startDate, Date endDate) {
+        int count = 0;
+        try {
+            for (int i = 0; i < historyTransaksi.length; i++) {
+                Date transaksiDate = dateFormat.parse(historyTransaksi[i][1]);
+                if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
+                    count++;
+                }
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return count;  
+    }
+
+    private static void displayHeader(){
+        System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║");
+        System.out.println("║"+YELLOW+centerString(98, "╔═╗╦╔═╗╔╦╗╔═╗╔╦╗  ╔═╗╦╔═╔═╗╔═╗╔═╗╔╦╗╦╔═╗╦"+RESET));
+        System.out.println("║"+YELLOW+centerString(98, "╚═╗║╚═╗ ║ ║╣ ║║║  ║╣ ╠╩╗╚═╗╠═╝║╣  ║║║╚═╗║"+RESET));
+        System.out.println("║"+YELLOW+centerString(98, "╚═╝╩╚═╝ ╩ ╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩  ╚═╝═╩╝╩╚═╝╩"+RESET));
+        System.out.println("║");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+    }
+
+    private static void clearTerminal(){
+        System.out.println(CLEAR);
+        System.out.flush();
+    }
+
+    private static void displayIndonesianMap(){
+        System.out.println("║   ..                                                                                              \r\n" + //
+                "║   .-===-                                                                                          \r\n" + //
+                "║     .:===:.                 .              ===-                                                   \r\n" + //
+                "║        -===-.                             -====:                                                  \r\n" + //
+                "║          -====-:              :.    ..  .-======.            .     :..                            \r\n" + //
+                "║        .  =======-.           ===-=============:..  ::-::.:::.     ::.                            \r\n" + //
+                "║            :======-           -================    .               :     .  .:.                   \r\n" + //
+                "║          :  .======-:          .=============:     ==::=-..        .      .-====:   .  .          \r\n" + //
+                "║              .=======::-:       -===========-     -====:                .   .:-::    :-===-:..    \r\n" + //
+                "║                :=======-   .       .::.::===:     -=- ==:       .-. .::::.   :=-=-.:==========.   \r\n" + //
+                "║                  :=====:                 .         --  =-..                   .  .:-==========.   \r\n" + //
+                "║                    .===:                           =:    :                             :======.   \r\n" + //
+                "║                        :---:.    .                                              .:       -====    \r\n" + //
+                "║                         .--==-==-====:..                                   .             :====    \r\n" + //
+                "║                                 .:::--:--.: ......  ...  .   .                          -:.::=.   \r\n" + //
+                "║                                               ..  ...       .:                                    \r\n" + //
+                "║                                                     :.     ::                                     \r\n" + //
+                "╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+    }
+
+    private static void displayRoute() {
+        System.out.println("║                                           @@@@                                             \r\n" + //
+                "║                                         @@@@@@@@                                            \r\n" + //
+                "║            ╔══════════════════════════@@@@@@@@@@@@════════════════════@@@@@@═══════╗        \r\n" + //
+                "║            ║........  ..........   ...@@@@    @@@@...............    @@@@@@@@......║        \r\n" + //
+                "║           ╔╝:......   ..........   ...@@@@    @@@@...............  @@@@    @@@@....╚╗       \r\n" + //
+                "║           ║........  ..........    .....@@@@@@@@.................  @@@@    @@@@.....║       \r\n" + //
+                "║          ╔╝:......   ..........         .@@@@@@.                    @@@@@@@@@@......╚╗      \r\n" + //
+                "║          ║........  ..........    ........@@@@....................   @@@@@@@@........║      \r\n" + //
+                "║         ╔╝.......   ....@@@@@@.. ..........@@.....................    .@@@@..........╚╗     \r\n" + //
+                "║         ║........  ...@@@@@@@@@@...................................    .@@............║     \r\n" + //
+                "║        ╔╝.......   ..@@@@    @@@@..................................     ::............╚╗    \r\n" + //
+                "║        ║........    .@@@@    @@@@.                                                     ║    \r\n" + //
+                "║       ╔╝...............@@@@@@@@.....................................     .............:╚╗   \r\n" + //
+                "║       ║.................@@@@@@ .....................................     ...............║   \r\n" + //
+                "║      ╔╝..................@@@@ ......................................     ...............╚╗  \r\n" + //
+                "║      ║....................@@........................................     ................║  \r\n" + //
+                "║      ╚═══════════════════════════════════════════════════════════════════════════════════╝  \r\n" + //
+                "║                                                                                             \r\n" + //
+                "╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+    }
+    
 }
