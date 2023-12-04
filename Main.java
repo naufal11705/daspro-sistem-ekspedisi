@@ -439,7 +439,9 @@ public class Main {
                                         namaPenerima,
                                         alamatPenerima,
                                         String.valueOf(beratBarang),
-                                        deskripsiBarang};
+                                        deskripsiBarang,
+                                        "On Process",
+                                        origin};
 
                                     System.out.println(String.format(
                                         labelFormat,
@@ -571,6 +573,7 @@ public class Main {
                                     System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
                                     System.out.print("║ -> Masukkan Pilihan: ");
                                     editMenu = input.nextInt();
+                                    input.nextLine();
                                     switch (editMenu) {
                                         case 1:
                                             boolean validInputTanggalAwal = false;
@@ -585,6 +588,7 @@ public class Main {
                                                     System.out.println("Format tanggal tidak valid. Harap masukkan tanggal dengan format dd-MM-yyyy.");
                                                     input.nextLine(); 
                                                 }
+                                                
                                             } while (!validInputTanggalAwal);
                                         
                                             do {
@@ -604,12 +608,15 @@ public class Main {
                                             } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
+                                            System.out.print("Enter: ");
+                                            input.nextLine();   
+                                            clearTerminal(); 
                                             break;
                                         case 2:
                                         try {
                                             int tanggalInput;
-                                        
-                                            while (!inputValid) {
+                                            validInput = false;
+                                            while (!validInput) {
                                                 System.out.print("Masukkan Tanggal (dd): ");
                                                 if (input.hasNextInt()) {
                                                     tanggalInput = input.nextInt();
@@ -617,7 +624,7 @@ public class Main {
                                                     if (tanggalInput < 1 || tanggalInput > 31) {
                                                         System.out.println("Tanggal tidak valid.");
                                                     } else {
-                                                        inputValid = true;
+                                                        validInput = true;
                                                         Calendar cal = Calendar.getInstance();
                                                         int bulanSekarang = cal.get(Calendar.MONTH) + 1; // Bulan dimulai dari 0
                                                         int tahunSekarang = cal.get(Calendar.YEAR);
@@ -640,6 +647,7 @@ public class Main {
                                         case 3:
                                             try {
                                                 int bulanInput;
+                                                validInput = false;
                                                 while (true) {
                                                     System.out.print("Masukkan Bulan (MM): ");
                                                     if (input.hasNextInt()) {
@@ -676,11 +684,13 @@ public class Main {
                                             try {
                                                 int tahunInput = 0;
                                     
+                                                validInput = false;
                                                 while (!validInput) {
                                                     System.out.print("Masukkan Tahun: ");
                                     
                                                     if (input.hasNextInt()) {
                                                         tahunInput = input.nextInt();
+                                                        input.nextLine();
                                     
                                                         if (tahunInput >= 1900 && tahunInput <= 3000) {
                                                             validInput = true;
