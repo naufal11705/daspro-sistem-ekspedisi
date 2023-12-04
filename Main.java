@@ -478,6 +478,39 @@ public class Main {
                                     double biayaAkhir = tarifLayanan + (beratBarang*tarifPerKg) + biayaJarak;
                                     nomorResi = generateTrackingNumber();
 
+                                    System.out.println("║");
+                                    System.out.println("║ Metode Pembayaran");
+                                    System.out.println("║ 1. VIA Bank");
+                                    System.out.println("║ 2. COD");
+                                    System.out.println("║ 3. Tunai");
+                                    System.out.print("║ Pilih Metode Pembayaran: ");
+                                    int metode = input.nextInt();
+
+                                    switch (metode) {
+                                        case 1:
+                                        System.out.println("║ Jenis Pilihan Bank yang Tersedia");
+                                        System.out.println("║ 1. BRI");
+                                        System.out.println("║ 2. BNI");
+                                        System.out.println("║ 3. MANDIRI");
+                                    
+                                        System.out.print("║ pilih jenis Bank yang ingin digunakan (Nama Bank) ");
+                                        String jenisBank = input.next();
+                                        System.out.println("║ Pembayaran Berhasil menggunakan " +jenisBank);
+                                        break;
+
+                                        case 2: 
+                                        System.out.println("║Silahkan lakukan pembayaran sejumlah " +biayaAkhir+ " sebelum menerima barang. Biaya akan dibebankan kepada penerima barang!!!");
+                                        break;
+
+                                        case 3:
+                                        System.out.println("║ Biaya Pengiriman sebesar: " +biayaAkhir);
+                                        System.out.print("║ Bayar: ");
+                                        int bayar = input.nextInt();
+                                        System.out.println("║ Kembalian: " +(bayar - biayaAkhir));
+                                        break;
+
+                                    }
+
                                     historyTransaksi = Arrays.copyOf(historyTransaksi,historyTransaksi.length + 1);
                                     historyTransaksi[historyTransaksi.length-1] = new String[]{
                                         nomorResi,
