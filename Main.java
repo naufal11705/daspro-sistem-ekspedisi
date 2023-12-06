@@ -822,9 +822,8 @@ public class Main {
 
                                             while (!validInput) {
                                                 System.out.print("║ -> Masukkan nomor resi: ");
-                                                input.nextLine();
+                                                searchString = input.nextLine();
                                                 try {
-                                                    searchString = input.nextLine();
                                                     validInput = true;
 
                                                     for (int i=0; i<historyTransaksi.length; i++) {
