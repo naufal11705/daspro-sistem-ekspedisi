@@ -215,16 +215,26 @@ public class Main {
 
                 if(isAdmin){
                     System.out.println("║ [0]. " + getLanguageModuleText(1)); //Manajemen Pengguna
-                }
-                System.out.println("║ [1]. " + getLanguageModuleText(2)); //Pengiriman Barang
-                System.out.println("║ [2]. " + getLanguageModuleText(12)); //Manajemen Lokasi
-                System.out.println("║ [3]. " + getLanguageModuleText(17)); //Manajemen Tarif
-                System.out.println("║ [4]. " + getLanguageModuleText(23)); //Ganti Bahasa
-                System.out.println("║ [5]. Laporan"); //Laporan
-                System.out.println("║ [6]. Keluar"); //Keluar
-                System.out.println("║ [7]. Manajemen Tarif Dasar");
-                System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                     System.out.println("║ [1]. " + getLanguageModuleText(2)); //Pengiriman Barang
+                    System.out.println("║ [2]. " + getLanguageModuleText(12)); //Manajemen Lokasi
+                    System.out.println("║ [3]. " + getLanguageModuleText(17)); //Manajemen Tarif
+                    System.out.println("║ [4]. " + getLanguageModuleText(23)); //Ganti Bahasa
+                    System.out.println("║ [5]. Manajemen Tarif Dasar"); //Laporan
+                    System.out.println("║ [6]. Laporan"); 
+                    System.out.println("║ [7]. Keluar");
+                    System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
 
+                } else {
+                    System.out.println("║ [1]. " + getLanguageModuleText(2)); //Pengiriman Barang
+                    System.out.println("║ [2]. " + getLanguageModuleText(12)); //Manajemen Lokasi
+                    System.out.println("║ [3]. " + getLanguageModuleText(17)); //Manajemen Tarif
+                    System.out.println("║ [4]. " + getLanguageModuleText(23)); //Ganti Bahasa
+                    System.out.println("║ [5]. Manajemen Tarif Dasar"); //Laporan
+                    System.out.println("║ [6]. Keluar"); //Keluar
+                    System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+
+            }
+                
                 System.out.print("║ " + languageModule[26][selectedLanguage]);
                 menuUtama = input.nextInt();
                 input.nextLine();
@@ -477,6 +487,39 @@ public class Main {
                                      
                                     double biayaAkhir = tarifLayanan + (beratBarang*tarifPerKg) + biayaJarak;
                                     nomorResi = generateTrackingNumber();
+
+                                    System.out.println("║");
+                                    System.out.println("║ Metode Pembayaran");
+                                    System.out.println("║ 1. VIA Bank");
+                                    System.out.println("║ 2. COD");
+                                    System.out.println("║ 3. Tunai");
+                                    System.out.print("║ Pilih Metode Pembayaran: ");
+                                    int metode = input.nextInt();
+
+                                    switch (metode) {
+                                        case 1:
+                                        System.out.println("║ Jenis Pilihan Bank yang Tersedia");
+                                        System.out.println("║ 1. BRI");
+                                        System.out.println("║ 2. BNI");
+                                        System.out.println("║ 3. MANDIRI");
+                                    
+                                        System.out.print("║ pilih jenis Bank yang ingin digunakan (Nama Bank) ");
+                                        String jenisBank = input.next();
+                                        System.out.println("║ Pembayaran Berhasil menggunakan " +jenisBank);
+                                        break;
+
+                                        case 2: 
+                                        System.out.println("║Silahkan lakukan pembayaran sejumlah " +biayaAkhir+ " sebelum menerima barang. Biaya akan dibebankan kepada penerima barang!!!");
+                                        break;
+
+                                        case 3:
+                                        System.out.println("║ Biaya Pengiriman sebesar: " +biayaAkhir);
+                                        System.out.print("║ Bayar: ");
+                                        int bayar = input.nextInt();
+                                        System.out.println("║ Kembalian: " +(bayar - biayaAkhir));
+                                        break;
+
+                                    }
 
                                     historyTransaksi = Arrays.copyOf(historyTransaksi,historyTransaksi.length + 1);
                                     historyTransaksi[historyTransaksi.length-1] = new String[]{
@@ -1107,30 +1150,8 @@ public class Main {
                             } while (inputselectedLanguage > languageModule[0].length);
                             clearTerminal();
                             break;
+        
                         case 5:
-                            Calendar calendar = Calendar.getInstance();
-                            calendar.set(Calendar.DAY_OF_MONTH, 1);
-                            Date startDate = calendar.getTime();
-
-                            calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-                            Date endDate = calendar.getTime();
-
-                            System.out.println(String.format(
-                                reportFormat,
-                                centerString(15, Integer.toString(getExpeditionCount(startDate, endDate))),
-                                centerString(15, Integer.toString(getTotalWeight(startDate, endDate))),
-                                centerString(15, "Rp "+Double.toString(getRevenue(startDate, endDate)))
-                            ));
-                            System.out.print("Enter: ");
-                            input.nextLine();   
-                            clearTerminal(); 
-                            break;
-                        case 6:
-                            exit=true;
-                            login=false;
-                            masuk=false;
-                            break;
-                        case 7:
                             System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
                             System.out.println("║"+YELLOW+centerString(98,"Manajemen Tarif Dasar")+RESET+"║");
                             System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
@@ -1158,12 +1179,49 @@ public class Main {
                                 default:
                                     break;
                             }
-
-                            break;
                         default:
                             System.out.println("║ Invalid choice. Please try again.");
+                            break; 
+                        }
+
+                        if (isAdmin) { 
+                            switch (menuUtama) {
+                            case 6: 
+                            Calendar calendar = Calendar.getInstance();
+                            calendar.set(Calendar.DAY_OF_MONTH, 1);
+                            Date startDate = calendar.getTime();
+
+                            calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+                            Date endDate = calendar.getTime();
+
+                            System.out.println(String.format(
+                                reportFormat,
+                                centerString(15, Integer.toString(getExpeditionCount(startDate, endDate))),
+                                centerString(15, Integer.toString(getTotalWeight(startDate, endDate))),
+                                centerString(15, "Rp "+Double.toString(getRevenue(startDate, endDate)))
+                            ));
+                            System.out.print("Enter: ");
+                            input.nextLine();   
+                            clearTerminal(); 
                             break;
-                    }
+                           
+                        case 7:
+                            exit=true;
+                            login=false;
+                            masuk=false;
+                            break;
+                        }
+                        } else {
+                            switch (menuUtama) { 
+                                case 6:
+                                exit=true;
+                                login=false;
+                                masuk=false;
+                                break;
+                           }
+                        
+                        }
+                    
                     break;
                 } while (isLoop);
                 
