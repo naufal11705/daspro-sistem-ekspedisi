@@ -74,12 +74,12 @@ public class Main {
                     {"Data with this receipt number has been removed","Data dengan nomor resi yang sesuai sudah dihapus"},  //48
                     {"User Data", "Data Pengguna"}, //49
             
-            {"Rute Management", "Manajemen Rute"},  //50
-                {"Add New Rute", "Tambah Rute Baru"},   //51
-                    {"║ Rute has been available", "║ Rute sudah tersedia"}, //52
-                    {"║ Enter the distance between ", "║ Masukkan jarak antara "},  //53
-                {"Remove Rute", "Hapus Rute"},  //54
-                {"Displays Location's Data", "Menampilkan Data Rute Pengiriman"},   //55
+            {"Rute Management", "Manajemen Rute"}, //49 
+                {"Add New Rute", "Tambah Rute Baru"},   //50
+                    {"║ Rute has been available", "║ Rute sudah tersedia"}, //51
+                    {"║ Enter the distance between ", "║ Masukkan jarak antara "},  //52
+                {"Remove Rute", "Hapus Rute"},  //53
+                {"Displays Location's Data", "Menampilkan Data Rute Pengiriman"},   //54
 
             {"Cost Management", "Manajemen Layanan"}, //56
                 {"Add Service Types", "Tambahkan Jenis Layanan"},   //57
@@ -87,7 +87,7 @@ public class Main {
                     {"║ ⤷ Cost: Rp.", "║ ⤷ Masukkan Tarif: Rp."},   //59
                     {"║ ⤷ Minimum delivery time: ","║ ⤷ Masukkan Waktu Pengiriman Minimum: "},  //60
                     {"║ ⤷ Maximum delivery time: ","║ ⤷ Masukkan Waktu Pengiriman Maximum: "},  //61
-                {"Edit Cost Service", "Edit Tarif Layanan"},    //62
+                {"Edit Service", "Edit Layanan"},    //62
                     {"║ Service list available: ","║ Daftar Layanan yang Tersedia: "},  //63
                     {"║ ⤷ Enter service number want to change: " ,"║ ⤷ Masukkan nomor layanan yang ingin diubah: "},    //64
                 {"Remove Service", "Menghapus Layanan"},    //65
@@ -1097,13 +1097,13 @@ public class Main {
                             System.out.println("║             ╭──────────────────────────────────────────────────────────────────────╮             ║");
                             System.out.println("║             │                                                                      │             ║");
                             System.out.println("║             │                                                                      │             ║");
-                            System.out.println("║             │                     [1]. Tambah Rute                                 │             ║");
+                            System.out.println("║             │                     [1]. " + padString(44, languageModule[50][selectedLanguage]) + "│             ║");
                             System.out.println("║             │                                                                      │             ║");
-                            System.out.println("║             │                     [2]. Hapus Rute                                  │             ║");
+                            System.out.println("║             │                     [2]. " + padString(44, languageModule[53][selectedLanguage]) + "│             ║");
                             System.out.println("║             │                                                                      │             ║");
-                            System.out.println("║             │                     [3]. Data Rute                                   │             ║");
+                            System.out.println("║             │                     [3]. " + padString(44, languageModule[54][selectedLanguage]) + "│             ║");
                             System.out.println("║             │                                                                      │             ║");
-                            System.out.println("║             │                     [4]. Kembali ke Menu Utama                       │             ║");
+                            System.out.println("║             │                     [4]. " + padString(44, languageModule[78][selectedLanguage]) + "│             ║");
                             System.out.println("║             │                                                                      │             ║");
                             System.out.println("║             │                                                                      │             ║"); 
                             System.out.println("║             ╰──────────────────────────────────────────────────────────────────────╯             ║");
@@ -1206,15 +1206,15 @@ public class Main {
                             System.out.println("║                                                                                                  ║");
                             System.out.println("║             ╭──────────────────────────────────────────────────────────────────────╮             ║");
                             System.out.println("║             │                                                                      │             ║");
-                            System.out.println("║             │                     [1]. Tambah Jenis Layanan                        │             ║");
+                            System.out.println("║             │                     [1]. " + padString(44, languageModule[56][selectedLanguage]) + "│             ║");
                             System.out.println("║             │                                                                      │             ║");
-                            System.out.println("║             │                     [2]. Edit Layanan                                │             ║");
+                            System.out.println("║             │                     [2]. " + padString(44, languageModule[61][selectedLanguage]) + "│             ║");
                             System.out.println("║             │                                                                      │             ║");
-                            System.out.println("║             │                     [3]. Hapus Layanan                               │             ║");
+                            System.out.println("║             │                     [3]. " + padString(44, languageModule[64][selectedLanguage]) + "│             ║");
                             System.out.println("║             │                                                                      │             ║");
-                            System.out.println("║             │                     [4]. Data Layanan                                │             ║");
+                            System.out.println("║             │                     [4]. " + padString(44, languageModule[65][selectedLanguage]) + "│             ║");
                             System.out.println("║             │                                                                      │             ║");
-                            System.out.println("║             │                     [5]. Keluar                                      │             ║");
+                            System.out.println("║             │                     [5]. " + padString(44, languageModule[78][selectedLanguage]) + "│             ║");
                             System.out.println("║             │                                                                      │             ║"); 
                             System.out.println("║             ╰──────────────────────────────────────────────────────────────────────╯             ║");
                             System.out.println("║                                                                                                  ║"); 
@@ -1420,13 +1420,23 @@ public class Main {
                         case 5:
                             System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
                             System.out.println("║"+YELLOW+centerString(98,"Manajemen Tarif Dasar")+RESET+"║");
-                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-
-                            System.out.println("║ [1]. Tarif Dasar per Kg"); //Tambahan Jenis Layanan
-                            System.out.println("║ [2]. Tarif Dasar per Km"); //Merubah Tarif Layanan
-                            System.out.println("║ [3]. Keluar"); //Keluar
-
-                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                    System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                    System.out.println("║                                                                                                  ║");
+                                    System.out.println("║             ╭──────────────────────────────────────────────────────────────────────╮             ║");
+                                    System.out.println("║             │                                                                      │             ║");
+                                    System.out.println("║             │                                                                      │             ║");
+                                    System.out.println("║             │                                                                      │             ║");
+                                    System.out.println("║             │          [1]. " + padString(25, languageModule[69][selectedLanguage]) + "│             ║");
+                                    System.out.println("║             │                                                                      │             ║");
+                                    System.out.println("║             │          [2]. " + padString(25, languageModule[70][selectedLanguage]) + "│             ║");
+                                    System.out.println("║             │                                                                      │             ║");
+                                    System.out.println("║             │          [3]. " + padString(25, languageModule[78][selectedLanguage]) + "│             ║");
+                                    System.out.println("║             │                                                                      │             ║");
+                                    System.out.println("║             │                                                                      │             ║");
+                                    System.out.println("║             │                                                                      │             ║"); 
+                                    System.out.println("║             ╰──────────────────────────────────────────────────────────────────────╯             ║");
+                                    System.out.println("║                                                                                                  ║"); 
+                                    System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
                             System.out.print("║ ⤷ Masukkan Pilihan: ");
                             subMenu = input.nextInt();
 
