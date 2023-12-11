@@ -359,10 +359,10 @@ public class Main {
                                     int startEstimation = 0;
                                     int endEstimation = 0;
 
-                                        System.out.print("║ ⤷ Masukkan Nama Layanan: ");
+                                        System.out.print(languageModule[57][selectedLanguage]);
                                         namaLayanan = input.next();
                                         while (!inputValid) {
-                                            System.out.print("║ ⤷ Masukkan Tarif: ");
+                                            System.out.print(languageModule[58][selectedLanguage]);
                                             if (input.hasNextDouble()) {
                                                 tarifLayanan = input.nextDouble();
                                                 inputValid = true;
@@ -372,9 +372,9 @@ public class Main {
                                             }
                                         }
 
-                                        System.out.print("║ ⤷ Masukkan Waktu Pengiriman Minimum: ");
+                                        System.out.print(languageModule[59][selectedLanguage]);
                                         startEstimation = input.nextInt();
-                                        System.out.print("║ ⤷ Masukkan Waktu Pengiriman Maximum: ");
+                                        System.out.print("");
                                         endEstimation = input.nextInt();
 
                                         arrayLayanan = Arrays.copyOf(arrayLayanan,arrayLayanan.length + 1);
@@ -387,12 +387,12 @@ public class Main {
                                     pressEnter();
                                     break;
                                 case 2:
-                                    System.out.println("║ Daftar Layanan yang Tersedia:");
+                                    System.out.println(languageModule[62][selectedLanguage]);
                                     for (int i = 0; i < arrayLayanan.length; i++) {
                                         System.out.println("║ "+(i + 1) + ". " + arrayLayanan[i][0] );
                                     }
                             
-                                    System.out.print("║ ⤷ Masukkan nomor layanan yang ingin diubah: ");
+                                    System.out.print(languageModule[63][selectedLanguage]);
                                     int selectedService = 0;
 
                                     while (!inputValid) {
@@ -416,7 +416,7 @@ public class Main {
                                         System.out.println("║ Pilih yang ingin diubah:");
                                         System.out.println("║ [1]. Nama Layanan");
                                         System.out.println("║ [2]. Tarif Layanan");
-                                        System.out.print("║ ⤷ Masukkan nomor pilihan: ");
+                                        System.out.print(languageModule[80][selectedLanguage]);
                                         int changeOption = 0;
 
                                         while (!inputValid) {
@@ -567,7 +567,7 @@ public class Main {
                             displayHeader();
                             displayIndonesianMap();
 
-                            System.out.println("║"+YELLOW+centerString(98,"Pengiriman Barang")+RESET+"║");
+                            System.out.println("║"+YELLOW+centerString(98,languageModule[72][selectedLanguage])+RESET+"║");
                             System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
                             System.out.println("║                                                                                                  ║");
                             System.out.println("║             ╭──────────────────────────────────────────────────────────────────────╮             ║");
@@ -592,7 +592,7 @@ public class Main {
                             switch (subMenu) {
                                 case 1:
                                     boolean inputFound = false;
-                                    System.out.print("║ ⤷ Masukkan lokasi gudang: ");
+                                    System.out.print(languageModule[74][selectedLanguage]);
                                     String location  = input.nextLine();
 
                                             inputFound = true;
@@ -712,7 +712,7 @@ public class Main {
                                             }
 
                                             while (!shipmentFound) {
-                                                System.out.print("║ ⤷ Masukkan lokasi gudang: ");
+                                                System.out.print(languageModule[74][selectedLanguage]);
                                                 location  = input.nextLine();
 
                                                 for (int i = 0; i < rutePengiriman.length; i++) {
@@ -761,7 +761,7 @@ public class Main {
 
                                                     if (searchIndex != 0){
                                                         int indexKirim;
-                                                        System.out.print("║ ⤷ Masukkan index: ");
+                                                        System.out.print(languageModule[76][selectedLanguage]);
                                                         indexKirim = input.nextInt();
 
                                                         boolean adaKesamaanData = false;           
@@ -843,7 +843,7 @@ public class Main {
                                     displayHeader();
                                     displayIndonesianMap();
 
-                                    System.out.println("║"+YELLOW+centerString(98,"Pengiriman Barang")+RESET+"║");
+                                    System.out.println("║"+YELLOW+centerString(98,languageModule[72][selectedLanguage])+RESET+"║");
                                     System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
                                     System.out.println("║                                                                                                  ║");
                                     System.out.println("║             ╭──────────────────────────────────────────────────────────────────────╮             ║");
@@ -868,7 +868,7 @@ public class Main {
                                     switch (subMenu) {
                                         case 1:
                                             boolean inputFound = false;
-                                            System.out.print("║ ⤷ Masukkan lokasi gudang: ");
+                                            System.out.print(languageModule[74][selectedLanguage]);
                                             String location  = input.nextLine();
 
                                                     inputFound = true;
@@ -988,7 +988,7 @@ public class Main {
                                             }
 
                                             while (!shipmentFound) {
-                                                System.out.print("║ ⤷ Masukkan lokasi gudang: ");
+                                                System.out.print(languageModule[74][selectedLanguage]);
                                                 location  = input.nextLine();
 
                                                 for (int i = 0; i < rutePengiriman.length; i++) {
@@ -1037,7 +1037,7 @@ public class Main {
 
                                                     if (searchIndex != 0){
                                                         int indexKirim;
-                                                        System.out.print("║ ⤷ Masukkan index: ");
+                                                        System.out.print(languageModule[76][selectedLanguage]);
                                                         indexKirim = input.nextInt();
 
                                                         boolean adaKesamaanData = false;           
