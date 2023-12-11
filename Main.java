@@ -92,7 +92,7 @@ public class Main {
 
     static String loggedInUsername = "";
 
-    static double tarifPerKg = 2500;
+    static double tarifPerKg = 5000;
     static double tarifPerKm = 500;
 
     // Array History Pemesanan
@@ -371,10 +371,10 @@ public class Main {
                                     int tinggi;
                                     double berat=0;
                                     do {
-                                        System.out.print("║ Masukkan Berat: ");
+                                        System.out.print("║ Masukkan Berat (Kg): ");
                                         while (!input.hasNextInt()) {
                                             System.out.println("Input harus berupa bilangan bulat. Silakan coba lagi.");
-                                            System.out.print("Masukkan Berat: ");
+                                            System.out.print("Masukkan Berat (Kg): ");
                                             input.next(); // mengonsumsi input yang tidak valid
                                         }
                                         berat= input.nextInt();
@@ -388,10 +388,10 @@ public class Main {
                                     } while (!validInput);
 
                                     do {
-                                        System.out.print("║ Masukkan Panjang: ");
+                                        System.out.print("║ Masukkan Panjang (cm): ");
                                         while (!input.hasNextInt()) {
                                             System.out.println("Input harus berupa bilangan bulat. Silakan coba lagi.");
-                                            System.out.print("Masukkan Panjang: ");
+                                            System.out.print("Masukkan Panjang (cm): ");
                                             input.next(); // mengonsumsi input yang tidak valid
                                         }
                                         panjang= input.nextInt();
@@ -405,10 +405,10 @@ public class Main {
                                     } while (!validInput);
                                     
                                     do {
-                                        System.out.print("║ Masukkan Lebar: ");
+                                        System.out.print("║ Masukkan Lebar (cm): ");
                                         while (!input.hasNextInt()) {
                                             System.out.println("Input harus berupa bilangan bulat. Silakan coba lagi.");
-                                            System.out.print("Masukkan Lebar: ");
+                                            System.out.print("Masukkan Lebar (cm): ");
                                             input.next(); // mengonsumsi input yang tidak valid
                                         }
                                         luas = input.nextInt();
@@ -422,10 +422,10 @@ public class Main {
                                     } while (!validInput);
 
                                     do {
-                                        System.out.print("║ Masukkan Tinggi: ");
+                                        System.out.print("║ Masukkan Tinggi (cm): ");
                                         while (!input.hasNextInt()) {
                                             System.out.println("Input harus berupa bilangan bulat. Silakan coba lagi.");
-                                            System.out.print("Masukkan Tinggi: ");
+                                            System.out.print("Masukkan Tinggi (cm): ");
                                             input.next(); // mengonsumsi input yang tidak valid
                                         }
                                         tinggi = input.nextInt();
@@ -482,7 +482,7 @@ public class Main {
                                     double beratBarangTemp; // Variabel sementara untuk menyimpan nilai dari kedua kondisi
 
                                     if (beratBarang >= 0) {
-                                        beratBarangTemp = (berat * tarifPerKg) / 100;
+                                        beratBarangTemp = (berat * tarifPerKg) / 5;
                                     } else {
                                         beratBarangTemp = (tarifPerKg * (panjang * luas * tinggi) / 4000) / 100;
                                     }
