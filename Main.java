@@ -95,7 +95,7 @@ public class Main {
 
     static String loggedInUsername = "";
 
-    static double tarifPerKg = 2500;
+    static double tarifPerKg = 5000;
     static double tarifPerKm = 500;
 
     static String[][] historyTransaksi = {
@@ -459,10 +459,29 @@ public class Main {
                                     System.out.print("║ Masukkan Deskripsi Barang: ");
                                     String deskripsiBarang = input.nextLine();
 
-                                    int beratBarang=0;
+                                    double beratBarang=0;
                                     int panjang;
                                     int luas;
                                     int tinggi;
+                                    int berat=0;
+                                    do {
+                                        System.out.print("║ Masukkan Berat: ");
+                                        while (!input.hasNextInt()) {
+                                            System.out.println("Input harus berupa bilangan bulat. Silakan coba lagi.");
+                                            System.out.print("Masukkan Berat: ");
+                                            input.next(); // mengonsumsi input yang tidak valid
+                                        }
+                                        berat= input.nextInt();
+
+                                        input.nextLine(); // membersihkan buffer input
+                                        if (berat <= 0) {
+                                            System.out.println("panjang harus lebih besar dari 0. Silakan coba lagi.");
+                                        } else {
+                                            validInput = true;
+                                        }
+                                    } while (!validInput);
+                                    
+                                    
                                     do {
                                         System.out.print("║ Masukkan Panjang: ");
                                         while (!input.hasNextInt()) {
@@ -561,13 +580,19 @@ public class Main {
                                     System.out.print ("║ ⤷ Masukkan Pilihan: ");
                                     pilihanLayanan = input.nextInt();
                                     double tarifLayanan = Double.parseDouble(arrayLayanan[pilihanLayanan][1]); 
-                                    if (beratBarang<1) {
-                                        beratBarang = 1;
+                                    double beratBarangTemp; // Variabel sementara untuk menyimpan nilai dari kedua kondisi
+
+                                    if (beratBarang >= 0) {
+                                        beratBarangTemp = (berat * tarifPerKg) / 5;
                                     } else {
-                                        beratBarang = (panjang*luas*tinggi)/6000;
+                                        beratBarangTemp = (tarifPerKg * (panjang * luas * tinggi) / 4000) / 100;
                                     }
-                                     
-                                    double biayaAkhir = tarifLayanan + (beratBarang*tarifPerKg) + biayaJarak;
+
+                                    // Menggunakan nilai terbesar dari kedua kondisi untuk beratBarang
+                                    beratBarang = Math.max(beratBarang, beratBarangTemp);
+
+                                    // Menghitung biayaAkhir dengan nilai beratBarang yang telah ditentukan
+                                    double biayaAkhir = tarifLayanan + beratBarang + biayaJarak;
                                     nomorResi = generateTrackingNumber();
 
                                     System.out.println("║");
