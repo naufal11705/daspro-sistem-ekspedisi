@@ -38,11 +38,11 @@ public class Main {
                     {"║ ⤷ Enter Username want to remove: ","║ ⤷ Masukan username yang akan dihapus: "}, //13
                     {"🗑️  User successfully removed.","🗑️  Pengguna telah dihapus."},   //14
                     {"⚠️  USER NOT FOUND. PLEASE TRY AGAIN.","⚠️  PENGGUNA TIDAK DITEMUKAN. SILAKAN COBA LAGI."},   //15
-                {" User Data", "Data Pengguna"},    //16
+                {"User Data", "Data Pengguna"},    //16
                     {"User Management", "Manajemen Pengguna"},  //17
                 {"Back to the Main Menu", "Kembali ke Menu Utama"}, //18
 
-            {"Delivery of Goods' Transaction", "Transaksi Pengiriman       "}, //19
+            {"Delivery Transaction", "Transaksi Pengiriman       "}, //19
                 {"Transactions", "Melakukan Transaksi"}, //20
                     {"║ Enter the Sender's Name: ","║ Masukkan Nama Pengirim: "},   //21
                     {"║ Enter contact number: ", "║ Masukkan nomor kontak: "},  //22
@@ -95,11 +95,11 @@ public class Main {
                     {"Service", "Cost"},    //67
 
             {"Change Language", "Ganti Bahasa"},    //68
-            {"Basic Service Cost Management", "Manajemen Tarif Dasar"}, //69
+            {"Basic Cost Management", "Manajemen Tarif Dasar"}, //69
                 {"║ ⤷ Service Cost Management per Kg: ","║ ⤷ Masukkan tarif dasar per Kg: "},   //70
                 {"║ ⤷ Service Cost Management per Km: ","║ ⤷ Masukkan tarif dasar per Km: "},   //71
             {"Report", "Laporan"},  //72
-            {"Delivery of goods","Pengiriminan Barang"}, //73
+            {"Delivery of goods","Pengiriman Barang"}, //73
                 {"Warehouse Inventory", "Inventori Gudang"},    //74
                     {"║ ⤷ Enter warehouse location: ", "║ ⤷ Masukkan lokasi Gudang: "}, //75
                 {"Send Pakcage", "Kirim Paket"},    //76
@@ -108,12 +108,18 @@ public class Main {
             {"Exit", "Keluar"}, //79
 
         {"Logout Successs. See You! 👋","Anda telah berhasil keluar. Sampai jumpa lain waktu! 👋"}, //80
-        {"║ ⤷ Enter Options: ", "║ ⤷ Masukkan Pilihan: "},  //81
-        {"Click ⏎ Enter to Continue", "Tekan ⏎ Enter untuk melanjutkan"}, //82
+        {"║ ⤷ Enter Options: ", "║ ⤷ Masukkan Pilihan: "},  //80
+        {"Click ⏎ Enter to Continue", "Tekan ⏎ Enter untuk melanjutkan"}, //81
 
         // Data Tambahan
-        {"Weight: ", "Masukkan berat barang: "},
+        {"Weight: ", "Masukkan berat barang: "}, //82
+        {"Transaction History", "Histori Transaksi"}, //83
 
+        {"Date Range", "Rentang Tanggal"}, //84
+        {"Day", "Hari"}, //85
+        {"Month", "Bulan"}, //86
+        {"Year", "Tahun"}, //87
+        {"Tracking Number", "Nomor Resi"} //88
     };
 
     // Format tanggal
@@ -297,13 +303,13 @@ public class Main {
                     System.out.println("║                                                                                                  ║");
                     System.out.println("║             ╭──────────────────────────────────────────────────────────────────────╮             ║");
                     System.out.println("║             │                                                                      │             ║");
-                    System.out.println("║             │     [1]. "+padString(32, languageModule[5][selectedLanguage])+"[6]. "+padString(23, languageModule[68][selectedLanguage])+"│             ║");
+                    System.out.println("║             │     [1]. "+padString(28, languageModule[5][selectedLanguage])+"[6]. "+padString(27, languageModule[68][selectedLanguage])+"│             ║");
                     System.out.println("║             │                                                                      │             ║");
-                    System.out.println("║             │     [2]. "+padString(32, languageModule[18][selectedLanguage])+"[7]. "+padString(23, languageModule[71][selectedLanguage])+"│             ║");
+                    System.out.println("║             │     [2]. "+padString(28, languageModule[18][selectedLanguage])+"[7]. "+padString(27, languageModule[71][selectedLanguage])+"│             ║");
                     System.out.println("║             │                                                                      │             ║");
-                    System.out.println("║             │     [3]. "+padString(32, languageModule[49][selectedLanguage])+"[8]. "+padString(23, languageModule[72][selectedLanguage])+"│             ║");
+                    System.out.println("║             │     [3]. "+padString(28, languageModule[49][selectedLanguage])+"[8]. "+padString(27, languageModule[72][selectedLanguage])+"│             ║");
                     System.out.println("║             │                                                                      │             ║");
-                    System.out.println("║             │     [4]. "+padString(32, languageModule[55][selectedLanguage])+"[9]. "+padString(23, languageModule[78][selectedLanguage])+"│             ║");
+                    System.out.println("║             │     [4]. "+padString(28, languageModule[55][selectedLanguage])+"[9]. "+padString(27, languageModule[78][selectedLanguage])+"│             ║");
                     System.out.println("║             │                                                                      │             ║");
                     System.out.println("║             │     [5]. "+padString(60, languageModule[67][selectedLanguage])+"│             ║");
                     System.out.println("║             │                                                                      │             ║"); 
@@ -333,7 +339,7 @@ public class Main {
                     System.out.println("║             │                                                                      │             ║");
                     System.out.println("║             │                                                                      │             ║");
                     System.out.println("║             │                                                                      │             ║");
-                    System.out.println("║             │   [1]. " + padString(44, languageModule[18][selectedLanguage]) + "   [4]. " + padString(44, languageModule[65][selectedLanguage]) + "   │             ║");
+                    System.out.println("║             │   [1]. " + padString(44, languageModule[19][selectedLanguage]) + "   [4]. " + padString(44, languageModule[65][selectedLanguage]) + "   │             ║");
                     System.out.println("║             │                                                                      │             ║");
                     System.out.println("║             │   [2]. " + padString(44, languageModule[19][selectedLanguage]) + "   [5]. " + padString(44, languageModule[69][selectedLanguage]) + "   │             ║");
                     System.out.println("║             │                                                                      │             ║");
@@ -370,13 +376,13 @@ public class Main {
                                 System.out.println("║             ╭──────────────────────────────────────────────────────────────────────╮             ║");
                                 System.out.println("║             │                                                                      │             ║");
                                 System.out.println("║             │                                                                      │             ║");
-                                System.out.println("║             │                     [1]. Tambahkan Pengguna                          │             ║");
+                                System.out.println("║             │                     [1]. " + padString(44, languageModule[6][selectedLanguage]) + "│             ║");
                                 System.out.println("║             │                                                                      │             ║");
-                                System.out.println("║             │                     [2]. Hapus Pengguna                              │             ║");
+                                System.out.println("║             │                     [2]. " + padString(44, languageModule[11][selectedLanguage]) + "│             ║");
                                 System.out.println("║             │                                                                      │             ║");
-                                System.out.println("║             │                     [3]. Data Pengguna                               │             ║");
+                                System.out.println("║             │                     [3]. " + padString(44, languageModule[15][selectedLanguage]) + "│             ║");
                                 System.out.println("║             │                                                                      │             ║");
-                                System.out.println("║             │                     [4]. Keluar                                      │             ║");
+                                System.out.println("║             │                     [4]. " + padString(44, languageModule[78][selectedLanguage]) + "│             ║");
                                 System.out.println("║             │                                                                      │             ║");
                                 System.out.println("║             │                                                                      │             ║"); 
                                 System.out.println("║             ╰──────────────────────────────────────────────────────────────────────╯             ║");
@@ -476,15 +482,15 @@ public class Main {
                             System.out.println("║                                                                                                  ║");
                             System.out.println("║             ╭──────────────────────────────────────────────────────────────────────╮             ║");
                             System.out.println("║             │                                                                      │             ║");
-                            System.out.println("║             │                     [1]. Melakukan Transaksi                         │             ║");
+                            System.out.println("║             │                     [1]. " + padString(44, languageModule[19][selectedLanguage]) + "│             ║");
                             System.out.println("║             │                                                                      │             ║");
-                            System.out.println("║             │                     [2]. Edit Status Pengiriman                      │             ║");
+                            System.out.println("║             │                     [2]. " + padString(44, languageModule[43][selectedLanguage]) + "│             ║");
                             System.out.println("║             │                                                                      │             ║");
-                            System.out.println("║             │                     [3]. Hapus Transaksi                             │             ║");
+                            System.out.println("║             │                     [3]. " + padString(44, languageModule[46][selectedLanguage]) + "│             ║");
                             System.out.println("║             │                                                                      │             ║");
-                            System.out.println("║             │                     [4]. Riwayat Transaksi                           │             ║");
+                            System.out.println("║             │                     [4]. " + padString(44, languageModule[83][selectedLanguage]) + "│             ║");
                             System.out.println("║             │                                                                      │             ║");
-                            System.out.println("║             │                     [5]. Kembali ke Menu Utama                       │             ║");
+                            System.out.println("║             │                     [5]. " + padString(44, languageModule[17][selectedLanguage]) + "│             ║");
                             System.out.println("║             │                                                                      │             ║"); 
                             System.out.println("║             ╰──────────────────────────────────────────────────────────────────────╯             ║");
                             System.out.println("║                                                                                                  ║"); 
@@ -890,11 +896,11 @@ public class Main {
                                     System.out.println("║             │                                                                      │             ║");
                                     System.out.println("║             │                                                                      │             ║");
                                     System.out.println("║             │                                                                      │             ║");
-                                    System.out.println("║             │          [1]. Rentang Tanggal         [4]. Tahun                     │             ║");
+                                    System.out.println("║             │          [1]. " + padString(25, languageModule[84][selectedLanguage]) + "[4]. " + padString(25, languageModule[87][selectedLanguage]) + "│             ║");
                                     System.out.println("║             │                                                                      │             ║");
-                                    System.out.println("║             │          [2]. Hari                    [5]. Nomor Resi                │             ║");
+                                    System.out.println("║             │          [2]. " + padString(25, languageModule[85][selectedLanguage]) + "[5]. " + padString(25, languageModule[88][selectedLanguage]) + "│             ║");
                                     System.out.println("║             │                                                                      │             ║");
-                                    System.out.println("║             │          [3]. Bulan                   [6]. Kembali ke Menu Utama     │             ║");
+                                    System.out.println("║             │          [3]. " + padString(25, languageModule[86][selectedLanguage]) + "[6]. " + padString(25, languageModule[17][selectedLanguage]) + "│             ║");
                                     System.out.println("║             │                                                                      │             ║");
                                     System.out.println("║             │                                                                      │             ║");
                                     System.out.println("║             │                                                                      │             ║"); 
@@ -2064,8 +2070,7 @@ public class Main {
     }
 
     private static String padString(int width, String s) {
-        int padSize = width - s.length();
-        return String.format("%s%" + padSize + "s", s, "");
+        return String.format("%-" + width + "s", s);
     }
 
     private static String generateTrackingNumber() {
