@@ -518,22 +518,70 @@ public class Main {
                                     System.out.print("║ Masukkan Deskripsi Barang: ");
                                     String deskripsiBarang = input.nextLine();
 
-                                    int beratBarang=0;
+                                    double beratBarang=0;
                                     int panjang;
                                     int luas;
                                     int tinggi;
+                                    int berat=0;
+                                    do {
+                                        System.out.print("║ Masukkan Berat: ");
+                                        while (!input.hasNextInt()) {
+                                            input.nextLine();
+                                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                            System.out.println("║                                                                                                  ║");
+                                            System.out.println("║"+centerString(99, "⚠️ INPUT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI.")+"║");
+                                            System.out.println("║                                                                                                  ║");
+                                            System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                                            System.out.print("Tekan ⏎ Enter untuk melanjutkan ");
+                                            input.nextLine();  
+                                            System.out.print("\033[7A\033[0J");
+                                            System.out.print("║ Masukkan Berat: ");
+                                        }
+                                        berat= input.nextInt();
+
+                                        input.nextLine(); // membersihkan buffer input
+                                        if (berat <= 0) {
+                                            input.nextLine();
+                                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                            System.out.println("║                                                                                                  ║");
+                                            System.out.println("║"+centerString(99, "⚠️ PANJANG HARUS LEBIH BESAR DARI 0 . SILAHKAN COBA LAGI.")+"║");
+                                            System.out.println("║                                                                                                  ║");
+                                            System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                                            System.out.print("Tekan ⏎ Enter untuk melanjutkan ");
+                                            input.nextLine();  
+                                            System.out.print("\033[7A\033[0J");
+                                        } else {
+                                            validInput = true;
+                                        }
+                                    } while (!validInput);
+                                    
                                     do {
                                         System.out.print("║ Masukkan Panjang: ");
                                         while (!input.hasNextInt()) {
-                                            System.out.println("Input harus berupa bilangan bulat. Silakan coba lagi.");
-                                            System.out.print("Masukkan Panjang: ");
-                                            input.next(); // mengonsumsi input yang tidak valid
+                                            input.nextLine();
+                                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                            System.out.println("║                                                                                                  ║");
+                                            System.out.println("║"+centerString(99, "⚠️ INPUT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI.")+"║");
+                                            System.out.println("║                                                                                                  ║");
+                                            System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                                            System.out.print("Tekan ⏎ Enter untuk melanjutkan ");
+                                            input.nextLine();  
+                                            System.out.print("\033[7A\033[0J");
+                                            System.out.print("║ Masukkan Panjang: ");
                                         }
                                         panjang= input.nextInt();
 
                                         input.nextLine(); // membersihkan buffer input
                                         if (panjang <= 0) {
-                                            System.out.println("panjang harus lebih besar dari 0. Silakan coba lagi.");
+                                            input.nextLine();
+                                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                            System.out.println("║                                                                                                  ║");
+                                            System.out.println("║"+centerString(99, "⚠️ PANJANG HARUS LEBIH BESAR DARI 0 . SILAHKAN COBA LAGI.")+"║");
+                                            System.out.println("║                                                                                                  ║");
+                                            System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                                            System.out.print("Tekan ⏎ Enter untuk melanjutkan ");
+                                            input.nextLine();  
+                                            System.out.print("\033[7A\033[0J");
                                         } else {
                                             validInput = true;
                                         }
@@ -542,15 +590,30 @@ public class Main {
                                     do {
                                         System.out.print("║ Masukkan Lebar: ");
                                         while (!input.hasNextInt()) {
-                                            System.out.println("Input harus berupa bilangan bulat. Silakan coba lagi.");
-                                            System.out.print("Masukkan Lebar: ");
-                                            input.next(); // mengonsumsi input yang tidak valid
+                                            input.nextLine();
+                                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                            System.out.println("║                                                                                                  ║");
+                                            System.out.println("║"+centerString(99, "⚠️ INPUT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI.")+"║");
+                                            System.out.println("║                                                                                                  ║");
+                                            System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                                            System.out.print("Tekan ⏎ Enter untuk melanjutkan ");
+                                            input.nextLine();  
+                                            System.out.print("\033[7A\033[0J");
+                                            System.out.print("║ Masukkan Lebar: ");
                                         }
                                         luas = input.nextInt();
 
                                         input.nextLine(); // membersihkan buffer input
                                         if (luas <= 0) {
-                                            System.out.println("Luas harus lebih besar dari 0. Silakan coba lagi.");
+                                            input.nextLine();
+                                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                            System.out.println("║                                                                                                  ║");
+                                            System.out.println("║"+centerString(99, "⚠️ LUAS HARUS LEBIH BESAR DARI 0. SILAHKAN COBA LAGI.")+"║");
+                                            System.out.println("║                                                                                                  ║");
+                                            System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                                            System.out.print("Tekan ⏎ Enter untuk melanjutkan ");
+                                            input.nextLine();  
+                                            System.out.print("\033[7A\033[0J");
                                         } else {
                                             validInput = true;
                                         }
@@ -559,15 +622,30 @@ public class Main {
                                     do {
                                         System.out.print("║ Masukkan Tinggi: ");
                                         while (!input.hasNextInt()) {
-                                            System.out.println("Input harus berupa bilangan bulat. Silakan coba lagi.");
-                                            System.out.print("Masukkan Tinggi: ");
-                                            input.next(); // mengonsumsi input yang tidak valid
+                                            input.nextLine();
+                                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                            System.out.println("║                                                                                                  ║");
+                                            System.out.println("║"+centerString(99, "⚠️ INPUT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI.")+"║");
+                                            System.out.println("║                                                                                                  ║");
+                                            System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                                            System.out.print("Tekan ⏎ Enter untuk melanjutkan ");
+                                            input.nextLine();  
+                                            System.out.print("\033[7A\033[0J");
+                                            System.out.print("║ Masukkan Tinggi: ");
                                         }
                                         tinggi = input.nextInt();
 
                                         input.nextLine(); // membersihkan buffer input
                                         if (tinggi <= 0) {
-                                            System.out.println("Luas harus lebih besar dari 0. Silakan coba lagi.");
+                                            input.nextLine();
+                                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                            System.out.println("║                                                                                                  ║");
+                                            System.out.println("║"+centerString(99, "⚠️ LUAS HARUS LEBIH BESAR DARI 0. SILAHKAN COBA LAGI.")+"║");
+                                            System.out.println("║                                                                                                  ║");
+                                            System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                                            System.out.print("Tekan ⏎ Enter untuk melanjutkan ");
+                                            input.nextLine();  
+                                            System.out.print("\033[7A\033[0J");
                                         } else {
                                             validInput = true;
                                         }
@@ -604,7 +682,7 @@ public class Main {
                                             System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
                                             System.out.print("Tekan ⏎ Enter untuk melanjutkan ");
                                             input.nextLine();  
-                                            System.out.print("\033[8A\033[0J");
+                                            System.out.print("\033[7A\033[0J");
                                         }    
                                     } while (!found);
 
