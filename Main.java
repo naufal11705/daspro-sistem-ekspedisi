@@ -98,8 +98,8 @@ public class Main {
 
             {"Change Language", "Ganti Bahasa"},    //68
             {"Basic Cost Management", "Manajemen Tarif Dasar"}, //69
-                {"║ ⤷ Service Cost Management per Kg: ","║ ⤷ Masukkan tarif dasar per Kg: "},   //70
-                {"║ ⤷ Service Cost Management per Km: ","║ ⤷ Masukkan tarif dasar per Km: "},   //71
+                {"Service Cost Management per Kg","Tarif dasar per Kg"},   //70
+                {"Service Cost Management per Km","Tarif dasar per Km"},   //71
             {"Report", "Laporan"},  //72
             {"Delivery of goods","Pengiriman Barang"}, //73
                 {"Warehouse Inventory", "Inventori Gudang"},    //74
@@ -109,7 +109,7 @@ public class Main {
                 {"Deliver Package", "Antar Paket"}, //78
             {"Exit", "Keluar"}, //79
 
-        {"Logout Successs. See You! 👋","Anda telah berhasil keluar. Sampai jumpa lain waktu! 👋"}, //80
+        {"Logout Successs. See You! 👋","Anda telah berhasil keluar. Sampai jumpa lain waktu! 👋"}, //79
         {"║ ⤷ Enter Options: ", "║ ⤷ Masukkan Pilihan: "},  //80
         {"Click ⏎ Enter to Continue", "Tekan ⏎ Enter untuk melanjutkan"}, //81
 
@@ -145,6 +145,10 @@ public class Main {
         {"Username", "Nama Pengguna"}, //105
         {"Password", "Kata Sandi"}, //106
         {"Role", "Peran"}, //107
+
+        {"║ ⤷ Input cost per Kg: ", "║ ⤷ Masukkan tarif dasar per Kg: "}, //108
+        {"║ ⤷ Input cost per Km: ", "║ ⤷ Masukkan tarif dasar per Km: "}, //109
+
     };
 
     // Format tanggal
@@ -187,6 +191,11 @@ public class Main {
 
     static double tarifPerKg = 2500;
     static double tarifPerKm = 500;
+
+    static int inputselectedLanguage;
+
+    static boolean validInput = false;
+    static int menuUtama, subMenu, editMenu;
     
 
     static String[][] historyTransaksi = {
@@ -267,25 +276,11 @@ public class Main {
 
         boolean exit = false;
         boolean isLoop = false;
-        boolean validInput = false;
         boolean inputValid = false;
-
-
-        int menuUtama, subMenu, editMenu;
-        int inputselectedLanguage;
 
         clearTerminal();
 
-        do {
-            clearTerminal();
-            displayHeader();
-            displayIndonesianMap();
-            viewLanguageMenu();
-
-            System.out.print("║ ⤷ Masukkan Pilihan: ");
-            inputselectedLanguage = input.nextInt();
-            changeLanguage(inputselectedLanguage);
-        } while (inputselectedLanguage > languageModule[0].length);
+        ManageLanguage();
 
         System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
         input.nextLine();
@@ -341,131 +336,15 @@ public class Main {
                             break;
 
                         case 2:
-                            boolean keluar = true;
-                            while (keluar) {
+                            ManageRoute();
+                            break;
 
-                            displayHeader();
-                            displayIndonesianMap();
-                            viewRouteMenu();
-
-                            System.out.print("║ ⤷ Masukkan Pilihan: "); 
-                            subMenu = input.nextInt();
-
-                            input.nextLine();
-                            clearTerminal();
-                
-                            switch (subMenu) {
-                                case 1:
-                                    displayHeader();
-                                    displayIndonesianMap();
-
-                                    boolean routeExist = false;
-                                    String origin;
-                                    String destination;
-                                    
-                                    do {
-                                        routeExist = false;
-                                        System.out.print("║ ⤷ Origin: ");
-                                        origin = input.nextLine();
-                                        System.out.print("║ ⤷ Destination: ");
-                                        destination = input.nextLine();
-
-                                        for (int i = 0; i < rutePengiriman.length; i++) {
-                                            if ((rutePengiriman[i][0].equalsIgnoreCase(origin) && rutePengiriman[i][1].equalsIgnoreCase(destination)) || 
-                                            (rutePengiriman[i][0].equalsIgnoreCase(destination) && rutePengiriman[i][1].equalsIgnoreCase(origin))) {
-                                                System.out.println("║ Rute tersebut sudah ada!");
-                                                routeExist = true;
-                                                break;
-                                            } 
-                                        }
-
-
-                                        } while (routeExist); 
-
-                                        System.out.print("║ ⤷ Masukkan Jarak antara "+origin+" dan "+destination+": ");
-                                        String jarak = input.next();
-
-                                        rutePengiriman = Arrays.copyOf(rutePengiriman,rutePengiriman.length + 1);
-                                        rutePengiriman[rutePengiriman.length-1] = new String[] {
-                                            origin,
-                                            destination,
-                                            jarak};
-
-                                    clearTerminal(); 
-                                    break;
-                                case 2:
-                                    displayHeader();
-                                    displayIndonesianMap();
-                                    System.out.println("║ Daftar rute yang Tersedia:");
-                                    for (int i = 0; i < rutePengiriman.length; i++) {
-                                        System.out.println("║ " + (i + 1) + ". " + rutePengiriman[i][0] + ". " + rutePengiriman[i][1] + ". " + rutePengiriman[i][2]);
-                                    }
-                        
-                                    int deleteIndex = 0;
-            
-                                    while (!validInput) {
-                                        System.out.print("║ ⤷ Masukkan nomor rute yang ingin dihapus: ");
-                                        try {
-                                            deleteIndex = Integer.parseInt(input.nextLine());
-                                            validInput = true;
-                                        } catch (NumberFormatException e) {
-                                            System.out.println("║ Input yang dimasukkan bukan angka. Silakan masukkan nomor.");
-                                        }
-                                    }
-
-                                    if (deleteIndex >= 1 && deleteIndex <= rutePengiriman.length) {
-                                        String deletedLocation = rutePengiriman[deleteIndex - 1][0]+" "+rutePengiriman[deleteIndex - 1][1];
-                                        System.out.println("║ " + deletedLocation + " Telah Dihapus!");
-
-                                        System.arraycopy(rutePengiriman, deleteIndex, rutePengiriman, deleteIndex - 1, rutePengiriman.length - deleteIndex);
-                                        rutePengiriman = Arrays.copyOf(rutePengiriman, rutePengiriman.length - 1);
-                                    } else {
-                                        System.out.println("║ Nomor rute tidak valid");
-                                        continue;
-                                    }
-
-                                    System.out.print(languageModule[81][selectedLanguage]);
-                                    input.nextLine();   
-                                    clearTerminal(); 
-                                         
-                                    break;
-                                case 3:
-                                    clearTerminal();
-                                    viewExpeditionRoutes();
-                                    System.out.print(languageModule[81][selectedLanguage]);
-                                    input.nextLine();   
-                                    clearTerminal(); 
-                                    break;
-                                case 4:
-                                    keluar = false;
-                                    clearTerminal();
-                                    break;
-                                default:
-                                }
-                        } break;
                         case 3:
                             displayHeader();
                             displayIndonesianMap();
+                            viewServiceMenu();
 
-                            System.out.println("║"+YELLOW+centerString(98,"Manajemen Layanan")+RESET+"║");
-                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                            System.out.println("║                                                                                                  ║");
-                            System.out.println("║             ╭──────────────────────────────────────────────────────────────────────╮             ║");
-                            System.out.println("║             │                                                                      │             ║");
-                            System.out.println("║             │                     [1]. " + padString(44, languageModule[56][selectedLanguage]) + "│             ║");
-                            System.out.println("║             │                                                                      │             ║");
-                            System.out.println("║             │                     [2]. " + padString(44, languageModule[61][selectedLanguage]) + "│             ║");
-                            System.out.println("║             │                                                                      │             ║");
-                            System.out.println("║             │                     [3]. " + padString(44, languageModule[64][selectedLanguage]) + "│             ║");
-                            System.out.println("║             │                                                                      │             ║");
-                            System.out.println("║             │                     [4]. " + padString(44, languageModule[65][selectedLanguage]) + "│             ║");
-                            System.out.println("║             │                                                                      │             ║");
-                            System.out.println("║             │                     [5]. " + padString(44, languageModule[78][selectedLanguage]) + "│             ║");
-                            System.out.println("║             │                                                                      │             ║"); 
-                            System.out.println("║             ╰──────────────────────────────────────────────────────────────────────╯             ║");
-                            System.out.println("║                                                                                                  ║"); 
-                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                            System.out.print("║ ⤷ Masukkan Pilihan: ");
+                            System.out.print(languageModule[80][selectedLanguage]);
                             subMenu = input.nextInt();
                             input.nextLine();
 
@@ -501,9 +380,7 @@ public class Main {
                                             String.valueOf(startEstimation),
                                             String.valueOf(endEstimation)};
 
-                                    System.out.print(languageModule[81][selectedLanguage]);
-                                    input.nextLine();   
-                                    clearTerminal(); 
+                                    pressEnter();
                                     break;
                                 case 2:
                                 System.out.println("║ Daftar Layanan yang Tersedia:");
@@ -581,9 +458,7 @@ public class Main {
                                 } else {
                                     System.out.println("║ Nomor layanan tidak valid");
                                 }
-                                System.out.print(languageModule[81][selectedLanguage]);
-                                input.nextLine();   
-                                clearTerminal(); 
+                                pressEnter();
                                 break;
                                 case 3:
                                     System.out.println("║ Daftar Layanan yang Tersedia:");
@@ -619,16 +494,12 @@ public class Main {
                                     } else {
                                         System.out.println("║ Nomor layanan tidak valid.");
                                     }
-                                    System.out.print(languageModule[81][selectedLanguage]);
-                                    input.nextLine();   
-                                    clearTerminal(); 
+                                    pressEnter();
                                     break;
                                 case 4:
                                     clearTerminal();
                                     viewExpeditionServices();
-                                    System.out.print(languageModule[81][selectedLanguage]);
-                                    input.nextLine();   
-                                    clearTerminal(); 
+                                    pressEnter();
                                     break;
                                 case 5:
                                     isLoop = false;
@@ -639,47 +510,24 @@ public class Main {
                             break;
 
                         case 4:
-                            do {
-                                displayHeader();
-                                displayIndonesianMap();
-                                viewLanguageMenu();
-                                System.out.print("║ ⤷ Masukkan Pilihan: ");
-                                inputselectedLanguage = input.nextInt();
-                                changeLanguage(inputselectedLanguage);
-                            } while (inputselectedLanguage > languageModule[0].length);
+                            ManageLanguage();
                             clearTerminal();
                             break;
         
                         case 5:
-                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                            System.out.println("║"+YELLOW+centerString(98,"Manajemen Tarif Dasar")+RESET+"║");
-                                    System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                                    System.out.println("║                                                                                                  ║");
-                                    System.out.println("║             ╭──────────────────────────────────────────────────────────────────────╮             ║");
-                                    System.out.println("║             │                                                                      │             ║");
-                                    System.out.println("║             │                                                                      │             ║");
-                                    System.out.println("║             │                                                                      │             ║");
-                                    System.out.println("║             │          [1]. " + padString(25, languageModule[69][selectedLanguage]) + "│             ║");
-                                    System.out.println("║             │                                                                      │             ║");
-                                    System.out.println("║             │          [2]. " + padString(25, languageModule[70][selectedLanguage]) + "│             ║");
-                                    System.out.println("║             │                                                                      │             ║");
-                                    System.out.println("║             │          [3]. " + padString(25, languageModule[78][selectedLanguage]) + "│             ║");
-                                    System.out.println("║             │                                                                      │             ║");
-                                    System.out.println("║             │                                                                      │             ║");
-                                    System.out.println("║             │                                                                      │             ║"); 
-                                    System.out.println("║             ╰──────────────────────────────────────────────────────────────────────╯             ║");
-                                    System.out.println("║                                                                                                  ║"); 
-                                    System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                            System.out.print("║ ⤷ Masukkan Pilihan: ");
+                            displayHeader();
+                            displayIndonesianMap();
+                            viewCostManagementMenu();
+                            System.out.print(languageModule[80][selectedLanguage]);
                             subMenu = input.nextInt();
 
                             switch (subMenu) {
                                 case 1:
-                                    System.out.print("║ ⤷ Masukkan tarif dasar per Kg: ");
+                                    System.out.print(languageModule[108][selectedLanguage]);
                                     tarifPerKg = input.nextInt();
                                     break;
                                 case 2:
-                                    System.out.print("║ ⤷ Masukkan tarif dasar per Km: ");
+                                    System.out.print(languageModule[109][selectedLanguage]);
                                     tarifPerKm = input.nextInt();
                                     break;
                                 case 3:
@@ -735,7 +583,7 @@ public class Main {
                             System.out.println("║             ╰──────────────────────────────────────────────────────────────────────╯             ║");
                             System.out.println("║                                                                                                  ║"); 
                             System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                            System.out.print("║ ⤷ Masukkan Pilihan: ");
+                            System.out.print(languageModule[80][selectedLanguage]);
                             subMenu = input.nextInt();
                             input.nextLine();
 
@@ -1011,7 +859,7 @@ public class Main {
                                     System.out.println("║             ╰──────────────────────────────────────────────────────────────────────╯             ║");
                                     System.out.println("║                                                                                                  ║"); 
                                     System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                                    System.out.print("║ ⤷ Masukkan Pilihan: ");
+                                    System.out.print(languageModule[80][selectedLanguage]);
                                     subMenu = input.nextInt();
                                     input.nextLine();
 
@@ -1914,6 +1762,44 @@ public class Main {
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
     }
 
+    private static void viewCostManagementMenu() {
+        System.out.println("║                                                                                                  ║");
+        System.out.println("║             ╭──────────────────────────────────────────────────────────────────────╮             ║");
+        System.out.println("║             │                                                                      │             ║");
+        System.out.println("║             │                                                                      │             ║");
+        System.out.println("║             │                                                                      │             ║");
+        System.out.println("║             │          [1]. " + padString(55, languageModule[69][selectedLanguage]) + "│             ║");
+        System.out.println("║             │                                                                      │             ║");
+        System.out.println("║             │          [2]. " + padString(55, languageModule[70][selectedLanguage]) + "│             ║");
+        System.out.println("║             │                                                                      │             ║");
+        System.out.println("║             │          [3]. " + padString(55, languageModule[78][selectedLanguage]) + "│             ║");
+        System.out.println("║             │                                                                      │             ║");
+        System.out.println("║             │                                                                      │             ║");
+        System.out.println("║             │                                                                      │             ║"); 
+        System.out.println("║             ╰──────────────────────────────────────────────────────────────────────╯             ║");
+        System.out.println("║                                                                                                  ║"); 
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+    }
+
+    private static void viewServiceMenu() {
+        System.out.println("║                                                                                                  ║");
+        System.out.println("║             ╭──────────────────────────────────────────────────────────────────────╮             ║");
+        System.out.println("║             │                                                                      │             ║");
+        System.out.println("║             │                     [1]. " + padString(44, languageModule[56][selectedLanguage]) + "│             ║");
+        System.out.println("║             │                                                                      │             ║");
+        System.out.println("║             │                     [2]. " + padString(44, languageModule[61][selectedLanguage]) + "│             ║");
+        System.out.println("║             │                                                                      │             ║");
+        System.out.println("║             │                     [3]. " + padString(44, languageModule[64][selectedLanguage]) + "│             ║");
+        System.out.println("║             │                                                                      │             ║");
+        System.out.println("║             │                     [4]. " + padString(44, languageModule[65][selectedLanguage]) + "│             ║");
+        System.out.println("║             │                                                                      │             ║");
+        System.out.println("║             │                     [5]. " + padString(44, languageModule[78][selectedLanguage]) + "│             ║");
+        System.out.println("║             │                                                                      │             ║"); 
+        System.out.println("║             ╰──────────────────────────────────────────────────────────────────────╯             ║");
+        System.out.println("║                                                                                                  ║"); 
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+    }
+
     private static void notificationBox(int textWidth, String s) {
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
         System.out.println("║                                                                                                  ║");
@@ -2031,7 +1917,7 @@ public class Main {
         displayHeader();
         displayIndonesianMap();
         viewExpeditionTransactionMenu();
-        System.out.print("║ ⤷ Masukkan Pilihan: "); 
+        System.out.print(languageModule[80][selectedLanguage]); 
 
         int subMenu = input.nextInt();
         input.nextLine();
@@ -2238,7 +2124,7 @@ public class Main {
                         System.out.println("║ ["+i+"]. "+arrayLayanan[i][0]+" - "+arrayLayanan[i][1]+ " - Estimasi: "+arrayLayanan[i][2]+" hari");
                     }
                 }
-                System.out.print ("║ ⤷ Masukkan Pilihan: ");
+                System.out.print (languageModule[80][selectedLanguage]);
                 pilihanLayanan = input.nextInt();
                 double tarifLayanan = Double.parseDouble(arrayLayanan[pilihanLayanan][1]); 
                 if (beratBarang<1) {
@@ -2344,7 +2230,7 @@ public class Main {
                         System.out.println("║ [2]. Shipping"); //Mengedit status pengiriman
                         System.out.println("║ [3]. Delivered"); //Menghapus Transaksi
                         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                        System.out.print("║ ⤷ Masukkan Pilihan: ");
+                        System.out.print(languageModule[80][selectedLanguage]);
                         String selected = input.nextLine();
 
                         if(selected.equals("1")){
@@ -2436,7 +2322,7 @@ public class Main {
                 System.out.println("║             ╰──────────────────────────────────────────────────────────────────────╯             ║");
                 System.out.println("║                                                                                                  ║"); 
                 System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                System.out.print("║ ⤷ Masukkan Pilihan: ");
+                System.out.print(languageModule[80][selectedLanguage]);
                 editMenu = input.nextInt();
                 input.nextLine();
                 switch (editMenu) {
@@ -2623,6 +2509,121 @@ public class Main {
         }
     }
 
+    private static void ManageLanguage() {
+        do {
+            clearTerminal();
+            displayHeader();
+            displayIndonesianMap();
+            viewLanguageMenu();
+
+            System.out.print(languageModule[80][selectedLanguage]);
+            inputselectedLanguage = input.nextInt();
+            changeLanguage(inputselectedLanguage);
+        } while (inputselectedLanguage > languageModule[0].length);
+    }
+
+    private static void ManageRoute() {
+        boolean keluar = true;
+        while (keluar) {
+
+        displayHeader();
+        displayIndonesianMap();
+        viewRouteMenu();
+
+        System.out.print(languageModule[80][selectedLanguage]); 
+        subMenu = input.nextInt();
+
+        input.nextLine();
+        clearTerminal();
+
+        switch (subMenu) {
+            case 1:
+                displayHeader();
+                displayIndonesianMap();
+
+                boolean routeExist = false;
+                String origin;
+                String destination;
+                
+                do {
+                    routeExist = false;
+                    System.out.print("║ ⤷ Origin: ");
+                    origin = input.nextLine();
+                    System.out.print("║ ⤷ Destination: ");
+                    destination = input.nextLine();
+
+                    for (int i = 0; i < rutePengiriman.length; i++) {
+                        if ((rutePengiriman[i][0].equalsIgnoreCase(origin) && rutePengiriman[i][1].equalsIgnoreCase(destination)) || 
+                        (rutePengiriman[i][0].equalsIgnoreCase(destination) && rutePengiriman[i][1].equalsIgnoreCase(origin))) {
+                            System.out.println("║ Rute tersebut sudah ada!");
+                            routeExist = true;
+                            break;
+                        } 
+                    }
 
 
+                    } while (routeExist); 
+
+                    System.out.print("║ ⤷ Masukkan Jarak antara "+origin+" dan "+destination+": ");
+                    String jarak = input.next();
+
+                    rutePengiriman = Arrays.copyOf(rutePengiriman,rutePengiriman.length + 1);
+                    rutePengiriman[rutePengiriman.length-1] = new String[] {
+                        origin,
+                        destination,
+                        jarak};
+
+                clearTerminal(); 
+                break;
+            case 2:
+                displayHeader();
+                displayIndonesianMap();
+                System.out.println("║ Daftar rute yang Tersedia:");
+                for (int i = 0; i < rutePengiriman.length; i++) {
+                    System.out.println("║ " + (i + 1) + ". " + rutePengiriman[i][0] + ". " + rutePengiriman[i][1] + ". " + rutePengiriman[i][2]);
+                }
+    
+                int deleteIndex = 0;
+
+                while (!validInput) {
+                    System.out.print("║ ⤷ Masukkan nomor rute yang ingin dihapus: ");
+                    try {
+                        deleteIndex = Integer.parseInt(input.nextLine());
+                        validInput = true;
+                    } catch (NumberFormatException e) {
+                        System.out.println("║ Input yang dimasukkan bukan angka. Silakan masukkan nomor.");
+                    }
+                }
+
+                if (deleteIndex >= 1 && deleteIndex <= rutePengiriman.length) {
+                    String deletedLocation = rutePengiriman[deleteIndex - 1][0]+" "+rutePengiriman[deleteIndex - 1][1];
+                    System.out.println("║ " + deletedLocation + " Telah Dihapus!");
+
+                    System.arraycopy(rutePengiriman, deleteIndex, rutePengiriman, deleteIndex - 1, rutePengiriman.length - deleteIndex);
+                    rutePengiriman = Arrays.copyOf(rutePengiriman, rutePengiriman.length - 1);
+                } else {
+                    System.out.println("║ Nomor rute tidak valid");
+                    continue;
+                }
+
+                System.out.print(languageModule[81][selectedLanguage]);
+                input.nextLine();   
+                clearTerminal(); 
+                        
+                break;
+            case 3:
+                clearTerminal();
+                viewExpeditionRoutes();
+                System.out.print(languageModule[81][selectedLanguage]);
+                input.nextLine();   
+                clearTerminal(); 
+                break;
+            case 4:
+                keluar = false;
+                clearTerminal();
+                break;
+            default:
+            }
+    }
+    }
 }
