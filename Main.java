@@ -17,13 +17,14 @@ public class Main {
         {"Naufal", "000","ADMIN"},
         {"Putra", "111","ADMIN"},
         {"Farhan", "222","ADMIN"},
-        {"Kasir", "333", "KASIR"}
+        {"Kasir", "333", "KASIR"},
+        {"Kurir", "444", "KURIR"}
     };
 
     static String[][] languageModule = {
         {"Welcome to the Expedition System", "Selamat Datang di Sistem Ekspedisi"},
-        {"", "Manajemen Pengguna"}, //1
-        {"Delivery of Goods", "Pengiriman Barang"}, //2
+        {"", "Manajemen Pengguna         "}, //1
+        {"Delivery of Goods' Transaction", "Transaksi Pengiriman       "}, //2
             // Bahasa menu pengiriman barang
             {"Transactions", "Melakukan Transaksi"}, 
                 {"Enter the Sender's Name: ","Masukkan Nama Pengirim: "},
@@ -34,7 +35,7 @@ public class Main {
             {"Remove Transactions", "Menghapus Data Transaksi"},
             {"Displyas Transactions' Data", "Menampilkan Data Transaksi"},
             {"Back to the Main Menu", "Kembali ke Menu Utama"},
-        {"Route Management", "Manajemen Rute"}, //12
+        {"Route Management", "Manajemen Rute       "}, //12
             // Bahasa menu manajemen lokasi
             {"Add Location", "Menambahkan Rute"},
             {"Remove Location", "Menghapus Rute"},
@@ -53,6 +54,7 @@ public class Main {
 
         // Bahasa input pilihan
         {"⤷ Enter Options: ", "⤷ Masukkan Pilihan: "}, 
+
     };
 
     // Format tanggal
@@ -82,50 +84,55 @@ public class Main {
     static String GREEN = "\u001B[32m";
     static String RED = "\u001B[31m";
     static String YELLOW = "\u001B[33m";
+    static String BOLD = "\u001B[1m";
 
     static int selectedLanguage = 1;
 
     static boolean login = false;
     static boolean isAdmin = false;
     static boolean masuk = false;
+    static boolean isKurir = false;
 
     static String loggedInUsername = "";
 
-    static double tarifPerKg = 5000;
+    static double tarifPerKg = 2500;
     static double tarifPerKm = 500;
 
-    // Array History Pemesanan
     static String[][] historyTransaksi = {
-        {"8032468109752", "29-01-2023", "Nanda", "08866778899", "Yogyakarta", "Reguler", "25700.0", "Farhan", "Abdi", "Jl. Kembang 5 No. 15", "3", "Makanan", "On Process", "Malang"},
-        {"9276354185046", "12-02-2023", "Gabriel", "08811223344", "Tangerang", "Ekonomi", "33200.0", "Naufal", "Afifah", "Jl. Anggrek 12 No. 8", "7", "Elektronik", "On Process", "Bekasi"},
-        {"1492578034685", "03-03-2023", "Afifah", "08876543210", "Makassar", "Reguler", "50900.0", "Putra", "Naufal", "Jl. Melati 9 No. 21", "5", "Pakaian", "On Process", "Bandung"},
-        {"5283176490254", "26-04-2023", "Esa", "08822334455", "Medan", "Ekonomi", "65400.0", "Farhan", "Luthfi", "Jl. Seroja 3 No. 7", "2", "Buku", "On Process", "Medan"},
-        {"3091754682351", "21-05-2023", "Abdi", "08811223344", "Bogor", "Ekonomi", "34800.0", "Naufal", "Julian", "Jl. Mawar 17 No. 5", "9", "Mainan", "On Process", "Bogor"},
-        {"6750912348526", "17-06-2023", "Naufal", "08822334455", "Semarang", "Sameday", "66500.0", "Putra", "Gabriel", "Jl. Anggrek 7 No. 12", "8", "Kesehatan", "On Process", "Malang"},
-        {"8013564729835", "30-06-2023", "Farrel", "08855443322", "Jakarta", "Reguler", "76800.0", "Farhan", "Chiko", "Jl. Melati 15 No. 10", "4", "Alat Tulis", "On Process", "Bekasi"},
-        {"2674853902164", "14-07-2023", "Atabik", "08855443322", "Bandung", "Ekonomi", "45300.0", "Naufal", "Vincent", "Jl. Kembang 2 No. 19", "1", "Elektronik", "On Process", "Bandung"},
-        {"4501628397517", "05-08-2023", "Dio", "08876543210", "Surabaya", "Sameday", "29100.0", "Putra", "Saputra", "Jl. Seroja 11 No. 14", "6", "Makanan", "On Process", "Medan"},
-        {"7246109385273", "09-09-2023", "Pasha", "08899887766", "Serang", "Reguler", "78000.0", "Farhan", "Naufal", "Jl. Anggrek 8 No. 5", "10", "Pakaian", "On Process", "Bogor"},
-        {"3751928643058", "18-10-2023", "Farhan", "08866778899", "Denpasar", "Reguler", "55700.0", "Naufal", "Petrus", "Jl. Mawar 5 No. 11", "2", "Mainan", "On Process", "Malang"},
-        {"5038921467584", "02-12-2023", "Chiko", "08811223344", "Malang", "Ekonomi", "87600.0", "Putra", "Saka", "Jl. Kembang 10 No. 17", "7", "Elektronik", "On Process", "Bogor"},
-        {"6904715283142", "27-09-2023", "Haikal", "08887654321", "Bengkulu", "Sameday", "98800.0", "Farhan", "Vincent", "Jl. Melati 3 No. 9", "3", "Kesehatan", "On Process", "Bekasi"},
-        {"4892307162453", "11-11-2023", "Cindy", "08899887766", "Bekasi", "Sameday", "65400.0", "Naufal", "Petrus", "Jl. Seroja 8 No. 6", "5", "Makanan", "On Process", "Bekasi"},
-        {"1234567890123", "01-01-2023", "Ivan", "08812345678", "Surabaya", "Ekonomi", "45000.0", "Putra", "Abdi", "Jl. Anggrek 14 No. 20", "9", "Buku", "On Process", "Bogor"},
-        {"9876543210987", "07-04-2023", "Luthfi", "08887654321", "Jakarta", "Reguler", "60000.0", "Farhan", "Farrel", "Jl. Kembang 1 No. 18", "1", "Elektronik", "On Process", "Malang"},
-        {"3456789012345", "14-06-2023", "Adri", "08811223344", "Bandung", "Ekonomi", "35000.0", "Naufal", "Petrus", "Jl. Melati 6 No. 13", "6", "Makanan", "On Process", "Bogor"},
-        {"8765432109876", "21-08-2023", "Alif", "08899887766", "Makassar", "Sameday", "42000.0", "Putra", "Saputra", "Jl. Anggrek 20 No. 3", "4", "Buku", "On Process", "Bandung"},
-        {"6543210987654", "03-10-2023", "Dimas", "08876543210", "Denpasar", "Reguler", "58000.0", "Farhan", "Farrel", "Jl. Mawar 13 No. 16", "10", "Mainan", "On Process", "Bekasi"},
-        {"8765432109876", "11-12-2023", "Julian", "08822334455", "Malang", "Sameday", "67000.0", "Naufal", "Naufal", "Jl. Seroja 2 No. 4", "8", "Kesehatan", "On Process", "Malang"},
-        {"5432109876543", "25-02-2023", "Petrus", "08866778899", "Bogor", "Reguler", "73000.0", "Putra", "Saka", "Jl. Kembang 8 No. 1", "3", "Elektronik", "On Process", "Bogor"},
-        {"3210987654321", "10-05-2023", "Saputra", "08855443322", "Surabaya", "Ekonomi", "32000.0", "Farhan", "Rio", "Jl. Mawar 14 No. 7", "5", "Makanan", "On Process", "Bekasi"},
-        {"9876543210987", "15-07-2023", "Reika", "08811223344", "Semarang", "Reguler", "52000.0", "Naufal", "Chiko", "Jl. Anggrek 11 No. 15", "2", "Alat Tulis", "On Process", "Medan"},
-        {"3456789012345", "20-09-2023", "Rio", "08887654321", "Yogyakarta", "Sameday", "47000.0", "Putra", "Naufal", "Jl. Seroja 10 No. 2", "9", "Elektronik", "On Process", "Bogor"},
-        {"9876543210987", "05-11-2023", "Saka", "08899887766", "Tangerang", "Sameday", "69000.0", "Farhan", "Chiko", "Jl. Melati 20 No. 16", "1", "Pakaian", "On Process", "Bekasi"},
-        {"3210987654321", "15-01-2023", "Taufik", "08876543210", "Bekasi", "Ekonomi", "40000.0", "Naufal", "Vincent", "Jl. Kembang 7 No. 19", "10", "Buku", "On Process", "Surabaya"},
-        {"9876543210987", "20-03-2023", "Mera", "08822334455", "Gorontalo", "Sameday", "61000.0", "Putra", "Saputra", "Jl. Seroja 4 No. 11", "4", "Kesehatan", "On Process", "Bogor"},
-        {"3456789012345", "05-05-2023", "Vincent", "08866778899", "Medan", "Reguler", "54000.0", "Farhan", "Petrus", "Jl. Anggrek 3 No. 14", "7", "Makanan", "On Process", "Medan"},
-        {"3210987654321", "10-07-2023", "Vira", "08855443322", "Bengkulu", "Ekonomi", "37000.0", "Naufal", "Haikal", "Jl. Kembang 12 No. 9", "1", "Elektronik", "On Process", "Bogor"},
-        {"9876543210987", "28-10-2023", "Innam", "08822334455", "Surabaya", "Sameday", "55000.0", "Putra", "Farrel", "Jl. Melati 9 No. 5", "6", "Buku", "On Process", "Bekasi"},
+        {"8032468109752", "29-01-2023", "Nanda", "08866778899", "Yogyakarta", "Reguler", "25700.0", "Farhan", "Abdi", "Jl. Kembang 5 No. 15", "3", "Makanan", "Waiting for pickup", "Malang"},
+        {"9276354185046", "12-02-2023", "Gabriel", "08811223344", "Tangerang", "Ekonomi", "33200.0", "Naufal", "Afifah", "Jl. Anggrek 12 No. 8", "7", "Elektronik", "Waiting for pickup", "Bekasi"},
+        {"1492578034685", "03-03-2023", "Afifah", "08876543210", "Makassar", "Reguler", "50900.0", "Putra", "Naufal", "Jl. Melati 9 No. 21", "5", "Pakaian", "Waiting for pickup", "Bandung"},
+        {"5283176490254", "26-04-2023", "Esa", "08822334455", "Medan", "Ekonomi", "65400.0", "Farhan", "Luthfi", "Jl. Seroja 3 No. 7", "2", "Buku", "Waiting for pickup", "Medan"},
+        {"3091754682351", "21-05-2023", "Abdi", "08811223344", "Bogor", "Ekonomi", "34800.0", "Naufal", "Julian", "Jl. Mawar 17 No. 5", "9", "Mainan", "Waiting for pickup", "Bogor"},
+        {"6750912348526", "17-06-2023", "Naufal", "08822334455", "Yogyakarta", "Reguler", "66500.0", "Putra", "Gabriel", "Jl. Anggrek 7 No. 12", "8", "Kesehatan", "Waiting for pickup", "Malang"},
+        {"8013564729835", "30-06-2023", "Farrel", "08855443322", "Jakarta", "Reguler", "76800.0", "Farhan", "Chiko", "Jl. Melati 15 No. 10", "4", "Alat Tulis", "Waiting for pickup", "Bekasi"},
+        {"2674853902164", "14-07-2023", "Atabik", "08855443322", "Bandung", "Ekonomi", "45300.0", "Naufal", "Vincent", "Jl. Kembang 2 No. 19", "1", "Elektronik", "Waiting for pickup", "Bandung"},
+        {"4501628397517", "05-08-2023", "Dio", "08876543210", "Surabaya", "Sameday", "29100.0", "Putra", "Saputra", "Jl. Seroja 11 No. 14", "6", "Makanan", "Waiting for pickup", "Medan"},
+        {"7246109385273", "09-09-2023", "Pasha", "08899887766", "Serang", "Reguler", "78000.0", "Farhan", "Naufal", "Jl. Anggrek 8 No. 5", "10", "Pakaian", "Waiting for pickup", "Bogor"},
+        {"3751928643058", "18-10-2023", "Farhan", "08866778899", "Denpasar", "Reguler", "55700.0", "Naufal", "Petrus", "Jl. Mawar 5 No. 11", "2", "Mainan", "Waiting for pickup", "Malang"},
+        {"5038921467584", "02-12-2023", "Chiko", "08811223344", "Malang", "Ekonomi", "87600.0", "Putra", "Saka", "Jl. Kembang 10 No. 17", "7", "Elektronik", "Waiting for pickup", "Bogor"},
+        {"6904715283142", "27-09-2023", "Haikal", "08887654321", "Bengkulu", "Sameday", "98800.0", "Farhan", "Vincent", "Jl. Melati 3 No. 9", "3", "Kesehatan", "Waiting for pickup", "Bekasi"},
+        {"4892307162453", "11-11-2023", "Cindy", "08899887766", "Bekasi", "Sameday", "65400.0", "Naufal", "Petrus", "Jl. Seroja 8 No. 6", "5", "Makanan", "Waiting for pickup", "Bekasi"},
+        {"1234567890123", "01-01-2023", "Ivan", "08812345678", "Surabaya", "Ekonomi", "45000.0", "Putra", "Abdi", "Jl. Anggrek 14 No. 20", "9", "Buku", "Waiting for pickup", "Bogor"},
+        {"9876543210987", "07-04-2023", "Luthfi", "08887654321", "Jakarta", "Reguler", "60000.0", "Farhan", "Farrel", "Jl. Kembang 1 No. 18", "1", "Elektronik", "Waiting for pickup", "Malang"},
+        {"3456789012345", "14-06-2023", "Adri", "08811223344", "Bandung", "Ekonomi", "35000.0", "Naufal", "Petrus", "Jl. Melati 6 No. 13", "6", "Makanan", "Waiting for pickup", "Bogor"},
+        {"8765432109876", "21-08-2023", "Alif", "08899887766", "Makassar", "Sameday", "42000.0", "Putra", "Saputra", "Jl. Anggrek 20 No. 3", "4", "Buku", "Waiting for pickup", "Bandung"},
+        {"6543210987654", "03-10-2023", "Dimas", "08876543210", "Denpasar", "Reguler", "58000.0", "Farhan", "Farrel", "Jl. Mawar 13 No. 16", "10", "Mainan", "Waiting for pickup", "Bekasi"},
+        {"8765432109876", "11-12-2023", "Julian", "08822334455", "Malang", "Sameday", "67000.0", "Naufal", "Naufal", "Jl. Seroja 2 No. 4", "8", "Kesehatan", "Waiting for pickup", "Malang"},
+        {"5432109876543", "25-02-2023", "Petrus", "08866778899", "Bogor", "Reguler", "73000.0", "Putra", "Saka", "Jl. Kembang 8 No. 1", "3", "Elektronik", "Waiting for pickup", "Bogor"},
+        {"3210987654321", "10-05-2023", "Saputra", "08855443322", "Surabaya", "Ekonomi", "32000.0", "Farhan", "Rio", "Jl. Mawar 14 No. 7", "5", "Makanan", "Waiting for pickup", "Bekasi"},
+        {"9876543210987", "15-07-2023", "Reika", "08811223344", "Semarang", "Reguler", "52000.0", "Naufal", "Chiko", "Jl. Anggrek 11 No. 15", "2", "Alat Tulis", "Waiting for pickup", "Medan"},
+        {"3456789012345", "20-09-2023", "Rio", "08887654321", "Yogyakarta", "Sameday", "47000.0", "Putra", "Naufal", "Jl. Seroja 10 No. 2", "9", "Elektronik", "Waiting for pickup", "Bogor"},
+        {"9876543210987", "05-11-2023", "Saka", "08899887766", "Tangerang", "Sameday", "69000.0", "Farhan", "Chiko", "Jl. Melati 20 No. 16", "1", "Pakaian", "Waiting for pickup", "Bekasi"},
+        {"3210987654321", "15-01-2023", "Taufik", "08876543210", "Bekasi", "Ekonomi", "40000.0", "Naufal", "Vincent", "Jl. Kembang 7 No. 19", "10", "Buku", "Waiting for pickup", "Surabaya"},
+        {"9876543210987", "20-03-2023", "Mera", "08822334455", "Gorontalo", "Sameday", "61000.0", "Putra", "Saputra", "Jl. Seroja 4 No. 11", "4", "Kesehatan", "Waiting for pickup", "Bogor"},
+        {"3456789012345", "05-05-2023", "Vincent", "08866778899", "Malang", "Reguler", "54000.0", "Farhan", "Petrus", "Jl. Anggrek 3 No. 14", "7", "Makanan", "Arrived at warehouse", "Medan"},
+        {"3210987654321", "10-07-2023", "Vira", "08855443322", "Bengkulu", "Ekonomi", "37000.0", "Naufal", "Haikal", "Jl. Kembang 12 No. 9", "1", "Elektronik", "Waiting for pickup", "Bogor"},
+        {"9876543210987", "28-10-2023", "Innam", "08822334455", "Surabaya", "Sameday", "55000.0", "Putra", "Farrel", "Jl. Melati 9 No. 5", "6", "Buku", "Waiting for pickup", "Bekasi"},
+    };
+
+    static String[][] shipmentDetails = {
+        {"3210987654321", "Saka", "Sending"},
     };
 
     static String reportFormat = 
@@ -166,6 +173,7 @@ public class Main {
         "╚══════════════════════════════════════════════════════════════════════════════════════════════════╝";
 
     public static void main(String[] args) {
+
         // Deklarasi scanner untuk memasukkan inputan
         Scanner input = new Scanner(System.in);
 
@@ -192,10 +200,10 @@ public class Main {
                 displayHeader();
                 displayIndonesianMap();
 
-                System.out.print("║ -> Masukkan Username\t: ");
+                System.out.print("║ ⤷ Masukkan Username\t: ");
                 String inputUsername = input.next();
 
-                System.out.print("║ -> Masukan Password\t: ");
+                System.out.print("║ ⤷ Masukan Password\t: ");
                 String inputPassword = input.next();
                 input.nextLine();
 
@@ -203,9 +211,11 @@ public class Main {
 
                 if(!masuk){
                     System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                    System.out.println("║"+RED+centerString(98, "Login Gagal, silahkan coba lagi!")+RESET);
+                    System.out.println("║                                                                                                  ║");
+                    System.out.println("║"+centerString(97, "⛔ UPS! TERDAPAT MASALAH DENGAN KREDENSIAL LOGIN ANDA. SILAKAN VERIFIKASI DAN COBA LAGI.")+"║");
+                    System.out.println("║                                                                                                  ║");
                     System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
-                    System.out.print("Enter: ");
+                    System.out.print("Tekan ⏎ Enter untuk melanjutkan ");
                     input.nextLine();
                     clearTerminal();
                 }
@@ -225,7 +235,6 @@ public class Main {
                 displayIndonesianMap();
 
                 if(isAdmin){
-
                     System.out.println("║                                                                                                  ║");
                     System.out.println("║             ╭──────────────────────────────────────────────────────────────────────╮             ║");
                     System.out.println("║             │                                                                      │             ║");
@@ -286,22 +295,32 @@ public class Main {
 
                 isLoop = true;
                 do {
-
                     if(isAdmin){
                     menuUtama = menuUtama-1;
                     switch (menuUtama) {
                         case 0:
-                            if(isAdmin){
+                            
                                 while(!exit) {
                                 displayHeader();
                                 displayIndonesianMap();
 
                                 System.out.println("║"+YELLOW+centerString(98,"Manajemen Pengguna")+RESET+"║");
                                 System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                                System.out.println("║ [1] Tambahkan Pengguna");
-                                System.out.println("║ [2] Hapus Pengguna");
-                                System.out.println("║ [3] Data Pengguna");
-                                System.out.println("║ [4] Keluar");
+                                System.out.println("║                                                                                                  ║");
+                                System.out.println("║             ╭──────────────────────────────────────────────────────────────────────╮             ║");
+                                System.out.println("║             │                                                                      │             ║");
+                                System.out.println("║             │                                                                      │             ║");
+                                System.out.println("║             │                     [1]. Tambahkan Pengguna                          │             ║");
+                                System.out.println("║             │                                                                      │             ║");
+                                System.out.println("║             │                     [2]. Hapus Pengguna                              │             ║");
+                                System.out.println("║             │                                                                      │             ║");
+                                System.out.println("║             │                     [3]. Data Pengguna                               │             ║");
+                                System.out.println("║             │                                                                      │             ║");
+                                System.out.println("║             │                     [4]. Keluar                                      │             ║");
+                                System.out.println("║             │                                                                      │             ║");
+                                System.out.println("║             │                                                                      │             ║"); 
+                                System.out.println("║             ╰──────────────────────────────────────────────────────────────────────╯             ║");
+                                System.out.println("║                                                                                                  ║"); 
                                 System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
 
                                 System.out.print("║ ⤷ Masukan Pilihan: ");
@@ -329,7 +348,7 @@ public class Main {
                                     System.out.println("║                                                                                                  ║");
                                     System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
 
-                                    System.out.print("Enter: ");
+                                    System.out.print("Tekan ⏎ Enter untuk melanjutkan ");
                                     input.nextLine();
                                     clearTerminal();
                                     
@@ -363,14 +382,14 @@ public class Main {
                                             System.out.println("║                                                                                                  ║");
                                             System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
                                         }
-                                        System.out.print("Enter: ");
+                                        System.out.print("Tekan ⏎ Enter untuk melanjutkan ");
                                         input.nextLine();
                                         clearTerminal();
                                         break;   
                                     case 3:
                                         input.nextLine(); //konsumsi
                                         viewUserAccounts();
-                                        System.out.print("Enter: ");
+                                        System.out.print("Tekan ⏎ Enter untuk melanjutkan ");
                                         input.nextLine();
                                         clearTerminal();
                                         break;
@@ -383,7 +402,7 @@ public class Main {
                                         break;
                                 }                
                             }
-                            }
+                            
                             exit = false;
                             break;
                                 
@@ -394,24 +413,36 @@ public class Main {
 
                             System.out.println("║"+YELLOW+centerString(98,"Pengiriman Barang")+RESET+"║");
                             System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                            System.out.println("║ [1]. Melakukan Transaksi"); //Melakukan Transaksi
-                            System.out.println("║ [2]. Manajemen Status Pengiriman"); //Mengedit status pengiriman
-                            System.out.println("║ [3]. Menghapus Data Transaksi"); //Menghapus Transaksi
-                            System.out.println("║ [4]. Menampilkan Data Transaksi"); //Menampilkan Data Transaksi
-                            System.out.println("║ [5]. Kembali ke Menu Utama"); //Kembali ke Menu Utama
+                            System.out.println("║                                                                                                  ║");
+                            System.out.println("║             ╭──────────────────────────────────────────────────────────────────────╮             ║");
+                            System.out.println("║             │                                                                      │             ║");
+                            System.out.println("║             │                     [1]. Melakukan Transaksi                         │             ║");
+                            System.out.println("║             │                                                                      │             ║");
+                            System.out.println("║             │                     [2]. Edit Status Pengiriman                      │             ║");
+                            System.out.println("║             │                                                                      │             ║");
+                            System.out.println("║             │                     [3]. Hapus Transaksi                             │             ║");
+                            System.out.println("║             │                                                                      │             ║");
+                            System.out.println("║             │                     [4]. Riwayat Transaksi                           │             ║");
+                            System.out.println("║             │                                                                      │             ║");
+                            System.out.println("║             │                     [5]. Kembali ke Menu Utama                       │             ║");
+                            System.out.println("║             │                                                                      │             ║"); 
+                            System.out.println("║             ╰──────────────────────────────────────────────────────────────────────╯             ║");
+                            System.out.println("║                                                                                                  ║"); 
                             System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                            System.out.print("║ -> Masukkan Pilihan: "); 
+                            System.out.print("║ ⤷ Masukkan Pilihan: "); 
 
                             subMenu = input.nextInt();
                             input.nextLine();
+                            clearTerminal();
 
                             switch (subMenu) {
                                 case 1:
+                                displayHeader();
+                                displayIndonesianMap();
+
                                     String nomorResi;
                                     int pilihanLayanan;
                                     double biayaJarak = 0;
-
-                                    System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
 
                                     System.out.print ("║ Masukkan Nama Pengirim: ");
                                     String namaPengirim = input.nextLine();
@@ -427,40 +458,22 @@ public class Main {
 
                                     System.out.print("║ Masukkan Deskripsi Barang: ");
                                     String deskripsiBarang = input.nextLine();
-            
-                                    double beratBarang=0;
+
+                                    int beratBarang=0;
                                     int panjang;
                                     int luas;
                                     int tinggi;
-                                    double berat=0;
                                     do {
-                                        System.out.print("║ Masukkan Berat (Kg): ");
+                                        System.out.print("║ Masukkan Panjang: ");
                                         while (!input.hasNextInt()) {
                                             System.out.println("Input harus berupa bilangan bulat. Silakan coba lagi.");
-                                            System.out.print("Masukkan Berat (Kg): ");
-                                            input.next(); // mengonsumsi input yang tidak valid
-                                        }
-                                        berat= input.nextInt();
-
-                                        input.nextLine(); // membersihkan buffer input
-                                        if (berat < 0) {
-                                            System.out.println("berat harus lebih besar dari 0. Silakan coba lagi.");
-                                        } else {
-                                            validInput = true;
-                                        }
-                                    } while (!validInput);
-
-                                    do {
-                                        System.out.print("║ Masukkan Panjang (cm): ");
-                                        while (!input.hasNextInt()) {
-                                            System.out.println("Input harus berupa bilangan bulat. Silakan coba lagi.");
-                                            System.out.print("Masukkan Panjang (cm): ");
+                                            System.out.print("Masukkan Panjang: ");
                                             input.next(); // mengonsumsi input yang tidak valid
                                         }
                                         panjang= input.nextInt();
 
                                         input.nextLine(); // membersihkan buffer input
-                                        if (panjang < 0) {
+                                        if (panjang <= 0) {
                                             System.out.println("panjang harus lebih besar dari 0. Silakan coba lagi.");
                                         } else {
                                             validInput = true;
@@ -468,10 +481,10 @@ public class Main {
                                     } while (!validInput);
                                     
                                     do {
-                                        System.out.print("║ Masukkan Lebar (cm): ");
+                                        System.out.print("║ Masukkan Lebar: ");
                                         while (!input.hasNextInt()) {
                                             System.out.println("Input harus berupa bilangan bulat. Silakan coba lagi.");
-                                            System.out.print("Masukkan Lebar (cm): ");
+                                            System.out.print("Masukkan Lebar: ");
                                             input.next(); // mengonsumsi input yang tidak valid
                                         }
                                         luas = input.nextInt();
@@ -485,10 +498,10 @@ public class Main {
                                     } while (!validInput);
 
                                     do {
-                                        System.out.print("║ Masukkan Tinggi (cm): ");
+                                        System.out.print("║ Masukkan Tinggi: ");
                                         while (!input.hasNextInt()) {
                                             System.out.println("Input harus berupa bilangan bulat. Silakan coba lagi.");
-                                            System.out.print("Masukkan Tinggi (cm): ");
+                                            System.out.print("Masukkan Tinggi: ");
                                             input.next(); // mengonsumsi input yang tidak valid
                                         }
                                         tinggi = input.nextInt();
@@ -545,23 +558,50 @@ public class Main {
                                             System.out.println("║ ["+i+"]. "+arrayLayanan[i][0]+" - "+arrayLayanan[i][1]+ " - Estimasi: "+arrayLayanan[i][2]+" hari");
                                         }
                                     }
-                                    System.out.print ("║ -> Masukkan Pilihan: ");
+                                    System.out.print ("║ ⤷ Masukkan Pilihan: ");
                                     pilihanLayanan = input.nextInt();
                                     double tarifLayanan = Double.parseDouble(arrayLayanan[pilihanLayanan][1]); 
-                                    double beratBarangTemp; // Variabel sementara untuk menyimpan nilai dari kedua kondisi
-
-                                    if (beratBarang >= 0) {
-                                        beratBarangTemp = (berat * tarifPerKg) / 5;
+                                    if (beratBarang<1) {
+                                        beratBarang = 1;
                                     } else {
-                                        beratBarangTemp = (tarifPerKg * (panjang * luas * tinggi) / 4000) / 100;
+                                        beratBarang = (panjang*luas*tinggi)/6000;
                                     }
-
-                                    // Menggunakan nilai terbesar dari kedua kondisi untuk beratBarang
-                                    beratBarang = Math.max(beratBarang, beratBarangTemp);
-
-                                    // Menghitung biayaAkhir dengan nilai beratBarang yang telah ditentukan
-                                    double biayaAkhir = tarifLayanan + beratBarang + biayaJarak;
+                                     
+                                    double biayaAkhir = tarifLayanan + (beratBarang*tarifPerKg) + biayaJarak;
                                     nomorResi = generateTrackingNumber();
+
+                                    System.out.println("║");
+                                    System.out.println("║ Metode Pembayaran");
+                                    System.out.println("║ 1. VIA Bank");
+                                    System.out.println("║ 2. COD");
+                                    System.out.println("║ 3. Tunai");
+                                    System.out.print("║ Pilih Metode Pembayaran: ");
+                                    int metode = input.nextInt();
+
+                                    switch (metode) {
+                                        case 1:
+                                        System.out.println("║ Jenis Pilihan Bank yang Tersedia");
+                                        System.out.println("║ 1. BRI");
+                                        System.out.println("║ 2. BNI");
+                                        System.out.println("║ 3. MANDIRI");
+                                    
+                                        System.out.print("║ pilih jenis Bank yang ingin digunakan (Nama Bank) ");
+                                        String jenisBank = input.next();
+                                        System.out.println("║ Pembayaran Berhasil menggunakan " +jenisBank);
+                                        break;
+
+                                        case 2: 
+                                        System.out.println("║Silahkan lakukan pembayaran sejumlah " +biayaAkhir+ " sebelum menerima barang. Biaya akan dibebankan kepada penerima barang!!!");
+                                        break;
+
+                                        case 3:
+                                        System.out.println("║ Biaya Pengiriman sebesar: " +biayaAkhir);
+                                        System.out.print("║ Bayar: ");
+                                        int bayar = input.nextInt();
+                                        System.out.println("║ Kembalian: " +(bayar - biayaAkhir));
+                                        break;
+
+                                    }
 
                                     historyTransaksi = Arrays.copyOf(historyTransaksi,historyTransaksi.length + 1);
                                     historyTransaksi[historyTransaksi.length-1] = new String[]{
@@ -596,11 +636,13 @@ public class Main {
                                     ));       
                                     input.nextLine(); //konsumsi
 
-                                    System.out.print("Enter: ");
+                                    System.out.print("Tekan ⏎ Enter untuk melanjutkan ");
                                     input.nextLine();   
                                     clearTerminal();                                 
                                     break;
                                 case 2:
+                                displayHeader();
+                                displayIndonesianMap();
                                     validInput = false;
                                     int index = -1;
 
@@ -625,7 +667,7 @@ public class Main {
                                             System.out.println("║ [2]. Shipping"); //Mengedit status pengiriman
                                             System.out.println("║ [3]. Delivered"); //Menghapus Transaksi
                                             System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                                            System.out.print("║ -> Masukkan Pilihan: ");
+                                            System.out.print("║ ⤷ Masukkan Pilihan: ");
                                             String selected = input.nextLine();
 
                                             if(selected.equals("1")){
@@ -648,12 +690,14 @@ public class Main {
                                         }
                                     }
 
-                                    System.out.print("Enter: ");
+                                    System.out.print("Tekan ⏎ Enter untuk melanjutkan ");
                                     input.nextLine();   
                                     clearTerminal(); 
                                 break;
 
                                 case 3: 
+                                displayHeader();
+                                displayIndonesianMap();
                                     // menghapus transaksi berdasarkan nomor resi
                                     validInput = false;
                                     int deleteIndex = -1;
@@ -691,24 +735,35 @@ public class Main {
                                         System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
                                     }
 
-                                    System.out.print("Enter: ");
+                                    System.out.print("Tekan ⏎ Enter untuk melanjutkan ");
                                     input.nextLine();   
                                     clearTerminal(); 
 
                                 break;
                                 case 4:
+                                displayHeader();
+                                displayIndonesianMap();
                                     Calendar calendar = Calendar.getInstance();
                                     System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════════════╗");
                                     System.out.println("║"+YELLOW+centerString(98,"History Transaksi")+RESET+"║");
                                     System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                                    System.out.println("║ [1]. Berdasarkan Rentang Tanggal");
-                                    System.out.println("║ [2]. Hari");
-                                    System.out.println("║ [3]. Bulan");
-                                    System.out.println("║ [4]. Tahun");
-                                    System.out.println("║ [5]. Nomor Resi");
-                                    System.out.println("║ [6]. Kembali ke Menu Utama");
+                                    System.out.println("║                                                                                                  ║");
+                                    System.out.println("║             ╭──────────────────────────────────────────────────────────────────────╮             ║");
+                                    System.out.println("║             │                                                                      │             ║");
+                                    System.out.println("║             │                                                                      │             ║");
+                                    System.out.println("║             │                                                                      │             ║");
+                                    System.out.println("║             │          [1]. Rentang Tanggal         [4]. Tahun                     │             ║");
+                                    System.out.println("║             │                                                                      │             ║");
+                                    System.out.println("║             │          [2]. Hari                    [5]. Nomor Resi                │             ║");
+                                    System.out.println("║             │                                                                      │             ║");
+                                    System.out.println("║             │          [3]. Bulan                   [6]. Kembali ke Menu Utama     │             ║");
+                                    System.out.println("║             │                                                                      │             ║");
+                                    System.out.println("║             │                                                                      │             ║");
+                                    System.out.println("║             │                                                                      │             ║"); 
+                                    System.out.println("║             ╰──────────────────────────────────────────────────────────────────────╯             ║");
+                                    System.out.println("║                                                                                                  ║"); 
                                     System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                                    System.out.print("║ -> Masukkan Pilihan: ");
+                                    System.out.print("║ ⤷ Masukkan Pilihan: ");
                                     editMenu = input.nextInt();
                                     input.nextLine();
                                     switch (editMenu) {
@@ -745,7 +800,7 @@ public class Main {
                                             } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
-                                            System.out.print("Enter: ");
+                                            System.out.print("Tekan ⏎ Enter untuk melanjutkan ");
                                             input.nextLine();   
                                             clearTerminal(); 
                                             break;
@@ -856,7 +911,6 @@ public class Main {
                                                 System.out.print("║ ⤷ Masukkan nomor resi: ");
                                                 searchString = input.nextLine();
                                                 try {
-                                                    searchString = input.nextLine();
                                                     validInput = true;
 
                                                     for (int i=0; i<historyTransaksi.length; i++) {
@@ -884,7 +938,6 @@ public class Main {
                                     isLoop = false;
                                     break;
                                 default:
-                                System.out.println("Invalid choice. Please try again.");
                             }
                             break;                        
                         case 2:
@@ -896,13 +949,23 @@ public class Main {
 
                             System.out.println("║"+YELLOW+centerString(98,"Manajemen Rute")+RESET+"║");
                             System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-
-                            System.out.println("║ [1]. Menambah Rute"); //Menambahkan Lokasi
-                            System.out.println("║ [2]. Menghapus Rute"); //Menghapus Lokasi
-                            System.out.println("║ [3]. Menampilkan Data Rute"); //Menampilkan Data Lokasi
-                            System.out.println("║ [4]. Kembali ke Menu Utama"); //Kembali ke Menu Utama
+                            System.out.println("║                                                                                                  ║");
+                            System.out.println("║             ╭──────────────────────────────────────────────────────────────────────╮             ║");
+                            System.out.println("║             │                                                                      │             ║");
+                            System.out.println("║             │                                                                      │             ║");
+                            System.out.println("║             │                     [1]. Tambah Rute                                 │             ║");
+                            System.out.println("║             │                                                                      │             ║");
+                            System.out.println("║             │                     [2]. Hapus Rute                                  │             ║");
+                            System.out.println("║             │                                                                      │             ║");
+                            System.out.println("║             │                     [3]. Data Rute                                   │             ║");
+                            System.out.println("║             │                                                                      │             ║");
+                            System.out.println("║             │                     [4]. Kembali ke Menu Utama                       │             ║");
+                            System.out.println("║             │                                                                      │             ║");
+                            System.out.println("║             │                                                                      │             ║"); 
+                            System.out.println("║             ╰──────────────────────────────────────────────────────────────────────╯             ║");
+                            System.out.println("║                                                                                                  ║"); 
                             System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                            System.out.print("║ -> Masukkan Pilihan: "); 
+                            System.out.print("║ ⤷ Masukkan Pilihan: "); 
                             subMenu = input.nextInt();
 
                             input.nextLine();
@@ -972,14 +1035,14 @@ public class Main {
                                         continue;
                                     }
 
-                                    System.out.print("Enter: ");
+                                    System.out.print("Tekan ⏎ Enter untuk melanjutkan ");
                                     input.nextLine();   
                                     clearTerminal(); 
                                          
                                     break;
                                 case 3:
                                     viewExpeditionRoutes();
-                                    System.out.print("Enter: ");
+                                    System.out.print("Tekan ⏎ Enter untuk melanjutkan ");
                                     input.nextLine();   
                                     clearTerminal(); 
                                     break;
@@ -988,7 +1051,6 @@ public class Main {
                                     clearTerminal();
                                     break;
                                 default:
-                                System.out.println("║ Invalid choice. Please try again.");
                                 }
                         } break;
                         case 3:
@@ -997,15 +1059,23 @@ public class Main {
 
                             System.out.println("║"+YELLOW+centerString(98,"Manajemen Layanan")+RESET+"║");
                             System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-
-                            System.out.println("║ [1]. Tambah Jenis Layanan"); //Tambahan Jenis Layanan
-                            System.out.println("║ [2]. Mengedit Layanan"); //Merubah Tarif Layanan
-                            System.out.println("║ [3]. Menghapus Layanan"); //Menghapus Layanan
-                            System.out.println("║ [4]. Menampilkan Data Layanan"); //Menampilkan Layanan Data
-                            System.out.println("║ [5]. Keluar"); //Keluar
-
+                            System.out.println("║                                                                                                  ║");
+                            System.out.println("║             ╭──────────────────────────────────────────────────────────────────────╮             ║");
+                            System.out.println("║             │                                                                      │             ║");
+                            System.out.println("║             │                     [1]. Tambah Jenis Layanan                        │             ║");
+                            System.out.println("║             │                                                                      │             ║");
+                            System.out.println("║             │                     [2]. Edit Layanan                                │             ║");
+                            System.out.println("║             │                                                                      │             ║");
+                            System.out.println("║             │                     [3]. Hapus Layanan                               │             ║");
+                            System.out.println("║             │                                                                      │             ║");
+                            System.out.println("║             │                     [4]. Data Layanan                                │             ║");
+                            System.out.println("║             │                                                                      │             ║");
+                            System.out.println("║             │                     [5]. Keluar                                      │             ║");
+                            System.out.println("║             │                                                                      │             ║"); 
+                            System.out.println("║             ╰──────────────────────────────────────────────────────────────────────╯             ║");
+                            System.out.println("║                                                                                                  ║"); 
                             System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                            System.out.print("║ -> Masukkan Pilihan: ");
+                            System.out.print("║ ⤷ Masukkan Pilihan: ");
                             subMenu = input.nextInt();
                             input.nextLine();
 
@@ -1041,7 +1111,7 @@ public class Main {
                                             String.valueOf(startEstimation),
                                             String.valueOf(endEstimation)};
 
-                                    System.out.print("Enter: ");
+                                    System.out.print("Tekan ⏎ Enter untuk melanjutkan ");
                                     input.nextLine();   
                                     clearTerminal(); 
                                     break;
@@ -1121,7 +1191,7 @@ public class Main {
                                 } else {
                                     System.out.println("║ Nomor layanan tidak valid");
                                 }
-                                System.out.print("Enter: ");
+                                System.out.print("Tekan ⏎ Enter untuk melanjutkan ");
                                 input.nextLine();   
                                 clearTerminal(); 
                                 break;
@@ -1159,13 +1229,13 @@ public class Main {
                                     } else {
                                         System.out.println("║ Nomor layanan tidak valid.");
                                     }
-                                    System.out.print("Enter: ");
+                                    System.out.print("Tekan ⏎ Enter untuk melanjutkan ");
                                     input.nextLine();   
                                     clearTerminal(); 
                                     break;
                                 case 4:
                                     viewExpeditionServices();
-                                    System.out.print("Enter: ");
+                                    System.out.print("Tekan ⏎ Enter untuk melanjutkan ");
                                     input.nextLine();   
                                     clearTerminal(); 
                                     break;
@@ -1174,7 +1244,6 @@ public class Main {
                                     clearTerminal();
                                     break;
                                 default:
-                                System.out.println("║ Invalid choice. Please try again.");
                             }
                             break;
 
@@ -1183,17 +1252,28 @@ public class Main {
                                 displayHeader();
                                 displayIndonesianMap();
 
-                                System.out.println("║ Pilih bahasa (Choose a language):");
-                                System.out.println("║ [1]. English");
-                                System.out.println("║ [2]. Indonesian");
-                                System.out.print("║ -> Masukkan Pilihan: ");
+                                System.out.println("║                                                                                                  ║");
+                                System.out.println("║             ╭──────────────────────────────────────────────────────────────────────╮             ║");
+                                System.out.println("║             │                                                                      │             ║");
+                                System.out.println("║             │                                                                      │             ║");
+                                System.out.println("║             │                                                                      │             ║");
+                                System.out.println("║             │                         [1]. English                                 │             ║");
+                                System.out.println("║             │                                                                      │             ║");
+                                System.out.println("║             │                         [2]. Indonesian                              │             ║");
+                                System.out.println("║             │                                                                      │             ║");
+                                System.out.println("║             │                                                                      │             ║");
+                                System.out.println("║             │                                                                      │             ║"); 
+                                System.out.println("║             ╰──────────────────────────────────────────────────────────────────────╯             ║");
+                                System.out.println("║                                                                                                  ║"); 
+                                System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                System.out.print("║ ⤷ Masukkan Pilihan: ");
                                 inputselectedLanguage = input.nextInt();
                                 changeLanguage(inputselectedLanguage);
                             } while (inputselectedLanguage > languageModule[0].length);
                             clearTerminal();
                             break;
+        
                         case 5:
-
                             System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
                             System.out.println("║"+YELLOW+centerString(98,"Manajemen Tarif Dasar")+RESET+"║");
                             System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
@@ -1228,7 +1308,6 @@ public class Main {
                         if (isAdmin) { 
                             switch (menuUtama) {
                             case 6: 
-
                             Calendar calendar = Calendar.getInstance();
                             calendar.set(Calendar.DAY_OF_MONTH, 1);
                             Date startDate = calendar.getTime();
@@ -1242,27 +1321,36 @@ public class Main {
                                 centerString(15, Integer.toString(getTotalWeight(startDate, endDate))),
                                 centerString(15, "Rp "+Double.toString(getRevenue(startDate, endDate)))
                             ));
-                            System.out.print("Enter: ");
+                            System.out.print("Tekan ⏎ Enter untuk melanjutkan ");
                             input.nextLine();   
                             clearTerminal(); 
                             break;
-                        case 6:
-                            exit=true;
-                            login=false;
-                            masuk=false;
-                            break;
+                           
                         case 7:
-                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                            System.out.println("║"+YELLOW+centerString(98,"Manajemen Tarif Dasar")+RESET+"║");
-                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                            displayHeader();
+                            displayIndonesianMap();
 
-                            System.out.println("║ [1]. Tarif Dasar per Kg"); //Tambahan Jenis Layanan
-                            System.out.println("║ [2]. Tarif Dasar per Km"); //Merubah Tarif Layanan
-                            System.out.println("║ [3]. Keluar"); //Keluar
-
+                            System.out.println("║"+YELLOW+centerString(98,"Pengiriman Barang")+RESET+"║");
                             System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                            System.out.print("║ -> Masukkan Pilihan: ");
+                            System.out.println("║                                                                                                  ║");
+                            System.out.println("║             ╭──────────────────────────────────────────────────────────────────────╮             ║");
+                            System.out.println("║             │                                                                      │             ║");
+                            System.out.println("║             │                                                                      │             ║");
+                            System.out.println("║             │                     [1]. Inventori Gudang                            │             ║");
+                            System.out.println("║             │                                                                      │             ║");
+                            System.out.println("║             │                     [2]. Kirim Paket                                 │             ║");
+                            System.out.println("║             │                                                                      │             ║");
+                            System.out.println("║             │                     [3]. Antar Paket                                 │             ║");
+                            System.out.println("║             │                                                                      │             ║");
+                            System.out.println("║             │                     [4]. Keluar                                      │             ║");
+                            System.out.println("║             │                                                                      │             ║");
+                            System.out.println("║             │                                                                      │             ║"); 
+                            System.out.println("║             ╰──────────────────────────────────────────────────────────────────────╯             ║");
+                            System.out.println("║                                                                                                  ║"); 
+                            System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                            System.out.print("║ ⤷ Masukkan Pilihan: ");
                             subMenu = input.nextInt();
+                            input.nextLine();
 
                             switch (subMenu) {
                                 case 1:
@@ -1489,16 +1577,26 @@ public class Main {
                                             }
                                             break;
                                 case 3:
-                                    isLoop = false;
-                                    break;
+                                    System.out.println("Under Development");
                                 default:
                                     break;
                             }
+                            break;
 
+                        case 8:
+                            System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════════════╗");
+                            System.out.println("║                                                                                                  ║");
+                            System.out.println("║"+centerString(98, "Anda telah berhasil keluar. Sampai jumpa lain waktu! 👋")+"║");
+                            System.out.println("║                                                                                                  ║");
+                            System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                            System.out.print("Tekan ⏎ Enter untuk melanjutkan ");
+                            input.nextLine();
+                            clearTerminal();
+                            exit=true;
+                            login=false;
+                            masuk=false;
                             break;
-                        default:
-                            System.out.println("║ Invalid choice. Please try again.");
-                            break;
+                        }
                     }
                              
                         // SWITCHCASE KURIR
@@ -1592,16 +1690,113 @@ public class Main {
                                             }
                                                                 
 
+                                            while (shipmentFound) {
+                                                int[] columnWidths = calculateColumnWidths(historyTransaksi);
+                                                String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[10] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[12] + "s",
+                                                    "No", 
+                                                    "No Resi", 
+                                                    "Pengirim",
+                                                    "Layanan",
+                                                    "Tujuan",
+                                                    "Berat",
+                                                    "Penerima",
+                                                    "Alamat Penerima",
+                                                    "Origin",
+                                                    "Status"
+                                                );
+                                                System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                                System.out.println(centerString(98, "Driver: " +loggedInUsername));
+                                                System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                                for (int k = 0; k < shipmentDetails.length; k++) {
+                                                    if (shipmentDetails[k][1].equalsIgnoreCase(loggedInUsername) && shipmentDetails[k][2].equalsIgnoreCase("Sending")) {
+                                                        for (int i = 0; i < historyTransaksi.length; i++) {
+                                                            if(historyTransaksi[i][0].equals(shipmentDetails[k][0])) {
+                                                                System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[10] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[12] + "s",
+                                                                    i,
+                                                                    historyTransaksi[i][0], // Nomor Resi
+                                                                    historyTransaksi[i][2], // Nama Pengirim
+                                                                    historyTransaksi[i][5],  //Jenis Layanan
+                                                                    historyTransaksi[i][4], // Tujuan
+                                                                    historyTransaksi[i][10], // Berat
+                                                                    historyTransaksi[i][8], // Nama Penerima
+                                                                    historyTransaksi[i][9], // Alamat
+                                                                    historyTransaksi[i][13], // Origin
+                                                                    historyTransaksi[i][12]
+                                                                ));
+                                                            }
+                                                        }
+                                                    }
+                                                }
 
-            } while(!exit);
-        }
-    }
+                                                System.out.print("╠ Apakah anda ingin mengubah status pengiriman menjadi selesai? (Y/N): " );
+                                                String driverChoice = input.nextLine();
+                                                if (driverChoice.equalsIgnoreCase("Y")) {
+                                                    for (int k = 0; k < shipmentDetails.length; k++) {
+                                                        if (shipmentDetails[k][1].equalsIgnoreCase(loggedInUsername) && shipmentDetails[k][2].equalsIgnoreCase("Sending")) {
+                                                            shipmentDetails[k][2] = "Done";
 
+                                                            for (int i = 0; i < historyTransaksi.length; i++) {
+                                                                if(historyTransaksi[i][0].equals(shipmentDetails[k][0])) {
+                                                                    historyTransaksi[i][12] = "Arrived at warehouse";
+                                                                }
+                                                            }
 
+                                                            shipmentFound = true;
+                                                        }
+                                                    }
+                                                    break;
+                                                } else {
+                                                    break;
+                                                }
+                                            }
 
                                             while (!shipmentFound) {
                                                 System.out.print("║ ⤷ Masukkan lokasi gudang: ");
                                                 location  = input.nextLine();
+
+                                                for (int i = 0; i < rutePengiriman.length; i++) {
+                                                    if ((rutePengiriman[i][0].equalsIgnoreCase(location) || rutePengiriman[i][1].equalsIgnoreCase(location))) {
+                                                        inputFound = true;
+                                                    } 
+                                                }
+
+                                                while (inputFound) {
+                                                    int[] columnWidths = calculateColumnWidths(historyTransaksi);
+                                                    String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[10] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[12] + "s",
+                                                        "No", 
+                                                        "No Resi", 
+                                                        "Pengirim",
+                                                        "Layanan",
+                                                        "Tujuan",
+                                                        "Berat",
+                                                        "Penerima",
+                                                        "Alamat Penerima",
+                                                        "Origin",
+                                                        "Status"
+                                                    );
+
+                                                    System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                                    System.out.println(formattedHeader);
+                                                    System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
+
+                                                    for (int i = 0; i < historyTransaksi.length; i++) {
+                                                        if (historyTransaksi[i][13].equalsIgnoreCase(location) && historyTransaksi[i][12].equalsIgnoreCase("Waiting for pickup")) {
+                                                            System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[10] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[12] + "s",
+                                                                i,
+                                                                historyTransaksi[i][0], // Nomor Resi
+                                                                historyTransaksi[i][2], // Nama Pengirim
+                                                                historyTransaksi[i][5],  //Jenis Layanan
+                                                                historyTransaksi[i][4], // Tujuan
+                                                                historyTransaksi[i][10], // Berat
+                                                                historyTransaksi[i][8], // Nama Penerima
+                                                                historyTransaksi[i][9], // Alamat
+                                                                historyTransaksi[i][13], // Origin
+                                                                historyTransaksi[i][12]
+                                                            ));
+                                                            searchIndex++;
+                                                        }
+                                                    }
+
 
                                                     if (searchIndex != 0){
                                                         int indexKirim;
@@ -1650,7 +1845,63 @@ public class Main {
                                                             System.out.println("║ ⤷ Fitur apaan dah ini, kodenya panjang banget");
                                                         }
 
+                                                        
+                                                    }
+                                                    break;
+                                                }
+                                                break;
+                                            }
+                                            break;
+                                        case 3:
+                                            System.out.println("Under Development");
+                                        default:
+                                            break;
+                                    }
+                                    break;
 
+                         case 2:
+                            System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════════════╗");
+                            System.out.println("║                                                                                                  ║");
+                            System.out.println("║"+centerString(98, "Anda telah berhasil keluar. Sampai jumpa lain waktu! 👋")+"║");
+                            System.out.println("║                                                                                                  ║");
+                            System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                            System.out.print("Tekan ⏎ Enter untuk melanjutkan ");
+                            input.nextLine();
+                            clearTerminal();
+                            exit=true;
+                            login=false;
+                            masuk=false;
+                            break;
+                            }
+                        
+                        // SWITCHCASE KASIR
+                        } else {
+                            switch (menuUtama) { 
+                                case 6:
+                                System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════════════╗");
+                                System.out.println("║                                                                                                  ║");
+                                System.out.println("║"+centerString(98, "Anda telah berhasil keluar. Sampai jumpa lain waktu! 👋")+"║");
+                                System.out.println("║                                                                                                  ║");
+                                System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                                System.out.print("Tekan ⏎ Enter untuk melanjutkan ");
+                                input.nextLine();
+                                clearTerminal();
+                                exit=true;
+                                login=false;
+                                masuk=false;
+                                break;
+                           }
+                        
+                        }
+                    
+                    break;
+                } while (isLoop);
+                
+
+
+            } while(!exit);
+        }
+    }
 
 
     private static int[] calculateColumnWidths(String[][] array) {
@@ -1697,6 +1948,11 @@ public class Main {
                 
                 if("ADMIN".equals(userData[i][2])){
                     isAdmin = true;
+                } else if ("KURIR".equals(userData[i][2])) {
+                    isKurir = true;
+                } else {
+                    isAdmin = false;
+                    isKurir = false;
                 }
                 break;
             }
@@ -2116,11 +2372,11 @@ public class Main {
 
     private static void displayHeader(){
         System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════════════╗");
-        System.out.println("║");
-        System.out.println("║"+YELLOW+centerString(98, "╔═╗╦╔═╗╔╦╗╔═╗╔╦╗  ╔═╗╦╔═╔═╗╔═╗╔═╗╔╦╗╦╔═╗╦"+RESET));
-        System.out.println("║"+YELLOW+centerString(98, "╚═╗║╚═╗ ║ ║╣ ║║║  ║╣ ╠╩╗╚═╗╠═╝║╣  ║║║╚═╗║"+RESET));
-        System.out.println("║"+YELLOW+centerString(98, "╚═╝╩╚═╝ ╩ ╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩  ╚═╝═╩╝╩╚═╝╩"+RESET));
-        System.out.println("║");
+        System.out.println("║                                                                                                  ║");
+        System.out.println("║"+YELLOW+centerString(98, "╔═╗╦╔═╗╔╦╗╔═╗╔╦╗  ╔═╗╦╔═╔═╗╔═╗╔═╗╔╦╗╦╔═╗╦"+RESET)+"    ║");
+        System.out.println("║"+YELLOW+centerString(98, "╚═╗║╚═╗ ║ ║╣ ║║║  ║╣ ╠╩╗╚═╗╠═╝║╣  ║║║╚═╗║"+RESET)+"    ║");
+        System.out.println("║"+YELLOW+centerString(98, "╚═╝╩╚═╝ ╩ ╚═╝╩ ╩  ╚═╝╩ ╩╚═╝╩  ╚═╝═╩╝╩╚═╝╩"+RESET)+"    ║");
+        System.out.println("║                                                                                                  ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
     }
 
@@ -2130,23 +2386,23 @@ public class Main {
     }
 
     private static void displayIndonesianMap(){
-        System.out.println("║   ..                                                                                              \r\n" + //
-                "║   .-===-                                                                                          \r\n" + //
-                "║     .:===:.                 .              ===-                                                   \r\n" + //
-                "║        -===-.                             -====:                                                  \r\n" + //
-                "║          -====-:              :.    ..  .-======.            .     :..                            \r\n" + //
-                "║        .  =======-.           ===-=============:..  ::-::.:::.     ::.                            \r\n" + //
-                "║            :======-           -================    .               :     .  .:.                   \r\n" + //
-                "║          :  .======-:          .=============:     ==::=-..        .      .-====:   .  .          \r\n" + //
-                "║              .=======::-:       -===========-     -====:                .   .:-::    :-===-:..    \r\n" + //
-                "║                :=======-   .       .::.::===:     -=- ==:       .-. .::::.   :=-=-.:==========.   \r\n" + //
-                "║                  :=====:                 .         --  =-..                   .  .:-==========.   \r\n" + //
-                "║                    .===:                           =:    :                             :======.   \r\n" + //
-                "║                        :---:.    .                                              .:       -====    \r\n" + //
-                "║                         .--==-==-====:..                                   .             :====    \r\n" + //
-                "║                                 .:::--:--.: ......  ...  .   .                          -:.::=.   \r\n" + //
-                "║                                               ..  ...       .:                                    \r\n" + //
-                "║                                                     :.     ::                                     \r\n" + //
+        System.out.println("║   ..                                                                                             ║\r\n" + 
+                "║   .-===-                                                                                         ║\r\n" + 
+                "║     .:===:.                 .              ===-                                                  ║\r\n" + 
+                "║        -===-.                             -====:                                                 ║\r\n" + 
+                "║          -====-:              :.    ..  .-======.            .     :..                           ║\r\n" + 
+                "║        .  =======-.           ===-=============:..  ::-::.:::.     ::.                           ║\r\n" + 
+                "║            :======-           -================    .               :     .  .:.                  ║\r\n" + 
+                "║          :  .======-:          .=============:     ==::=-..        .      .-====:   .  .         ║\r\n" + 
+                "║              .=======::-:       -===========-     -====:                .   .:-::    :-===-:..   ║\r\n" + 
+                "║                :=======-   .       .::.::===:     -=- ==:       .-. .::::.   :=-=-.:==========.  ║\r\n" + 
+                "║                  :=====:                 .         --  =-..                   .  .:-==========.  ║\r\n" + 
+                "║                    .===:                           =:    :                             :======.  ║\r\n" + 
+                "║                        :---:.    .                                              .:       -====   ║\r\n" + 
+                "║                         .--==-==-====:..                                   .             :====   ║\r\n" + 
+                "║                                 .:::--:--.: ......  ...  .   .                          -:.::=.  ║\r\n" + 
+                "║                                               ..  ...       .:                                   ║\r\n" + 
+                "║                                                     :.     ::                                    ║\r\n" + 
                 "╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
     }
     
