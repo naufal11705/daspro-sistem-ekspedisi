@@ -1,4 +1,7 @@
 import java.util.Scanner;
+
+import javax.xml.crypto.Data;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,37 +26,93 @@ public class Main {
 
     static String[][] languageModule = {
         {"Welcome to the Expedition System", "Selamat Datang di Sistem Ekspedisi"},
-        {"", "Manajemen Pengguna         "}, //1
-        {"Delivery of Goods' Transaction", "Transaksi Pengiriman       "}, //2
-            // Bahasa menu pengiriman barang
-            {"Transactions", "Melakukan Transaksi"}, 
-                {"Enter the Sender's Name: ","Masukkan Nama Pengirim: "},
-                {"Enter the weight of the item: ", "Masukkan Berat Barang: "},
-                {"Enter Destination: ", "Masukkan Kota Tujuan: "},
-                {"Destination not Found", "Kota Tujuan tidak ditemukan"},
-            {"Editing Transactions", "Mengedit Data Transaksi"},
-            {"Remove Transactions", "Menghapus Data Transaksi"},
-            {"Displyas Transactions' Data", "Menampilkan Data Transaksi"},
-            {"Back to the Main Menu", "Kembali ke Menu Utama"},
-        {"Route Management", "Manajemen Rute       "}, //12
-            // Bahasa menu manajemen lokasi
-            {"Add Location", "Menambahkan Rute"},
-            {"Remove Location", "Menghapus Rute"},
-            {"Displays Location's Data", "Menampilkan Data Rute Pengiriman"},
-            {"Back to the Main Menu", "Kembali ke Menu Utama"},
-        {"Cost Management", "Manajemen Layanan"}, //17
-            // Bahasa menu Manajemen Tarif
-            {"Add Service Types", "Tambahkan Jenis Layanan"},
-            {"Change Cost Service", "Merubah Tarif Layanan"},
-            {"Remove Service", "Menghapus Layanan"},
-            {"Displays Services' Data", "Menampilkan Layanan Data"},
-            {"Exit", "Keluar"}, 
-        {"Change Language", "Ganti Bahasa"}, //23
-        {"", "Laporan Ekspedisi"}, //24
-        {"Exit", "Keluar"}, //25
+        {"║ ⤷ Input Username  : ", "║ ⤷ Masukkan Username   : "},
+        {"║ ⤷ Input Password  : ", "║ ⤷ Masukkan Password   : "},
+        {"✅ Loggin Success. Welcome ","✅ Anda berhasil masuk. Selamat datang "},
+        {"⛔ OOPS! THERE IS A PROBLEM WITH YOUR LOGIN CREDENTIALS. PLEASE VERIFCATION AND TRY AGAIN.","⛔ OOPS! TERDAPAT MASALAH DENGAN KREDENSIAL LOGIN ANDA. SILAKAN VERIFIKASI DAN COBA LAGI."},
 
-        // Bahasa input pilihan
-        {"⤷ Enter Options: ", "⤷ Masukkan Pilihan: "}, 
+            {"User Management", "Manajemen Pengguna         "}, //1
+                {"Add User", "Tambahkan Pengguna"},
+                    {"║ ⤷ Enter new Username: ", "║ ⤷ Masukkan nama pengguna baru: "},
+                    {"║ ⤷ Enter new Password: ", "║ ⤷ Masukkan kata sandi baru: "},
+                    {"║ ⤷ Enter new role user: ", "║ ⤷ Masukkan jabatan penggun baru: "},
+                    {"✅ New User Successfully Added.","✅ Pengguna baru berhasil ditambahkan."},
+                {"Remove User", "Hapus Pengguna"},
+                    {"║ ⤷ Enter Username want to remove: ","║ ⤷ Masukan username yang akan dihapus: "},
+                    {"🗑️  User successfully removed.","🗑️  Pengguna telah dihapus."},
+                    {"⚠️  USER NOT FOUND. PLEASE TRY AGAIN.","⚠️  PENGGUNA TIDAK DITEMUKAN. SILAKAN COBA LAGI."},
+                {" User Data", "Data Pengguna"},
+                    {"User Management", "Manajemen Pengguna"},
+                {"Back to the Main Menu", "Kembali ke Menu Utama"},
+
+            {"Delivery of Goods' Transaction", "Transaksi Pengiriman       "}, //2
+                {"Transactions", "Melakukan Transaksi"}, 
+                    {"║ Enter the Sender's Name: ","║ Masukkan Nama Pengirim: "},
+                    {"║ Enter contact number: ", "║ Masukkan nomor kontak: "},
+                    {"║ Enter receiver's name:","║ Masukkan Nama Penerima:"},
+                    {"║ Enter Address: ", "║ Masukkan Alamat: "},
+                    {"║ Enter Description: ", "║ Masukkan Deskripsi Barang:"},
+                    {"║ Length: ", "║ Masukkan Panjang: "},
+                    {"║ Weidht: ", "║ Masukkan Lebar"},
+                    {"║ Height: ", "║ Masukkan Tinggi: "},
+                    {"⚠️ RUTE IS NOT FOUND. PLEASE TRY AGAIN", "⚠️ RUTE TIDAK DITEMUKAN. SILAKAN COBA LAGI."},
+                    {"day", "hari"},
+                    {"║ Payment Methode", "║ Metode Pembayaran"},
+                    {"║ Choose Payment methode: ", "║ Pilih Metode Pembayaran: "},
+                    {"║ Available Bank (Name)", "║ Bank yang tersedia (Nama)"},
+                    {"Payment successfullu used ","Pembayaran berhasi menggunakan "},
+                    {"║ Please make payment of the amound Rp.","║ Silahkan lakukan Pembayaran sejumlah Rp."},
+                        {" before receiving goods. Fee will be charged to the receiver!!!"," sebelum menerima barang. Biaya akan dibebankan kepada penerima!!!"},
+                    {"║ Shipping cost amount to: ","║ Biaya Pengiriman sebesar: "},
+                        {"║ Pay: Rp.", "║ Bayar: Rp."},
+                        {"║ Return: Rp", "║ Kembalian: Rp"},
+                    {"Sender", "Pegiriman"},
+                    {"Receiver", "Penerima"},
+                    {"Date", "Tanggal"},
+                    {"Cost", "Biaya"},
+                {"Edit Delivery Status", "Edit Status Pengiriman"},
+                    {"║ Enter receipt number: ", "║ Masukkan nomor resi: "},
+                    {"Data is not found", "Data tidak ditemukan"},
+                {"Remove Transaction", "Hapus Transaksi"},
+                    {"Data with this receipt number has been removed","Data dengan nomor resi yang sesuai sudah dihapus"},
+                    {"User Data", "Data Pengguna"},
+            
+            {"Rute Management", "Manajemen Rute"},
+                {"Add New Rute", "Tambah Rute Baru"},
+                    {"║ Rute has been available", "║ Rute sudah tersedia"},
+                    {"║ Enter the distance between ", "║ Masukkan jarak antara "},
+                {"Remove Rute", "Hapus Rute"},
+                {"Displays Location's Data", "Menampilkan Data Rute Pengiriman"},
+
+            {"Cost Management", "Manajemen Layanan"}, //17
+                {"Add Service Types", "Tambahkan Jenis Layanan"},
+                    {"║ ⤷ Enter New Service Name", "║ ⤷ Masukkan Nama Layanan"},
+                    {"║ ⤷ Cost: Rp.", "║ ⤷ Masukkan Tarif: Rp."},
+                    {"║ ⤷ Minimum delivery time: ","║ ⤷ Masukkan Waktu Pengiriman Minimum: "},
+                    {"║ ⤷ Maximum delivery time: ","║ ⤷ Masukkan Waktu Pengiriman Maximum: "},
+                {"Edit Cost Service", "Edit Tarif Layanan"},
+                    {"║ Service list available: ","║ Daftar Layanan yang Tersedia: "},
+                    {"║ ⤷ Enter service number want to change: " ,"║ ⤷ Masukkan nomor layanan yang ingin diubah: "},
+                {"Remove Service", "Menghapus Layanan"},
+                {"Displays Services' Data", "Menampilkan Layanan Data"},
+                    {"Service", "Cost"},
+
+            {"Change Language", "Ganti Bahasa"},
+            {"Basic Service Cost Management", "Manajemen Tarif Dasar"},
+                {"║ ⤷ Service Cost Management per Kg: ","║ ⤷ Masukkan tarif dasar per Kg: "},
+                {"║ ⤷ Service Cost Management per Km: ","║ ⤷ Masukkan tarif dasar per Km: "},
+            {"Report", "Laporan"},
+            {"Delivery of gods","Pengiriminan Barang"},
+                {"Warehouse Inventory", "Inventori Gudang"},
+                    {"║ ⤷ Enter warehouse location: ", "║ ⤷ Masukkan lokasi Gudang: "},
+                {"Send Pakcage", "Kirim Paket"},
+                    {"║ ⤷ Enter index: ", "║ ⤷ Masukkan index: "},
+                {"Deliver Package", "Antar Paket"},
+            {"Exit", "Keluar"}, //25
+
+        {"Logout Successs. See You! 👋","Anda telah berhasil keluar. Sampai jumpa lain waktu! 👋"},
+        {"║ ⤷ Enter Options: ", "║ ⤷ Masukkan Pilihan: "},
+        {"Click ⏎ Enter to Continue", "Tekan ⏎ Enter untuk melanjutkan"} 
 
     };
 
@@ -669,7 +728,7 @@ public class Main {
                                         break;
 
                                         case 2: 
-                                        System.out.println("║Silahkan lakukan pembayaran sejumlah " +biayaAkhir+ " sebelum menerima barang. Biaya akan dibebankan kepada penerima barang!!!");
+                                        System.out.println("║ Silahkan lakukan pembayaran sejumlah " +biayaAkhir+ " sebelum menerima barang. Biaya akan dibebankan kepada penerima barang!!!");
                                         break;
 
                                         case 3:
