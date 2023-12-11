@@ -667,7 +667,21 @@ public class Main {
                                             (rutePengiriman[i][0].equalsIgnoreCase(destination) && rutePengiriman[i][1].equalsIgnoreCase(origin))) {
                                                 int jarak = Integer.parseInt(rutePengiriman[i][2]);
                                                 
-                                                biayaJarak = (jarak * tarifPerKm)/100;
+                                                double tarifTambahan = 15000;
+                                                if (jarak <= 100) {
+                                                    biayaJarak = (jarak * tarifPerKm) / 100;
+                                                } else {
+                                                    double biayaAwal = (100 * tarifPerKm) / 100; // Biaya untuk 100 km pertama
+                                                
+                                                    // Menghitung sisa jarak setelah 100 km pertama
+                                                    double sisaJarak = jarak - 100;
+                                                
+                                                    // Menghitung biaya tambahan untuk setiap 10 km selanjutnya
+                                                    double biayaTambahan = Math.ceil(sisaJarak / 10) * tarifTambahan;
+                                                
+                                                    // Total biaya jarak termasuk tambahan
+                                                    biayaJarak = biayaAwal + biayaTambahan;
+                                                }
                                                 found = true;
                                                 break;
                                             }
@@ -698,13 +712,20 @@ public class Main {
                                     System.out.print ("║ ⤷ Masukkan Pilihan: ");
                                     pilihanLayanan = input.nextInt();
                                     double tarifLayanan = Double.parseDouble(arrayLayanan[pilihanLayanan][1]); 
-                                    if (beratBarang<1) {
-                                        beratBarang = 1;
+                                    double hargaPerKg = 2500;
+                                    double beratBarangTemp; // Variabel sementara untuk menyimpan nilai dari kedua kondisi
+
+                                    if (beratBarang >= 0) {
+                                        beratBarangTemp = (beratBarang * tarifPerKg) / 100;
                                     } else {
-                                        beratBarang = (panjang*luas*tinggi)/6000;
+                                        beratBarangTemp = (tarifPerKg * (panjang * luas * tinggi) / 4000) / 100;
                                     }
-                                     
-                                    double biayaAkhir = tarifLayanan + (beratBarang*tarifPerKg) + biayaJarak;
+
+                                    // Menggunakan nilai terbesar dari kedua kondisi untuk beratBarang
+                                    beratBarang = Math.max(beratBarang, beratBarangTemp);
+
+                                    // Menghitung biayaAkhir dengan nilai beratBarang yang telah ditentukan
+                                    double biayaAkhir = tarifLayanan + beratBarang + biayaJarak;
                                     nomorResi = generateTrackingNumber();
 
                                     System.out.println("║");
