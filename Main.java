@@ -459,10 +459,28 @@ public class Main {
                                     System.out.print("║ Masukkan Deskripsi Barang: ");
                                     String deskripsiBarang = input.nextLine();
 
-                                    int beratBarang=0;
+                                    double beratBarang=0;
                                     int panjang;
                                     int luas;
                                     int tinggi;
+                                    int berat=0;
+                                    do {
+                                        System.out.print("║ Masukkan Berat: ");
+                                        while (!input.hasNextInt()) {
+                                            System.out.println("Input harus berupa bilangan bulat. Silakan coba lagi.");
+                                            System.out.print("Masukkan Berat: ");
+                                            input.next(); // mengonsumsi input yang tidak valid
+                                        }
+                                        berat= input.nextInt();
+
+                                        input.nextLine(); // membersihkan buffer input
+                                        if (berat <= 0) {
+                                            System.out.println("panjang harus lebih besar dari 0. Silakan coba lagi.");
+                                        } else {
+                                            validInput = true;
+                                        }
+                                    } while (!validInput);
+                                    
                                     do {
                                         System.out.print("║ Masukkan Panjang: ");
                                         while (!input.hasNextInt()) {
@@ -569,6 +587,39 @@ public class Main {
                                      
                                     double biayaAkhir = tarifLayanan + (beratBarang*tarifPerKg) + biayaJarak;
                                     nomorResi = generateTrackingNumber();
+
+                                    System.out.println("║");
+                                    System.out.println("║ Metode Pembayaran");
+                                    System.out.println("║ 1. VIA Bank");
+                                    System.out.println("║ 2. COD");
+                                    System.out.println("║ 3. Tunai");
+                                    System.out.print("║ Pilih Metode Pembayaran: ");
+                                    int metode = input.nextInt();
+
+                                    switch (metode) {
+                                        case 1:
+                                        System.out.println("║ Jenis Pilihan Bank yang Tersedia");
+                                        System.out.println("║ 1. BRI");
+                                        System.out.println("║ 2. BNI");
+                                        System.out.println("║ 3. MANDIRI");
+                                    
+                                        System.out.print("║ pilih jenis Bank yang ingin digunakan (Nama Bank) ");
+                                        String jenisBank = input.next();
+                                        System.out.println("║ Pembayaran Berhasil menggunakan " +jenisBank);
+                                        break;
+
+                                        case 2: 
+                                        System.out.println("║Silahkan lakukan pembayaran sejumlah " +biayaAkhir+ " sebelum menerima barang. Biaya akan dibebankan kepada penerima barang!!!");
+                                        break;
+
+                                        case 3:
+                                        System.out.println("║ Biaya Pengiriman sebesar: " +biayaAkhir);
+                                        System.out.print("║ Bayar: ");
+                                        int bayar = input.nextInt();
+                                        System.out.println("║ Kembalian: " +(bayar - biayaAkhir));
+                                        break;
+
+                                    }
 
                                     System.out.println("║");
                                     System.out.println("║ Metode Pembayaran");
