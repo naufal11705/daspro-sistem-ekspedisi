@@ -149,6 +149,10 @@ public class Main {
         {"║ ⤷ Input cost per Kg: ", "║ ⤷ Masukkan tarif dasar per Kg: "}, //108
         {"║ ⤷ Input cost per Km: ", "║ ⤷ Masukkan tarif dasar per Km: "}, //109
 
+        {" ⤷ Select the index of services you want to delete: ", "⤷ Pilih index layanan yang ingin dihapus: "}, //110
+        {"⚠️ Inputs are not numbers. Please enter a valid service number", "⚠️ Inputan bukan angka. Silakan masukkan nomor layanan yang valid"}, //111
+        {" has been deleted!", " Telah Dihapus!"}, //112
+        {"Invalid service number.", "Nomor layanan tidak valid."}, //113
     };
 
     // Format tanggal
@@ -158,8 +162,8 @@ public class Main {
     static String inputanTanggalAwal = "00-00-000", inputanTanggalAkhir = "00-00-0000";
 
     static String[][] arrayLayanan = {
-        {"Ekonomi","5000", "1", "5"},
-        {"Reguler", "10000", "1", "3"},
+        {"Economic","5000", "1", "5"},
+        {"Regular", "10000", "1", "3"},
         {"Sameday", "20000", "1", "1"}
     };
 
@@ -199,35 +203,35 @@ public class Main {
     
 
     static String[][] historyTransaksi = {
-        {"8032468109752", "29-01-2023", "Nanda", "08866778899", "Yogyakarta", "Reguler", "25700.0", "Farhan", "Abdi", "Jl. Kembang 5 No. 15", "3", "Makanan", "Waiting for pickup", "Malang"},
-        {"9276354185046", "12-02-2023", "Gabriel", "08811223344", "Tangerang", "Ekonomi", "33200.0", "Naufal", "Afifah", "Jl. Anggrek 12 No. 8", "7", "Elektronik", "Waiting for pickup", "Bekasi"},
-        {"1492578034685", "03-03-2023", "Afifah", "08876543210", "Makassar", "Reguler", "50900.0", "Putra", "Naufal", "Jl. Melati 9 No. 21", "5", "Pakaian", "Waiting for pickup", "Bandung"},
-        {"5283176490254", "26-04-2023", "Esa", "08822334455", "Medan", "Ekonomi", "65400.0", "Farhan", "Luthfi", "Jl. Seroja 3 No. 7", "2", "Buku", "Waiting for pickup", "Medan"},
-        {"3091754682351", "21-05-2023", "Abdi", "08811223344", "Bogor", "Ekonomi", "34800.0", "Naufal", "Julian", "Jl. Mawar 17 No. 5", "9", "Mainan", "Waiting for pickup", "Bogor"},
-        {"6750912348526", "17-06-2023", "Naufal", "08822334455", "Yogyakarta", "Reguler", "66500.0", "Putra", "Gabriel", "Jl. Anggrek 7 No. 12", "8", "Kesehatan", "Waiting for pickup", "Malang"},
-        {"8013564729835", "30-06-2023", "Farrel", "08855443322", "Jakarta", "Reguler", "76800.0", "Farhan", "Chiko", "Jl. Melati 15 No. 10", "4", "Alat Tulis", "Waiting for pickup", "Bekasi"},
-        {"2674853902164", "14-07-2023", "Atabik", "08855443322", "Bandung", "Ekonomi", "45300.0", "Naufal", "Vincent", "Jl. Kembang 2 No. 19", "1", "Elektronik", "Waiting for pickup", "Bandung"},
+        {"8032468109752", "29-01-2023", "Nanda", "08866778899", "Yogyakarta", "Regular", "25700.0", "Farhan", "Abdi", "Jl. Kembang 5 No. 15", "3", "Makanan", "Waiting for pickup", "Malang"},
+        {"9276354185046", "12-02-2023", "Gabriel", "08811223344", "Tangerang", "Economic", "33200.0", "Naufal", "Afifah", "Jl. Anggrek 12 No. 8", "7", "Elektronik", "Waiting for pickup", "Bekasi"},
+        {"1492578034685", "03-03-2023", "Afifah", "08876543210", "Makassar", "Regular", "50900.0", "Putra", "Naufal", "Jl. Melati 9 No. 21", "5", "Pakaian", "Waiting for pickup", "Bandung"},
+        {"5283176490254", "26-04-2023", "Esa", "08822334455", "Medan", "Economic", "65400.0", "Farhan", "Luthfi", "Jl. Seroja 3 No. 7", "2", "Buku", "Waiting for pickup", "Medan"},
+        {"3091754682351", "21-05-2023", "Abdi", "08811223344", "Bogor", "Economic", "34800.0", "Naufal", "Julian", "Jl. Mawar 17 No. 5", "9", "Mainan", "Waiting for pickup", "Bogor"},
+        {"6750912348526", "17-06-2023", "Naufal", "08822334455", "Yogyakarta", "Regular", "66500.0", "Putra", "Gabriel", "Jl. Anggrek 7 No. 12", "8", "Kesehatan", "Waiting for pickup", "Malang"},
+        {"8013564729835", "30-06-2023", "Farrel", "08855443322", "Jakarta", "Regular", "76800.0", "Farhan", "Chiko", "Jl. Melati 15 No. 10", "4", "Alat Tulis", "Waiting for pickup", "Bekasi"},
+        {"2674853902164", "14-07-2023", "Atabik", "08855443322", "Bandung", "Economic", "45300.0", "Naufal", "Vincent", "Jl. Kembang 2 No. 19", "1", "Elektronik", "Waiting for pickup", "Bandung"},
         {"4501628397517", "05-08-2023", "Dio", "08876543210", "Surabaya", "Sameday", "29100.0", "Putra", "Saputra", "Jl. Seroja 11 No. 14", "6", "Makanan", "Waiting for pickup", "Medan"},
-        {"7246109385273", "09-09-2023", "Pasha", "08899887766", "Serang", "Reguler", "78000.0", "Farhan", "Naufal", "Jl. Anggrek 8 No. 5", "10", "Pakaian", "Waiting for pickup", "Bogor"},
-        {"3751928643058", "18-10-2023", "Farhan", "08866778899", "Denpasar", "Reguler", "55700.0", "Naufal", "Petrus", "Jl. Mawar 5 No. 11", "2", "Mainan", "Waiting for pickup", "Malang"},
-        {"5038921467584", "02-12-2023", "Chiko", "08811223344", "Malang", "Ekonomi", "87600.0", "Putra", "Saka", "Jl. Kembang 10 No. 17", "7", "Elektronik", "Waiting for pickup", "Bogor"},
+        {"7246109385273", "09-09-2023", "Pasha", "08899887766", "Serang", "Regular", "78000.0", "Farhan", "Naufal", "Jl. Anggrek 8 No. 5", "10", "Pakaian", "Waiting for pickup", "Bogor"},
+        {"3751928643058", "18-10-2023", "Farhan", "08866778899", "Denpasar", "Regular", "55700.0", "Naufal", "Petrus", "Jl. Mawar 5 No. 11", "2", "Mainan", "Waiting for pickup", "Malang"},
+        {"5038921467584", "02-12-2023", "Chiko", "08811223344", "Malang", "Economic", "87600.0", "Putra", "Saka", "Jl. Kembang 10 No. 17", "7", "Elektronik", "Waiting for pickup", "Bogor"},
         {"6904715283142", "27-09-2023", "Haikal", "08887654321", "Bengkulu", "Sameday", "98800.0", "Farhan", "Vincent", "Jl. Melati 3 No. 9", "3", "Kesehatan", "Waiting for pickup", "Bekasi"},
         {"4892307162453", "11-11-2023", "Cindy", "08899887766", "Bekasi", "Sameday", "65400.0", "Naufal", "Petrus", "Jl. Seroja 8 No. 6", "5", "Makanan", "Waiting for pickup", "Bekasi"},
-        {"1234567890123", "01-01-2023", "Ivan", "08812345678", "Surabaya", "Ekonomi", "45000.0", "Putra", "Abdi", "Jl. Anggrek 14 No. 20", "9", "Buku", "Waiting for pickup", "Bogor"},
-        {"9876543210987", "07-04-2023", "Luthfi", "08887654321", "Jakarta", "Reguler", "60000.0", "Farhan", "Farrel", "Jl. Kembang 1 No. 18", "1", "Elektronik", "Waiting for pickup", "Malang"},
-        {"3456789012345", "14-06-2023", "Adri", "08811223344", "Bandung", "Ekonomi", "35000.0", "Naufal", "Petrus", "Jl. Melati 6 No. 13", "6", "Makanan", "Waiting for pickup", "Bogor"},
+        {"1234567890123", "01-01-2023", "Ivan", "08812345678", "Surabaya", "Economic", "45000.0", "Putra", "Abdi", "Jl. Anggrek 14 No. 20", "9", "Buku", "Waiting for pickup", "Bogor"},
+        {"9876543210987", "07-04-2023", "Luthfi", "08887654321", "Jakarta", "Regular", "60000.0", "Farhan", "Farrel", "Jl. Kembang 1 No. 18", "1", "Elektronik", "Waiting for pickup", "Malang"},
+        {"3456789012345", "14-06-2023", "Adri", "08811223344", "Bandung", "Economic", "35000.0", "Naufal", "Petrus", "Jl. Melati 6 No. 13", "6", "Makanan", "Waiting for pickup", "Bogor"},
         {"8765432109876", "21-08-2023", "Alif", "08899887766", "Makassar", "Sameday", "42000.0", "Putra", "Saputra", "Jl. Anggrek 20 No. 3", "4", "Buku", "Waiting for pickup", "Bandung"},
-        {"6543210987654", "03-10-2023", "Dimas", "08876543210", "Denpasar", "Reguler", "58000.0", "Farhan", "Farrel", "Jl. Mawar 13 No. 16", "10", "Mainan", "Waiting for pickup", "Bekasi"},
+        {"6543210987654", "03-10-2023", "Dimas", "08876543210", "Denpasar", "Regular", "58000.0", "Farhan", "Farrel", "Jl. Mawar 13 No. 16", "10", "Mainan", "Waiting for pickup", "Bekasi"},
         {"8765432109876", "11-12-2023", "Julian", "08822334455", "Malang", "Sameday", "67000.0", "Naufal", "Naufal", "Jl. Seroja 2 No. 4", "8", "Kesehatan", "Waiting for pickup", "Malang"},
-        {"5432109876543", "25-02-2023", "Petrus", "08866778899", "Bogor", "Reguler", "73000.0", "Putra", "Saka", "Jl. Kembang 8 No. 1", "3", "Elektronik", "Waiting for pickup", "Bogor"},
-        {"3210987654321", "10-05-2023", "Saputra", "08855443322", "Surabaya", "Ekonomi", "32000.0", "Farhan", "Rio", "Jl. Mawar 14 No. 7", "5", "Makanan", "Waiting for pickup", "Bekasi"},
-        {"9876543210987", "15-07-2023", "Reika", "08811223344", "Semarang", "Reguler", "52000.0", "Naufal", "Chiko", "Jl. Anggrek 11 No. 15", "2", "Alat Tulis", "Waiting for pickup", "Medan"},
+        {"5432109876543", "25-02-2023", "Petrus", "08866778899", "Bogor", "Regular", "73000.0", "Putra", "Saka", "Jl. Kembang 8 No. 1", "3", "Elektronik", "Waiting for pickup", "Bogor"},
+        {"3210987654321", "10-05-2023", "Saputra", "08855443322", "Surabaya", "Economic", "32000.0", "Farhan", "Rio", "Jl. Mawar 14 No. 7", "5", "Makanan", "Waiting for pickup", "Bekasi"},
+        {"9876543210987", "15-07-2023", "Reika", "08811223344", "Semarang", "Regular", "52000.0", "Naufal", "Chiko", "Jl. Anggrek 11 No. 15", "2", "Alat Tulis", "Waiting for pickup", "Medan"},
         {"3456789012345", "20-09-2023", "Rio", "08887654321", "Yogyakarta", "Sameday", "47000.0", "Putra", "Naufal", "Jl. Seroja 10 No. 2", "9", "Elektronik", "Waiting for pickup", "Bogor"},
         {"9876543210987", "05-11-2023", "Saka", "08899887766", "Tangerang", "Sameday", "69000.0", "Farhan", "Chiko", "Jl. Melati 20 No. 16", "1", "Pakaian", "Waiting for pickup", "Bekasi"},
-        {"3210987654321", "15-01-2023", "Taufik", "08876543210", "Bekasi", "Ekonomi", "40000.0", "Naufal", "Vincent", "Jl. Kembang 7 No. 19", "10", "Buku", "Waiting for pickup", "Surabaya"},
+        {"3210987654321", "15-01-2023", "Taufik", "08876543210", "Bekasi", "Economic", "40000.0", "Naufal", "Vincent", "Jl. Kembang 7 No. 19", "10", "Buku", "Waiting for pickup", "Surabaya"},
         {"9876543210987", "20-03-2023", "Mera", "08822334455", "Gorontalo", "Sameday", "61000.0", "Putra", "Saputra", "Jl. Seroja 4 No. 11", "4", "Kesehatan", "Waiting for pickup", "Bogor"},
-        {"3456789012345", "05-05-2023", "Vincent", "08866778899", "Malang", "Reguler", "54000.0", "Farhan", "Petrus", "Jl. Anggrek 3 No. 14", "7", "Makanan", "Arrived at warehouse", "Medan"},
-        {"3210987654321", "10-07-2023", "Vira", "08855443322", "Bengkulu", "Ekonomi", "37000.0", "Naufal", "Haikal", "Jl. Kembang 12 No. 9", "1", "Elektronik", "Waiting for pickup", "Bogor"},
+        {"3456789012345", "05-05-2023", "Vincent", "08866778899", "Malang", "Regular", "54000.0", "Farhan", "Petrus", "Jl. Anggrek 3 No. 14", "7", "Makanan", "Arrived at warehouse", "Medan"},
+        {"3210987654321", "10-07-2023", "Vira", "08855443322", "Bengkulu", "Economic", "37000.0", "Naufal", "Haikal", "Jl. Kembang 12 No. 9", "1", "Elektronik", "Waiting for pickup", "Bogor"},
         {"9876543210987", "28-10-2023", "Innam", "08822334455", "Surabaya", "Sameday", "55000.0", "Putra", "Farrel", "Jl. Melati 9 No. 5", "6", "Buku", "Waiting for pickup", "Bekasi"},
     };
 
@@ -383,117 +387,115 @@ public class Main {
                                     pressEnter();
                                     break;
                                 case 2:
-                                System.out.println("║ Daftar Layanan yang Tersedia:");
-                                for (int i = 0; i < arrayLayanan.length; i++) {
-                                    System.out.println("║ "+(i + 1) + ". " + arrayLayanan[i][0] );
-                                }
-                        
-                                System.out.print("║ ⤷ Masukkan nomor layanan yang ingin diubah: ");
-                                int selectedService = 0;
-
-                                while (!inputValid) {
-                                    if (input.hasNextInt()) {
-                                        selectedService = input.nextInt();
-                                        if (selectedService >= 1 && selectedService <= arrayLayanan.length) {
-                                            inputValid = true;
-                                        } else {
-                                            System.out.println("║ Nomor layanan tidak valid. Masukkan nomor layanan yang valid:");
-                                            input.nextLine();
-                                        }
-                                    } else {
-                                        System.out.println("║ Input bukan angka. Mohon masukkan nomor layanan yang valid:");
-                                        input.next();
+                                    System.out.println("║ Daftar Layanan yang Tersedia:");
+                                    for (int i = 0; i < arrayLayanan.length; i++) {
+                                        System.out.println("║ "+(i + 1) + ". " + arrayLayanan[i][0] );
                                     }
-                                }
-
-                                inputValid = false;
-
-                                if (selectedService >= 1 && selectedService <= arrayLayanan.length) {
-                                    System.out.println("║ Pilih yang ingin diubah:");
-                                    System.out.println("║ [1]. Nama Layanan");
-                                    System.out.println("║ [2]. Tarif Layanan");
-                                    System.out.print("║ ⤷ Masukkan nomor pilihan: ");
-                                    int changeOption = 0;
+                            
+                                    System.out.print("║ ⤷ Masukkan nomor layanan yang ingin diubah: ");
+                                    int selectedService = 0;
 
                                     while (!inputValid) {
                                         if (input.hasNextInt()) {
-                                            changeOption = input.nextInt();
-                                            if (changeOption == 1 || changeOption == 2) {
+                                            selectedService = input.nextInt();
+                                            if (selectedService >= 1 && selectedService <= arrayLayanan.length) {
                                                 inputValid = true;
                                             } else {
-                                                System.out.println("║ Pilihan tidak valid. Masukkan nomor pilihan yang valid:");
+                                                System.out.println("║ Nomor layanan tidak valid. Masukkan nomor layanan yang valid:");
                                                 input.nextLine();
                                             }
                                         } else {
-                                            System.out.println("║ Input bukan angka. Mohon masukkan nomor pilihan yang valid:");
+                                            System.out.println("║ Input bukan angka. Mohon masukkan nomor layanan yang valid:");
                                             input.next();
                                         }
                                     }
 
-                                    if (changeOption == 1) {
-                                        System.out.print("║ ⤷ Masukkan Nama Layanan Baru: ");
-                                        input.nextLine();
-                                        arrayLayanan[selectedService - 1][0] = input.nextLine();
-                                        System.out.println("║ Data nama layanan berhasil diupdate.");
-                                    } else if (changeOption == 2) {
-                                        double newTarif = 0.0;
-                                        inputValid = false;
+                                    inputValid = false;
+
+                                    if (selectedService >= 1 && selectedService <= arrayLayanan.length) {
+                                        System.out.println("║ Pilih yang ingin diubah:");
+                                        System.out.println("║ [1]. Nama Layanan");
+                                        System.out.println("║ [2]. Tarif Layanan");
+                                        System.out.print("║ ⤷ Masukkan nomor pilihan: ");
+                                        int changeOption = 0;
 
                                         while (!inputValid) {
-                                            System.out.print("║ ⤷ Masukkan Tarif Baru: ");
-                                            if (input.hasNextDouble()) {
-                                                newTarif = input.nextDouble();
-                                                inputValid = true;
+                                            if (input.hasNextInt()) {
+                                                changeOption = input.nextInt();
+                                                if (changeOption == 1 || changeOption == 2) {
+                                                    inputValid = true;
+                                                } else {
+                                                    System.out.println("║ Pilihan tidak valid. Masukkan nomor pilihan yang valid:");
+                                                    input.nextLine();
+                                                }
                                             } else {
-                                                System.out.println("║ Masukan bukan angka. Mohon masukkan angka.");
+                                                System.out.println("║ Input bukan angka. Mohon masukkan nomor pilihan yang valid:");
                                                 input.next();
                                             }
                                         }
 
-                                        arrayLayanan[selectedService - 1][1] = String.valueOf(newTarif);
-                                        System.out.println("║ Data tarif layanan berhasil diupdate.");
+                                        if (changeOption == 1) {
+                                            System.out.print("║ ⤷ Masukkan Nama Layanan Baru: ");
+                                            input.nextLine();
+                                            arrayLayanan[selectedService - 1][0] = input.nextLine();
+                                            System.out.println("║ Data nama layanan berhasil diupdate.");
+                                        } else if (changeOption == 2) {
+                                            double newTarif = 0.0;
+                                            inputValid = false;
 
-                                        break;
-                                    }
-                                } else {
-                                    System.out.println("║ Nomor layanan tidak valid");
-                                }
-                                pressEnter();
-                                break;
-                                case 3:
-                                    System.out.println("║ Daftar Layanan yang Tersedia:");
-                                    for (int i = 0; i < arrayLayanan.length; i++) {
-                                        if (arrayLayanan[i] != null) {
-                                            System.out.println("║ " + (i + 1) + ". " + arrayLayanan[i][0]);
+                                            while (!inputValid) {
+                                                System.out.print("║ ⤷ Masukkan Tarif Baru: ");
+                                                if (input.hasNextDouble()) {
+                                                    newTarif = input.nextDouble();
+                                                    inputValid = true;
+                                                } else {
+                                                    System.out.println("║ Masukan bukan angka. Mohon masukkan angka.");
+                                                    input.next();
+                                                }
+                                            }
+
+                                            arrayLayanan[selectedService - 1][1] = String.valueOf(newTarif);
+                                            System.out.println("║ Data tarif layanan berhasil diupdate.");
+
+                                            break;
                                         }
+                                    } else {
+                                        System.out.println("║ Nomor layanan tidak valid");
                                     }
+                                    pressEnter();
+                                    break;
+                                case 3:
+                                    clearTerminal();
+                                    viewExpeditionServices();
                         
                                     int selectedNumber = 0;
         
                                     while (!validInput) {
                                         try {
-                                            System.out.print("║ ⤷Pilih nomor layanan yang ingin dihapus: ");
+                                            System.out.print(languageModule[110][selectedLanguage]);
                                             selectedNumber = input.nextInt();
                                             validInput = true;
                                         } catch (InputMismatchException e) {
-                                            System.out.println("║ Masukan bukan angka. Silakan masukkan nomor layanan yang valid.");
+                                            System.out.println(languageModule[111][selectedLanguage]);
                                             input.nextLine();
                                         }
                                     }
-
                                     if (selectedNumber > 0 && selectedNumber <= arrayLayanan.length) {
                                         String pilih = arrayLayanan[selectedNumber - 1][0];
 
                                         for (int i = 0; i < arrayLayanan.length; i++) {
                                             if (arrayLayanan[i][0].equalsIgnoreCase(pilih)) {
-                                                System.out.println("║ " + arrayLayanan[i][0] + " - " + arrayLayanan[i][1] + " Telah Dihapus!");
+                                                clearTerminal();
+                                                System.out.println(arrayLayanan[i][0] + " ⇋ " + arrayLayanan[i][1] + languageModule[112][selectedLanguage]);
                                                 arrayLayanan[i] = null;
+                                                viewExpeditionServices();
                                                 break;
                                             }
                                         }
                                     } else {
-                                        System.out.println("║ Nomor layanan tidak valid.");
+                                        System.out.println(languageModule[113][selectedLanguage]);
                                     }
+                                    input.nextLine();
                                     pressEnter();
                                     break;
                                 case 4:
@@ -1257,7 +1259,7 @@ public class Main {
         for (int i = 0; i < arrayLayanan.length; i++) {
             if (arrayLayanan[i] != null) {
                     String formattedString = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s",
-                    i,
+                    (i+1),
                     arrayLayanan[i][0], 
                     arrayLayanan[i][1] 
             );
