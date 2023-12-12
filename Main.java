@@ -155,13 +155,36 @@ public class Main {
         {" has been deleted!", " Telah Dihapus!"}, //112
         {"Invalid service number.", "Nomor layanan tidak valid."}, //113
 
-        {"","⚠️ INPUT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI."},//114
-        {"","⚠️ BERAT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI."},//115
-        {"","⚠️ PANJANG HARUS LEBIH BESAR DARI 0 . SILAHKAN COBA LAGI."},//116
-        {"","⚠️ LEBAR HARUS LEBIH BESAR DARI 0 . SILAHKAN COBA LAGI."},//117
-        {"","⚠️ TINGGI HARUS LEBIH BESAR DARI 0 . SILAHKAN COBA LAGI."},//118
+        {"⚠️ THE INPUT MUST BE AN INTEGER. PLEASE TRY AGAIN.","⚠️ INPUT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI."},//114
+        {"⚠️ WEIGHT MUST BE AN INTEGER. PLEASE TRY AGAIN.","⚠️ BERAT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI."},//115
+        {"⚠️ THE LENGTH MUST BE GREATER THAN 0. PLEASE TRY AGAIN.","⚠️ PANJANG HARUS LEBIH BESAR DARI 0 . SILAHKAN COBA LAGI."},//116
+        {"⚠️ THE WIDTH MUST BE GREATER THAN 0. PLEASE TRY AGAIN.","⚠️ LEBAR HARUS LEBIH BESAR DARI 0 . SILAHKAN COBA LAGI."},//117
+        {"⚠️ HEIGHT MUST BE GREATER THAN 0. PLEASE TRY AGAIN.","⚠️ TINGGI HARUS LEBIH BESAR DARI 0 . SILAHKAN COBA LAGI."},//118
 
         {"Edit Route", "Edit Rute"}, //119
+        {"║ The input entered is invalid. Please enter the receipt number again!.","║ Input yang dimasukkan tidak valid. Silakan masukkan nomor resi kembali!."},//120
+        {"The route already exists!","Rute tersebut sudah ada!"},//121
+        {"⤷ Enter the route number you want to delete: ","⤷ Masukkan nomor rute yang ingin dihapus: "},//122
+        {"Invalid route number","Nomor rute tidak valid"},//123
+        {"║ Invalid service number. Please enter a valid service number:","║ Nomor layanan tidak valid. Masukkan nomor layanan yang valid:"},//124
+        {"⤷ Press [⏎ Enter] if you don't want to edit the data","⤷ Tekan [⏎ Enter] jika tidak ingin mengedit data"},//125
+        {"⤷ Enter the route number you want to change:","⤷ Masukkan nomor rute yang ingin diubah: "},//126
+        {"╠ Do you want to change the delivery status to completed? (Y/N):","╠ Apakah anda ingin mengubah status pengiriman menjadi selesai? (Y/N): "},//127
+        {"║ Invalid date format. Please enter the date in dd-MM-yyyy format.","║ Format tanggal tidak valid. Harap masukkan tanggal dengan format dd-MM-yyyy."},//128
+        {"║ Enter End Date (dd-MM-yyyy):","║ Masukkan Tanggal Akhir (dd-MM-yyyy): "},//129
+        {"║⤷Enter Start Date (dd-MM-yyyy): ","║ ⤷ Masukkan Tanggal Awal (dd-MM-yyyy): "},//130
+        {"║ The input must be a number.","║ Input harus berupa angka."},//131
+        {"║ Invalid date.","║ Tanggal tidak valid."},//132
+        {"║ ⤷ Enter Date (dd):","║ ⤷ Masukkan Tanggal (dd): "},//133
+        {"║ Enter a number between 1 and 12.","║ Masukkan angka antara 1 sampai 12."},//134
+        {"║ The moon is invalid. Enter a number between 1 and 12.","║ Bulan tidak valid. Masukkan angka antara 1 sampai 12."},//135
+        {"║⤷Enter Month (MM):","║ ⤷ Masukkan Bulan (MM): "},//136
+        {"║ Input is not a number. Please enter the year between 1900 and 3000.","║ Input bukan angka. Silakan masukkan tahun antara 1900 dan 3000."},//137
+        {"║ Invalid year. Please enter the year between 1900 and 3000.","║ Tahun tidak valid. Harap masukkan tahun antara 1900 dan 3000."},//138
+        {"║ ⤷Enter Year:","║ ⤷ Masukkan Tahun: "},//139
+        {"║ Data not found. Please try again.","║ Data tidak ditemukan. Silakan coba lagi."},//140
+        {"There are no transactions in that date range or that correspond to the month and year.","Tidak ada transaksi pada rentang tanggal tersebut atau yang sesuai dengan bulan dan tahun ini."}//141
+
         
     };
 
@@ -677,7 +700,7 @@ public class Main {
         System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝"); 
 
         if (!dataDitemukan) {
-            System.out.println("Tidak ada transaksi pada rentang tanggal tersebut atau yang sesuai dengan bulan dan tahun ini.");
+            System.out.print(languageModule[141][selectedLanguage]);//"Tidak ada transaksi pada rentang tanggal tersebut atau yang sesuai dengan bulan dan tahun ini."
         }
     }
 
@@ -1340,7 +1363,7 @@ public class Main {
         String searchString = "";
 
         while (!validInput) {
-            System.out.print("║ ⤷ Masukkan nomor resi: ");
+            System.out.print(languageModule[44][selectedLanguage]);
             searchString = input.nextLine();
             try {
                 validInput = true;
@@ -1357,10 +1380,10 @@ public class Main {
             } 
             if (searchIndex != -1) {
                 validInput = true;
-            } else { System.out.println("║ Data tidak ditemukan. Silakan coba lagi."); }
+            } else { System.out.print(languageModule[140][selectedLanguage]); }//"║ Data tidak ditemukan. Silakan coba lagi."
 
         } catch (NumberFormatException exception) {
-                System.out.println("║ Input yang dimasukkan tidak valid. Silakan masukkan nomor resi kembali!.");
+                System.out.print(languageModule[120][selectedLanguage]);;
             }
         }
     }
@@ -1371,7 +1394,7 @@ public class Main {
 
             validInput = false;
             while (!validInput) {
-                System.out.print("║ ⤷ Masukkan Tahun: ");
+                System.out.print(languageModule[139][selectedLanguage]);//"║ ⤷ Masukkan Tahun: "
 
                 if (input.hasNextInt()) {
                     tahunInput = input.nextInt();
@@ -1380,10 +1403,10 @@ public class Main {
                     if (tahunInput >= 1900 && tahunInput <= 3000) {
                         validInput = true;
                     } else {
-                        System.out.println("║ Tahun tidak valid. Harap masukkan tahun antara 1900 dan 3000.");
+                        System.out.print(languageModule[138][selectedLanguage]);//"║ Tahun tidak valid. Harap masukkan tahun antara 1900 dan 3000."
                     }
                 } else {
-                    System.out.println("║ Input bukan angka. Silakan masukkan tahun antara 1900 dan 3000.");
+                    System.out.print(languageModule[137][selectedLanguage]);//"║ Input bukan angka. Silakan masukkan tahun antara 1900 dan 3000."
                     input.next(); 
                 }
             }
@@ -1399,16 +1422,16 @@ public class Main {
             int bulanInput;
             validInput = false;
             while (true) {
-                System.out.print("║ ⤷ Masukkan Bulan (MM): ");
+                System.out.print(languageModule[136][selectedLanguage]);//"║ ⤷ Masukkan Bulan (MM): "
                 if (input.hasNextInt()) {
                     bulanInput = input.nextInt();
                     if (bulanInput >= 1 && bulanInput <= 12) {
                         break; // Keluar dari loop saat input valid
                     } else {
-                        System.out.println("║ Bulan tidak valid. Masukkan angka antara 1 sampai 12.");
+                        System.out.print(languageModule[135][selectedLanguage]);//"║ Bulan tidak valid. Masukkan angka antara 1 sampai 12."
                     }
                 } else {
-                    System.out.println("║ Masukkan angka antara 1 sampai 12.");
+                    System.out.print(languageModule[134][selectedLanguage]);//"║ Masukkan angka antara 1 sampai 12."
                     input.next(); 
                 }
             }
@@ -1438,12 +1461,12 @@ public class Main {
             int tanggalInput;
             validInput = false;
             while (!validInput) {
-                System.out.print("║ ⤷ Masukkan Tanggal (dd): ");
+                System.out.print(languageModule[133][selectedLanguage]);//"║ ⤷ Masukkan Tanggal (dd): "
                 if (input.hasNextInt()) {
                     tanggalInput = input.nextInt();
         
                     if (tanggalInput < 1 || tanggalInput > 31) {
-                        System.out.println("║ Tanggal tidak valid.");
+                        System.out.print(languageModule[132][selectedLanguage]);//"║ Tanggal tidak valid."
                     } else {
                         validInput = true;
                         Calendar cal = Calendar.getInstance();
@@ -1459,7 +1482,7 @@ public class Main {
                         viewExpeditionHistoryByDay(startDate, endDate);
                     }
                 } else {
-                    System.out.println("║ Input harus berupa angka.");
+                    System.out.print(languageModule[131][selectedLanguage]);//"║ Input harus berupa angka."
                     input.next(); 
                 }
             }
@@ -1473,12 +1496,12 @@ public class Main {
         boolean validInputTanggalAkhir = false;
         do {
             try {
-                System.out.print("║ ⤷ Masukkan Tanggal Awal (dd-MM-yyyy): ");
+                System.out.print(languageModule[130][selectedLanguage]);//"║ ⤷ Masukkan Tanggal Awal (dd-MM-yyyy): "
                 inputanTanggalAwal = input.next();
                 startDate = dateFormat.parse(inputanTanggalAwal);
                 validInputTanggalAwal = true;
             } catch (ParseException | InputMismatchException e) {
-                System.out.println("║ Format tanggal tidak valid. Harap masukkan tanggal dengan format dd-MM-yyyy.");
+                System.out.print(languageModule[128][selectedLanguage]);//format tanggal tidak valid 
                 input.nextLine(); 
             }
             
@@ -1486,12 +1509,12 @@ public class Main {
     
         do {
             try {
-                System.out.print("║ Masukkan Tanggal Akhir (dd-MM-yyyy): ");
+                System.out.print(languageModule[129][selectedLanguage]);//"║ Masukkan Tanggal Akhir (dd-MM-yyyy): "
                 inputanTanggalAkhir = input.next();
                 endDate = dateFormat.parse(inputanTanggalAkhir);
                 validInputTanggalAkhir = true;
             } catch (ParseException | InputMismatchException e) {
-                System.out.println("║ Format tanggal tidak valid. Harap masukkan tanggal dengan format dd-MM-yyyy.");
+               System.out.print(languageModule[128][selectedLanguage]);//Format tanggal tidak valid
                 input.nextLine(); 
             }
         } while (!validInputTanggalAkhir);
@@ -1510,7 +1533,7 @@ public class Main {
         int deleteIndex = -1;
 
         while (!validInput) {
-            System.out.print("║ ⤷ Masukkan nomor resi: ");
+            System.out.print(languageModule[44][selectedLanguage]);
             try {
                 String deleteString = input.nextLine();
                 validInput = true;
@@ -1761,7 +1784,7 @@ public class Main {
 
         switch (metode) {
             case 1:
-            System.out.println("║ Jenis Pilihan Bank yang Tersedia");   
+           System.out.print(languageModule[32][selectedLanguage]);  //Jenis bank tersedia
             System.out.println("║ 1. BRI");
             System.out.println("║ 2. BNI");
             System.out.println("║ 3. MANDIRI");
@@ -1862,7 +1885,7 @@ public class Main {
             }
 
         } catch (NumberFormatException exception) {
-                System.out.println("║ Input yang dimasukkan tidak valid. Silakan masukkan nomor resi kembali!.");
+                System.out.print(languageModule[120][selectedLanguage]);;
             }
         }
     }
@@ -1885,7 +1908,7 @@ public class Main {
             for (int i = 0; i < rutePengiriman.length; i++) {
                 if ((rutePengiriman[i][0].equalsIgnoreCase(origin) && rutePengiriman[i][1].equalsIgnoreCase(destination)) || 
                 (rutePengiriman[i][0].equalsIgnoreCase(destination) && rutePengiriman[i][1].equalsIgnoreCase(origin))) {
-                    System.out.println("Rute tersebut sudah ada!");
+                    System.out.print(languageModule[121][selectedLanguage]);
                     routeExist = true;
                     break;
                 } 
@@ -1916,7 +1939,7 @@ public class Main {
         validInput = false;
 
         while (!validInput) {
-            System.out.print("⤷ Masukkan nomor rute yang ingin dihapus: ");
+            System.out.print(languageModule[122][selectedLanguage]);
             try {
                 deleteIndex = Integer.parseInt(input.nextLine());
                 validInput = true;
@@ -1927,12 +1950,12 @@ public class Main {
 
         if (deleteIndex >= 1 && deleteIndex <= rutePengiriman.length) {
             String deletedLocation = rutePengiriman[deleteIndex - 1][0]+" "+rutePengiriman[deleteIndex - 1][1];
-            System.out.println("║ " + deletedLocation + " Telah Dihapus!");
+            System.out.println("║ " + deletedLocation + languageModule[112][selectedLanguage]);//telah dihapus
 
             System.arraycopy(rutePengiriman, deleteIndex, rutePengiriman, deleteIndex - 1, rutePengiriman.length - deleteIndex);
             rutePengiriman = Arrays.copyOf(rutePengiriman, rutePengiriman.length - 1);
         } else {
-            System.out.println("Nomor rute tidak valid");
+            System.out.print(languageModule[123][selectedLanguage]);
         }
 
         clearTerminal();
@@ -2037,7 +2060,7 @@ public class Main {
                 if (selectedService <= arrayLayanan.length) {
                     inputValid = true;
                 } else {
-                    System.out.println("║ Nomor layanan tidak valid. Masukkan nomor layanan yang valid:");
+                    System.out.print(languageModule[124][selectedLanguage]);
                     input.nextLine();
                 }
             } else {
@@ -2049,7 +2072,7 @@ public class Main {
         inputValid = false;
         input.nextLine();
 
-        System.out.println("⤷ Tekan [⏎ Enter] jika tidak ingin mengedit data");
+        System.out.print(languageModule[125][selectedLanguage]);
 
         System.out.print("\t"+arrayLayanan[selectedService][0] + " ➺  ");
         newData = input.nextLine();
@@ -2267,7 +2290,7 @@ public class Main {
             }
             System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
 
-            System.out.print("╠ Apakah anda ingin mengubah status pengiriman menjadi selesai? (Y/N): " );
+            System.out.print(languageModule[127][selectedLanguage]); //apakah anda ingin mengubah pesanan menjadi selesai
             String driverChoice = input.nextLine();
             if (driverChoice.equalsIgnoreCase("Y")) {
                 for (int k = 0; k < shipmentDetails.length; k++) {
@@ -2520,7 +2543,7 @@ public class Main {
 
         viewExpeditionRoutes();
 
-        System.out.print("⤷ Masukkan nomor rute yang ingin diubah: ");
+        System.out.print(languageModule[126][selectedLanguage]);
         int selectedService = 0;
         String newData;
 
@@ -2530,7 +2553,7 @@ public class Main {
                 if (selectedService <= rutePengiriman.length) {
                     inputValid = true;
                 } else {
-                    System.out.println("║ Nomor layanan tidak valid. Masukkan nomor layanan yang valid:");
+                    System.out.print(languageModule[124][selectedLanguage]);
                     input.nextLine();
                 }
             } else {
@@ -2542,7 +2565,7 @@ public class Main {
         inputValid = false;
         input.nextLine();
 
-        System.out.println("⤷ Tekan [⏎ Enter] jika tidak ingin mengedit data");
+        System.out.print(languageModule[125][selectedLanguage]);
 
         System.out.print("\t"+rutePengiriman[selectedService][0] + " ➺  ");
         newData = input.nextLine();
