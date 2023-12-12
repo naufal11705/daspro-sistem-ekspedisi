@@ -383,7 +383,7 @@ public class Main {
                                 System.out.println("║                                                                                                  ║"); 
                                 System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
 
-                                System.out.print("║ ⤷ Masukan Pilihan: ");
+                                System.out.print("║ "+padString(32, languageModule[80][selectedLanguage])); //Masukan Pilihan
                                 int pilihan = input.nextInt();
 
                                 switch (pilihan) {
@@ -489,7 +489,7 @@ public class Main {
                             System.out.println("║             ╰──────────────────────────────────────────────────────────────────────╯             ║");
                             System.out.println("║                                                                                                  ║"); 
                             System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                            System.out.print("║ ⤷ Masukkan Pilihan: "); 
+                            System.out.print("║ "+padString(32, languageModule[80][selectedLanguage])); 
 
                             subMenu = input.nextInt();
                             input.nextLine();
@@ -504,19 +504,19 @@ public class Main {
                                     int pilihanLayanan;
                                     double biayaJarak = 0;
 
-                                    System.out.print ("║ Masukkan Nama Pengirim: ");
+                                    System.out.print(padString(32, languageModule[20][selectedLanguage]));
                                     String namaPengirim = input.nextLine();
 
-                                    System.out.print ("║ Masukkan Nomor Kontak: ");
+                                    System.out.print(padString(32, languageModule[21][selectedLanguage]));
                                     String nomorKontak = input.nextLine();
 
-                                    System.out.print ("║ Masukkan Nama Penerima: ");
+                                    System.out.print(padString(32, languageModule[22][selectedLanguage]));
                                     String namaPenerima = input.nextLine();
 
-                                    System.out.print ("║ Masukkan Alamat: ");
+                                    System.out.print(padString(32, languageModule[23][selectedLanguage]));
                                     String alamatPenerima = input.nextLine();
 
-                                    System.out.print("║ Masukkan Deskripsi Barang: ");
+                                    System.out.print(padString(32, languageModule[24][selectedLanguage]));
                                     String deskripsiBarang = input.nextLine();
 
                                     double beratBarang=0;
@@ -525,7 +525,7 @@ public class Main {
                                     int tinggi;
                                     int berat=0;
                                     do {
-                                        System.out.print("║ Masukkan Berat: ");
+                                        System.out.print("║ "+padString(32, languageModule[82][selectedLanguage]));
                                         while (!input.hasNextInt()) {
                                             input.nextLine();
                                             System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
@@ -536,7 +536,7 @@ public class Main {
                                             System.out.print(languageModule[81][selectedLanguage]);
                                             input.nextLine();  
                                             System.out.print("\033[7A\033[0J");
-                                            System.out.print("║ Masukkan Berat: ");
+                                            System.out.print("║ "+padString(32, languageModule[82][selectedLanguage]));
                                         }
                                         berat= input.nextInt();
 
@@ -557,7 +557,7 @@ public class Main {
                                     } while (!validInput);
                                     
                                     do {
-                                        System.out.print("║ Masukkan Panjang: ");
+                                        System.out.print("║ "+padString(32, languageModule[25][selectedLanguage]));
                                         while (!input.hasNextInt()) {
                                             input.nextLine();
                                             System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
@@ -568,7 +568,7 @@ public class Main {
                                             System.out.print(languageModule[81][selectedLanguage]);
                                             input.nextLine();  
                                             System.out.print("\033[7A\033[0J");
-                                            System.out.print("║ Masukkan Panjang: ");
+                                            System.out.print("║ "+padString(32, languageModule[25][selectedLanguage]));
                                         }
                                         panjang= input.nextInt();
 
@@ -589,7 +589,7 @@ public class Main {
                                     } while (!validInput);
                                     
                                     do {
-                                        System.out.print("║ Masukkan Lebar: ");
+                                        System.out.print("║ "+padString(32, languageModule[26][selectedLanguage]));
                                         while (!input.hasNextInt()) {
                                             input.nextLine();
                                             System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
@@ -600,7 +600,7 @@ public class Main {
                                             System.out.print(languageModule[81][selectedLanguage]);
                                             input.nextLine();  
                                             System.out.print("\033[7A\033[0J");
-                                            System.out.print("║ Masukkan Lebar: ");
+                                            System.out.print("║ "+padString(32, languageModule[26][selectedLanguage]));
                                         }
                                         luas = input.nextInt();
 
@@ -621,7 +621,7 @@ public class Main {
                                     } while (!validInput);
 
                                     do {
-                                        System.out.print("║ Masukkan Tinggi: ");
+                                        System.out.print("║ "+padString(32, languageModule[27][selectedLanguage]));
                                         while (!input.hasNextInt()) {
                                             input.nextLine();
                                             System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
@@ -632,7 +632,7 @@ public class Main {
                                             System.out.print(languageModule[81][selectedLanguage]);
                                             input.nextLine();  
                                             System.out.print("\033[7A\033[0J");
-                                            System.out.print("║ Masukkan Tinggi: ");
+                                            System.out.print("║ "+padString(32, languageModule[27][selectedLanguage]));
                                         }
                                         tinggi = input.nextInt();
 
@@ -668,21 +668,7 @@ public class Main {
                                             (rutePengiriman[i][0].equalsIgnoreCase(destination) && rutePengiriman[i][1].equalsIgnoreCase(origin))) {
                                                 int jarak = Integer.parseInt(rutePengiriman[i][2]);
                                                 
-                                                double tarifTambahan = 15000;
-                                                if (jarak <= 100) {
-                                                    biayaJarak = (jarak * tarifPerKm) / 100;
-                                                } else {
-                                                    double biayaAwal = (100 * tarifPerKm) / 100; // Biaya untuk 100 km pertama
-                                                
-                                                    // Menghitung sisa jarak setelah 100 km pertama
-                                                    double sisaJarak = jarak - 100;
-                                                
-                                                    // Menghitung biaya tambahan untuk setiap 10 km selanjutnya
-                                                    double biayaTambahan = Math.ceil(sisaJarak / 10) * tarifTambahan;
-                                                
-                                                    // Total biaya jarak termasuk tambahan
-                                                    biayaJarak = biayaAwal + biayaTambahan;
-                                                }
+                                                biayaJarak = (jarak * tarifPerKm)/100;
                                                 found = true;
                                                 break;
                                             }
@@ -713,28 +699,21 @@ public class Main {
                                     System.out.print ("║ ⤷ Masukkan Pilihan: ");
                                     pilihanLayanan = input.nextInt();
                                     double tarifLayanan = Double.parseDouble(arrayLayanan[pilihanLayanan][1]); 
-                                    double hargaPerKg = 2500;
-                                    double beratBarangTemp; // Variabel sementara untuk menyimpan nilai dari kedua kondisi
-
-                                    if (beratBarang >= 0) {
-                                        beratBarangTemp = (beratBarang * tarifPerKg) / 100;
+                                    if (beratBarang<1) {
+                                        beratBarang = 1;
                                     } else {
-                                        beratBarangTemp = (tarifPerKg * (panjang * luas * tinggi) / 4000) / 100;
+                                        beratBarang = (panjang*luas*tinggi)/6000;
                                     }
-
-                                    // Menggunakan nilai terbesar dari kedua kondisi untuk beratBarang
-                                    beratBarang = Math.max(beratBarang, beratBarangTemp);
-
-                                    // Menghitung biayaAkhir dengan nilai beratBarang yang telah ditentukan
-                                    double biayaAkhir = tarifLayanan + beratBarang + biayaJarak;
+                                     
+                                    double biayaAkhir = tarifLayanan + (beratBarang*tarifPerKg) + biayaJarak;
                                     nomorResi = generateTrackingNumber();
 
                                     System.out.println("║");
-                                    System.out.println("║ Metode Pembayaran");
+                                    System.out.println("║ "+padString(32, languageModule[30][selectedLanguage]));
                                     System.out.println("║ 1. VIA Bank");
                                     System.out.println("║ 2. COD");
                                     System.out.println("║ 3. Tunai");
-                                    System.out.print("║ Pilih Metode Pembayaran: ");
+                                    System.out.print("║ "+padString(32, languageModule[31][selectedLanguage]));
                                     int metode = input.nextInt();
 
                                     switch (metode) {
@@ -806,7 +785,7 @@ public class Main {
                                     int index = -1;
 
                                     while (!validInput) {
-                                        System.out.print("║ ⤷ Masukkan nomor resi: ");
+                                        System.out.print("║ "+padString(32, languageModule[44][selectedLanguage])); // maukan nomor resi
                                         try {
                                             String trackingNumber = input.nextLine();
                                             validInput = true;
@@ -826,7 +805,7 @@ public class Main {
                                             System.out.println("║ [2]. Shipping"); //Mengedit status pengiriman
                                             System.out.println("║ [3]. Delivered"); //Menghapus Transaksi
                                             System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                                            System.out.print("║ ⤷ Masukkan Pilihan: ");
+                                            System.out.print("║ "+padString(32, languageModule[80][selectedLanguage]));
                                             String selected = input.nextLine();
 
                                             if(selected.equals("1")){
@@ -862,7 +841,7 @@ public class Main {
                                     int deleteIndex = -1;
 
                                     while (!validInput) {
-                                        System.out.print("║ ⤷ Masukkan nomor resi: ");
+                                        System.out.println("║ "+padString(32, languageModule[44][selectedLanguage])); // masukan nomor resi
                                         try {
                                             String deleteString = input.nextLine();
                                             validInput = true;
@@ -922,7 +901,7 @@ public class Main {
                                     System.out.println("║             ╰──────────────────────────────────────────────────────────────────────╯             ║");
                                     System.out.println("║                                                                                                  ║"); 
                                     System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                                    System.out.print("║ ⤷ Masukkan Pilihan: ");
+                                    System.out.print("║ "+padString(32, languageModule[80][selectedLanguage]));
                                     editMenu = input.nextInt();
                                     input.nextLine();
                                     switch (editMenu) {
@@ -2085,8 +2064,7 @@ public class Main {
     }
 
     private static String padString(int width, String s) {
-        int padSize = width - s.length();
-        return String.format("%s%" + padSize + "s", s, "");
+    return String.format("%-" + width + "s", s);
     }
 
     private static String generateTrackingNumber() {
