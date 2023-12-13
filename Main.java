@@ -382,26 +382,22 @@ public class Main {
                                 ManageCost();
                                 clearTerminal();
                                 break;
+                            
+                            case 6: 
+                                viewReport();
+                                pressEnter();
+                                break;
+                        
+                            case 7:
+                                ManageShipment();
+                                break;
+
+                            case 8:
+                                Logout();
+                                break; 
                                 
                             default:
                                 break; 
-                        }
-
-                        if (isAdmin) { 
-                            switch (menuUtama) {
-                                case 6: 
-                                    viewReport();
-                                    pressEnter();
-                                    break;
-                        
-                                case 7:
-                                    ManageShipment();
-                                    break;
-
-                                case 8:
-                                    Logout();
-                                    break;
-                            }
                         }
                             
                     } else if (isKurir) {
@@ -2180,9 +2176,7 @@ public class Main {
         System.out.println("║             │                                                                      │             ║");
         System.out.println("║             │                     [2]. " + padString(44, languageModule[75][selectedLanguage]) + "│             ║");
         System.out.println("║             │                                                                      │             ║");
-        System.out.println("║             │                     [3]. " + padString(44, languageModule[77][selectedLanguage]) + "│             ║");
-        System.out.println("║             │                                                                      │             ║");
-        System.out.println("║             │                     [4]. " + padString(44, languageModule[78][selectedLanguage]) + "│             ║");
+        System.out.println("║             │                     [3]. " + padString(44, languageModule[78][selectedLanguage]) + "│             ║");
         System.out.println("║             │                                                                      │             ║");
         System.out.println("║             │                                                                      │             ║"); 
         System.out.println("║             ╰──────────────────────────────────────────────────────────────────────╯             ║");
@@ -2517,10 +2511,7 @@ public class Main {
             case 2:
                 SendPackage();
                 break;
-            case 3:
-                System.out.println("Under Development");
-                pressEnter();
-                break;
+            
             default:
                 break;
         }
