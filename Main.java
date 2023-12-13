@@ -33,9 +33,9 @@ public class Main {
 
             {"User Management", "Manajemen Pengguna         "}, //6
                 {"Add User", "Tambahkan Pengguna"}, //7
-                    {"║ ⤷ Enter new Username: ", "║ ⤷ Masukkan nama pengguna baru: "},  //8
-                    {"║ ⤷ Enter new Password: ", "║ ⤷ Masukkan kata sandi baru: "}, //9
-                    {"║ ⤷ Enter new role user: ", "║ ⤷ Masukkan jabatan penggun baru: "},   //10
+                    {" ⤷ Enter new Username: ", " ⤷ Masukkan nama pengguna baru: "},  //8
+                    {" ⤷ Enter new Password: ", " ⤷ Masukkan kata sandi baru: "}, //9
+                    {" ⤷ Enter new Role user: ", " ⤷ Masukkan jabatan penggun baru: "},   //10
                     {"✅ New User Successfully Added.","✅ Pengguna baru berhasil ditambahkan."},   //11
                 {"Remove User", "Hapus Pengguna"},  //12
                     {"║ ⤷ Enter Username want to remove: ","║ ⤷ Masukan username yang akan dihapus: "}, //13
@@ -57,7 +57,7 @@ public class Main {
                     {"║ Input Height: ", "║ Masukkan Tinggi: "},  //28
                     {"⚠️ RUTE IS NOT FOUND. PLEASE TRY AGAIN", "⚠️ RUTE TIDAK DITEMUKAN. SILAKAN COBA LAGI."},  //29
                     {"day", "hari"},    //30
-                    {"Payment Methode", "Metode Pembayaran"},   //31
+                    {"Payment Method", "Metode Pembayaran"},   //31
                     {" ⤷ Choose Payment methode: ", " ⤷ Pilih Metode Pembayaran: "},  //32
                     {" ⤷ Choose Available Bank: ", " ⤷ Pilih Bank yang tersedia: "}, //33
                     {"Payment successfully used ","Pembayaran berhasil menggunakan "},   //34
@@ -339,21 +339,31 @@ public class Main {
             pressEnter();
 
             while(!exit) {
-                displayHeader();
-                displayIndonesianMap();
 
-                if(isAdmin){
-                    viewAdminMenu();
-                } else if (isKurir) {
-                    viewCourierMenu();
-                } else {
-                    viewCashierMenu();   
-                }
-                
-                System.out.print(languageModule[80][selectedLanguage]);//"║ ⤷ Masukkan Pilihan: "
-                menuUtama = input.nextInt();
-                input.nextLine();
-                clearTerminal();
+                while (true) {
+                    try {
+                        displayHeader();
+                        displayIndonesianMap();
+
+                        if(isAdmin){
+                            viewAdminMenu();
+                        } else if (isKurir) {
+                            viewCourierMenu();
+                        } else {
+                            viewCashierMenu();   
+                        }
+                        
+                        System.out.print(languageModule[80][selectedLanguage]);//"║ ⤷ Masukkan Pilihan: "
+                        menuUtama = input.nextInt();
+                    } catch (InputMismatchException e) {
+                        input.nextLine();
+                        clearTerminal();
+                        continue;
+                    }
+                    input.nextLine();
+                    clearTerminal();
+                    break;
+                }                
 
                 while (true) {
                     if(isAdmin){
@@ -1163,17 +1173,32 @@ public class Main {
     }
 
     private static void ManageUser() {
+        int pilihan;
         while(true) {
-            displayHeader();
-            displayIndonesianMap();
-            viewUserManagementMenu();
-            
-            System.out.print(languageModule[80][selectedLanguage]);//"║ ⤷ Masukkan Pilihan: "
-            int pilihan = input.nextInt();
+
+            while (true) {
+                try {
+                    displayHeader();
+                    displayIndonesianMap();
+                    viewUserManagementMenu();
+                    
+                    System.out.print(languageModule[80][selectedLanguage]);//"║ ⤷ Masukkan Pilihan: "
+                    pilihan = input.nextInt();
+                } catch (InputMismatchException e) {
+                    input.nextLine();
+                    clearTerminal();
+                    continue;
+                }
+                input.nextLine();
+                clearTerminal();
+                break;
+            }
 
             switch (pilihan) {
 
                 case 1:
+                    clearTerminal();
+                    viewUserAccounts();
                     AddUser();
                     pressEnter();
                     continue;
@@ -1184,7 +1209,6 @@ public class Main {
                     continue;   
 
                 case 3:
-                    input.nextLine();
                     clearTerminal();
                     viewUserAccounts();
                     pressEnter();
@@ -1294,10 +1318,23 @@ public class Main {
             displayIndonesianMap();
             viewLanguageMenu();
 
-            System.out.print(languageModule[80][selectedLanguage]);//"║ ⤷ Masukkan Pilihan: "
-            inputselectedLanguage = input.nextInt();
-            changeLanguage(inputselectedLanguage);
-        } while (inputselectedLanguage > languageModule[0].length);
+            try {
+                System.out.print(languageModule[80][selectedLanguage]);//"║ ⤷ Masukkan Pilihan: "
+                inputselectedLanguage = input.nextInt();
+            } catch (InputMismatchException e) {
+                input.nextLine();
+                continue;
+            }
+
+            if (inputselectedLanguage > 2) {
+                continue;
+            } else if (inputselectedLanguage < 1) {
+                continue;
+            } else {
+                changeLanguage(inputselectedLanguage);
+                break;
+            }
+        } while (true);
     }
 
     private static void ManageRoute() {
@@ -1580,9 +1617,38 @@ public class Main {
 
         System.out.print (languageModule[20][selectedLanguage]);
         String namaPengirim = input.nextLine();
+        int nomorKontak;
+        do {
+            System.out.print(languageModule[21][selectedLanguage]);
+            while (!input.hasNextInt()) {
+                input.nextLine();
+                System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                System.out.println("║                                                                                                  ║");
+                System.out.println("║"+centerString(99,languageModule[114][selectedLanguage]+ "║"));  //"⚠️ INPUT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI.")
+                System.out.println("║                                                                                                  ║");
+                System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                System.out.print(languageModule[81][selectedLanguage]);//"Tekan [  ⏎ Enter] untuk melanjutkan"
+                input.nextLine();  
+                System.out.print("\033[7A\033[0J");
+                System.out.print(languageModule[21][selectedLanguage]); //"║ Masukkan Nomor Kontak: "
+            }
+            nomorKontak= input.nextInt();
 
-        System.out.print (languageModule[21][selectedLanguage]);
-        String nomorKontak = input.nextLine();
+            input.nextLine(); // membersihkan buffer input
+            if (nomorKontak <= 0) {
+                input.nextLine();
+                System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                System.out.println("║                                                                                                  ║");
+                System.out.println("║"+centerString(99,languageModule[115] +"║"));  //"⚠️ BERAT HARUS LEBIH BESAR DARI 0 . SILAHKAN COBA LAGI.")
+                System.out.println("║                                                                                                  ║");
+                System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                System.out.print(languageModule[81][selectedLanguage]);//"Tekan [  ⏎ Enter] untuk melanjutkan"
+                input.nextLine();  
+                System.out.print("\033[7A\033[0J");
+            } else {
+                validInput = true;
+            }
+        } while (!validInput);
 
         System.out.print (languageModule[22][selectedLanguage]);
         String namaPenerima = input.nextLine();
@@ -1598,6 +1664,7 @@ public class Main {
         int luas;
         int tinggi;
         int berat=0;
+        
         do {
             System.out.print(languageModule[82][selectedLanguage]);
             while (!input.hasNextInt()) {
@@ -1745,15 +1812,12 @@ public class Main {
                             if (jarak <= 100) {
                                 biayaJarak = (jarak * tarifPerKm) / 100;
                             } else {
-                                double biayaAwal = (100 * tarifPerKm) / 100; // Biaya untuk 100 km pertama
+                                double biayaAwal = (100 * tarifPerKm) / 100; 
 
-                                // Menghitung sisa jarak setelah 100 km pertama
                                 double sisaJarak = jarak - 100;
 
-                                // Menghitung biaya tambahan untuk setiap 10 km selanjutnya
                                 double biayaTambahan = Math.ceil(sisaJarak / 10) * tarifTambahan;
 
-                                // Total biaya jarak termasuk tambahan
                                 biayaJarak = biayaAwal + biayaTambahan;
                             }
                     found = true;
@@ -1781,7 +1845,7 @@ public class Main {
         System.out.print (languageModule[142][selectedLanguage]);//" ⤷ Masukkan Pilihan: "
         pilihanLayanan = input.nextInt();
         double tarifLayanan = Double.parseDouble(arrayLayanan[pilihanLayanan][1]);
-        double beratBarangTemp; 
+        double beratBarangTemp;
         if (beratBarang >= 0) {
                     beratBarangTemp = (beratBarang * tarifPerKg) / 5;
                 } else {
@@ -1795,7 +1859,6 @@ public class Main {
         System.out.println("╔════════════════════════════════════════════════════════════╗"); 
         System.out.println("║"+centerString(60,languageModule[30][selectedLanguage])+"║"); //"Metode Pembayaran"
         System.out.println("╠════════════════════════════════════════════════════════════╣");
-
         System.out.println("║ 1. VIA Bank");
         System.out.println("║ 2. Tunai");
         System.out.println("╚════════════════════════════════════════════════════════════╝");
@@ -1805,7 +1868,7 @@ public class Main {
         switch (metode) {
             case 1:
                 while (true) {
-
+                    namaMetode = "Bank";
                     System.out.println("╔════════════════════════════════════════════════════════════╗"); 
                     System.out.println("║"+centerString(60,"BANK")+"║");
                     System.out.println("╠════════════════════════════════════════════════════════════╣");
@@ -1839,6 +1902,7 @@ public class Main {
                 break;   //"║ Pembayaran Berhasil menggunakan "
 
             case 2:
+                namaMetode = "Tunai";
                 System.out.println(languageModule[36][selectedLanguage]+biayaAkhir);    //"║ Biaya Pengiriman sebesar: " 
                 System.out.print(languageModule[37][selectedLanguage]); //"║ Bayar: "
                 int bayar = input.nextInt();
@@ -1852,7 +1916,7 @@ public class Main {
             nomorResi,
             tanggalHariIni,
             namaPengirim,
-            nomorKontak,
+            String.valueOf(nomorKontak),
             destination,
             arrayLayanan[pilihanLayanan][0],
             Double.toString(biayaAkhir),
