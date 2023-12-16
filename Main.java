@@ -191,10 +191,12 @@ public class Main {
         {"⤷ Enter the user number you want to delete: ","⤷ Masukkan nomor pengguna yang ingin dihapus: "},//145
         {"The input entered is invalid. Please enter the receipt number back!","Input yang dimasukkan tidak valid. Silahkan masukkan nomor resi kembali!"},//146
         {"The data with the corresponding receipt number has been deleted","Data dengan nomor resi yang sesuai sudah dihapus"},//147
-        {"Jumlah uang yang anda berikan kurang","The amount of money you give is less"},//148
+        {"The amount of money you give is less","Jumlah uang yang anda berikan kurang"},//148
         {"Admin","Admin"}, //149
         {"Courier","Kurir"}, //150
         {"Cashier","Kasir"}, //151
+        {"Polinema Expedition Receipt","Kwitansi Ekspedisi Polinema"}, //152
+
     };
 
     // Format tanggal
@@ -345,6 +347,10 @@ public class Main {
         "╚═══════════════════════════════════════════════════════╩════════════════════════╩═════════════════╝";
 
     public static void main(String[] args) {
+
+        clearTerminal();
+        viewReceipt();
+        pressEnter();
 
         clearTerminal();
         ManageLanguage();
@@ -2920,7 +2926,46 @@ public class Main {
 
     }
 
-    private static void viewCashierPayment() {
-
+    private static void viewReceipt() {
+            System.out.println("╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮");
+            System.out.println("│"+centerString(123, getLanguageModuleText(152))+"│");
+            System.out.println("├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤");
+            System.out.println("│                         ╭──────────────────────╮                          ╭────────────────────────────────────────────╮  │");
+            System.out.println("│  Tanggal                │                      │   Nama Pengirim          │                                            │  │");
+            System.out.println("│                         ╰──────────────────────╯                          ╰────────────────────────────────────────────╯  │");
+            System.out.println("│                         ╭──────────────────────╮                          ╭────────────────────────────────────────────╮  │");
+            System.out.println("│  No Resi                │                      │   Nama Penerima          │                                            │  │");
+            System.out.println("│                         ╰──────────────────────╯                          ╰────────────────────────────────────────────╯  │");
+            System.out.println("│  ╭────────────────┬───╮ ╭──────────────────────────────╮                  ╭──────────────────────────────╮                │");
+            System.out.println("│  │     Layanan    │ ▼ │ │            Origin            │                  │          Destination         │                │");
+            System.out.println("│  ├────────────────┴───┤ ├──────────────────────────────┤      415 KM      ├──────────────────────────────┤                │");
+            System.out.println("│  │                    │ │                              │                  │                              │                │");
+            System.out.println("│  ╰────────────────────╯ ╰──────────────────────────────╯                  ╰──────────────────────────────╯                │");
+            System.out.println("│                                                                                                                           │");
+            System.out.println("│  ╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮ │");
+            System.out.println("│  │                                                                                                                      │ │");
+            System.out.println("│  │                                                                                                                      │ │");
+            System.out.println("│  │                                                                                                                      │ │");
+            System.out.println("│  │                                                                                                                      │ │");
+            System.out.println("│  │                                                                                                                      │ │");
+            System.out.println("│  │                                                                                                                      │ │");
+            System.out.println("│  │                                                                                                                      │ │");
+            System.out.println("│  │                                                                                                                      │ │");
+            System.out.println("│  │                                                                                                                      │ │");
+            System.out.println("│  │                                                                                                                      │ │");
+            System.out.println("│  │                                                                                                                      │ │");
+            System.out.println("│  │                                                                                                                      │ │");
+            System.out.println("│  │                                                                                                                      │ │");
+            System.out.println("│  │                                                                                                                      │ │");
+            System.out.println("│  │                                                                                                                      │ │");
+            System.out.println("│  │                                                                                                                      │ │");
+            System.out.println("│  ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯ │");
+            System.out.println("├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤");
+            System.out.println("│  Total :                                                                                                                  │");
+            System.out.println("├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤");
+            System.out.println("│  Bayar :                                                                                                                  │");
+            System.out.println("├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤");
+            System.out.println("│  Kembalian :                                                                                                              │");
+            System.out.println("╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯");
     }
 }
