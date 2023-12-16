@@ -125,7 +125,7 @@ public class Main {
         {"Year", "Tahun"}, //87
         {"Tracking Number", "Nomor Resi"}, //88
 
-        {"Tracking Number", "No Resi"}, //89
+        {"Tracking ID", "No Resi"}, //89
         {"Date", "Tanggal"}, //90
         {"Sender", "Pengirim"}, //91
         {"Service", "Layanan"}, //92
@@ -504,7 +504,7 @@ public class Main {
                     maxWidth = array[i][j].length();
                 }
             }
-            columnWidths[j] = maxWidth + 4;
+            columnWidths[j] = maxWidth + 1;
         }
     
         return columnWidths;
@@ -2124,6 +2124,8 @@ public class Main {
                     bayar,
                     kembalian
                 )); 
+                input.nextLine();
+                pressEnter();
                 break;   //"║ Pembayaran Berhasil menggunakan "
 
             case 2:
@@ -2197,7 +2199,7 @@ public class Main {
 
             input.nextLine();
             pressEnter();
-
+        }     
             historyTransaksi = Arrays.copyOf(historyTransaksi,historyTransaksi.length + 1);
             historyTransaksi[historyTransaksi.length-1] = new String[]{
             nomorResi,
@@ -2228,8 +2230,7 @@ public class Main {
             centerString(45, destination),
             tanggalHariIni,
             biayaAkhir
-        ));  }     
-        input.nextLine();
+        ));  
     }
 
     private static void EditTransactionStatus() {
