@@ -205,7 +205,8 @@ public class Main {
         {"Change :", "Kembalian :"}, //159
         {"POLINEMA EXPEDITION", "EKSPEDSI POLINEMA"}, //160
         {"💵 The recipient does not need to pay anything to the courier", "💵 Penerima tidak perlu membayar apapun ke kurir"}, //161
-        {"Handling fee", "Ongkir"} //162
+        {"Handling fee", "Ongkir"}, //162
+        {"Do you want to change the delivery status of the goods? (Y/N): ", "Apakah anda ingin mengubah status pengiriman barang? (Y/N): "} //163
     };
 
     // Format tanggal
@@ -3077,10 +3078,10 @@ public class Main {
             break;
         }
         System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
-        System.out.print("Apakah anda ingin mengubah status pengiriman barang? (Y/N): ");
+        System.out.print(getLanguageModuleText(163));
         String confirm = input.nextLine();
         if(confirm.equalsIgnoreCase("Y")) {
-            System.out.print("Pilih index: ");
+            System.out.print(getLanguageModuleText(76));
             selectedData = input.nextInt();
             historyTransaksi[selectedData][12] = "Has been received by the recipient";
         }
