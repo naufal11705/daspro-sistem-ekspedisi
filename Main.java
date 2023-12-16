@@ -1806,28 +1806,19 @@ public class Main {
 
         System.out.print (languageModule[20][selectedLanguage]);
         String namaPengirim = input.nextLine();
-        int nomorKontak;
-        
-        do {
-            System.out.print(languageModule[21][selectedLanguage]);
-            while (!input.hasNextInt()) {
-                input.nextLine();
-                System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                System.out.println("║                                                                                                  ║");
-                System.out.println("║"+centerString(99,languageModule[114][selectedLanguage]+ "║"));  //"⚠️ INPUT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI.")
-                System.out.println("║                                                                                                  ║");
-                System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
-                System.out.print(languageModule[81][selectedLanguage]);//"Tekan [  ⏎ Enter] untuk melanjutkan"
-                input.nextLine();  
-                System.out.print("\033[7A\033[0J");
-                System.out.print(languageModule[21][selectedLanguage]); //"║ Masukkan Nomor Kontak: "
-            }
-            nomorKontak= input.nextInt();
 
-            input.nextLine(); // membersihkan buffer input
-            if (nomorKontak <= 0) {
-                input.nextLine();
-                System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
+        String nomorKontak;
+        do {
+            if (!validInput) {
+                System.out.print(languageModule[21][selectedLanguage]); // "║ Masukkan Nomor Kontak: "
+            }
+            nomorKontak = input.nextLine();
+            
+            // Memeriksa apakah input adalah angka
+            if (nomorKontak.matches("\\d+")) {
+                validInput = true;
+            } else {
+                System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════");
                 System.out.println("║                                                                                                  ║");
                 System.out.println("║" + centerString(99, languageModule[114][selectedLanguage] + "║")); // "⚠️ INPUT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI."
                 System.out.println("║                                                                                                  ║");
