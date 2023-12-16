@@ -1750,40 +1750,28 @@ public class Main {
 
         System.out.print (languageModule[20][selectedLanguage]);
         String namaPengirim = input.nextLine();
-        int nomorKontak;
-        
+        String nomorKontak;
         do {
-            System.out.print(languageModule[21][selectedLanguage]);
-            while (!input.hasNextInt()) {
-                input.nextLine();
-                System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                System.out.println("║                                                                                                  ║");
-                System.out.println("║"+centerString(99,languageModule[114][selectedLanguage]+ "║"));  //"⚠️ INPUT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI.")
-                System.out.println("║                                                                                                  ║");
-                System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
-                System.out.print(languageModule[81][selectedLanguage]);//"Tekan [  ⏎ Enter] untuk melanjutkan"
-                input.nextLine();  
-                System.out.print("\033[7A\033[0J");
-                System.out.print(languageModule[21][selectedLanguage]); //"║ Masukkan Nomor Kontak: "
+            if (!validInput) {
+                System.out.print(languageModule[21][selectedLanguage]); // "║ Masukkan Nomor Kontak: "
             }
-            nomorKontak= input.nextInt();
-
-            input.nextLine(); // membersihkan buffer input
-            if (nomorKontak <= 0) {
-                input.nextLine();
-                System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                System.out.println("║                                                                                                  ║");
-                System.out.println("║"+centerString(99,languageModule[115] +"║"));  //"⚠️ BERAT HARUS LEBIH BESAR DARI 0 . SILAHKAN COBA LAGI.")
-                System.out.println("║                                                                                                  ║");
-                System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
-                System.out.print(languageModule[81][selectedLanguage]);//"Tekan [  ⏎ Enter] untuk melanjutkan"
-                input.nextLine();  
-                System.out.print("\033[7A\033[0J");
-            } else {
+            nomorKontak = input.nextLine();
+            
+            // Memeriksa apakah input adalah angka
+            if (nomorKontak.matches("\\d+")) {
                 validInput = true;
+            } else {
+                System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════");
+                System.out.println("║                                                                                                  ║");
+                System.out.println("║" + centerString(99, languageModule[114][selectedLanguage] + "║")); // "⚠️ INPUT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI."
+                System.out.println("║                                                                                                  ║");
+                System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                System.out.print(languageModule[81][selectedLanguage]); // "Tekan [  ⏎ Enter] untuk melanjutkan"
+                input.nextLine();
+                System.out.print("\033[7A\033[0J");
             }
         } while (!validInput);
-
+        
         System.out.print (languageModule[22][selectedLanguage]);
         String namaPenerima = input.nextLine();
 
@@ -2037,34 +2025,36 @@ public class Main {
 
             case 2:
                 namaMetode = "Tunai";
-                System.out.println(languageModule[36][selectedLanguage]+biayaAkhir);    //"║ Biaya Pengiriman sebesar: " 
+                System.out.println(languageModule[36][selectedLanguage] + biayaAkhir); //"║ Biaya Pengiriman sebesar: "
                 int bayar;
+                boolean validInput = false;
+
                 do {
-                System.out.print(languageModule[37][selectedLanguage]); //"║ Bayar: "  
-                while (!input.hasNextInt()) {
-                    System.out.println("⚠️ " + languageModule[114][selectedLanguage]); // Pesan untuk input bukan bilangan bulat
-                    System.out.print(languageModule[37][selectedLanguage]);
-                    input.nextLine(); //"║ Bayar: " 
-                }
-                
-                bayar = input.nextInt();
+                    System.out.print(languageModule[37][selectedLanguage]); //"║ Bayar: "
+
+                    while (!input.hasNextInt()) {
+                        System.out.println("⚠️ " + languageModule[114][selectedLanguage]); // Pesan untuk input bukan bilangan bulat
+                        System.out.print(languageModule[37][selectedLanguage]);
+                        input.nextLine(); //"║ Bayar: "
+                    }
+
+                    bayar = input.nextInt();
+
+                    if (bayar <= 0) {
+                        System.out.println("⚠️ " + languageModule[148][selectedLanguage]); // Pesan untuk input <= 0
+                    } else if (bayar < biayaAkhir) {
+                        System.out.println("⚠️ " + languageModule[148][selectedLanguage]); // Jumlah uang yang anda berikan kurang
+                    } else {
+                        validInput = true;
+                    }
+
+                    System.out.println(languageModule[38][selectedLanguage] + (bayar - biayaAkhir)); //"║ Kembalian: "
+                } while (!validInput);
 
 
-            } while (!validInput);
-                input.nextLine(); // membersihkan buffer input
-                if (bayar <= 0) {
-                    //System.out.println("⚠️ " + languageModule[114][selectedLanguage]); // Pesan untuk input <= 0
-                } else if (bayar < biayaAkhir){
-                     System.out.println("⚠️ " + languageModule[148][selectedLanguage]); // Jumlah uang yang anda berikan kurang
-                } else {
-                    validInput=true;
-                }
-            System.out.println(languageModule[38][selectedLanguage] + (bayar - biayaAkhir)); //"║ Kembalian: "   
 
-        }
-
-        historyTransaksi = Arrays.copyOf(historyTransaksi,historyTransaksi.length + 1);
-        historyTransaksi[historyTransaksi.length-1] = new String[]{
+            historyTransaksi = Arrays.copyOf(historyTransaksi,historyTransaksi.length + 1);
+            historyTransaksi[historyTransaksi.length-1] = new String[]{
             nomorResi,
             tanggalHariIni,
             namaPengirim,
@@ -2093,7 +2083,7 @@ public class Main {
             centerString(45, destination),
             tanggalHariIni,
             biayaAkhir
-        ));       
+        ));  }     
         input.nextLine();
     }
 
