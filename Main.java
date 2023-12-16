@@ -68,15 +68,15 @@ public class Main {
                         {" ⤷ Pay: Rp.", " ⤷ Bayar: Rp."},     //38
                         {" ⤷ Return: Rp", " ⤷ Kembalian: Rp"},    //39
                     {"Sender", "Pegiriman"},    //40
-                    {"Receiver", "Penerima"},   //41
-                    {"Date", "Tanggal"},        //42
-                    {"Cost", "Biaya"},      //43
-                {"Edit Delivery Status", "Edit Status Pengiriman"}, //44
-                    {"║ Input receipt number: ", "║ Masukkan nomor resi: "},    //45
-                    {"Data is not found", "Data tidak ditemukan"},  //46
-                {"Remove Transaction", "Hapus Transaksi"},  //47
-                    {"Data with this receipt number has been removed","Data dengan nomor resi yang sesuai sudah dihapus"},  //48
-                    {"User Data", "Data Pengguna"}, //49
+                    {"Receiver", "Penerima"},   //40
+                    {"Date", "Tanggal"},        //41
+                    {"Cost", "Biaya"},      //42
+                {"Edit Delivery Status", "Edit Status Pengiriman"}, //43
+                    {"║ Input receipt number: ", "║ Masukkan nomor resi: "},    //44
+                    {"Data is not found", "Data tidak ditemukan"},  //45
+                {"Remove Transaction", "Hapus Transaksi"},  //46
+                    {"Data with this receipt number has been removed","Data dengan nomor resi yang sesuai sudah dihapus"},  //47
+                    {"User Data", "Data Pengguna"}, //48
             
             {"Route Management", "Manajemen Rute"}, //49 
                 {"Add New Route", "Tambah Rute Baru"},   //50
@@ -85,18 +85,18 @@ public class Main {
                 {"Remove Route", "Hapus Rute"},  //53
                 {"Displays Location's Data", "Menampilkan Data Rute Pengiriman"},   //54
 
-            {"Service Management", "Manajemen Layanan"}, //56
-                {"Add Service Types", "Tambahkan Jenis Layanan"},   //57
-                    {" ⤷ Enter New Service Name: ", " ⤷ Masukkan Nama Layanan: "},    //58
-                    {" ⤷ Input new Cost: Rp.", " ⤷ Masukkan Tarif: Rp."},   //59
-                    {" ⤷ Minimum delivery time: "," ⤷ Masukkan Waktu Pengiriman Minimum: "},  //60
-                    {" ⤷ Maximum delivery time: "," ⤷ Masukkan Waktu Pengiriman Maximum: "},  //61
-                {"Edit Service", "Edit Layanan"},    //62
-                    {"║ Service list available: ","║ Daftar Layanan yang Tersedia: "},  //63
-                    {"⤷ Enter service number want to change: " ,"⤷ Masukkan nomor layanan yang ingin diubah: "},    //64
-                {"Remove Service", "Menghapus Layanan"},    //65
-                {"Displays Services' Data", "Menampilkan Layanan Data"},    //66
-                    {"Service", "Cost"},    //67
+            {"Service Management", "Manajemen Layanan"}, //55
+                {"Add Service Types", "Tambahkan Jenis Layanan"},   //56
+                    {" ⤷ Enter New Service Name: ", " ⤷ Masukkan Nama Layanan: "},    //57
+                    {" ⤷ Input new Cost: Rp.", " ⤷ Masukkan Tarif: Rp."},   //58
+                    {" ⤷ Minimum delivery time: "," ⤷ Masukkan Waktu Pengiriman Minimum: "},  //59
+                    {" ⤷ Maximum delivery time: "," ⤷ Masukkan Waktu Pengiriman Maximum: "},  //60
+                {"Edit Service", "Edit Layanan"},    //61
+                    {"║ Service list available: ","║ Daftar Layanan yang Tersedia: "},  //62
+                    {"⤷ Enter service number want to change: " ,"⤷ Masukkan nomor layanan yang ingin diubah: "},    //63
+                {"Remove Service", "Menghapus Layanan"},    //64
+                {"Displays Services' Data", "Menampilkan Layanan Data"},    //65
+                    {"Service", "Cost"},    //66
 
             {"Change Language", "Ganti Bahasa"},    //67
             {"Basic Cost Management", "Manajemen Tarif Dasar"}, //68
@@ -196,7 +196,13 @@ public class Main {
         {"Courier","Kurir"}, //150
         {"Cashier","Kasir"}, //151
         {"Polinema Expedition Receipt","Kwitansi Ekspedisi Polinema"}, //152
-
+        {"Sender Name", "Nama Pengirim"}, //153
+        {"Package Description", "Deskripsi Paket"}, //154
+        {"Weight", "Berat"}, //155
+        {"Distance", "Jarak"}, //156
+        {"Detail", "Rincian"}, //157
+        {"Pay :", "Bayar :"}, //158
+        {"Change :", "Kembalian :"} //159
     };
 
     // Format tanggal
@@ -327,31 +333,41 @@ public class Main {
         "║                                                                                                  ║\n" +
         "╚══════════════════════════════════════════════════════════════════════════════════════════════════╝";
 
-    static String receipt =
-        "╔══════════════════════════════════════════════════════════════════════════════════════════════════╗\n" +
-        "║                                                                                                  ║\n" +
-        "║                                        ╦═╗╔═╗╔═╗╔═╗╦═╗╔╦╗                                        ║\n" + 
-        "║                                        ╠╦╝║╣ ╠═╝║ ║╠╦╝ ║                                         ║\n" +
-        "║                                        ╩╚═╚═╝╩  ╚═╝╩╚═ ╩                                         ║\n" +
-        "║                                                                                                  ║\n" +
-        "╠══════════════════════════════════════════════════════════════════════════════════════════════════╣\n" +
-        "║ POLINEMA EKPEDITION                                                                              ║\n" +
-        "║ Laporan Pengiriman Per Bulan                                                                     ║\n" + 
-        "╠═══════════════════════════════════════════════════════╦════════════════════════╦═════════════════╣\n" +
-        "║                                                       ║       Nilai            ║     Satuan      ║\n" +
-        "║                                                       ╠════════════════════════╬═════════════════╣\n" +
-        "║ Total Pengiriman Per Asset                            ║      %s   ║      Buah       ║\n" +
-        "║ Total Pengiriman Per kg                               ║      %s   ║       Kg        ║\n" +
-        "║ Total Pendapatan                                      ║      %s   ║     Rupiah      ║\n" +
-        "║                                                       ║                        ║                 ║\n" +
-        "╚═══════════════════════════════════════════════════════╩════════════════════════╩═════════════════╝";
-
+    static String receiptFormat =
+        "╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮\n" +
+        "│" + centerString(123, getLanguageModuleText(152)) + "│\n" +
+        "├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤\n" +
+        "│                         ╭──────────────────────╮                          ╭────────────────────────────────────────────╮  │\n" +
+        "│  "+padString(23, getLanguageModuleText(41))+"│ %-21s│   "+padString(23, getLanguageModuleText(153))+"│ %-43s│  │\n" +
+        "│                         ╰──────────────────────╯                          ╰────────────────────────────────────────────╯  │\n" +
+        "│                         ╭──────────────────────╮                          ╭────────────────────────────────────────────╮  │\n" +
+        "│  "+padString(23, getLanguageModuleText(89))+"│ %-21s│   "+padString(23, getLanguageModuleText(96))+"│ %-43s│  │\n" +
+        "│                         ╰──────────────────────╯                          ╰────────────────────────────────────────────╯  │\n" +
+        "│  ╭────────────────┬───╮ ╭──────────────────────────────╮                  ╭──────────────────────────────╮                │\n" +
+        "│  │"+centerString(16, getLanguageModuleText(103))+"│ ▼ │ │"+centerString(30, getLanguageModuleText(93))+"│                  │"+centerString(30, getLanguageModuleText(94))+"│                │\n" +
+        "│  ├────────────────┴───┤ ├──────────────────────────────┤                  ├──────────────────────────────┤                │\n" +
+        "│  │ %-19s│ │%s│                  │%s│                │\n" +
+        "│  ╰────────────────────╯ ╰──────────────────────────────╯                  ╰──────────────────────────────╯                │\n" +
+        "│                                                                                                                           │\n" +
+        "│  ╭──────────────────────────────────────────────────────────────┬───────────────────────────────────────────┬───────────╮ │\n" +
+        "│  │"+centerString(62, getLanguageModuleText(154))+"│                                           │           │ │\n" +
+        "│  ├──────────────────────────────────────────────────────────────┤"+centerString(43, getLanguageModuleText(157))+"│   Total   │ │\n" +
+        "│  │  %-60s│                                           │           │ │\n" +
+        "│  ├──────────────────────────────────────────────────────────────┼───────────────────────────────────────────┼───────────┤ │\n" +
+        "│  │  "+padString(60, getLanguageModuleText(155))+"│%42s │%10s │ │\n" +
+        "│  ├──────────────────────────────────────────────────────────────┼───────────────────────────────────────────┼───────────┤ │\n" +
+        "│  │  "+padString(60, getLanguageModuleText(156))+"│%42s │%10s │ │\n" +
+        "│  ├──────────────────────────────────────────────────────────────┼───────────────────────────────────────────┼───────────┤ │\n" +
+        "│  │  "+padString(60, getLanguageModuleText(103))+"│%42s │%10s │ │\n" +
+        "│  ╰──────────────────────────────────────────────────────────────┴───────────────────────────────────────────┴───────────╯ │\n" +
+        "├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤\n" +
+        "│  Total :                                                                                                       %10s │\n" +
+        "├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤\n" +
+        "│  "+padString(25, getLanguageModuleText(158))+"                                                                                     %10s │\n" +
+        "├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤\n" +
+        "│  "+padString(25, getLanguageModuleText(159))+"                                                                                     %10s │\n" +
+        "╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯";
     public static void main(String[] args) {
-
-        clearTerminal();
-        viewReceipt();
-        pressEnter();
-
         clearTerminal();
         ManageLanguage();
         clearTerminal();
@@ -1982,6 +1998,9 @@ public class Main {
         boolean found = false;
         String origin;
         String destination;
+        int jarak = 0;
+        double kembalian=0;
+        int bayar=0;
         do {
             System.out.print("║ " + languageModule[93][selectedLanguage] + ": ");//asal
             origin = input.nextLine();
@@ -1992,7 +2011,7 @@ public class Main {
             for (int i = 0; i < rutePengiriman.length; i++) {
                 if ((rutePengiriman[i][0].equalsIgnoreCase(origin) && rutePengiriman[i][1].equalsIgnoreCase(destination)) || 
                 (rutePengiriman[i][0].equalsIgnoreCase(destination) && rutePengiriman[i][1].equalsIgnoreCase(origin))) {
-                    int jarak = Integer.parseInt(rutePengiriman[i][2]);
+                    jarak = Integer.parseInt(rutePengiriman[i][2]);
                     double tarifTambahan = 15000;
                             if (jarak <= 100) {
                                 biayaJarak = (jarak * tarifPerKm) / 100;
@@ -2083,14 +2102,55 @@ public class Main {
                     }  
                     break;
                 }
-                System.out.println(languageModule[33][selectedLanguage] +bankName);
+                bayar = (int) biayaAkhir;
+                clearTerminal();
+                System.out.println(String.format(
+                    receiptFormat,
+                    tanggalHariIni,
+                    namaPengirim,
+                    nomorResi, 
+                    loggedInUsername,
+                    arrayLayanan[pilihanLayanan-1][0],
+                    centerString(30, origin), 
+                    centerString(30, destination),
+                    deskripsiBarang,
+                    berat,
+                    beratBarang,
+                    jarak,
+                    biayaJarak,
+                    arrayLayanan[pilihanLayanan-1][0],
+                    arrayLayanan[pilihanLayanan-1][1],
+                    Double.toString(biayaAkhir),
+                    bayar,
+                    kembalian
+                )); 
                 break;   //"║ Pembayaran Berhasil menggunakan "
 
             case 2:
                 namaMetode = "Tunai";
-                System.out.println(languageModule[36][selectedLanguage] + biayaAkhir); //"║ Biaya Pengiriman sebesar: "
-                int bayar;
                 boolean validInput = false;
+
+                clearTerminal();
+                System.out.println(String.format(
+                    receiptFormat,
+                    tanggalHariIni,
+                    namaPengirim,
+                    nomorResi, 
+                    loggedInUsername,
+                    arrayLayanan[pilihanLayanan-1][0],
+                    centerString(30, origin), 
+                    centerString(30, destination),
+                    deskripsiBarang,
+                    berat,
+                    beratBarang,
+                    jarak,
+                    biayaJarak,
+                    arrayLayanan[pilihanLayanan-1][0],
+                    arrayLayanan[pilihanLayanan-1][1],
+                    Double.toString(biayaAkhir),
+                    bayar,
+                    kembalian
+                ));  
 
                 do {
                     System.out.print(languageModule[37][selectedLanguage]); //"║ Bayar: "
@@ -2111,10 +2171,32 @@ public class Main {
                         validInput = true;
                     }
 
-                    System.out.println(languageModule[38][selectedLanguage] + (bayar - biayaAkhir)); //"║ Kembalian: "
+                    kembalian = (bayar - biayaAkhir);
+                    clearTerminal();
+                    System.out.println(String.format(
+                        receiptFormat,
+                        tanggalHariIni,
+                        namaPengirim,
+                        nomorResi, 
+                        loggedInUsername,
+                        arrayLayanan[pilihanLayanan-1][0],
+                        centerString(30, origin), 
+                        centerString(30, destination),
+                        deskripsiBarang,
+                        berat,
+                        beratBarang,
+                        jarak,
+                        biayaJarak,
+                        arrayLayanan[pilihanLayanan-1][0],
+                        arrayLayanan[pilihanLayanan-1][1],
+                        Double.toString(biayaAkhir),
+                        bayar,
+                        kembalian
+                    )); 
                 } while (!validInput);
 
-
+            input.nextLine();
+            pressEnter();
 
             historyTransaksi = Arrays.copyOf(historyTransaksi,historyTransaksi.length + 1);
             historyTransaksi[historyTransaksi.length-1] = new String[]{
@@ -2924,41 +3006,5 @@ public class Main {
 
     private static void DeliverPackage() {
 
-    }
-
-    private static void viewReceipt() {
-            System.out.println("╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮");
-            System.out.println("│"+centerString(123, getLanguageModuleText(152))+"│");
-            System.out.println("├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤");
-            System.out.println("│                         ╭──────────────────────╮                          ╭────────────────────────────────────────────╮  │");
-            System.out.println("│  Tanggal                │                      │   Nama Pengirim          │                                            │  │");
-            System.out.println("│                         ╰──────────────────────╯                          ╰────────────────────────────────────────────╯  │");
-            System.out.println("│                         ╭──────────────────────╮                          ╭────────────────────────────────────────────╮  │");
-            System.out.println("│  No Resi                │                      │   Kasir                  │                                            │  │");
-            System.out.println("│                         ╰──────────────────────╯                          ╰────────────────────────────────────────────╯  │");
-            System.out.println("│  ╭────────────────┬───╮ ╭──────────────────────────────╮                  ╭──────────────────────────────╮                │");
-            System.out.println("│  │     Layanan    │ ▼ │ │            Origin            │                  │          Destination         │                │");
-            System.out.println("│  ├────────────────┴───┤ ├──────────────────────────────┤      415 KM      ├──────────────────────────────┤                │");
-            System.out.println("│  │                    │ │                              │                  │                              │                │");
-            System.out.println("│  ╰────────────────────╯ ╰──────────────────────────────╯                  ╰──────────────────────────────╯                │");
-            System.out.println("│                                                                                                                           │");
-            System.out.println("│  ╭──────────────────────────────────────────────────────────────┬───────────────────────────────────────────┬───────────╮ │");
-            System.out.println("│  │                       Deskripsi Barang                       │                                           │           │ │");
-            System.out.println("│  ├──────────────────────────────────────────────────────────────┤                   Detail                  │   Total   │ │");
-            System.out.println("│  │  Laptop Nitro V 15                                           │                                           │           │ │");
-            System.out.println("│  ├──────────────────────────────────────────────────────────────┼───────────────────────────────────────────┼───────────┤ │");
-            System.out.println("│  │  Berat                                                       │                                         3 │           │ │");
-            System.out.println("│  ├──────────────────────────────────────────────────────────────┼───────────────────────────────────────────┼───────────┤ │");
-            System.out.println("│  │  Jarak                                                       │                                       415 │           │ │");
-            System.out.println("│  ├──────────────────────────────────────────────────────────────┼───────────────────────────────────────────┼───────────┤ │");
-            System.out.println("│  │  Layanan                                                     │                                   Sameday │     20000 │ │");
-            System.out.println("│  ╰──────────────────────────────────────────────────────────────┴───────────────────────────────────────────┴───────────╯ │");
-            System.out.println("├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤");
-            System.out.println("│  Total :                                                                                                                  │");
-            System.out.println("├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤");
-            System.out.println("│  Bayar :                                                                                                                  │");
-            System.out.println("├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤");
-            System.out.println("│  Kembalian :                                                                                                              │");
-            System.out.println("╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯");
     }
 }
