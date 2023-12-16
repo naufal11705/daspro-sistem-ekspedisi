@@ -21,7 +21,8 @@ public class Main {
         {"Putra", "111","ADMIN"},
         {"Farhan", "222","ADMIN"},
         {"Kasir", "333", "KASIR"},
-        {"Kurir", "444", "KURIR"}
+        {"Kurir", "444", "KURIR"},
+        {"Yanto", "555", "KURIR"}
     };
 
     static String[][] languageModule = {
@@ -79,17 +80,17 @@ public class Main {
             
             {"Route Management", "Manajemen Rute"}, //49 
                 {"Add New Route", "Tambah Rute Baru"},   //50
-                    {"║ Rute has been available", "║ Rute sudah tersedia"}, //51
+                    {"Rute has been available", "Rute sudah tersedia"}, //51
                     {"⤷ Enter the distance between ", "⤷ Masukkan jarak antara "},  //52
                 {"Remove Route", "Hapus Rute"},  //53
                 {"Displays Location's Data", "Menampilkan Data Rute Pengiriman"},   //54
 
             {"Service Management", "Manajemen Layanan"}, //56
                 {"Add Service Types", "Tambahkan Jenis Layanan"},   //57
-                    {"║ ⤷ Enter New Service Name: ", "║ ⤷ Masukkan Nama Layanan: "},    //58
-                    {"║ ⤷ Cost: Rp.", "║ ⤷ Masukkan Tarif: Rp."},   //59
-                    {"║ ⤷ Minimum delivery time: ","║ ⤷ Masukkan Waktu Pengiriman Minimum: "},  //60
-                    {"║ ⤷ Maximum delivery time: ","║ ⤷ Masukkan Waktu Pengiriman Maximum: "},  //61
+                    {" ⤷ Enter New Service Name: ", " ⤷ Masukkan Nama Layanan: "},    //58
+                    {" ⤷ Input new Cost: Rp.", " ⤷ Masukkan Tarif: Rp."},   //59
+                    {" ⤷ Minimum delivery time: "," ⤷ Masukkan Waktu Pengiriman Minimum: "},  //60
+                    {" ⤷ Maximum delivery time: "," ⤷ Masukkan Waktu Pengiriman Maximum: "},  //61
                 {"Edit Service", "Edit Layanan"},    //62
                     {"║ Service list available: ","║ Daftar Layanan yang Tersedia: "},  //63
                     {"⤷ Enter service number want to change: " ,"⤷ Masukkan nomor layanan yang ingin diubah: "},    //64
@@ -169,7 +170,7 @@ public class Main {
         {"Invalid number. Please enter a valid number: ","Nomor tidak valid. Silahkan masukkan nomor yang valid: "},//124
         {"⤷ Press [⏎ Enter] if you don't want to edit the data","⤷ Tekan [⏎ Enter] jika tidak ingin mengedit data"},//125
         {"⤷ Enter the route number you want to change: ","⤷ Masukkan nomor rute yang ingin diubah: "},//126
-        {"╠ Do you want to change the delivery status to completed? (Y/N):","╠ Apakah anda ingin mengubah status pengiriman menjadi selesai? (Y/N): "},//127
+        {"⤷ Do you want to change the delivery status to completed? (Y/N): ","⤷ Apakah anda ingin mengubah status pengiriman menjadi selesai? (Y/N): "},//127
         {"║ Invalid date format. Please enter the date in dd-MM-yyyy format.","║ Format tanggal tidak valid. Harap masukkan tanggal dengan format dd-MM-yyyy."},//128
         {"║ Enter End Date (dd-MM-yyyy):","║ Masukkan Tanggal Akhir (dd-MM-yyyy): "},//129
         {"║⤷Enter Start Date (dd-MM-yyyy): ","║ ⤷ Masukkan Tanggal Awal (dd-MM-yyyy): "},//130
@@ -178,7 +179,7 @@ public class Main {
         {"║ ⤷ Enter Date (dd):","║ ⤷ Masukkan Tanggal (dd): "},//133
         {"║ Enter a number between 1 and 12.","║ Masukkan angka antara 1 sampai 12."},//134
         {"║ The moon is invalid. Enter a number between 1 and 12.","║ Bulan tidak valid. Masukkan angka antara 1 sampai 12."},//135
-        {"║⤷Enter Month (MM):","║ ⤷ Masukkan Bulan (MM): "},//136
+        {"║ ⤷ Enter Month (MM):","║ ⤷ Masukkan Bulan (MM): "},//136
         {"║ Input is not a number. Please enter the year between 1900 and 3000.","║ Input bukan angka. Silakan masukkan tahun antara 1900 dan 3000."},//137
         {"║ Invalid year. Please enter the year between 1900 and 3000.","║ Tahun tidak valid. Harap masukkan tahun antara 1900 dan 3000."},//138
         {"║ ⤷ Enter Year: ","║ ⤷ Masukkan Tahun: "},//139
@@ -212,7 +213,11 @@ public class Main {
         {"Malang", "Bekasi", "818"},
         {"Malang", "Bandung", "753"},
         {"Malang", "Medan", "2738"},
-        {"Malang", "Bogor", "875"}
+        {"Malang", "Bogor", "875"},
+        {"Semarang", "Bekasi", "418"},
+        {"Tangerang", "Palembang", "521"},
+        {"Batam", "Pekanbaru", "371"},
+        {"Yogyakarta", "Malang", "357"},
     };
 
     static Date startDate;
@@ -225,7 +230,7 @@ public class Main {
     static String YELLOW = "\u001B[33m";
     static String BOLD = "\u001B[1m";
 
-    static int selectedLanguage = 1;
+    static int selectedLanguage = 0;
 
     static boolean login = false;
     static boolean isAdmin = false;
@@ -280,7 +285,7 @@ public class Main {
     };
 
     static String[][] shipmentDetails = {
-        {"3210987654321", "Saka", "Sending"},
+        {"", "", ""},
     };
 
     static String reportFormat = 
@@ -319,6 +324,25 @@ public class Main {
         "║  Biaya:       %-83s║\n" +
         "║                                                                                                  ║\n" +
         "╚══════════════════════════════════════════════════════════════════════════════════════════════════╝";
+
+    static String receipt =
+        "╔══════════════════════════════════════════════════════════════════════════════════════════════════╗\n" +
+        "║                                                                                                  ║\n" +
+        "║                                        ╦═╗╔═╗╔═╗╔═╗╦═╗╔╦╗                                        ║\n" + 
+        "║                                        ╠╦╝║╣ ╠═╝║ ║╠╦╝ ║                                         ║\n" +
+        "║                                        ╩╚═╚═╝╩  ╚═╝╩╚═ ╩                                         ║\n" +
+        "║                                                                                                  ║\n" +
+        "╠══════════════════════════════════════════════════════════════════════════════════════════════════╣\n" +
+        "║ POLINEMA EKPEDITION                                                                              ║\n" +
+        "║ Laporan Pengiriman Per Bulan                                                                     ║\n" + 
+        "╠═══════════════════════════════════════════════════════╦════════════════════════╦═════════════════╣\n" +
+        "║                                                       ║       Nilai            ║     Satuan      ║\n" +
+        "║                                                       ╠════════════════════════╬═════════════════╣\n" +
+        "║ Total Pengiriman Per Asset                            ║      %s   ║      Buah       ║\n" +
+        "║ Total Pengiriman Per kg                               ║      %s   ║       Kg        ║\n" +
+        "║ Total Pendapatan                                      ║      %s   ║     Rupiah      ║\n" +
+        "║                                                       ║                        ║                 ║\n" +
+        "╚═══════════════════════════════════════════════════════╩════════════════════════╩═════════════════╝";
 
     public static void main(String[] args) {
 
@@ -521,7 +545,21 @@ public class Main {
         System.out.println("╠════════════════════════════════════════════════════════════╣");
 
         for (int i = 0; i < userData.length; i++) {
-            System.out.printf("║ "+(i+1)+".  ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s\n", userData[i][0], userData[i][1], userData[i][2]);
+            if(selectedLanguage==1){
+                System.out.printf("║ "+(i+1)+".  ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s\n", userData[i][0], userData[i][1], userData[i][2]);
+            } else {
+                String tempRole = "";
+                if(userData[i][2].equals("ADMIN")) {
+                    tempRole = "ADMIN";
+                } else if(userData[i][2].equals("KASIR")) {
+                    tempRole = "CASHIER";
+                } else if(userData[i][2].equals("KURIR")) {
+                    tempRole = "COURIER";
+                }
+
+                System.out.printf("║ "+(i+1)+".  ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s\n", userData[i][0], userData[i][1], tempRole);
+            }
+
         }
 
         System.out.println("╚════════════════════════════════════════════════════════════╝");
@@ -724,7 +762,7 @@ public class Main {
         System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝"); 
 
         if (!dataDitemukan) {
-            System.out.print(languageModule[141][selectedLanguage]);//"Tidak ada transaksi pada rentang tanggal tersebut atau yang sesuai dengan bulan dan tahun ini."
+            System.out.println(languageModule[141][selectedLanguage]);//"Tidak ada transaksi pada rentang tanggal tersebut atau yang sesuai dengan bulan dan tahun ini."
         }
     }
 
@@ -1258,7 +1296,22 @@ public class Main {
             System.out.println("│ 3.│"+centerString(18, languageModule[151][selectedLanguage])+"│");
             System.out.println("╰───┴──────────────────╯");
 
-            System.out.print("\t"+userData[selectedService][2] + " ➺  ");
+            if(selectedLanguage==1){
+                System.out.print("\t"+userData[selectedService][2] + " ➺  ");
+            } else {
+                String tempRole = "";
+                if(userData[selectedService][2].equals("ADMIN")) {
+                    tempRole = "ADMIN";
+                    System.out.print("\t"+tempRole + " ➺  ");
+                } else if(userData[selectedService][2].equals("KASIR")) {
+                    tempRole = "CASHIER";
+                    System.out.print("\t"+tempRole + " ➺  ");
+                } else if(userData[selectedService][2].equals("KURIR")) {
+                    tempRole = "COURIER";
+                    System.out.print("\t"+tempRole + " ➺  ");
+                }
+            }
+
             String pilihJabatan = input.nextLine();
 
             if(pilihJabatan.trim().isEmpty()) {
@@ -1268,12 +1321,15 @@ public class Main {
             switch (pilihJabatan) {
                 case "1":
                     newData = "ADMIN";
+                    userData[selectedService][2] = newData;
                     break;
                 case "2":
                     newData = "KURIR";
+                    userData[selectedService][2] = newData;
                     break;
                 case "3":
                     newData = "KASIR";
+                    userData[selectedService][2] = newData;
                     break;
                 default:
                     break;
@@ -1750,6 +1806,7 @@ public class Main {
 
         System.out.print (languageModule[20][selectedLanguage]);
         String namaPengirim = input.nextLine();
+        
         int nomorKontak;
         
         do {
@@ -2262,8 +2319,11 @@ public class Main {
     }
 
     private static void AddService() {
+        clearTerminal();
+        viewExpeditionServices();
+
         String namaLayanan = "";
-        double tarifLayanan = 0;
+        int tarifLayanan = 0;
         int startEstimation = 0;
         int endEstimation = 0;
         boolean inputValid = false;
@@ -2272,8 +2332,8 @@ public class Main {
             namaLayanan = input.next();
             while (!inputValid) {
                 System.out.print(languageModule[58][selectedLanguage]);//"║ ⤷ Masukkan Tarif: Rp."
-                if (input.hasNextDouble()) {
-                    tarifLayanan = input.nextDouble();
+                if (input.hasNextInt()) {
+                    tarifLayanan = input.nextInt();
                     inputValid = true;
                 } else {
                     System.out.println(languageModule[111][selectedLanguage]);  //"║ Input bukan angka. Mohon masukkan nomor layanan yang valid:"
@@ -2293,6 +2353,10 @@ public class Main {
                 String.valueOf(startEstimation),
                 String.valueOf(endEstimation)};
 
+        input.nextLine();
+
+        clearTerminal();
+        viewExpeditionServices();
     }
 
     private static void EditService() {
@@ -2395,13 +2459,17 @@ public class Main {
 
             switch (subMenu) {
                 case 1:
-                    System.out.print(languageModule[108][selectedLanguage]);//"║ ⤷ Masukkan tarif dasar per Kg: "
+                    System.out.print(languageModule[108][selectedLanguage]+"("+tarifPerKg+") ➪  ");//"║ ⤷ Masukkan tarif dasar per Kg: "
                     tarifPerKg = input.nextInt();
+                    input.nextLine();
+                    pressEnter();
                     continue;
 
                 case 2:
-                    System.out.print(languageModule[109][selectedLanguage]);//"║ ⤷ Masukkan tarif dasar per Km: "
+                    System.out.print(languageModule[109][selectedLanguage]+"("+tarifPerKm+") ➪  ");//"║ ⤷ Masukkan tarif dasar per Kg: "
                     tarifPerKm = input.nextInt();
+                    input.nextLine();
+                    pressEnter();
                     continue;
 
                 case 3:
@@ -2496,7 +2564,7 @@ public class Main {
             }
             break;
         }
-        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
     }
 
     private static void SendPackage() {
@@ -2525,8 +2593,10 @@ public class Main {
                 languageModule[98][selectedLanguage], //alamat
                 "Status"
             );
+            System.out.println("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
+            System.out.println("║"+centerString(160, languageModule[150][selectedLanguage]+": " +loggedInUsername)+"║");
             System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
-            System.out.println(centerString(98, "Driver: " +loggedInUsername));
+            System.out.println(formattedHeader);
             System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
             for (int k = 0; k < shipmentDetails.length; k++) {
                 if (shipmentDetails[k][1].equalsIgnoreCase(loggedInUsername) && shipmentDetails[k][2].equalsIgnoreCase("Sending")) {
@@ -2548,7 +2618,8 @@ public class Main {
                     }
                 }
             }
-            System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
+
+            System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
 
             System.out.print(languageModule[127][selectedLanguage]); //apakah anda ingin mengubah pesanan menjadi selesai
             String driverChoice = input.nextLine();
@@ -2722,7 +2793,7 @@ public class Main {
 
                             for (int k = 0; k < shipmentDetails.length; k++) {
                                 if (shipmentDetails[k][1].equalsIgnoreCase(loggedInUsername) && shipmentDetails[k][2].equalsIgnoreCase("Sending")) {
-                                    shipmentDetails[k][2] = "Done";
+                                    shipmentDetails[k][2] = "Sending";
 
                                     for (int i = 0; i < historyTransaksi.length; i++) {
                                         if(historyTransaksi[i][0].equals(shipmentDetails[k][0])) {
@@ -2760,29 +2831,34 @@ public class Main {
     }
 
     private static void ManageShipment() {
-        displayHeader();
-        displayIndonesianMap();
-        viewShipmentMenu();
+        while (true) {
+            displayHeader();
+            displayIndonesianMap();
+            viewShipmentMenu();
 
-        System.out.print(languageModule[80][selectedLanguage]);//"║ ⤷ Masukkan Pilihan: "
-        subMenu = input.nextInt();
-        input.nextLine();
+            System.out.print(languageModule[80][selectedLanguage]);//"║ ⤷ Masukkan Pilihan: "
+            subMenu = input.nextInt();
+            input.nextLine();
 
-        switch (subMenu) {
-            case 1:
-                viewWarehouseInventory();
-                pressEnter();
-                break;
-            case 2:
-                clearTerminal();
-                SendPackage();
-                break;
-            case 3:
-                System.out.println("Under Development");
-                pressEnter();
-                break;
-            default:
-                break;
+            switch (subMenu) {
+                case 1:
+                    viewWarehouseInventory();
+                    pressEnter();
+                    continue;
+                case 2:
+                    clearTerminal();
+                    SendPackage();
+                    continue;
+                case 3:
+                    DeliverPackage();
+                    pressEnter();
+                    continue;
+                case 4:
+                    break;
+                default:
+                    continue;
+            }
+            break;
         }
     }
 
@@ -2848,5 +2924,13 @@ public class Main {
 
         clearTerminal();
         viewExpeditionRoutes();
+    }
+
+    private static void DeliverPackage() {
+
+    }
+
+    private static void viewCashierPayment() {
+
     }
 }
