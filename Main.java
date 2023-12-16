@@ -206,7 +206,8 @@ public class Main {
         {"POLINEMA EXPEDITION", "EKSPEDSI POLINEMA"}, //160
         {"💵 The recipient does not need to pay anything to the courier", "💵 Penerima tidak perlu membayar apapun ke kurir"}, //161
         {"Handling fee", "Ongkir"}, //162
-        {"Do you want to change the delivery status of the goods? (Y/N): ", "Apakah anda ingin mengubah status pengiriman barang? (Y/N): "} //163
+        {"Do you want to change the delivery status of the goods? (Y/N): ", "Apakah anda ingin mengubah status pengiriman barang? (Y/N): "}, //163
+        {"Expedition History", "Riwayat Ekspedisi"} //164
     };
 
     // Format tanggal
@@ -872,52 +873,6 @@ public class Main {
             System.out.println("Tidak ada transaksi pada rentang tanggal tersebut atau yang sesuai dengan bulan dan tahun ini.");
         }
 
-    }
-
-    private static void viewExpeditionHistory() {
-        int[] columnWidths = calculateColumnWidths(historyTransaksi);
-        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s",
-            "No", 
-            languageModule[89][selectedLanguage], 
-            languageModule[90][selectedLanguage],
-            languageModule[91][selectedLanguage],
-            languageModule[92][selectedLanguage],
-            languageModule[93][selectedLanguage],
-            languageModule[94][selectedLanguage],
-            languageModule[95][selectedLanguage],
-            languageModule[96][selectedLanguage],
-            languageModule[97][selectedLanguage],
-            languageModule[98][selectedLanguage]
-        );
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        boolean dataDitemukan = false;
-
-        System.out.println("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗"); 
-        System.out.println("║"+centerString(168, languageModule[83][selectedLanguage])+"║");
-        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
-        System.out.println(formattedHeader);
-        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
-
-        for (int i = 0; i < historyTransaksi.length; i++) {
-            System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s",
-                i,
-                historyTransaksi[i][0], // Nomor Resi
-                historyTransaksi[i][1], // Tanggal
-                historyTransaksi[i][2], // Nama Pengirim
-                historyTransaksi[i][5],  //Jenis Layanan
-                historyTransaksi[i][13],
-                historyTransaksi[i][4], // Tujuan
-                historyTransaksi[i][6], // Tarif
-                historyTransaksi[i][7], // Nama Kasir
-                historyTransaksi[i][8], // Nama Penerima
-                historyTransaksi[i][9] // Alamat
-            ));
-        }
-
-        System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝"); 
-        if (!dataDitemukan) {
-            System.out.println("Tidak ada transaksi pada tahun tersebut.");
-        }
     }
 
     private static void viewExpeditionHistoryByYear(int tahunInput) {
@@ -2598,15 +2553,15 @@ public class Main {
         System.out.println("║                                                                                                  ║");
         System.out.println("║             ╭──────────────────────────────────────────────────────────────────────╮             ║");
         System.out.println("║             │                                                                      │             ║");
-        System.out.println("║             │                                                                      │             ║");
         System.out.println("║             │                     [1]. " + padString(44, languageModule[73][selectedLanguage]) + "│             ║");
         System.out.println("║             │                                                                      │             ║");
         System.out.println("║             │                     [2]. " + padString(44, languageModule[75][selectedLanguage]) + "│             ║");
         System.out.println("║             │                                                                      │             ║");
         System.out.println("║             │                     [3]. " + padString(44, languageModule[77][selectedLanguage]) + "│             ║");
         System.out.println("║             │                                                                      │             ║");
-        System.out.println("║             │                     [4]. " + padString(44, languageModule[78][selectedLanguage]) + "│             ║");
+        System.out.println("║             │                     [4]. " + padString(44, languageModule[164][selectedLanguage]) + "│             ║");
         System.out.println("║             │                                                                      │             ║");
+        System.out.println("║             │                     [5]. " + padString(44, languageModule[78][selectedLanguage]) + "│             ║");
         System.out.println("║             │                                                                      │             ║"); 
         System.out.println("║             ╰──────────────────────────────────────────────────────────────────────╯             ║");
         System.out.println("║                                                                                                  ║"); 
@@ -2946,15 +2901,23 @@ public class Main {
                     viewWarehouseInventory();
                     pressEnter();
                     continue;
+
                 case 2:
                     clearTerminal();
                     SendPackage();
                     continue;
+
                 case 3:
                     DeliverPackage();
                     pressEnter();
                     continue;
+
                 case 4:
+                    viewExpeditionHistory();
+                    pressEnter();
+                    continue;
+
+                case 5:
                     clearTerminal();
                     break;
                 default:
@@ -3085,5 +3048,44 @@ public class Main {
             selectedData = input.nextInt();
             historyTransaksi[selectedData][12] = "Has been received by the recipient";
         }
+    }
+
+    private static void viewExpeditionHistory() {
+        clearTerminal();
+        int[] columnWidths = calculateColumnWidths(historyTransaksi);
+        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
+            "No", 
+            languageModule[89][selectedLanguage],//no resi
+            languageModule[90][selectedLanguage],//tanggal
+            languageModule[91][selectedLanguage],//pengirim
+            languageModule[92][selectedLanguage],//layanan
+            languageModule[93][selectedLanguage],//asal
+            languageModule[94][selectedLanguage],//tujuan
+            languageModule[97][selectedLanguage],//penerima
+            languageModule[98][selectedLanguage],//alamat
+            "Status"
+        );
+
+        System.out.println("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
+        System.out.println(formattedHeader);
+        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
+
+        for (int i = 0; i < historyTransaksi.length; i++) {
+            if (historyTransaksi[i][12].equalsIgnoreCase("Has been received by the recipient")) {
+                System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
+                    i,
+                    historyTransaksi[i][0], // Nomor Resi
+                    historyTransaksi[i][1], // Tanggal
+                    historyTransaksi[i][2], // Nama Pengirim
+                    historyTransaksi[i][5],  //Jenis Layanan
+                    historyTransaksi[i][13],
+                    historyTransaksi[i][4], // Tujuan
+                    historyTransaksi[i][8], // Nama Penerima
+                    historyTransaksi[i][9], // Alamat
+                    historyTransaksi[i][12]
+                ));
+            }
+        }
+        System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
     }
 }
