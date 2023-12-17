@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.InputMismatchException;
+import java.util.Locale;
 import java.util.Arrays;
 import java.util.Calendar;
 
@@ -207,7 +208,15 @@ public class Main {
         {"💵 The recipient does not need to pay anything to the courier", "💵 Penerima tidak perlu membayar apapun ke kurir"}, //161
         {"Handling fee", "Ongkir"}, //162
         {"Do you want to change the delivery status of the goods? (Y/N): ", "Apakah anda ingin mengubah status pengiriman barang? (Y/N): "}, //163
-        {"Expedition History", "Riwayat Ekspedisi"} //164
+        {"Expedition History", "Riwayat Ekspedisi"}, //164
+
+        {"Monthly Delivery Report: ", "Monthly Delivery Report: "}, //165
+        {"Total Delivery Per Asset","Total Pengiriman Per Asset "}, //166
+        {"Total Delivery Per kg","Total Pengiriman Per kg"}, //167
+        {"Total income","Total Pendapatan"}, //168
+        {"Value", "Nilai"}, //169
+        {"Unit", "Satuan"}, //170
+        {"Unit","Buah"},//171
     };
 
     // Format tanggal
@@ -309,14 +318,14 @@ public class Main {
         "║                                        ╩╚═╚═╝╩  ╚═╝╩╚═ ╩                                         ║\n" +
         "║                                                                                                  ║\n" +
         "╠══════════════════════════════════════════════════════════════════════════════════════════════════╣\n" +
-        "║ POLINEMA EKPEDITION                                                                              ║\n" +
-        "║ Laporan Pengiriman Per Bulan                                                                     ║\n" + 
+        "║ "+padString(97, languageModule[160][selectedLanguage])+"║\n" + 
+        "║ "+padString(84, languageModule[165][selectedLanguage]+"%s")+"║\n" + 
         "╠═══════════════════════════════════════════════════════╦════════════════════════╦═════════════════╣\n" +
-        "║                                                       ║       Nilai            ║     Satuan      ║\n" +
+        "║                                                       ║       "+languageModule[169][selectedLanguage]+"            ║     "+languageModule[170][selectedLanguage]+"        ║\n" +
         "║                                                       ╠════════════════════════╬═════════════════╣\n" +
-        "║ Total Pengiriman Per Asset                            ║      %s   ║      Buah       ║\n" +
-        "║ Total Pengiriman Per kg                               ║      %s   ║       Kg        ║\n" +
-        "║ Total Pendapatan                                      ║      %s   ║     Rupiah      ║\n" +
+        "║ "+padString(54, languageModule[166][selectedLanguage])+"║      %s   ║      "+languageModule[171][selectedLanguage]+"       ║\n" +
+        "║ "+padString(54, languageModule[167][selectedLanguage])+"║      %s   ║       Kg        ║\n" +
+        "║ "+padString(54, languageModule[168][selectedLanguage])+"║      %s   ║     Rupiah      ║\n" +
         "║                                                       ║                        ║                 ║\n" +
         "╚═══════════════════════════════════════════════════════╩════════════════════════╩═════════════════╝";
 
@@ -2534,19 +2543,53 @@ public class Main {
     }
 
     private static void viewReport() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DAY_OF_MONTH, 1);
-        Date startDate = calendar.getTime();
+        Locale locale;
+        if (inputselectedLanguage == 1) {
+            locale = Locale.ENGLISH;
+            System.out.print("Enter month name (e.g., January): ");
+        } else if (inputselectedLanguage == 2) {
+            locale = new Locale("id");
+            System.out.print("Masukkan nama bulan (e.g., Januari): ");
+        } else {
+            System.out.println("Pilihan bahasa tidak valid!");
+            return;
+        }
+        String namaBulan = input.nextLine();
+        Calendar calendar = Calendar.getInstance(locale);
 
-        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-        Date endDate = calendar.getTime();
+        int nomorBulan = -1;    
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("MMMM", locale);
+            calendar.setTime(sdf.parse(namaBulan));
+            nomorBulan = calendar.get(Calendar.MONTH);
+        } catch (Exception e) {
+            System.out.println("Format bulan tidak valid!");
+            return;
+        }
+        Calendar cal = Calendar.getInstance();
+        int tahunSekarang = cal.get(Calendar.YEAR);
 
-        System.out.println(String.format(
-            reportFormat,
-            centerString(15, Integer.toString(getExpeditionCount(startDate, endDate))),
-            centerString(15, Integer.toString(getTotalWeight(startDate, endDate))),
-            centerString(15, "Rp "+Double.toString(getRevenue(startDate, endDate)))
-        ));
+        String tanggalAwal = String.format("01-%02d-%d", nomorBulan+1, tahunSekarang);
+        cal.set(Calendar.MONTH, nomorBulan - 1); // Bulan dimulai dari 0
+        int hariTerakhir = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        String tanggalAkhir = String.format("%02d-%02d-%d", hariTerakhir, nomorBulan+1, tahunSekarang);
+
+        try {
+            Date startDate = dateFormat.parse(tanggalAwal);
+            Date endDate = dateFormat.parse(tanggalAkhir);
+
+            String namaBulanInReport = new SimpleDateFormat("MMMM", locale).format(calendar.getTime());
+
+            System.out.println(String.format(
+                reportFormat,
+                centerString(15, namaBulanInReport),
+                centerString(15, Integer.toString(getExpeditionCount(startDate, endDate))),
+                centerString(15, Integer.toString(getTotalWeight(startDate, endDate))),
+                centerString(15, "Rp "+Double.toString(getRevenue(startDate, endDate)))
+            ));
+        } catch (Exception e) {
+            System.out.println("Error parsing dates!");
+        }
     }
 
     private static void viewShipmentMenu() {
