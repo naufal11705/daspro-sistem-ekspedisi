@@ -364,7 +364,7 @@ public class Main {
         "│  "+padString(23, getLanguageModuleText(41))+"│ %-21s│   "+padString(23, getLanguageModuleText(153))+"│ %-43s│  │\n" +
         "│                         ╰──────────────────────╯                          ╰────────────────────────────────────────────╯  │\n" +
         "│                         ╭──────────────────────╮                          ╭────────────────────────────────────────────╮  │\n" +
-        "│  "+padString(23, getLanguageModuleText(41))+"│ %-21s│   "+padString(23, getLanguageModuleText(40))+"│ %-43s│  │\n" +
+        "│  "+padString(23, getLanguageModuleText(89))+"│ %-21s│   "+padString(23, getLanguageModuleText(40))+"│ %-43s│  │\n" +
         "│                         ╰──────────────────────╯                          ╰────────────────────────────────────────────╯  │\n" +
         "│                         ╭──────────────────────╮                          ╭────────────────────────────────────────────╮  │\n" +
         "│  "+padString(23, getLanguageModuleText(30))+"│ %-21s│   "+padString(23, getLanguageModuleText(96))+"│ %-43s│  │\n" +
