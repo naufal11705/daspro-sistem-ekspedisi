@@ -360,20 +360,20 @@ public class Main {
         "╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮\n" +
         "│" + centerString(123, getLanguageModuleText(152)) + "│\n" +
         "├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤\n" +
-        "│                         ╭──────────────────────╮                          ╭────────────────────────────────────────────╮  │\n" +
-        "│  "+padString(23, getLanguageModuleText(41))+"│ %-21s│   "+padString(23, getLanguageModuleText(153))+"│ %-43s│  │\n" +
-        "│                         ╰──────────────────────╯                          ╰────────────────────────────────────────────╯  │\n" +
-        "│                         ╭──────────────────────╮                          ╭────────────────────────────────────────────╮  │\n" +
-        "│  "+padString(23, getLanguageModuleText(89))+"│ %-21s│   "+padString(23, getLanguageModuleText(40))+"│ %-43s│  │\n" +
-        "│                         ╰──────────────────────╯                          ╰────────────────────────────────────────────╯  │\n" +
-        "│                         ╭──────────────────────╮                          ╭────────────────────────────────────────────╮  │\n" +
-        "│  "+padString(23, getLanguageModuleText(30))+"│ %-21s│   "+padString(23, getLanguageModuleText(96))+"│ %-43s│  │\n" +
-        "│                         ╰──────────────────────╯                          ╰────────────────────────────────────────────╯  │\n" +
-        "│  ╭────────────────┬───╮ ╭──────────────────────────────╮                  ╭──────────────────────────────╮                │\n" +
-        "│  │"+centerString(16, getLanguageModuleText(103))+"│ ▼ │ │"+centerString(30, getLanguageModuleText(93))+"│                  │"+centerString(30, getLanguageModuleText(94))+"│                │\n" +
-        "│  ├────────────────┴───┤ ├──────────────────────────────┤                  ├──────────────────────────────┤                │\n" +
-        "│  │ %-19s│ │%s│                  │%s│                │\n" +
-        "│  ╰────────────────────╯ ╰──────────────────────────────╯                  ╰──────────────────────────────╯                │\n" +
+        "│                         ╭──────────────────────╮                          ╭─────────────────────────────────────────────╮ │\n" +
+        "│  "+padString(23, getLanguageModuleText(41))+"│ %-21s│   "+padString(23, getLanguageModuleText(153))+"│ %-44s│ │\n" +
+        "│                         ╰──────────────────────╯                          ╰─────────────────────────────────────────────╯ │\n" +
+        "│                         ╭──────────────────────╮                          ╭─────────────────────────────────────────────╮ │\n" +
+        "│  "+padString(23, getLanguageModuleText(89))+"│ %-21s│   "+padString(23, getLanguageModuleText(40))+"│ %-44s│ │\n" +
+        "│                         ╰──────────────────────╯                          ╰─────────────────────────────────────────────╯ │\n" +
+        "│                         ╭──────────────────────╮                          ╭─────────────────────────────────────────────╮ │\n" +
+        "│  "+padString(23, getLanguageModuleText(30))+"│ %-21s│   "+padString(23, getLanguageModuleText(96))+"│ %-44s│ │\n" +
+        "│                         ╰──────────────────────╯                          ╰─────────────────────────────────────────────╯ │\n" +
+        "│  ╭────────────────┬───╮ ╭───────────────────────────────────────────────╮ ╭─────────────────────────────────────────────╮ │\n" +
+        "│  │"+centerString(16, getLanguageModuleText(103))+"│ ▼ │ │"+centerString(47, getLanguageModuleText(93))+"│ │"+centerString(45, getLanguageModuleText(94))+"│ │\n" +
+        "│  ├────────────────┴───┤ ├───────────────────────────────────────────────┤ ├─────────────────────────────────────────────┤ │\n" +
+        "│  │ %-19s│ │%s│ │%s│ │\n" +
+        "│  ╰────────────────────╯ ╰───────────────────────────────────────────────╯ ╰─────────────────────────────────────────────╯ │\n" +
         "│                                                                                                                           │\n" +
         "│  ╭──────────────────────────────────────────────────────────────┬───────────────────────────────────────────┬───────────╮ │\n" +
         "│  │"+centerString(62, getLanguageModuleText(154))+"│                                           │           │ │\n" +
@@ -2154,8 +2154,8 @@ public class Main {
                     paymentMethod,
                     loggedInUsername,
                     arrayLayanan[pilihanLayanan-1][0],
-                    centerString(30, origin), 
-                    centerString(30, destination),
+                    centerString(47, origin), 
+                    centerString(45, destination),
                     deskripsiBarang,
                     selectedKgVol,
                     KgVol,
@@ -2185,8 +2185,8 @@ public class Main {
                     paymentMethod,
                     loggedInUsername,
                     arrayLayanan[pilihanLayanan-1][0],
-                    centerString(30, origin), 
-                    centerString(30, destination),
+                    centerString(47, origin), 
+                    centerString(45, destination),
                     deskripsiBarang,
                     selectedKgVol,
                     KgVol,
@@ -2230,8 +2230,8 @@ public class Main {
                         paymentMethod,
                         loggedInUsername,
                         arrayLayanan[pilihanLayanan-1][0],
-                        centerString(30, origin), 
-                        centerString(30, destination),
+                        centerString(47, origin), 
+                        centerString(45, destination),
                         deskripsiBarang,
                         selectedKgVol,
                         KgVol,
