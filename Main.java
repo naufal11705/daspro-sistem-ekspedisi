@@ -214,6 +214,8 @@ public class Main {
         {"Value", "Nilai"}, //169
         {"Unit", "Satuan"}, //170
         {"Unit","Buah"},//171
+        {" ⤷ Input Account Number: ", " ⤷ Masukkan Nomor Rekening: "},
+        {"Cash", "Tunai"}
     };
 
     // Format tanggal
@@ -270,7 +272,7 @@ public class Main {
     static int menuUtama, subMenu, editMenu;
     static boolean exit = false;
     static String bankName;
-    static String namaMetode;
+    static String paymentMethod;
     
 
     static String[][] historyTransaksi = {
@@ -381,6 +383,8 @@ public class Main {
         "│  ├──────────────────────────────────────────────────────────────┼───────────────────────────────────────────┼───────────┤ │\n" +
         "│  │  "+padString(60, getLanguageModuleText(103))+"│%42s │%10s │ │\n" +
         "│  ╰──────────────────────────────────────────────────────────────┴───────────────────────────────────────────┴───────────╯ │\n" +
+        "├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤\n" +
+        "│  "+padString(25, getLanguageModuleText(30))+"                                                                           %20s │\n" +
         "├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤\n" +
         "│  Total :                                                                                                       %10s │\n" +
         "├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤\n" +
@@ -2102,7 +2106,7 @@ public class Main {
         switch (metode) {
             case 1:
                 while (true) {
-                    namaMetode = "Bank";
+                    paymentMethod = "Bank";
                     System.out.println("╔════════════════════════════════════════════════════════════╗"); 
                     System.out.println("║"+centerString(60,"BANK")+"║");
                     System.out.println("╠════════════════════════════════════════════════════════════╣");
@@ -2113,18 +2117,22 @@ public class Main {
                 
                     System.out.print(languageModule[32][selectedLanguage]); //"⤷ Pilih Bank "
                     int jenisBank = input.nextInt();
+                    input.nextLine();
 
                     switch (jenisBank) {
                         case 1:
-                            bankName = "BRI";
+                            System.out.print(languageModule[172][selectedLanguage]);
+                            paymentMethod = "BRI - "+input.nextLine();
                             break;
 
                         case 2:
-                            bankName = "BNI";
+                            System.out.print(languageModule[172][selectedLanguage]);
+                            paymentMethod = "BNI - "+input.nextLine();
                             break;
 
                         case 3:
-                            bankName = "MANDIRI";
+                            System.out.print(languageModule[172][selectedLanguage]); 
+                            paymentMethod = "MANDIRI - "+input.nextLine();
                             break;
 
                         default:
@@ -2144,22 +2152,22 @@ public class Main {
                     centerString(30, origin), 
                     centerString(30, destination),
                     deskripsiBarang,
-                    berat,
+                    berat+" Kg",
                     beratBarang,
-                    jarak,
+                    jarak+" Km",
                     biayaJarak,
                     arrayLayanan[pilihanLayanan-1][0],
                     arrayLayanan[pilihanLayanan-1][1],
+                    paymentMethod,
                     Double.toString(biayaAkhir),
                     bayar,
                     kembalian
                 )); 
-                input.nextLine();
                 pressEnter();
                 break;   //"║ Pembayaran Berhasil menggunakan "
 
             case 2:
-                namaMetode = "Tunai";
+                paymentMethod = languageModule[173][selectedLanguage];
                 boolean validInput = false;
 
                 clearTerminal();
@@ -2173,12 +2181,13 @@ public class Main {
                     centerString(30, origin), 
                     centerString(30, destination),
                     deskripsiBarang,
-                    berat,
+                    berat+" Kg",
                     beratBarang,
-                    jarak,
+                    jarak+" Km",
                     biayaJarak,
                     arrayLayanan[pilihanLayanan-1][0],
                     arrayLayanan[pilihanLayanan-1][1],
+                    paymentMethod,
                     Double.toString(biayaAkhir),
                     bayar,
                     kembalian
@@ -2215,12 +2224,13 @@ public class Main {
                         centerString(30, origin), 
                         centerString(30, destination),
                         deskripsiBarang,
-                        berat,
+                        berat+" Kg",
                         beratBarang,
-                        jarak,
+                        jarak+" Km",
                         biayaJarak,
                         arrayLayanan[pilihanLayanan-1][0],
                         arrayLayanan[pilihanLayanan-1][1],
+                        paymentMethod,
                         Double.toString(biayaAkhir),
                         bayar,
                         kembalian
