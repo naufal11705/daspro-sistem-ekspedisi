@@ -364,7 +364,10 @@ public class Main {
         "│  "+padString(23, getLanguageModuleText(41))+"│ %-21s│   "+padString(23, getLanguageModuleText(153))+"│ %-43s│  │\n" +
         "│                         ╰──────────────────────╯                          ╰────────────────────────────────────────────╯  │\n" +
         "│                         ╭──────────────────────╮                          ╭────────────────────────────────────────────╮  │\n" +
-        "│  "+padString(23, getLanguageModuleText(89))+"│ %-21s│   "+padString(23, getLanguageModuleText(96))+"│ %-43s│  │\n" +
+        "│  "+padString(23, getLanguageModuleText(41))+"│ %-21s│   "+padString(23, getLanguageModuleText(40))+"│ %-43s│  │\n" +
+        "│                         ╰──────────────────────╯                          ╰────────────────────────────────────────────╯  │\n" +
+        "│                         ╭──────────────────────╮                          ╭────────────────────────────────────────────╮  │\n" +
+        "│  "+padString(23, getLanguageModuleText(30))+"│ %-21s│   "+padString(23, getLanguageModuleText(96))+"│ %-43s│  │\n" +
         "│                         ╰──────────────────────╯                          ╰────────────────────────────────────────────╯  │\n" +
         "│  ╭────────────────┬───╮ ╭──────────────────────────────╮                  ╭──────────────────────────────╮                │\n" +
         "│  │"+centerString(16, getLanguageModuleText(103))+"│ ▼ │ │"+centerString(30, getLanguageModuleText(93))+"│                  │"+centerString(30, getLanguageModuleText(94))+"│                │\n" +
@@ -383,8 +386,6 @@ public class Main {
         "│  ├──────────────────────────────────────────────────────────────┼───────────────────────────────────────────┼───────────┤ │\n" +
         "│  │  "+padString(60, getLanguageModuleText(103))+"│%42s │%10s │ │\n" +
         "│  ╰──────────────────────────────────────────────────────────────┴───────────────────────────────────────────┴───────────╯ │\n" +
-        "├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤\n" +
-        "│  "+padString(25, getLanguageModuleText(30))+"                                                                           %20s │\n" +
         "├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤\n" +
         "│  Total :                                                                                                       %10s │\n" +
         "├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤\n" +
@@ -2137,6 +2138,8 @@ public class Main {
                     tanggalHariIni,
                     namaPengirim,
                     nomorResi, 
+                    namaPenerima,
+                    paymentMethod,
                     loggedInUsername,
                     arrayLayanan[pilihanLayanan-1][0],
                     centerString(30, origin), 
@@ -2148,7 +2151,6 @@ public class Main {
                     biayaJarak,
                     arrayLayanan[pilihanLayanan-1][0],
                     arrayLayanan[pilihanLayanan-1][1],
-                    paymentMethod,
                     Double.toString(biayaAkhir),
                     bayar,
                     kembalian
@@ -2166,6 +2168,8 @@ public class Main {
                     tanggalHariIni,
                     namaPengirim,
                     nomorResi, 
+                    namaPenerima,
+                    paymentMethod,
                     loggedInUsername,
                     arrayLayanan[pilihanLayanan-1][0],
                     centerString(30, origin), 
@@ -2177,11 +2181,10 @@ public class Main {
                     biayaJarak,
                     arrayLayanan[pilihanLayanan-1][0],
                     arrayLayanan[pilihanLayanan-1][1],
-                    paymentMethod,
                     Double.toString(biayaAkhir),
                     bayar,
                     kembalian
-                ));  
+                )); 
 
                 do {
                     System.out.print(languageModule[37][selectedLanguage]); //"║ Bayar: "
@@ -2209,6 +2212,8 @@ public class Main {
                         tanggalHariIni,
                         namaPengirim,
                         nomorResi, 
+                        namaPenerima,
+                        paymentMethod,
                         loggedInUsername,
                         arrayLayanan[pilihanLayanan-1][0],
                         centerString(30, origin), 
@@ -2220,7 +2225,6 @@ public class Main {
                         biayaJarak,
                         arrayLayanan[pilihanLayanan-1][0],
                         arrayLayanan[pilihanLayanan-1][1],
-                        paymentMethod,
                         Double.toString(biayaAkhir),
                         bayar,
                         kembalian
@@ -3131,5 +3135,8 @@ public class Main {
             }
         }
         System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
+    }
+
+    private static void checkReceipt(int index) {
     }
 }
