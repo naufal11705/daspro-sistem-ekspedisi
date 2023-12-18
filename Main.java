@@ -1690,6 +1690,7 @@ public class Main {
             }
             clearTerminal();
             viewExpeditionHistoryByYear(tahunInput);
+            viewTransactionDetail();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -3152,6 +3153,30 @@ public class Main {
         System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
     }
 
-    private static void checkReceipt(int index) {
+    private static void viewTransactionDetail() {
+        System.out.print("Apakah anda ingin melihat detail transaksi? (Y/N): ");
+        String confirm = input.nextLine();
+        if (confirm.equalsIgnoreCase("Y")){
+            System.out.print(getLanguageModuleText(76));
+            int index = input.nextInt();
+            clearTerminal();
+            System.out.println(getLanguageModuleText(76)+historyTransaksi[index][0]);
+            System.out.println(historyTransaksi[index][1]);
+            System.out.println(historyTransaksi[index][2]);
+            System.out.println(historyTransaksi[index][3]);
+            System.out.println(historyTransaksi[index][11]);
+            System.out.println(historyTransaksi[index][10]);
+            System.out.println(historyTransaksi[index][5]);
+            System.out.println(historyTransaksi[index][7]);
+            System.out.println(historyTransaksi[index][6]);
+            System.out.println(historyTransaksi[index][13]);
+            System.out.println(historyTransaksi[index][4]);
+            System.out.println(historyTransaksi[index][9]);
+            System.out.println(historyTransaksi[index][12]);
+            input.nextLine();
+        } else {
+
+        };
+
     }
 }
