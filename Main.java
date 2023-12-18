@@ -380,7 +380,7 @@ public class Main {
         "│  ├──────────────────────────────────────────────────────────────┤"+centerString(43, getLanguageModuleText(157))+"│   Total   │ │\n" +
         "│  │  %-60s│                                           │           │ │\n" +
         "│  ├──────────────────────────────────────────────────────────────┼───────────────────────────────────────────┼───────────┤ │\n" +
-        "│  │  "+padString(60, getLanguageModuleText(155))+"│%42s │%10s │ │\n" +
+        "│  │  %-60s│%42s │%10s │ │\n" +
         "│  ├──────────────────────────────────────────────────────────────┼───────────────────────────────────────────┼───────────┤ │\n" +
         "│  │  "+padString(60, getLanguageModuleText(156))+"│%42s │%10s │ │\n" +
         "│  ├──────────────────────────────────────────────────────────────┼───────────────────────────────────────────┼───────────┤ │\n" +
@@ -1885,7 +1885,7 @@ public class Main {
         System.out.print(languageModule[24][selectedLanguage]);
         String deskripsiBarang = input.nextLine();
 
-        double biayaBerat=0;
+        double beratBarang=0;
         int panjang = 0;
         int lebar=0;
         int tinggi = 0;
@@ -1905,10 +1905,10 @@ public class Main {
                 System.out.print("\033[7A\033[0J");
                 System.out.print(languageModule[82][selectedLanguage]); //"║ Masukkan Berat: "
             }
-            biayaBerat= input.nextInt();
+            beratBarang= input.nextInt();
 
             input.nextLine(); // membersihkan buffer input
-            if (biayaBerat <= 0) {
+            if (beratBarang <= 0) {
                 input.nextLine();
                 System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
                 System.out.println("║                                                                                                  ║");
@@ -2075,21 +2075,26 @@ public class Main {
         pilihanLayanan = input.nextInt();
         double tarifLayanan = Double.parseDouble(arrayLayanan[pilihanLayanan-1][1]);
         
-        double beratKg = 0 ;
-        double beratVol = 0;
-        beratKg = (biayaBerat * tarifPerKg) / 5;
-        beratVol = (tarifPerKg * (panjang * lebar * tinggi) / 4000) / 5;
+        double biayaBerat = 0 ;
+        double biayaVol = 0;
+        biayaBerat = (beratBarang * tarifPerKg) / 5;
+        biayaVol = (tarifPerKg * (panjang * lebar * tinggi) / 4000) / 5;
 
-        double hargaTertinggi = Math.max (beratKg,beratVol);
+        double hargaTertinggi = Math.max (biayaBerat,biayaVol);
         double biayaAkhir;
+        String selectedKgVol = "";
+        String KgVol;
 
-        if (hargaTertinggi == beratVol) {
+        if (hargaTertinggi == biayaVol) {
             biayaAkhir = tarifLayanan + hargaTertinggi + biayaJarak;
-            
+            KgVol = (panjang * lebar * tinggi)+" cm³";
+            selectedKgVol = "Volume";
         } else {
             biayaAkhir = tarifLayanan + hargaTertinggi + biayaJarak;
-            
+            KgVol = beratBarang+" kg";
+            selectedKgVol = languageModule[155][selectedLanguage];
         }
+
         nomorResi = generateTrackingNumber();
 
         System.out.println("╔════════════════════════════════════════════════════════════╗"); 
@@ -2152,7 +2157,8 @@ public class Main {
                     centerString(30, origin), 
                     centerString(30, destination),
                     deskripsiBarang,
-                    biayaBerat+" Kg",
+                    selectedKgVol,
+                    KgVol,
                     hargaTertinggi,
                     jarak+" Km",
                     biayaJarak,
@@ -2182,7 +2188,8 @@ public class Main {
                     centerString(30, origin), 
                     centerString(30, destination),
                     deskripsiBarang,
-                    biayaBerat+" Kg",
+                    selectedKgVol,
+                    KgVol,
                     hargaTertinggi,
                     jarak+" Km",
                     biayaJarak,
@@ -2226,7 +2233,8 @@ public class Main {
                         centerString(30, origin), 
                         centerString(30, destination),
                         deskripsiBarang,
-                        biayaBerat+" Kg",
+                        selectedKgVol,
+                        KgVol,
                         hargaTertinggi,
                         jarak+" Km",
                         biayaJarak,
@@ -2253,7 +2261,7 @@ public class Main {
             loggedInUsername,
             namaPenerima,
             alamatPenerima,
-            String.valueOf(hargaTertinggi),
+            String.valueOf(KgVol),
             deskripsiBarang,
             "On Process",
             origin};
@@ -2263,7 +2271,7 @@ public class Main {
             labelFormat,
             nomorResi,
             arrayLayanan[pilihanLayanan-1][0],
-            biayaBerat,
+            beratBarang,
             biayaAkhir,
             namaPenerima, 
             namaPengirim,
