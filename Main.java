@@ -276,7 +276,7 @@ public class Main {
     
 
     static String[][] historyTransaksi = {
-        {"9876538710987", "18-12-2023", "Saka", "08899887766", "Malang", "Regular", "69000.0", "Farhan", "Reika", "Jl. Melati 20 No. 16", "1", "Gadget Elektronik High-end", "Waiting for pickup", "Yogyakarta"},
+        {"9876538710987", "18-12-2023", "Saka", "08899887766", "Malang", "Regular", "69000.0", "Farhan", "Reika", "Jl. Melati 20 No. 16", "1500 cm³", "Gadget Elektronik High-end", "Waiting for pickup", "Yogyakarta", "BNI - 72382322", "Volume", "20000.0", "40000.0", "1500.0"},
         {"6904715283142", "18-12-2023", "Haikal", "08887654321", "Malang", "Regular", "98800.0", "Farhan", "Vincent", "Jl. Melati 3 No. 9", "3", "Kit Kesehatan Premium", "Waiting for pickup", "Yogyakarta"},
         {"9276354185046", "19-12-2023", "Gabriel", "08811223344", "Malang", "Regular", "33200.0", "Naufal", "Afifah", "Jl. Anggrek 12 No. 8", "7", "Smartwatch Fitness Tracker", "Waiting for pickup", "Yogyakarta"},
         {"1492578034685", "20-12-2023", "Afifah", "08876543210", "Malang", "Regular", "50900.0", "Putra", "Naufal", "Jl. Melati 9 No. 21", "5", "Pakaian Anak-anak Setelan Lengkap", "Waiting for pickup", "Yogyakarta"},
@@ -3160,19 +3160,31 @@ public class Main {
             System.out.print(getLanguageModuleText(76));
             int index = input.nextInt();
             clearTerminal();
-            System.out.println(getLanguageModuleText(76)+historyTransaksi[index][0]);
-            System.out.println(historyTransaksi[index][1]);
-            System.out.println(historyTransaksi[index][2]);
-            System.out.println(historyTransaksi[index][3]);
-            System.out.println(historyTransaksi[index][11]);
-            System.out.println(historyTransaksi[index][10]);
-            System.out.println(historyTransaksi[index][5]);
-            System.out.println(historyTransaksi[index][7]);
-            System.out.println(historyTransaksi[index][6]);
-            System.out.println(historyTransaksi[index][13]);
-            System.out.println(historyTransaksi[index][4]);
-            System.out.println(historyTransaksi[index][9]);
-            System.out.println(historyTransaksi[index][12]);
+
+            System.out.println(String.format(
+                receiptFormat,
+                historyTransaksi[index][1],
+                historyTransaksi[index][2],
+                historyTransaksi[index][0],
+                historyTransaksi[index][8],
+                "miss", //paymentmethod
+                historyTransaksi[index][7],
+                historyTransaksi[index][5],
+                centerString(47, historyTransaksi[index][13]), 
+                centerString(45, historyTransaksi[index][4]),
+                historyTransaksi[index][11],
+                "miss",
+                "miss",
+                "miss",
+                "miss",
+                "miss",
+                historyTransaksi[index][5],
+                "miss",
+                historyTransaksi[index][6],
+                "miss",
+                "miss"
+            )); 
+
             input.nextLine();
         } else {
 
