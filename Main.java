@@ -276,7 +276,7 @@ public class Main {
     
 
     static String[][] historyTransaksi = {
-        {"9876538710987", "18-12-2023", "Saka", "08899887766", "Malang", "Regular", "69000.0", "Farhan", "Reika", "Jl. Melati 20 No. 16", "1", "Gadget Elektronik High-end", "Waiting for pickup", "Yogyakarta"},
+        {"9876538710987", "18-12-2023", "Saka", "08899887766", "Malang", "Regular", "69000.0", "Farhan", "Reika", "Jl. Melati 20 No. 16", "1500 cm³", "Gadget Elektronik High-end", "Waiting for pickup", "Yogyakarta", "BNI - 72382322", "Volume", "20000.0", "40000.0", "1500.0"},
         {"6904715283142", "18-12-2023", "Haikal", "08887654321", "Malang", "Regular", "98800.0", "Farhan", "Vincent", "Jl. Melati 3 No. 9", "3", "Kit Kesehatan Premium", "Waiting for pickup", "Yogyakarta"},
         {"9276354185046", "19-12-2023", "Gabriel", "08811223344", "Malang", "Regular", "33200.0", "Naufal", "Afifah", "Jl. Anggrek 12 No. 8", "7", "Smartwatch Fitness Tracker", "Waiting for pickup", "Yogyakarta"},
         {"1492578034685", "20-12-2023", "Afifah", "08876543210", "Malang", "Regular", "50900.0", "Putra", "Naufal", "Jl. Melati 9 No. 21", "5", "Pakaian Anak-anak Setelan Lengkap", "Waiting for pickup", "Yogyakarta"},
