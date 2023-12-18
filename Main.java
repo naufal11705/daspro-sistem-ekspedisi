@@ -364,7 +364,10 @@ public class Main {
         "│  "+padString(23, getLanguageModuleText(41))+"│ %-21s│   "+padString(23, getLanguageModuleText(153))+"│ %-43s│  │\n" +
         "│                         ╰──────────────────────╯                          ╰────────────────────────────────────────────╯  │\n" +
         "│                         ╭──────────────────────╮                          ╭────────────────────────────────────────────╮  │\n" +
-        "│  "+padString(23, getLanguageModuleText(89))+"│ %-21s│   "+padString(23, getLanguageModuleText(96))+"│ %-43s│  │\n" +
+        "│  "+padString(23, getLanguageModuleText(89))+"│ %-21s│   "+padString(23, getLanguageModuleText(40))+"│ %-43s│  │\n" +
+        "│                         ╰──────────────────────╯                          ╰────────────────────────────────────────────╯  │\n" +
+        "│                         ╭──────────────────────╮                          ╭────────────────────────────────────────────╮  │\n" +
+        "│  "+padString(23, getLanguageModuleText(30))+"│ %-21s│   "+padString(23, getLanguageModuleText(96))+"│ %-43s│  │\n" +
         "│                         ╰──────────────────────╯                          ╰────────────────────────────────────────────╯  │\n" +
         "│  ╭────────────────┬───╮ ╭──────────────────────────────╮                  ╭──────────────────────────────╮                │\n" +
         "│  │"+centerString(16, getLanguageModuleText(103))+"│ ▼ │ │"+centerString(30, getLanguageModuleText(93))+"│                  │"+centerString(30, getLanguageModuleText(94))+"│                │\n" +
@@ -383,8 +386,6 @@ public class Main {
         "│  ├──────────────────────────────────────────────────────────────┼───────────────────────────────────────────┼───────────┤ │\n" +
         "│  │  "+padString(60, getLanguageModuleText(103))+"│%42s │%10s │ │\n" +
         "│  ╰──────────────────────────────────────────────────────────────┴───────────────────────────────────────────┴───────────╯ │\n" +
-        "├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤\n" +
-        "│  "+padString(25, getLanguageModuleText(30))+"                                                                           %20s │\n" +
         "├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤\n" +
         "│  Total :                                                                                                       %10s │\n" +
         "├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤\n" +
@@ -682,7 +683,7 @@ public class Main {
 
     private static void viewExpeditionHistoryByTrackingNumber(String resi){
         int[] columnWidths = calculateColumnWidths(historyTransaksi);
-        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s",
+        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s",
             "No", 
             languageModule[89][selectedLanguage], 
             languageModule[90][selectedLanguage],
@@ -692,17 +693,16 @@ public class Main {
             languageModule[94][selectedLanguage],
             languageModule[95][selectedLanguage],
             languageModule[96][selectedLanguage],
-            languageModule[97][selectedLanguage],
-            languageModule[98][selectedLanguage]
+            languageModule[97][selectedLanguage]
         );
-        System.out.println("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗"); 
-        System.out.println("║"+centerString(168, languageModule[83][selectedLanguage])+"║");
-        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+        System.out.println("╔═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗"); 
+        System.out.println("║"+centerString(125, languageModule[83][selectedLanguage])+"║");
+        System.out.println("╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
         System.out.println(formattedHeader);
-        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");           
+        System.out.println("╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");            
         for (int i = 0; i < historyTransaksi.length; i++) {
             if (historyTransaksi[i][0].equals(resi)) {
-                System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s",
+                System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s",
                     i,
                     historyTransaksi[i][0], // Nomor Resi
                     historyTransaksi[i][1], // Tanggal
@@ -712,17 +712,16 @@ public class Main {
                     historyTransaksi[i][4], // Tujuan
                     historyTransaksi[i][6], // Tarif
                     historyTransaksi[i][7], // Nama Kasir
-                    historyTransaksi[i][8], // Nama Penerima
-                    historyTransaksi[i][9] // Alamat
+                    historyTransaksi[i][8]
                 ));
             }
         }
-        System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝"); 
+        System.out.println("╚═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝"); 
     }
 
     private static void viewExpeditionHistoryByRange(Date startDate, Date endDate){
         int[] columnWidths = calculateColumnWidths(historyTransaksi);
-        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s",
+        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s",
             "No", 
             languageModule[89][selectedLanguage], 
             languageModule[90][selectedLanguage],
@@ -732,20 +731,19 @@ public class Main {
             languageModule[94][selectedLanguage],
             languageModule[95][selectedLanguage],
             languageModule[96][selectedLanguage],
-            languageModule[97][selectedLanguage],
-            languageModule[98][selectedLanguage]
+            languageModule[97][selectedLanguage]
         );
         try{
-            System.out.println("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗"); 
-            System.out.println("║"+centerString(168, languageModule[83][selectedLanguage])+"║");
-            System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+            System.out.println("╔═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗"); 
+            System.out.println("║"+centerString(125, languageModule[83][selectedLanguage])+"║");
+            System.out.println("╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
             System.out.println(formattedHeader);
-            System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+            System.out.println("╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
             for (int i = 0; i < historyTransaksi.length; i++) {
                 if (historyTransaksi[i][0] != null){
                     Date transaksiDate = dateFormat.parse(historyTransaksi[i][1]);
                     if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
-                        System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s",
+                        System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s",
                             i,
                             historyTransaksi[i][0], // Nomor Resi
                             historyTransaksi[i][1], // Tanggal
@@ -755,13 +753,12 @@ public class Main {
                             historyTransaksi[i][4], // Tujuan
                             historyTransaksi[i][6], // Tarif
                             historyTransaksi[i][7], // Nama Kasir
-                            historyTransaksi[i][8], // Nama Penerima
-                            historyTransaksi[i][9] // Alamat
+                            historyTransaksi[i][8]
                         ));
                     }
                 }
             }
-        System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝"); 
+        System.out.println("╚═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");  
         }catch (ParseException e){
             e.printStackTrace();
         }
@@ -769,7 +766,7 @@ public class Main {
 
     private static void viewExpeditionHistoryByDay(Date startDate, Date endDate) {
         int[] columnWidths = calculateColumnWidths(historyTransaksi);
-        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s",
+        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s",
             "No", 
             languageModule[89][selectedLanguage], 
             languageModule[90][selectedLanguage],
@@ -779,17 +776,16 @@ public class Main {
             languageModule[94][selectedLanguage],
             languageModule[95][selectedLanguage],
             languageModule[96][selectedLanguage],
-            languageModule[97][selectedLanguage],
-            languageModule[98][selectedLanguage]
+            languageModule[97][selectedLanguage]
         );
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         boolean dataDitemukan = false;
 
-        System.out.println("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗"); 
-        System.out.println("║"+centerString(168, languageModule[83][selectedLanguage])+"║");
-        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+        System.out.println("╔═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗"); 
+        System.out.println("║"+centerString(125, languageModule[83][selectedLanguage])+"║");
+        System.out.println("╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
         System.out.println(formattedHeader);
-        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");  
+        System.out.println("╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
 
         for (int i = 0; i < historyTransaksi.length; i++) {
             try {
@@ -800,7 +796,7 @@ public class Main {
 
                 if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0
                         && dateFormat.format(transaksiDate).startsWith(String.format("%02d-%02d", startDate.getDate(), bulanSekarang))) {
-                        System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s",
+                        System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s",
                             i,
                             historyTransaksi[i][0], // Nomor Resi
                             historyTransaksi[i][1], // Tanggal
@@ -810,8 +806,7 @@ public class Main {
                             historyTransaksi[i][4], // Tujuan
                             historyTransaksi[i][6], // Tarif
                             historyTransaksi[i][7], // Nama Kasir
-                            historyTransaksi[i][8], // Nama Penerima
-                            historyTransaksi[i][9] // Alamat
+                            historyTransaksi[i][8]
                         ));
                     dataDitemukan = true;
                 }
@@ -820,7 +815,7 @@ public class Main {
             }
         }
 
-        System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝"); 
+        System.out.println("╚═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");  
 
         if (!dataDitemukan) {
             System.out.println(languageModule[141][selectedLanguage]);//"Tidak ada transaksi pada rentang tanggal tersebut atau yang sesuai dengan bulan dan tahun ini."
@@ -829,7 +824,7 @@ public class Main {
 
     private static void viewExpeditionHistoryByMonth(Date startDate, Date endDate) {
         int[] columnWidths = calculateColumnWidths(historyTransaksi);
-        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s",
+        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s",
             "No", 
             languageModule[89][selectedLanguage], 
             languageModule[90][selectedLanguage],
@@ -839,17 +834,16 @@ public class Main {
             languageModule[94][selectedLanguage],
             languageModule[95][selectedLanguage],
             languageModule[96][selectedLanguage],
-            languageModule[97][selectedLanguage],
-            languageModule[98][selectedLanguage]
+            languageModule[97][selectedLanguage]
         );
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         boolean dataDitemukan = false;
 
-        System.out.println("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗"); 
-        System.out.println("║"+centerString(168, languageModule[83][selectedLanguage])+"║");
-        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+        System.out.println("╔═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗"); 
+        System.out.println("║"+centerString(125, languageModule[83][selectedLanguage])+"║");
+        System.out.println("╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
         System.out.println(formattedHeader);
-        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");  
+        System.out.println("╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
 
         for (int i = 0; i < historyTransaksi.length; i++) {
             try {
@@ -862,7 +856,7 @@ public class Main {
 
                 if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0
                         && transaksiBulan == startDate.getMonth() + 1 && transaksiTahun == startDate.getYear() + 1900) {
-                        System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s",
+                        System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s",
                             i,
                             historyTransaksi[i][0], // Nomor Resi
                             historyTransaksi[i][1], // Tanggal
@@ -872,8 +866,7 @@ public class Main {
                             historyTransaksi[i][4], // Tujuan
                             historyTransaksi[i][6], // Tarif
                             historyTransaksi[i][7], // Nama Kasir
-                            historyTransaksi[i][8], // Nama Penerima
-                            historyTransaksi[i][9] // Alamat
+                            historyTransaksi[i][8] // Nama Penerima
                         ));
                     dataDitemukan = true;
                 }
@@ -882,7 +875,7 @@ public class Main {
             }
         }
 
-        System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝"); 
+        System.out.println("╚═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");  
         if (!dataDitemukan) {
             System.out.println("Tidak ada transaksi pada rentang tanggal tersebut atau yang sesuai dengan bulan dan tahun ini.");
         }
@@ -891,7 +884,7 @@ public class Main {
 
     private static void viewExpeditionHistoryByYear(int tahunInput) {
         int[] columnWidths = calculateColumnWidths(historyTransaksi);
-        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s",
+        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s",
             "No", 
             languageModule[89][selectedLanguage], 
             languageModule[90][selectedLanguage],
@@ -901,17 +894,16 @@ public class Main {
             languageModule[94][selectedLanguage],
             languageModule[95][selectedLanguage],
             languageModule[96][selectedLanguage],
-            languageModule[97][selectedLanguage],
-            languageModule[98][selectedLanguage]
+            languageModule[97][selectedLanguage]
         );
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         boolean dataDitemukan = false;
 
-        System.out.println("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗"); 
-        System.out.println("║"+centerString(168, languageModule[83][selectedLanguage])+"║");
-        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+        System.out.println("╔═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗"); 
+        System.out.println("║"+centerString(125, languageModule[83][selectedLanguage])+"║");
+        System.out.println("╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
         System.out.println(formattedHeader);
-        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
+        System.out.println("╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
 
         for (int i = 0; i < historyTransaksi.length; i++) {
             try {
@@ -921,7 +913,7 @@ public class Main {
                 int tahunTransaksi = cal.get(Calendar.YEAR);
 
                 if (tahunTransaksi == tahunInput) {
-                    System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s",
+                    System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s",
                         i,
                         historyTransaksi[i][0], // Nomor Resi
                         historyTransaksi[i][1], // Tanggal
@@ -931,8 +923,7 @@ public class Main {
                         historyTransaksi[i][4], // Tujuan
                         historyTransaksi[i][6], // Tarif
                         historyTransaksi[i][7], // Nama Kasir
-                        historyTransaksi[i][8], // Nama Penerima
-                        historyTransaksi[i][9] // Alamat
+                        historyTransaksi[i][8]
                     ));
                     dataDitemukan = true;
                 }
@@ -941,7 +932,7 @@ public class Main {
             }
         }
 
-        System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝"); 
+        System.out.println("╚═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝"); 
         if (!dataDitemukan) {
             System.out.println("Tidak ada transaksi pada tahun tersebut.");
         }
@@ -2147,6 +2138,8 @@ public class Main {
                     tanggalHariIni,
                     namaPengirim,
                     nomorResi, 
+                    namaPenerima,
+                    paymentMethod,
                     loggedInUsername,
                     arrayLayanan[pilihanLayanan-1][0],
                     centerString(30, origin), 
@@ -2158,7 +2151,6 @@ public class Main {
                     biayaJarak,
                     arrayLayanan[pilihanLayanan-1][0],
                     arrayLayanan[pilihanLayanan-1][1],
-                    paymentMethod,
                     Double.toString(biayaAkhir),
                     bayar,
                     kembalian
@@ -2176,6 +2168,8 @@ public class Main {
                     tanggalHariIni,
                     namaPengirim,
                     nomorResi, 
+                    namaPenerima,
+                    paymentMethod,
                     loggedInUsername,
                     arrayLayanan[pilihanLayanan-1][0],
                     centerString(30, origin), 
@@ -2187,11 +2181,10 @@ public class Main {
                     biayaJarak,
                     arrayLayanan[pilihanLayanan-1][0],
                     arrayLayanan[pilihanLayanan-1][1],
-                    paymentMethod,
                     Double.toString(biayaAkhir),
                     bayar,
                     kembalian
-                ));  
+                )); 
 
                 do {
                     System.out.print(languageModule[37][selectedLanguage]); //"║ Bayar: "
@@ -2219,6 +2212,8 @@ public class Main {
                         tanggalHariIni,
                         namaPengirim,
                         nomorResi, 
+                        namaPenerima,
+                        paymentMethod,
                         loggedInUsername,
                         arrayLayanan[pilihanLayanan-1][0],
                         centerString(30, origin), 
@@ -2230,7 +2225,6 @@ public class Main {
                         biayaJarak,
                         arrayLayanan[pilihanLayanan-1][0],
                         arrayLayanan[pilihanLayanan-1][1],
-                        paymentMethod,
                         Double.toString(biayaAkhir),
                         bayar,
                         kembalian
@@ -3141,5 +3135,8 @@ public class Main {
             }
         }
         System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
+    }
+
+    private static void checkReceipt(int index) {
     }
 }
