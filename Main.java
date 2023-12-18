@@ -332,7 +332,6 @@ public class Main {
         "║                                                       ║       "+languageModule[169][selectedLanguage]+"            ║     "+languageModule[170][selectedLanguage]+"        ║\n" +
         "║                                                       ╠════════════════════════╬═════════════════╣\n" +
         "║ "+padString(54, languageModule[166][selectedLanguage])+"║      %s   ║      "+languageModule[171][selectedLanguage]+"       ║\n" +
-        "║ "+padString(54, languageModule[167][selectedLanguage])+"║      %s   ║       Kg        ║\n" +
         "║ "+padString(54, languageModule[168][selectedLanguage])+"║      %s   ║     Rupiah      ║\n" +
         "║                                                       ║                        ║                 ║\n" +
         "╚═══════════════════════════════════════════════════════╩════════════════════════╩═════════════════╝";
@@ -2591,7 +2590,6 @@ public class Main {
                 reportFormat,
                 centerString(15, namaBulanInReport),
                 centerString(15, Integer.toString(getExpeditionCount(startDate, endDate))),
-                centerString(15, Integer.toString(getTotalWeight(startDate, endDate))),
                 centerString(15, "Rp "+Double.toString(getRevenue(startDate, endDate)))
             ));
         } catch (Exception e) {
