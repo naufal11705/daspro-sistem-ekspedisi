@@ -105,7 +105,7 @@ public class Main {
                 {"Warehouse Inventory", "Inventori Gudang"},    //73
                     {" ⤷ Enter warehouse location: ", " ⤷ Masukkan lokasi Gudang: "}, //74
                 {"Send Package", "Kirim Paket"},    //75
-                    {" ⤷ Enter index: ", "║ ⤷ Masukkan index: "},  //76
+                    {" ⤷ Enter index: ", " ⤷ Masukkan index: "},  //76
                 {"Deliver Package", "Antar Paket"}, //77
             {"Exit", "Keluar"}, //78
 
@@ -214,8 +214,9 @@ public class Main {
         {"Value", "Nilai"}, //169
         {"Unit", "Satuan"}, //170
         {"Unit","Buah"},//171
-        {" ⤷ Input Account Number: ", " ⤷ Masukkan Nomor Rekening: "},
-        {"Cash", "Tunai"}
+        {" ⤷ Input Account Number: ", " ⤷ Masukkan Nomor Rekening: "}, //172
+        {"Cash", "Tunai"}, //173
+        {" ⤷ Do you want to see transaction details? (Y/N): ", " ⤷ Apakah anda ingin melihat detail transaksi? (Y/N): "} //174
     };
 
     // Format tanggal
@@ -276,37 +277,8 @@ public class Main {
     
 
     static String[][] historyTransaksi = {
-        {"9876538710987", "18-12-2023", "Saka", "08899887766", "Malang", "Regular", "69000.0", "Farhan", "Reika", "Jl. Melati 20 No. 16", "1500 cm³", "Gadget Elektronik High-end", "Waiting for pickup", "Yogyakarta", "BNI - 72382322", "Volume", "20000.0", "40000.0", "1500.0"},
-        {"6904715283142", "18-12-2023", "Haikal", "08887654321", "Malang", "Regular", "98800.0", "Farhan", "Vincent", "Jl. Melati 3 No. 9", "3", "Kit Kesehatan Premium", "Waiting for pickup", "Yogyakarta"},
-        {"9276354185046", "19-12-2023", "Gabriel", "08811223344", "Malang", "Regular", "33200.0", "Naufal", "Afifah", "Jl. Anggrek 12 No. 8", "7", "Smartwatch Fitness Tracker", "Waiting for pickup", "Yogyakarta"},
-        {"1492578034685", "20-12-2023", "Afifah", "08876543210", "Malang", "Regular", "50900.0", "Putra", "Naufal", "Jl. Melati 9 No. 21", "5", "Pakaian Anak-anak Setelan Lengkap", "Waiting for pickup", "Yogyakarta"},
-        {"8032468109752", "20-12-2023", "Nanda", "08866778899", "Malang", "Economic", "25700.0", "Farhan", "Abdi", "Jl. Kembang 5 No. 15", "3", "Makanan Ringan Assorted", "Waiting for pickup", "Yogyakarta"},
-        {"5283176490254", "26-04-2023", "Esa", "08822334455", "Malang", "Economic", "65400.0", "Farhan", "Luthfi", "Jl. Seroja 3 No. 7", "2", "Buku Ensiklopedia Anak-anak", "Arrived at warehouse", "Bandung"},
-        {"3091754682351", "21-05-2022", "Abdi", "08811223344", "Bogor", "Economic", "34800.0", "Naufal", "Julian", "Jl. Mawar 17 No. 5", "9", "Mainan Puzzle Edukatif", "Waiting for pickup", "Bekasi"},
-        {"6750912348526", "17-06-2022", "Naufal", "08822334455", "Yogyakarta", "Regular", "66500.0", "Putra", "Gabriel", "Jl. Anggrek 7 No. 12", "8", "Kit Kesehatan Keluarga", "Waiting for pickup", "Malang"},
-        {"8013564729835", "30-06-2022", "Farrel", "08855443322", "Jakarta", "Regular", "76800.0", "Farhan", "Chiko", "Jl. Melati 15 No. 10", "4", "Alat Tulis Sekolah Premium", "Waiting for pickup", "Bekasi"},
-        {"2674853902164", "14-07-2022", "Atabik", "08855443322", "Bandung", "Economic", "45300.0", "Naufal", "Vincent", "Jl. Kembang 2 No. 19", "1", "Smartphone Android 128GB", "Waiting for pickup", "Bandung"},
-        {"4501628397517", "05-08-2023", "Dio", "08876543210", "Surabaya", "Sameday", "29100.0", "Putra", "Saputra", "Jl. Seroja 11 No. 14", "6", "Makanan Kesehatan Organik", "Waiting for pickup", "Pekanbaru"},
-        {"7246109385273", "09-09-2023", "Pasha", "08899887766", "Serang", "Regular", "78000.0", "Farhan", "Naufal", "Jl. Anggrek 8 No. 5", "10", "Pakaian Dewasa Setelan Formal", "Waiting for pickup", "Malang"},
-        {"3751928643058", "18-10-2023", "Farhan", "08866778899", "Denpasar", "Regular", "55700.0", "Naufal", "Petrus", "Jl. Mawar 5 No. 11", "2", "Mainan Robot Remote Control", "Waiting for pickup", "Malang"},
-        {"5038921467584", "02-12-2023", "Chiko", "08811223344", "Malang", "Economic", "87600.0", "Putra", "Saka", "Jl. Kembang 10 No. 17", "7", "Gadget Elektronik Portable", "Waiting for pickup", "Bogor"},
-        {"4892307162453", "11-11-2023", "Cindy", "08899887766", "Bekasi", "Sameday", "65400.0", "Naufal", "Petrus", "Jl. Seroja 8 No. 6", "5", "Makanan Ringan Assorted Premium", "Waiting for pickup", "Bekasi"},
-        {"1234567890123", "01-01-2023", "Ivan", "08812345678", "Surabaya", "Economic", "45000.0", "Putra", "Abdi", "Jl. Anggrek 14 No. 20", "9", "Buku Ensiklopedia Anak-anak", "Waiting for pickup", "Bogor"},
-        {"9876543210987", "07-04-2023", "Luthfi", "08887654321", "Jakarta", "Regular", "60000.0", "Farhan", "Farrel", "Jl. Kembang 1 No. 18", "1", "Gadget Elektronik High-end", "Waiting for pickup", "Malang"},
-        {"3456789012345", "14-06-2023", "Adri", "08811223344", "Bandung", "Economic", "35000.0", "Naufal", "Petrus", "Jl. Melati 6 No. 13", "6", "Makanan Ringan Assorted", "Waiting for pickup", "Bogor"},
-        {"8765432109876", "21-08-2023", "Alif", "08899887766", "Makassar", "Sameday", "42000.0", "Putra", "Saputra", "Jl. Anggrek 20 No. 3", "4", "Buku Ensiklopedia Anak-anak", "Waiting for pickup", "Bandung"},
-        {"6543210987654", "03-10-2023", "Dimas", "08876543210", "Denpasar", "Regular", "58000.0", "Farhan", "Farrel", "Jl. Mawar 13 No. 16", "10", "Mainan Robot Remote Control", "Waiting for pickup", "Bekasi"},
-        {"8765432109876", "11-12-2023", "Julian", "08822334455", "Malang", "Sameday", "67000.0", "Naufal", "Naufal", "Jl. Seroja 2 No. 4", "8", "Kit Kesehatan Premium", "Waiting for pickup", "Malang"},
-        {"5432109876543", "25-02-2023", "Petrus", "08866778899", "Bogor", "Regular", "73000.0", "Putra", "Saka", "Jl. Kembang 8 No. 1", "3", "Gadget Elektronik Portable", "Waiting for pickup", "Bogor"},
-        {"3210987654321", "10-05-2023", "Saputra", "08855443322", "Surabaya", "Economic", "32000.0", "Farhan", "Rio", "Jl. Mawar 14 No. 7", "5", "Makanan Ringan Assorted", "Waiting for pickup", "Bekasi"},
-        {"9876543210987", "15-07-2023", "Reika", "08811223344", "Semarang", "Regular", "52000.0", "Naufal", "Chiko", "Jl. Anggrek 11 No. 15", "2", "Alat Tulis Sekolah Set Lengkap", "Waiting for pickup", "Medan"},
-        {"3456789012345", "20-09-2023", "Rio", "08887654321", "Yogyakarta", "Sameday", "47000.0", "Putra", "Naufal", "Jl. Seroja 10 No. 2", "9", "Gadget Elektronik High-end", "Waiting for pickup", "Bogor"},
-        {"3210987654321", "15-01-2023", "Taufik", "08876543210", "Bekasi", "Economic", "40000.0", "Naufal", "Vincent", "Jl. Kembang 7 No. 19", "10", "Buku Ensiklopedia Anak-anak", "Waiting for pickup", "Surabaya"},
-        {"9876543210987", "20-03-2023", "Mera", "08822334455", "Gorontalo", "Sameday", "61000.0", "Putra", "Saputra", "Jl. Seroja 4 No. 11", "4", "Kit Kesehatan Keluarga", "Waiting for pickup", "Bogor"},
-        {"3456789012345", "05-05-2023", "Vincent", "08866778899", "Malang", "Regular", "54000.0", "Farhan", "Petrus", "Jl. Anggrek 3 No. 14", "7", "Makanan Ringan Assorted", "Arrived at warehouse", "Medan"},
-        {"3210987654321", "10-07-2023", "Vira", "08855443322", "Bengkulu", "Economic", "37000.0", "Naufal", "Haikal", "Jl. Kembang 12 No. 9", "1", "Gadget Elektronik Portable", "Waiting for pickup", "Bogor"},
-        {"9876543210987", "28-10-2023", "Innam", "08822334455", "Surabaya", "Sameday", "55000.0", "Putra", "Farrel", "Jl. Melati 9 No. 5", "6", "Buku Ensiklopedia Anak-anak", "Waiting for pickup", "Bekasi"},
-        
+        {"18122023192438", "18-12-2023", "Rangga Dwi Saputra", "08899887766", "Malang", "Economic", "96000.0", "Naufal", "Farhan Mawaluddin", "Jl. Seroja 3 No. 7", "1.0 kg", "Smartwatch Fitness Tracker", "Waiting for pickup", "Yogyakarta", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
+        {"18122023190643", "18-12-2023", "Haikal Muhammad Rafli", "08899887766", "Malang", "Regular", "102000.0", "Farhan", "Ahmad Naufal Waskito Aji", "Jl. Melati 20 No. 16", "3.0 kg", "Gadget Elektronik High-end", "Waiting for pickup", "Yogyakarta", "BNI - 72382322", "Weight", "1500.0", "102000", "0.0", "357", "90500.0", "10000"},
     };
 
     static String[][] shipmentDetails = {
@@ -681,57 +653,46 @@ public class Main {
         System.out.println("╚════════════════════════════════════════════════════════════╝");
     } 
 
-    private static void viewExpeditionHistoryByTrackingNumber(String resi){
-        int[] columnWidths = calculateColumnWidths(historyTransaksi);
-        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s",
-            "No", 
-            languageModule[89][selectedLanguage], 
-            languageModule[90][selectedLanguage],
-            languageModule[91][selectedLanguage],
-            languageModule[92][selectedLanguage],
-            languageModule[93][selectedLanguage],
-            languageModule[94][selectedLanguage],
-            languageModule[95][selectedLanguage],
-            languageModule[96][selectedLanguage],
-            languageModule[97][selectedLanguage]
-        );
-        System.out.println("╔═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗"); 
-        System.out.println("║"+centerString(125, languageModule[83][selectedLanguage])+"║");
-        System.out.println("╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣"); 
-        System.out.println(formattedHeader);
-        System.out.println("╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");            
+    private static void viewExpeditionHistoryByTrackingNumber(String resi){  
         for (int i = 0; i < historyTransaksi.length; i++) {
             if (historyTransaksi[i][0].equals(resi)) {
-                System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s",
-                    i,
-                    historyTransaksi[i][0], // Nomor Resi
-                    historyTransaksi[i][1], // Tanggal
-                    historyTransaksi[i][2], // Nama Pengirim
-                    historyTransaksi[i][5],  //Jenis Layanan
-                    historyTransaksi[i][13],
-                    historyTransaksi[i][4], // Tujuan
-                    historyTransaksi[i][6], // Tarif
-                    historyTransaksi[i][7], // Nama Kasir
-                    historyTransaksi[i][8]
-                ));
+                System.out.println(String.format(
+                    receiptFormat,
+                    historyTransaksi[i][1],
+                    historyTransaksi[i][2],
+                    historyTransaksi[i][0],
+                    historyTransaksi[i][8],
+                    historyTransaksi[i][14],
+                    historyTransaksi[i][7],
+                    historyTransaksi[i][5],
+                    centerString(47, historyTransaksi[i][13]), 
+                    centerString(45, historyTransaksi[i][4]),
+                    historyTransaksi[i][11],
+                    historyTransaksi[i][15],
+                    historyTransaksi[i][10],
+                    historyTransaksi[i][16],
+                    historyTransaksi[i][19]+" km",
+                    historyTransaksi[i][20],
+                    historyTransaksi[i][5],
+                    historyTransaksi[i][21],
+                    historyTransaksi[i][6],
+                    historyTransaksi[i][17],
+                    historyTransaksi[i][18]
+                )); 
             }
         }
-        System.out.println("╚═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝"); 
     }
 
     private static void viewExpeditionHistoryByRange(Date startDate, Date endDate){
         int[] columnWidths = calculateColumnWidths(historyTransaksi);
-        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s",
+        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s",
             "No", 
             languageModule[89][selectedLanguage], 
             languageModule[90][selectedLanguage],
             languageModule[91][selectedLanguage],
-            languageModule[92][selectedLanguage],
-            languageModule[93][selectedLanguage],
-            languageModule[94][selectedLanguage],
+            languageModule[97][selectedLanguage],
             languageModule[95][selectedLanguage],
-            languageModule[96][selectedLanguage],
-            languageModule[97][selectedLanguage]
+            languageModule[96][selectedLanguage]
         );
         try{
             System.out.println("╔═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗"); 
@@ -743,17 +704,14 @@ public class Main {
                 if (historyTransaksi[i][0] != null){
                     Date transaksiDate = dateFormat.parse(historyTransaksi[i][1]);
                     if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
-                        System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s",
+                        System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s",
                             i,
                             historyTransaksi[i][0], // Nomor Resi
                             historyTransaksi[i][1], // Tanggal
                             historyTransaksi[i][2], // Nama Pengirim
-                            historyTransaksi[i][5],  //Jenis Layanan
-                            historyTransaksi[i][13],
-                            historyTransaksi[i][4], // Tujuan
+                            historyTransaksi[i][8],
                             historyTransaksi[i][6], // Tarif
-                            historyTransaksi[i][7], // Nama Kasir
-                            historyTransaksi[i][8]
+                            historyTransaksi[i][7] // Nama Kasir
                         ));
                     }
                 }
@@ -766,17 +724,14 @@ public class Main {
 
     private static void viewExpeditionHistoryByDay(Date startDate, Date endDate) {
         int[] columnWidths = calculateColumnWidths(historyTransaksi);
-        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s",
+        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s",
             "No", 
             languageModule[89][selectedLanguage], 
             languageModule[90][selectedLanguage],
             languageModule[91][selectedLanguage],
-            languageModule[92][selectedLanguage],
-            languageModule[93][selectedLanguage],
-            languageModule[94][selectedLanguage],
+            languageModule[97][selectedLanguage],
             languageModule[95][selectedLanguage],
-            languageModule[96][selectedLanguage],
-            languageModule[97][selectedLanguage]
+            languageModule[96][selectedLanguage]
         );
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         boolean dataDitemukan = false;
@@ -796,17 +751,14 @@ public class Main {
 
                 if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0
                         && dateFormat.format(transaksiDate).startsWith(String.format("%02d-%02d", startDate.getDate(), bulanSekarang))) {
-                        System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s",
+                        System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s",
                             i,
                             historyTransaksi[i][0], // Nomor Resi
                             historyTransaksi[i][1], // Tanggal
                             historyTransaksi[i][2], // Nama Pengirim
-                            historyTransaksi[i][5],  //Jenis Layanan
-                            historyTransaksi[i][13],
-                            historyTransaksi[i][4], // Tujuan
+                            historyTransaksi[i][8],
                             historyTransaksi[i][6], // Tarif
-                            historyTransaksi[i][7], // Nama Kasir
-                            historyTransaksi[i][8]
+                            historyTransaksi[i][7] // Nama Kasir
                         ));
                     dataDitemukan = true;
                 }
@@ -824,17 +776,14 @@ public class Main {
 
     private static void viewExpeditionHistoryByMonth(Date startDate, Date endDate) {
         int[] columnWidths = calculateColumnWidths(historyTransaksi);
-        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s",
+        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s",
             "No", 
             languageModule[89][selectedLanguage], 
             languageModule[90][selectedLanguage],
             languageModule[91][selectedLanguage],
-            languageModule[92][selectedLanguage],
-            languageModule[93][selectedLanguage],
-            languageModule[94][selectedLanguage],
+            languageModule[97][selectedLanguage],
             languageModule[95][selectedLanguage],
-            languageModule[96][selectedLanguage],
-            languageModule[97][selectedLanguage]
+            languageModule[96][selectedLanguage]
         );
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         boolean dataDitemukan = false;
@@ -856,17 +805,14 @@ public class Main {
 
                 if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0
                         && transaksiBulan == startDate.getMonth() + 1 && transaksiTahun == startDate.getYear() + 1900) {
-                        System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s",
+                        System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s",
                             i,
                             historyTransaksi[i][0], // Nomor Resi
                             historyTransaksi[i][1], // Tanggal
                             historyTransaksi[i][2], // Nama Pengirim
-                            historyTransaksi[i][5],  //Jenis Layanan
-                            historyTransaksi[i][13],
-                            historyTransaksi[i][4], // Tujuan
+                            historyTransaksi[i][8],
                             historyTransaksi[i][6], // Tarif
-                            historyTransaksi[i][7], // Nama Kasir
-                            historyTransaksi[i][8] // Nama Penerima
+                            historyTransaksi[i][7] // Nama Kasir
                         ));
                     dataDitemukan = true;
                 }
@@ -884,17 +830,14 @@ public class Main {
 
     private static void viewExpeditionHistoryByYear(int tahunInput) {
         int[] columnWidths = calculateColumnWidths(historyTransaksi);
-        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s",
+        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s",
             "No", 
             languageModule[89][selectedLanguage], 
             languageModule[90][selectedLanguage],
             languageModule[91][selectedLanguage],
-            languageModule[92][selectedLanguage],
-            languageModule[93][selectedLanguage],
-            languageModule[94][selectedLanguage],
+            languageModule[97][selectedLanguage],
             languageModule[95][selectedLanguage],
-            languageModule[96][selectedLanguage],
-            languageModule[97][selectedLanguage]
+            languageModule[96][selectedLanguage]
         );
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         boolean dataDitemukan = false;
@@ -913,17 +856,14 @@ public class Main {
                 int tahunTransaksi = cal.get(Calendar.YEAR);
 
                 if (tahunTransaksi == tahunInput) {
-                    System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s ║ %-" + columnWidths[8] + "s",
+                    System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[6] + "s ║ %-" + columnWidths[7] + "s",
                         i,
                         historyTransaksi[i][0], // Nomor Resi
                         historyTransaksi[i][1], // Tanggal
                         historyTransaksi[i][2], // Nama Pengirim
-                        historyTransaksi[i][5],  //Jenis Layanan
-                        historyTransaksi[i][13],
-                        historyTransaksi[i][4], // Tujuan
+                        historyTransaksi[i][8],
                         historyTransaksi[i][6], // Tarif
-                        historyTransaksi[i][7], // Nama Kasir
-                        historyTransaksi[i][8]
+                        historyTransaksi[i][7] // Nama Kasir
                     ));
                     dataDitemukan = true;
                 }
@@ -1648,6 +1588,7 @@ public class Main {
 
                 for (int i=0; i<historyTransaksi.length; i++) {
                     if (historyTransaksi[i][0].equals(searchString)) {
+                        clearTerminal();
                         viewExpeditionHistoryByTrackingNumber(searchString);
                         System.out.print(languageModule[81][selectedLanguage]);//"Tekan [  ⏎ Enter] untuk melanjutkan"
                         input.nextLine();   
@@ -1730,6 +1671,7 @@ public class Main {
             clearTerminal();
             input.nextLine();
             viewExpeditionHistoryByMonth(startDate, endDate);
+            viewTransactionDetail();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1759,6 +1701,7 @@ public class Main {
                         clearTerminal();
                         input.nextLine();
                         viewExpeditionHistoryByDay(startDate, endDate);
+                        viewTransactionDetail();
                     }
                 } else {
                     System.out.print(languageModule[131][selectedLanguage]);//"║ Input harus berupa angka."
@@ -1802,6 +1745,7 @@ public class Main {
             clearTerminal();
             input.nextLine();
             viewExpeditionHistoryByRange(startDate, endDate);
+            viewTransactionDetail();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -2265,7 +2209,16 @@ public class Main {
             String.valueOf(KgVol),
             deskripsiBarang,
             "On Process",
-            origin};
+            origin,
+            paymentMethod,
+            selectedKgVol,
+            String.valueOf(hargaTertinggi),
+            String.valueOf(bayar),
+            String.valueOf(kembalian),
+            String.valueOf(jarak),
+            String.valueOf(biayaJarak),
+            arrayLayanan[pilihanLayanan-1][1]
+        };
 
         clearTerminal();
         System.out.println(String.format(
@@ -3154,8 +3107,9 @@ public class Main {
     }
 
     private static void viewTransactionDetail() {
-        System.out.print("Apakah anda ingin melihat detail transaksi? (Y/N): ");
+        System.out.print(getLanguageModuleText(174));
         String confirm = input.nextLine();
+
         if (confirm.equalsIgnoreCase("Y")){
             System.out.print(getLanguageModuleText(76));
             int index = input.nextInt();
@@ -3167,28 +3121,25 @@ public class Main {
                 historyTransaksi[index][2],
                 historyTransaksi[index][0],
                 historyTransaksi[index][8],
-                "miss", //paymentmethod
+                historyTransaksi[index][14], //paymentmethod
                 historyTransaksi[index][7],
                 historyTransaksi[index][5],
                 centerString(47, historyTransaksi[index][13]), 
                 centerString(45, historyTransaksi[index][4]),
                 historyTransaksi[index][11],
-                "miss",
-                "miss",
-                "miss",
-                "miss",
-                "miss",
+                historyTransaksi[index][15],
+                historyTransaksi[index][10],
+                historyTransaksi[index][16],
+                historyTransaksi[index][19]+" km",
+                historyTransaksi[index][20],
                 historyTransaksi[index][5],
-                "miss",
+                historyTransaksi[index][21],
                 historyTransaksi[index][6],
-                "miss",
-                "miss"
+                historyTransaksi[index][17],
+                historyTransaksi[index][18]
             )); 
 
             input.nextLine();
-        } else {
-
-        };
-
+        }
     }
 }
