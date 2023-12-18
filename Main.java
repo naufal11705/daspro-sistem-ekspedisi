@@ -3160,19 +3160,31 @@ public class Main {
             System.out.print(getLanguageModuleText(76));
             int index = input.nextInt();
             clearTerminal();
-            System.out.println(getLanguageModuleText(76)+historyTransaksi[index][0]);
-            System.out.println(historyTransaksi[index][1]);
-            System.out.println(historyTransaksi[index][2]);
-            System.out.println(historyTransaksi[index][3]);
-            System.out.println(historyTransaksi[index][11]);
-            System.out.println(historyTransaksi[index][10]);
-            System.out.println(historyTransaksi[index][5]);
-            System.out.println(historyTransaksi[index][7]);
-            System.out.println(historyTransaksi[index][6]);
-            System.out.println(historyTransaksi[index][13]);
-            System.out.println(historyTransaksi[index][4]);
-            System.out.println(historyTransaksi[index][9]);
-            System.out.println(historyTransaksi[index][12]);
+
+            System.out.println(String.format(
+                receiptFormat,
+                historyTransaksi[index][1],
+                historyTransaksi[index][2],
+                historyTransaksi[index][0],
+                historyTransaksi[index][8],
+                "miss", //paymentmethod
+                historyTransaksi[index][7],
+                historyTransaksi[index][5],
+                centerString(47, historyTransaksi[index][13]), 
+                centerString(45, historyTransaksi[index][4]),
+                historyTransaksi[index][11],
+                "miss",
+                "miss",
+                "miss",
+                "miss",
+                "miss",
+                historyTransaksi[index][5],
+                "miss",
+                historyTransaksi[index][6],
+                "miss",
+                "miss"
+            )); 
+
             input.nextLine();
         } else {
 
