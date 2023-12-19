@@ -2278,9 +2278,9 @@ public class Main {
         
         do {
             routeExist = false;
-            System.out.print("⤷ Origin: ");
+            System.out.print(" ⤷ "+getLanguageModuleText(93));
             origin = input.nextLine();
-            System.out.print("⤷ Destination: ");
+            System.out.print(" ⤷ "+getLanguageModuleText(94));
             destination = input.nextLine();
 
             for (int i = 0; i < rutePengiriman.length; i++) {
