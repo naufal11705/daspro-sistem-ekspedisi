@@ -1192,9 +1192,9 @@ public class Main {
         viewUserAccounts();
 
         System.out.print(languageModule[7][selectedLanguage]);
-        String usernameBaru = input.next();
+        String usernameBaru = input.nextLine();
         System.out.print(languageModule[8][selectedLanguage]);
-        String katasandiBaru = input.next();
+        String katasandiBaru = input.nextLine();
 
         while (true) {
             System.out.println("╭──────────────────┬───╮");
@@ -1368,11 +1368,10 @@ public class Main {
 
     private static void Login() {
         System.out.print(languageModule[1][selectedLanguage]);
-        String inputUsername = input.next();
+        String inputUsername = input.nextLine();
 
         System.out.print(languageModule[2][selectedLanguage]);
-        String inputPassword = input.next();
-        input.nextLine();
+        String inputPassword = input.nextLine();
 
         loginValidation(inputUsername, inputPassword);
 
