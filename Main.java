@@ -2278,15 +2278,18 @@ public class Main {
         
         do {
             routeExist = false;
-            System.out.print(" ⤷ "+getLanguageModuleText(93));
+            System.out.print(" ⤷ "+getLanguageModuleText(93)+": ");
             origin = input.nextLine();
-            System.out.print(" ⤷ "+getLanguageModuleText(94));
+            System.out.print(" ⤷ "+getLanguageModuleText(94)+": ");
             destination = input.nextLine();
 
             for (int i = 0; i < rutePengiriman.length; i++) {
                 if ((rutePengiriman[i][0].equalsIgnoreCase(origin) && rutePengiriman[i][1].equalsIgnoreCase(destination)) || 
                 (rutePengiriman[i][0].equalsIgnoreCase(destination) && rutePengiriman[i][1].equalsIgnoreCase(origin))) {
-                    System.out.print(languageModule[121][selectedLanguage]);//"Rute tersebut sudah ada!"
+                    System.out.println(languageModule[121][selectedLanguage]);//"Rute tersebut sudah ada!"
+                    System.out.print(languageModule[81][selectedLanguage]);//"Tekan [  ⏎ Enter] untuk melanjutkan"
+                    input.nextLine();
+                    System.out.print("\033[4A\033[0J");
                     routeExist = true;
                     break;
                 } 
