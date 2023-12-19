@@ -2076,8 +2076,8 @@ public class Main {
         System.out.println("╔════════════════════════════════════════════════════════════╗"); 
         System.out.println("║"+centerString(60,languageModule[30][selectedLanguage])+"║"); //"Metode Pembayaran"
         System.out.println("╠════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 1. VIA Bank");
-        System.out.println("║ 2. Tunai");
+        System.out.println("║ 1. Transfer Bank");
+        System.out.println("║ 2. "+getLanguageModuleText(173));
         System.out.println("╚════════════════════════════════════════════════════════════╝");
         System.out.print(languageModule[31][selectedLanguage]); //" ⤷ Pilih Metode Pembayaran: "
         int metode = input.nextInt();
