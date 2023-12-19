@@ -2014,7 +2014,7 @@ public class Main {
                 if ((rutePengiriman[i][0].equalsIgnoreCase(origin) && rutePengiriman[i][1].equalsIgnoreCase(destination)) || 
                 (rutePengiriman[i][0].equalsIgnoreCase(destination) && rutePengiriman[i][1].equalsIgnoreCase(origin))) {
                     jarak = Integer.parseInt(rutePengiriman[i][2]);
-                    double tarifTambahan = 15000;
+                    double tarifTambahan = 5000;
                             if (jarak <= 100) {
                                 biayaJarak = (jarak * tarifPerKm) / 100;
                             } else {
