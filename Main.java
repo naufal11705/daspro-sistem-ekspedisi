@@ -593,7 +593,7 @@ public class Main {
     private static void loginValidation(String username, String password) {
         for (int i = 0; i < userData.length ; i++ ) {
             if (userData[i][0].equals(username) && userData[i][1].equals(password)) {
-                masuk = true;
+                login = true;
                 loggedInUsername = username;
                 
                 if("ADMIN".equals(userData[i][2])){
@@ -3220,5 +3220,17 @@ public class Main {
             }
         }
     }    
+
+    private static void Countdown(int second) {
+        try {
+            for (int i = second; i > 0; i--) {
+                System.out.println("Detik yang tersisa: "+i);
+                Thread.sleep(1000);
+                System.out.print("\033[1A\033[2K");
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
