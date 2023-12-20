@@ -171,16 +171,16 @@ public class Main {
         {"⤷ Do you want to change the delivery status to completed? (Y/N): ","⤷ Apakah anda ingin mengubah status pengiriman menjadi selesai? (Y/N): "},//127
         {"║ Invalid date format. Please enter the date in dd-MM-yyyy format.","║ Format tanggal tidak valid. Harap masukkan tanggal dengan format dd-MM-yyyy."},//128
         {"║ Enter End Date (dd-MM-yyyy):","║ Masukkan Tanggal Akhir (dd-MM-yyyy): "},//129
-        {"║⤷Enter Start Date (dd-MM-yyyy): ","║ ⤷ Masukkan Tanggal Awal (dd-MM-yyyy): "},//130
-        {"║ The input must be a number.","║ Input harus berupa angka."},//131
-        {"║ Invalid date.","║ Tanggal tidak valid."},//132
-        {"║ ⤷ Enter Date (dd):","║ ⤷ Masukkan Tanggal (dd): "},//133
+        {" ⤷ Enter Start Date (dd-MM-yyyy): "," ⤷ Masukkan Tanggal Awal (dd-MM-yyyy): "},//130
+        {"The input must be a number.","Input harus berupa angka."},//131
+        {"Invalid date.","Tanggal tidak valid."},//132
+        {" ⤷ Enter Date (dd):"," ⤷ Masukkan Tanggal (dd): "},//133
         {"║ Enter a number between 1 and 12.","║ Masukkan angka antara 1 sampai 12."},//134
         {"║ The moon is invalid. Enter a number between 1 and 12.","║ Bulan tidak valid. Masukkan angka antara 1 sampai 12."},//135
-        {"║ ⤷ Enter Month (MM):","║ ⤷ Masukkan Bulan (MM): "},//136
+        {" ⤷ Enter Month (MM):"," ⤷ Masukkan Bulan (MM): "},//136
         {"║ Input is not a number. Please enter the year between 1900 and 3000.","║ Input bukan angka. Silakan masukkan tahun antara 1900 dan 3000."},//137
         {"║ Invalid year. Please enter the year between 1900 and 3000.","║ Tahun tidak valid. Harap masukkan tahun antara 1900 dan 3000."},//138
-        {"║ ⤷ Enter Year: ","║ ⤷ Masukkan Tahun: "},//139
+        {" ⤷ Enter Year: "," ⤷ Masukkan Tahun: "},//139
         {"║ Data not found. Please try again.","║ Data tidak ditemukan. Silakan coba lagi."},//140
         {"There are no transactions in that date range or that correspond to the month and year.","Tidak ada transaksi pada rentang tanggal tersebut atau yang sesuai dengan bulan dan tahun ini."},//141
         {" ⤷ Enter Options: ", " ⤷ Masukkan Pilihan: "},  //142
@@ -339,28 +339,26 @@ public class Main {
         "╚═══════════════════════════════════════════════════════╩════════════════════════╩═════════════════╝";
 
     static String labelFormat =
-        "╔══════════════════════════════════════════════════════════════════════╗\n" +
-        "║                                                                      ║\n" +
-        "║  "+padString(40, getLanguageModuleText(160))+"%26s  ║\n" +
-        "║                                                                      ║\n" +
-        "╠══════════════════════════════════════════════════════════════════════╣\n" +
-        "║                                                                      ║\n" +
-        "║  "+padString(18, getLanguageModuleText(92))+padString(34, getLanguageModuleText(155))+padString(16, getLanguageModuleText(162))+"║\n" +
-        "║  %-18s%-2s Kg                             Rp.%-13s║\n" +
-        "║                                                                      ║\n" + 
-        "║  ╭─────────────────────────────────────────────────────────────────╮ ║\n" +
-        "║  │"+centerString(65, getLanguageModuleText(161))+"│ ║\n" +
-        "║  ╰─────────────────────────────────────────────────────────────────╯ ║\n" +
-        "║                                                                      ║\n" +
-        "║   "+padString(38, getLanguageModuleText(94))+padString(29, getLanguageModuleText(93))+"║\n" +
-        "║   %-38s%-29s║\n" +
-        "║   %-38s%-29s║\n" +
-        "║   %-38s%-29s║\n" +
-        "║                                                                      ║\n" +
-        "╠══════════════════════════════════════════════════════════════════════╣\n" +
-        "║  "+padString(68, getLanguageModuleText(154))+"║\n" +
-        "║  %-68s║\n" +
-        "╚══════════════════════════════════════════════════════════════════════╝";
+        "╭──────────────────────────────────────────────────────────────────────╮\n" +
+        "│  "+padString(40, getLanguageModuleText(160))+"%26s  │\n" +
+        "├──────────────────────────────────────────────────────────────────────┤\n" +
+        "│                                                                      │\n" +
+        "│  "+padString(18, getLanguageModuleText(92))+padString(34, getLanguageModuleText(155))+padString(16, getLanguageModuleText(162))+"│\n" +
+        "│  %-18s%-4s Kg                           Rp.%-13s│\n" +
+        "│                                                                      │\n" + 
+        "│  ╭─────────────────────────────────────────────────────────────────╮ │\n" +
+        "│  │"+centerString(65, getLanguageModuleText(161))+"│ │\n" +
+        "│  ╰─────────────────────────────────────────────────────────────────╯ │\n" +
+        "│                                                                      │\n" +
+        "│   "+padString(38, getLanguageModuleText(94))+padString(29, getLanguageModuleText(93))+"│\n" +
+        "│   %-38s%-29s│\n" +
+        "│   %-38s%-29s│\n" +
+        "│   %-38s%-29s│\n" +
+        "│                                                                      │\n" +
+        "├──────────────────────────────────────────────────────────────────────┤\n" +
+        "│  "+padString(68, getLanguageModuleText(154))+"│\n" +
+        "│  %-68s│\n" +
+        "╰──────────────────────────────────────────────────────────────────────╯";
 
     static String receiptFormat =
         "╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮\n" +
@@ -406,7 +404,6 @@ public class Main {
             exit = false;
             isAdmin = false;
             isKurir = false;
-            masuk = false;
 
             clearTerminal();
             displayHeader();
@@ -436,11 +433,6 @@ public class Main {
 
                 default:
                     continue;
-            }
-
-
-            while (!masuk) {
-
             }
 
             notificationBox(97, languageModule[3][selectedLanguage] + loggedInUsername);
@@ -2026,10 +2018,10 @@ public class Main {
         int bayar=0;
         do {
             System.out.print("║ " + languageModule[93][selectedLanguage] + ": ");//asal
-            origin = input.nextLine();
+            origin = input.nextLine().toUpperCase();
 
             System.out.print("║ " + languageModule[94][selectedLanguage] + ": ");//tujuan
-            destination = input.nextLine();
+            destination = input.nextLine().toUpperCase();
 
             for (int i = 0; i < rutePengiriman.length; i++) {
                 if ((rutePengiriman[i][0].equalsIgnoreCase(origin) && rutePengiriman[i][1].equalsIgnoreCase(destination)) || 
