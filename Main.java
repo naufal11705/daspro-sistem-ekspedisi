@@ -23,105 +23,95 @@ public class Main {
     };
 
     static String[][] languageModule = {
-        {"Welcome to the Expedition System", "Selamat Datang di Sistem Ekspedisi"}, //1
-        {"║ ⤷ Input Username  : ", "║ ⤷ Masukkan Username   : "}, //2
-        {"║ ⤷ Input Password  : ", "║ ⤷ Masukkan Password   : "}, //3
-        {"✅ Login Success. Welcome ","✅ Anda berhasil masuk. Selamat datang "}, //4
-        {"⛔ OOPS! THERE IS A PROBLEM WITH YOUR LOGIN CREDENTIALS. PLEASE VERIFCATION AND TRY AGAIN.","⛔ OOPS! TERDAPAT MASALAH DENGAN KREDENSIAL LOGIN ANDA. SILAKAN VERIFIKASI DAN COBA LAGI."}, //5
-
-            {"User Management", "Manajemen Pengguna         "}, //6
-                {"Add User", "Tambahkan Pengguna"}, //7
-                    {" ⤷ Enter new Username: ", " ⤷ Masukkan nama pengguna baru: "},  //8
-                    {" ⤷ Enter new Password: ", " ⤷ Masukkan kata sandi baru: "}, //9
-                    {" ⤷ Enter new Role user: ", " ⤷ Masukkan jabatan penggun baru: "},   //10
-                    {"✅ New User Successfully Added.","✅ Pengguna baru berhasil ditambahkan."},   //11
-                {"Remove User", "Hapus Pengguna"},  //12
-                    {"║ ⤷ Enter Username want to remove: ","║ ⤷ Masukan username yang akan dihapus: "}, //13
-                    {"🗑️  User successfully removed.","🗑️  Pengguna telah dihapus."},   //14
-                    {"⚠️  USER NOT FOUND. PLEASE TRY AGAIN.","⚠️  PENGGUNA TIDAK DITEMUKAN. SILAKAN COBA LAGI."},   //15
-                {"User Data", "Data Pengguna"},    //16
-                    {"User Management", "Manajemen Pengguna"},  //17
-                {"Back to the Main Menu", "Kembali ke Menu Utama"}, //18
-
-            {"Delivery Transaction", "Transaksi Pengiriman       "}, //19
-                {"Transactions", "Melakukan Transaksi"}, //20
-                    {"║ Enter the Sender's Name: ","║ Masukkan Nama Pengirim: "},   //21
-                    {"║ Enter contact number: ", "║ Masukkan nomor kontak: "},  //22
-                    {"║ Enter receiver's name: ","║ Masukkan Nama Penerima: "},   //23
-                    {"║ Enter Address: ", "║ Masukkan Alamat: "},   //24
-                    {"║ Enter Description: ", "║ Masukkan Deskripsi Barang: "},  //25
-                    {"║ Input Length: ", "║ Masukkan Panjang: "}, //26
-                    {"║ Input Width: ", "║ Masukkan Lebar: "}, //27
-                    {"║ Input Height: ", "║ Masukkan Tinggi: "},  //28
-                    {"⚠️ RUTE IS NOT FOUND. PLEASE TRY AGAIN", "⚠️ RUTE TIDAK DITEMUKAN. SILAKAN COBA LAGI."},  //29
-                    {"day", "hari"},    //30
-                    {"Payment Method", "Metode Pembayaran"},   //31
-                    {" ⤷ Choose Payment methode: ", " ⤷ Pilih Metode Pembayaran: "},  //32
-                    {" ⤷ Choose Available Bank: ", " ⤷ Pilih Bank yang tersedia: "}, //33
-                    {"Payment successfully used ","Pembayaran berhasil menggunakan "},   //34
-                    {" ⤷ Please make payment of the amound Rp."," ⤷ Silahkan lakukan Pembayaran sejumlah Rp."},   //35
-                        {" before receiving goods. The Fee will be charged to the receiver!!!"," sebelum menerima barang. Biaya akan dibebankan kepada penerima!!!"},   //36
-                    {" ⤷ Shipping cost amount to: "," ⤷ Biaya Pengiriman sebesar: "}, //37
-                        {" ⤷ Pay: Rp.", " ⤷ Bayar: Rp."},     //38
-                        {" ⤷ Return: Rp", " ⤷ Kembalian: Rp"},    //39
-                    {"Sender", "Pegiriman"},    //40
-                    {"Receiver", "Penerima"},   //40
-                    {"Date", "Tanggal"},        //41
-                    {"Cost", "Biaya"},      //42
-                {"Edit Transaction", "Edit Transaksi"}, //43
-                    {"║ Input receipt number: ", "║ Masukkan nomor resi: "},    //44
-                    {"Data is not found", "Data tidak ditemukan"},  //45
-                {"Remove Transaction", "Hapus Transaksi"},  //46
-                    {"Data with this receipt number has been removed","Data dengan nomor resi yang sesuai sudah dihapus"},  //47
-                    {"User Data", "Data Pengguna"}, //48
-            
-            {"Route Management", "Manajemen Rute"}, //49 
-                {"Add New Route", "Tambah Rute Baru"},   //50
-                    {"Rute has been available", "Rute sudah tersedia"}, //51
-                    {" ⤷ Enter the distance between ", " ⤷ Masukkan jarak antara "},  //52
-                {"Remove Route", "Hapus Rute"},  //53
-                {"Displays Location's Data", "Menampilkan Data Rute Pengiriman"},   //54
-
-            {"Service Management", "Manajemen Layanan"}, //55
-                {"Add Service Types", "Tambahkan Jenis Layanan"},   //56
-                    {" ⤷ Enter New Service Name: ", " ⤷ Masukkan Nama Layanan: "},    //57
-                    {" ⤷ Input new Cost: Rp.", " ⤷ Masukkan Tarif: Rp."},   //58
-                    {" ⤷ Minimum delivery time: "," ⤷ Masukkan Waktu Pengiriman Minimum: "},  //59
-                    {" ⤷ Maximum delivery time: "," ⤷ Masukkan Waktu Pengiriman Maximum: "},  //60
-                {"Edit Service", "Edit Layanan"},    //61
-                    {"║ Service list available: ","║ Daftar Layanan yang Tersedia: "},  //62
-                    {"⤷ Enter service number want to change: " ,"⤷ Masukkan nomor layanan yang ingin diubah: "},    //63
-                {"Remove Service", "Menghapus Layanan"},    //64
-                {"Displays Services' Data", "Menampilkan Layanan Data"},    //65
-                    {"Service", "Cost"},    //66
-
-            {"Change Language", "Ganti Bahasa"},    //67
-            {"Basic Cost Management", "Manajemen Tarif Dasar"}, //68
-                {"Service Cost Management per Kg","Tarif dasar per Kg"},   //69
-                {"Service Cost Management per Km","Tarif dasar per Km"},   //70
-            {"Report", "Laporan"},  //71
-            {"Delivery of goods","Pengiriman Barang"}, //72
-                {"Warehouse Inventory", "Inventori Gudang"},    //73
-                    {" ⤷ Enter warehouse location: ", " ⤷ Masukkan lokasi Gudang: "}, //74
-                {"Send Package", "Kirim Paket"},    //75
-                    {" ⤷ Enter index: ", " ⤷ Masukkan index: "},  //76
-                {"Deliver Package", "Antar Paket"}, //77
-            {"Logout", "Keluar"}, //78
-
+        {"Welcome to the Expedition System", "Selamat Datang di Sistem Ekspedisi"}, //0
+        {"║ ⤷ Input Username  : ", "║ ⤷ Masukkan Username   : "}, //1
+        {"║ ⤷ Input Password  : ", "║ ⤷ Masukkan Password   : "}, //2
+        {"✅ Login Success. Welcome ","✅ Anda berhasil masuk. Selamat datang "}, //3
+        {"⛔ OOPS! THERE IS A PROBLEM WITH YOUR LOGIN CREDENTIALS. PLEASE VERIFCATION AND TRY AGAIN.","⛔ OOPS! TERDAPAT MASALAH DENGAN KREDENSIAL LOGIN ANDA. SILAKAN VERIFIKASI DAN COBA LAGI."}, //4
+        {"User Management", "Manajemen Pengguna         "}, //5
+        {"Add User", "Tambahkan Pengguna"}, //6
+        {" ⤷ Enter new Username: ", " ⤷ Masukkan nama pengguna baru: "},  //7
+        {" ⤷ Enter new Password: ", " ⤷ Masukkan kata sandi baru: "}, //8
+        {" ⤷ Enter new Role user: ", " ⤷ Masukkan jabatan penggun baru: "},   //9
+        {"✅ New User Successfully Added.","✅ Pengguna baru berhasil ditambahkan."},   //10
+        {"Remove User", "Hapus Pengguna"},  //11
+        {"║ ⤷ Enter Username want to remove: ","║ ⤷ Masukan username yang akan dihapus: "}, //12
+        {"🗑️  User successfully removed.","🗑️  Pengguna telah dihapus."},   //13
+        {"⚠️  USER NOT FOUND. PLEASE TRY AGAIN.","⚠️  PENGGUNA TIDAK DITEMUKAN. SILAKAN COBA LAGI."},   //14
+        {"User Data", "Data Pengguna"},    //15
+        {"User Management", "Manajemen Pengguna"},  //16
+        {"Back to the Main Menu", "Kembali ke Menu Utama"}, //17
+        {"Delivery Transaction", "Transaksi Pengiriman       "}, //18
+        {"Transactions", "Melakukan Transaksi"}, //19
+        {"║ Enter the Sender's Name: ","║ Masukkan Nama Pengirim: "},   //20
+        {"║ Enter contact number: ", "║ Masukkan nomor kontak: "},  //21
+        {"║ Enter receiver's name: ","║ Masukkan Nama Penerima: "},   //22
+        {"║ Enter Address: ", "║ Masukkan Alamat: "},   //23
+        {"║ Enter Description: ", "║ Masukkan Deskripsi Barang: "},  //24
+        {"║ Input Length: ", "║ Masukkan Panjang: "}, //25
+        {"║ Input Width: ", "║ Masukkan Lebar: "}, //26
+        {"║ Input Height: ", "║ Masukkan Tinggi: "},  //27
+        {"⚠️ RUTE IS NOT FOUND. PLEASE TRY AGAIN", "⚠️ RUTE TIDAK DITEMUKAN. SILAKAN COBA LAGI."},  //28
+        {"day", "hari"},    //29
+        {"Payment Method", "Metode Pembayaran"},   //30
+        {" ⤷ Choose Payment methode: ", " ⤷ Pilih Metode Pembayaran: "},  //31
+        {" ⤷ Choose Available Bank: ", " ⤷ Pilih Bank yang tersedia: "}, //32
+        {"Payment successfully used ","Pembayaran berhasil menggunakan "},   //33
+        {" ⤷ Please make payment of the amound Rp."," ⤷ Silahkan lakukan Pembayaran sejumlah Rp."},   //34
+            {" before receiving goods. The Fee will be charged to the receiver!!!"," sebelum menerima barang. Biaya akan dibebankan kepada penerima!!!"},   //35
+        {" ⤷ Shipping cost amount to: "," ⤷ Biaya Pengiriman sebesar: "}, //36
+            {" ⤷ Pay: Rp.", " ⤷ Bayar: Rp."},     //37
+            {" ⤷ Return: Rp", " ⤷ Kembalian: Rp"},    //38
+        {"Sender", "Pegiriman"},    //39
+        {"Receiver", "Penerima"},   //40
+        {"Date", "Tanggal"},        //41
+        {"Cost", "Biaya"},      //42
+        {"Edit Transaction", "Edit Transaksi"}, //43
+        {"║ Input receipt number: ", "║ Masukkan nomor resi: "},    //44
+        {"Data is not found", "Data tidak ditemukan"},  //45
+        {"Remove Transaction", "Hapus Transaksi"},  //46
+        {"Data with this receipt number has been removed","Data dengan nomor resi yang sesuai sudah dihapus"},  //47
+        {"User Data", "Data Pengguna"}, //48
+        {"Route Management", "Manajemen Rute"}, //49 
+        {"Add New Route", "Tambah Rute Baru"},   //50
+        {"Rute has been available", "Rute sudah tersedia"}, //51
+        {" ⤷ Enter the distance between ", " ⤷ Masukkan jarak antara "},  //52
+        {"Remove Route", "Hapus Rute"},  //53
+        {"Displays Location's Data", "Menampilkan Data Rute Pengiriman"},   //54
+        {"Service Management", "Manajemen Layanan"}, //55
+        {"Add Service Types", "Tambahkan Jenis Layanan"},   //56
+        {" ⤷ Enter New Service Name: ", " ⤷ Masukkan Nama Layanan: "},    //57
+        {" ⤷ Input new Cost: Rp.", " ⤷ Masukkan Tarif: Rp."},   //58
+        {" ⤷ Minimum delivery time: "," ⤷ Masukkan Waktu Pengiriman Minimum: "},  //59
+        {" ⤷ Maximum delivery time: "," ⤷ Masukkan Waktu Pengiriman Maximum: "},  //60
+        {"Edit Service", "Edit Layanan"},    //61
+        {"║ Service list available: ","║ Daftar Layanan yang Tersedia: "},  //62
+        {"⤷ Enter service number want to change: " ,"⤷ Masukkan nomor layanan yang ingin diubah: "},    //63
+        {"Remove Service", "Menghapus Layanan"},    //64
+        {"Displays Services' Data", "Menampilkan Layanan Data"},    //65
+        {"Service", "Cost"},    //66
+        {"Change Language", "Ganti Bahasa"},    //67
+        {"Basic Cost Management", "Manajemen Tarif Dasar"}, //68
+        {"Service Cost Management per Kg","Tarif dasar per Kg"},   //69
+        {"Service Cost Management per Km","Tarif dasar per Km"},   //70
+        {"Report", "Laporan"},  //71
+        {"Delivery of goods","Pengiriman Barang"}, //72
+        {"Warehouse Inventory", "Inventori Gudang"},    //73
+        {" ⤷ Enter warehouse location: ", " ⤷ Masukkan lokasi Gudang: "}, //74
+        {"Send Package", "Kirim Paket"},    //75
+        {" ⤷ Enter index: ", " ⤷ Masukkan index: "},  //76
+        {"Deliver Package", "Antar Paket"}, //77
+        {"Logout", "Keluar"}, //78
         {"You have successfully exited. See You! 👋","Anda telah berhasil keluar. Sampai jumpa lain waktu! 👋"}, //79
         {" ⤷ Enter Options: ", " ⤷ Masukkan Pilihan: "},  //80
         {"Click [  ⏎ Enter] to Continue", "Tekan [  ⏎ Enter] untuk melanjutkan"}, //81
-
-        // Data Tambahan
         {"║ Input Weight: ", "║ Masukkan berat barang: "}, //82
         {"Transaction History", "Histori Transaksi"}, //83
-
         {"Date Range", "Rentang Tanggal"}, //84
         {"Day", "Hari"}, //85
         {"Month", "Bulan"}, //86
         {"Year", "Tahun"}, //87
         {"Tracking Number", "Nomor Resi"}, //88
-
         {"Tracking ID", "No Resi"}, //89
         {"Date", "Tanggal"}, //90
         {"Sender", "Pengirim"}, //91
@@ -132,33 +122,26 @@ public class Main {
         {"Cashier", "Kasir"}, //96
         {"Recipient", "Penerima"}, //97
         {"Address", "Alamat"}, //98
-
         {"Route Data", "Data Rute"}, //99
         {"Location", "Lokasi"}, //100
         {"Distance (Km)", "Jarak (Km)"}, //101
-
         {"Service Data", "Data Layanan"}, //102
         {"Service", "Layanan"}, //103
         {"Cost (Rp)", "Biaya (Rp)"}, //104
-
         {"Username", "Nama Pengguna"}, //105
         {"Password", "Kata Sandi"}, //106
         {"Role", "Peran"}, //107
-
         {"║ ⤷ Input cost per Kg: ", "║ ⤷ Masukkan tarif dasar per Kg: "}, //108
         {"║ ⤷ Input cost per Km: ", "║ ⤷ Masukkan tarif dasar per Km: "}, //109
-
         {" ⤷ Select the index of services you want to delete: ", "⤷ Pilih index layanan yang ingin dihapus: "}, //110
         {"⚠️ Inputs are not numbers. Please enter a valid number", "⚠️ Inputan bukan angka. Silakan masukkan nomor yang valid"}, //111
         {" has been deleted!", " Telah Dihapus!"}, //112
         {"Invalid service number.", "Nomor layanan tidak valid."}, //113
-
         {"⚠️ THE INPUT MUST BE AN INTEGER. PLEASE TRY AGAIN.","⚠️ INPUT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI."},//114
         {"⚠️ WEIGHT MUST BE AN INTEGER. PLEASE TRY AGAIN.","⚠️ BERAT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI."},//115
         {"⚠️ THE LENGTH MUST BE GREATER THAN 0. PLEASE TRY AGAIN.","⚠️ PANJANG HARUS LEBIH BESAR DARI 0 . SILAHKAN COBA LAGI."},//116
         {"⚠️ THE WIDTH MUST BE GREATER THAN 0. PLEASE TRY AGAIN.","⚠️ LEBAR HARUS LEBIH BESAR DARI 0 . SILAHKAN COBA LAGI."},//117
         {"⚠️ HEIGHT MUST BE GREATER THAN 0. PLEASE TRY AGAIN.","⚠️ TINGGI HARUS LEBIH BESAR DARI 0 . SILAHKAN COBA LAGI."},//118
-
         {"Edit Route", "Edit Rute"}, //119
         {"║ The input entered is invalid. Please enter the receipt number again!.","║ Input yang dimasukkan tidak valid. Silakan masukkan nomor resi kembali!."},//120
         {"The route already exists!","Rute tersebut sudah ada!"},//121
