@@ -2584,24 +2584,29 @@ public class Main {
     }
 
     private static void viewReport() {
+        String namaBulan;
+        int tahun;
         Locale locale;
-        
-        if (inputselectedLanguage == 1) {
+        if (inputselectedLanguage == 0) {
             locale = Locale.ENGLISH;
+            System.out.print("Enter Years (YYYY): ");
+            tahun = input.nextInt();
+            input.nextLine();
             System.out.print("Enter month name (e.g., January): ");
-        } else if (inputselectedLanguage == 2) {
-            locale = new Locale("id");
-            System.out.print("Masukkan nama bulan (e.g., Januari): ");
+            namaBulan = input.nextLine();
         } else {
-            System.out.println("Pilihan bahasa tidak valid!");
-            return;
+            locale = new Locale("id");
+            System.out.print("Masukkan Tahun (TTTT): ");
+            tahun = input.nextInt();
+            System.out.print("Masukkan nama bulan (e.g., Januari): ");
+            input.nextLine();
+            namaBulan = input.nextLine();
         }
-
-        String namaBulan = input.nextLine();
+        
         Calendar calendar = Calendar.getInstance(locale);
+        calendar.set(Calendar.YEAR, tahun); // Set the year in the calendar
 
         int nomorBulan = -1;    
-
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("MMMM", locale);
             calendar.setTime(sdf.parse(namaBulan));
@@ -2610,23 +2615,23 @@ public class Main {
             System.out.println("Format bulan tidak valid!");
             return;
         }
-
         Calendar cal = Calendar.getInstance();
-        int tahunSekarang = cal.get(Calendar.YEAR);
-        String tanggalAwal = String.format("01-%02d-%d", nomorBulan+1, tahunSekarang);
-        cal.set(Calendar.MONTH, nomorBulan - 1);
+        
+
+        String tanggalAwal = String.format("01-%02d-%d", nomorBulan+1, tahun);
+        cal.set(Calendar.MONTH, nomorBulan - 1); // Bulan dimulai dari 0
         int hariTerakhir = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-        String tanggalAkhir = String.format("%02d-%02d-%d", hariTerakhir, nomorBulan+1, tahunSekarang);
+        String tanggalAkhir = String.format("%02d-%02d-%d", hariTerakhir, nomorBulan+1, tahun);
 
         try {
             Date startDate = dateFormat.parse(tanggalAwal);
             Date endDate = dateFormat.parse(tanggalAkhir);
 
             String namaBulanInReport = new SimpleDateFormat("MMMM", locale).format(calendar.getTime());
-
+            String namaTahunInReport = new SimpleDateFormat("yyyy", locale).format(calendar.getTime());
             System.out.println(String.format(
                 reportFormat,
-                centerString(15, namaBulanInReport),
+                centerString(15, namaBulan+" "+tahun),
                 centerString(15, Integer.toString(getExpeditionCount(startDate, endDate))),
                 centerString(15, "Rp "+Double.toString(getRevenue(startDate, endDate)))
             ));
