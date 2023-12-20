@@ -1,4 +1,3 @@
-
 import java.util.Scanner;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -218,7 +217,8 @@ public class Main {
         {"Cash", "Tunai"}, //173
         {" ⤷ Do you want to see transaction details? (Y/N): ", " ⤷ Apakah anda ingin melihat detail transaksi? (Y/N): "}, //174
         {"Login", "Masuk"}, //175
-        {"Exit", "Keluar"} //176
+        {"Exit", "Keluar"}, //176
+        {"Contact Number", "Nomor Kontak"}, //177
     };
 
     // Format tanggal
@@ -280,40 +280,40 @@ public class Main {
 
     static String[][] historyTransaksi = {
         //untuk cek history & melakukan pengiriman
-        {"9876538710987", "18-12-2023", "Saka", "08899887766", "Malang", "Regular", "69000.0", "Farhan", "Reika", "Jl. Melati 20 No. 16", "1500 cm³", "Gadget Elektronik High-end", "Waiting for pickup", "Yogyakarta", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"6904715283142", "18-12-2023", "Haikal", "08887654321", "Malang", "Regular", "98800.0", "Farhan", "Vincent", "Jl. Melati 3 No. 9", "3", "Kit Kesehatan Premium", "Waiting for pickup", "Yogyakarta", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"9276354185046", "19-12-2023", "Gabriel", "08811223344", "Malang", "Regular", "33200.0", "Naufal", "Afifah", "Jl. Anggrek 12 No. 8", "7", "Smartwatch Fitness Tracker", "Waiting for pickup", "Yogyakarta", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"1492578034685", "20-12-2023", "Afifah", "08876543210", "Malang", "Regular", "50900.0", "Putra", "Naufal", "Jl. Melati 9 No. 21", "5", "Pakaian Anak-anak Setelan Lengkap", "Waiting for pickup", "Yogyakarta", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"8032468109752", "20-12-2023", "Nanda", "08866778899", "Malang", "Economic", "25700.0", "Farhan", "Abdi", "Jl. Kembang 5 No. 15", "3", "Makanan Ringan Assorted", "Waiting for pickup", "Yogyakarta", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"5283176490254", "26-04-2023", "Esa", "08822334455", "Malang", "Economic", "65400.0", "Farhan", "Luthfi", "Jl. Seroja 3 No. 7", "2", "Buku Ensiklopedia Anak-anak", "Arrived at warehouse", "Bandung", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"3091754682351", "21-05-2022", "Abdi", "08811223344", "Bogor", "Economic", "34800.0", "Naufal", "Julian", "Jl. Mawar 17 No. 5", "9", "Mainan Puzzle Edukatif", "Waiting for pickup", "Bekasi", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"6750912348526", "17-06-2022", "Naufal", "08822334455", "Yogyakarta", "Regular", "66500.0", "Putra", "Gabriel", "Jl. Anggrek 7 No. 12", "8", "Kit Kesehatan Keluarga", "Waiting for pickup", "Malang", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"8013564729835", "30-06-2022", "Farrel", "08855443322", "Jakarta", "Regular", "76800.0", "Farhan", "Chiko", "Jl. Melati 15 No. 10", "4", "Alat Tulis Sekolah Premium", "Waiting for pickup", "Bekasi", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"2674853902164", "14-07-2022", "Atabik", "08855443322", "Bandung", "Economic", "45300.0", "Naufal", "Vincent", "Jl. Kembang 2 No. 19", "1", "Smartphone Android 128GB", "Waiting for pickup", "Bandung", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"4501628397517", "05-08-2023", "Dio", "08876543210", "Surabaya", "Sameday", "29100.0", "Putra", "Saputra", "Jl. Seroja 11 No. 14", "6", "Makanan Kesehatan Organik", "Waiting for pickup", "Pekanbaru", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"7246109385273", "09-09-2023", "Pasha", "08899887766", "Serang", "Regular", "78000.0", "Farhan", "Naufal", "Jl. Anggrek 8 No. 5", "10", "Pakaian Dewasa Setelan Formal", "Waiting for pickup", "Malang", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"3751928643058", "18-10-2023", "Farhan", "08866778899", "Denpasar", "Regular", "55700.0", "Naufal", "Petrus", "Jl. Mawar 5 No. 11", "2", "Mainan Robot Remote Control", "Waiting for pickup", "Malang", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"5038921467584", "02-12-2023", "Chiko", "08811223344", "Malang", "Economic", "87600.0", "Putra", "Saka", "Jl. Kembang 10 No. 17", "7", "Gadget Elektronik Portable", "Waiting for pickup", "Bogor", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"4892307162453", "11-11-2023", "Cindy", "08899887766", "Bekasi", "Sameday", "65400.0", "Naufal", "Petrus", "Jl. Seroja 8 No. 6", "5", "Makanan Ringan Assorted Premium", "Waiting for pickup", "Bekasi", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"1234567890123", "01-01-2023", "Ivan", "08812345678", "Surabaya", "Economic", "45000.0", "Putra", "Abdi", "Jl. Anggrek 14 No. 20", "9", "Buku Ensiklopedia Anak-anak", "Waiting for pickup", "Bogor", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"9876543210987", "07-04-2023", "Luthfi", "08887654321", "Jakarta", "Regular", "60000.0", "Farhan", "Farrel", "Jl. Kembang 1 No. 18", "1", "Gadget Elektronik High-end", "Waiting for pickup", "Malang", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"3456789012345", "14-06-2023", "Adri", "08811223344", "Bandung", "Economic", "35000.0", "Naufal", "Petrus", "Jl. Melati 6 No. 13", "6", "Makanan Ringan Assorted", "Waiting for pickup", "Bogor", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"8765432109876", "21-08-2023", "Alif", "08899887766", "Makassar", "Sameday", "42000.0", "Putra", "Saputra", "Jl. Anggrek 20 No. 3", "4", "Buku Ensiklopedia Anak-anak", "Waiting for pickup", "Bandung", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"6543210987654", "03-10-2023", "Dimas", "08876543210", "Denpasar", "Regular", "58000.0", "Farhan", "Farrel", "Jl. Mawar 13 No. 16", "10", "Mainan Robot Remote Control", "Waiting for pickup", "Bekasi", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"8765432109876", "11-12-2023", "Julian", "08822334455", "Malang", "Sameday", "67000.0", "Naufal", "Naufal", "Jl. Seroja 2 No. 4", "8", "Kit Kesehatan Premium", "Waiting for pickup", "Malang", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"5432109876543", "25-02-2023", "Petrus", "08866778899", "Bogor", "Regular", "73000.0", "Putra", "Saka", "Jl. Kembang 8 No. 1", "3", "Gadget Elektronik Portable", "Waiting for pickup", "Bogor", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"3210987654321", "10-05-2023", "Saputra", "08855443322", "Surabaya", "Economic", "32000.0", "Farhan", "Rio", "Jl. Mawar 14 No. 7", "5", "Makanan Ringan Assorted", "Waiting for pickup", "Bekasi", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"9876543210987", "15-07-2023", "Reika", "08811223344", "Semarang", "Regular", "52000.0", "Naufal", "Chiko", "Jl. Anggrek 11 No. 15", "2", "Alat Tulis Sekolah Set Lengkap", "Waiting for pickup", "Medan", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"3456789012345", "20-09-2023", "Rio", "08887654321", "Yogyakarta", "Sameday", "47000.0", "Putra", "Naufal", "Jl. Seroja 10 No. 2", "9", "Gadget Elektronik High-end", "Waiting for pickup", "Bogor", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"3210987654321", "15-01-2023", "Taufik", "08876543210", "Bekasi", "Economic", "40000.0", "Naufal", "Vincent", "Jl. Kembang 7 No. 19", "10", "Buku Ensiklopedia Anak-anak", "Waiting for pickup", "Surabaya", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"9876543210987", "20-03-2023", "Mera", "08822334455", "Gorontalo", "Sameday", "61000.0", "Putra", "Saputra", "Jl. Seroja 4 No. 11", "4", "Kit Kesehatan Keluarga", "Waiting for pickup", "Bogor", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"3456789012345", "05-05-2023", "Vincent", "08866778899", "Malang", "Regular", "54000.0", "Farhan", "Petrus", "Jl. Anggrek 3 No. 14", "7", "Makanan Ringan Assorted", "Arrived at warehouse", "Medan", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"3210987654321", "10-07-2023", "Vira", "08855443322", "Bengkulu", "Economic", "37000.0", "Naufal", "Haikal", "Jl. Kembang 12 No. 9", "1", "Gadget Elektronik Portable", "Waiting for pickup", "Bogor", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"9876543210987", "28-10-2023", "Innam", "08822334455", "Surabaya", "Sameday", "55000.0", "Putra", "Farrel", "Jl. Melati 9 No. 5", "6", "Buku Ensiklopedia Anak-anak", "Waiting for pickup", "Bekasi", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
+        {"9876538710987", "18-12-2023", "Saka", "08899887766", "Malang", "Regular", "69000.0", "Farhan", "Reika", "Jl. Melati 20 No. 16", "1500 cm³", "Gadget Elektronik High-end", "Waiting for pickup", "Yogyakarta", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"6904715283142", "18-12-2023", "Haikal", "08887654321", "Malang", "Regular", "98800.0", "Farhan", "Vincent", "Jl. Melati 3 No. 9", "3", "Kit Kesehatan Premium", "Waiting for pickup", "Yogyakarta", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"9276354185046", "19-12-2023", "Gabriel", "08811223344", "Malang", "Regular", "33200.0", "Naufal", "Afifah", "Jl. Anggrek 12 No. 8", "7", "Smartwatch Fitness Tracker", "Waiting for pickup", "Yogyakarta", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"1492578034685", "20-12-2023", "Afifah", "08876543210", "Malang", "Regular", "50900.0", "Putra", "Naufal", "Jl. Melati 9 No. 21", "5", "Pakaian Anak-anak Setelan Lengkap", "Waiting for pickup", "Yogyakarta", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"8032468109752", "20-12-2023", "Nanda", "08866778899", "Malang", "Economic", "25700.0", "Farhan", "Abdi", "Jl. Kembang 5 No. 15", "3", "Makanan Ringan Assorted", "Waiting for pickup", "Yogyakarta", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"5283176490254", "26-04-2023", "Esa", "08822334455", "Malang", "Economic", "65400.0", "Farhan", "Luthfi", "Jl. Seroja 3 No. 7", "2", "Buku Ensiklopedia Anak-anak", "Arrived at warehouse", "Bandung", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"3091754682351", "21-05-2022", "Abdi", "08811223344", "Bogor", "Economic", "34800.0", "Naufal", "Julian", "Jl. Mawar 17 No. 5", "9", "Mainan Puzzle Edukatif", "Waiting for pickup", "Bekasi", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"6750912348526", "17-06-2022", "Naufal", "08822334455", "Yogyakarta", "Regular", "66500.0", "Putra", "Gabriel", "Jl. Anggrek 7 No. 12", "8", "Kit Kesehatan Keluarga", "Waiting for pickup", "Malang", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"8013564729835", "30-06-2022", "Farrel", "08855443322", "Jakarta", "Regular", "76800.0", "Farhan", "Chiko", "Jl. Melati 15 No. 10", "4", "Alat Tulis Sekolah Premium", "Waiting for pickup", "Bekasi", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"2674853902164", "14-07-2022", "Atabik", "08855443322", "Bandung", "Economic", "45300.0", "Naufal", "Vincent", "Jl. Kembang 2 No. 19", "1", "Smartphone Android 128GB", "Waiting for pickup", "Bandung", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"4501628397517", "05-08-2023", "Dio", "08876543210", "Surabaya", "Sameday", "29100.0", "Putra", "Saputra", "Jl. Seroja 11 No. 14", "6", "Makanan Kesehatan Organik", "Waiting for pickup", "Pekanbaru", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"7246109385273", "09-09-2023", "Pasha", "08899887766", "Serang", "Regular", "78000.0", "Farhan", "Naufal", "Jl. Anggrek 8 No. 5", "10", "Pakaian Dewasa Setelan Formal", "Waiting for pickup", "Malang", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"3751928643058", "18-10-2023", "Farhan", "08866778899", "Denpasar", "Regular", "55700.0", "Naufal", "Petrus", "Jl. Mawar 5 No. 11", "2", "Mainan Robot Remote Control", "Waiting for pickup", "Malang", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"5038921467584", "02-12-2023", "Chiko", "08811223344", "Malang", "Economic", "87600.0", "Putra", "Saka", "Jl. Kembang 10 No. 17", "7", "Gadget Elektronik Portable", "Waiting for pickup", "Bogor", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"4892307162453", "11-11-2023", "Cindy", "08899887766", "Bekasi", "Sameday", "65400.0", "Naufal", "Petrus", "Jl. Seroja 8 No. 6", "5", "Makanan Ringan Assorted Premium", "Waiting for pickup", "Bekasi", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"1234567890123", "01-01-2023", "Ivan", "08812345678", "Surabaya", "Economic", "45000.0", "Putra", "Abdi", "Jl. Anggrek 14 No. 20", "9", "Buku Ensiklopedia Anak-anak", "Waiting for pickup", "Bogor", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"9876543210987", "07-04-2023", "Luthfi", "08887654321", "Jakarta", "Regular", "60000.0", "Farhan", "Farrel", "Jl. Kembang 1 No. 18", "1", "Gadget Elektronik High-end", "Waiting for pickup", "Malang", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"3456789012345", "14-06-2023", "Adri", "08811223344", "Bandung", "Economic", "35000.0", "Naufal", "Petrus", "Jl. Melati 6 No. 13", "6", "Makanan Ringan Assorted", "Waiting for pickup", "Bogor", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"8765432109876", "21-08-2023", "Alif", "08899887766", "Makassar", "Sameday", "42000.0", "Putra", "Saputra", "Jl. Anggrek 20 No. 3", "4", "Buku Ensiklopedia Anak-anak", "Waiting for pickup", "Bandung", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"6543210987654", "03-10-2023", "Dimas", "08876543210", "Denpasar", "Regular", "58000.0", "Farhan", "Farrel", "Jl. Mawar 13 No. 16", "10", "Mainan Robot Remote Control", "Waiting for pickup", "Bekasi", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"8765432109876", "11-12-2023", "Julian", "08822334455", "Malang", "Sameday", "67000.0", "Naufal", "Naufal", "Jl. Seroja 2 No. 4", "8", "Kit Kesehatan Premium", "Waiting for pickup", "Malang", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"5432109876543", "25-02-2023", "Petrus", "08866778899", "Bogor", "Regular", "73000.0", "Putra", "Saka", "Jl. Kembang 8 No. 1", "3", "Gadget Elektronik Portable", "Waiting for pickup", "Bogor", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"3210987654321", "10-05-2023", "Saputra", "08855443322", "Surabaya", "Economic", "32000.0", "Farhan", "Rio", "Jl. Mawar 14 No. 7", "5", "Makanan Ringan Assorted", "Waiting for pickup", "Bekasi", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"9876543210987", "15-07-2023", "Reika", "08811223344", "Semarang", "Regular", "52000.0", "Naufal", "Chiko", "Jl. Anggrek 11 No. 15", "2", "Alat Tulis Sekolah Set Lengkap", "Waiting for pickup", "Medan", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"3456789012345", "20-09-2023", "Rio", "08887654321", "Yogyakarta", "Sameday", "47000.0", "Putra", "Naufal", "Jl. Seroja 10 No. 2", "9", "Gadget Elektronik High-end", "Waiting for pickup", "Bogor", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"3210987654321", "15-01-2023", "Taufik", "08876543210", "Bekasi", "Economic", "40000.0", "Naufal", "Vincent", "Jl. Kembang 7 No. 19", "10", "Buku Ensiklopedia Anak-anak", "Waiting for pickup", "Surabaya", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"9876543210987", "20-03-2023", "Mera", "08822334455", "Gorontalo", "Sameday", "61000.0", "Putra", "Saputra", "Jl. Seroja 4 No. 11", "4", "Kit Kesehatan Keluarga", "Waiting for pickup", "Bogor", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"3456789012345", "05-05-2023", "Vincent", "08866778899", "Malang", "Regular", "54000.0", "Farhan", "Petrus", "Jl. Anggrek 3 No. 14", "7", "Makanan Ringan Assorted", "Arrived at warehouse", "Medan", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"3210987654321", "10-07-2023", "Vira", "08855443322", "Bengkulu", "Economic", "37000.0", "Naufal", "Haikal", "Jl. Kembang 12 No. 9", "1", "Gadget Elektronik Portable", "Waiting for pickup", "Bogor", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"9876543210987", "28-10-2023", "Innam", "08822334455", "Surabaya", "Sameday", "55000.0", "Putra", "Farrel", "Jl. Melati 9 No. 5", "6", "Buku Ensiklopedia Anak-anak", "Waiting for pickup", "Bekasi", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
 
         //data real, sesuai perhitungan transaksi
-        {"18122023192438", "18-12-2023", "Rangga Dwi Saputra", "08899887766", "Malang", "Economic", "96000.0", "Naufal", "Farhan Mawaluddin", "Jl. Seroja 3 No. 7", "1.0 kg", "Smartwatch Fitness Tracker", "Waiting for pickup", "Yogyakarta", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000"},
-        {"18122023190643", "18-12-2023", "Haikal Muhammad Rafli", "08899887766", "Malang", "Regular", "102000.0", "Farhan", "Ahmad Naufal Waskito Aji", "Jl. Melati 20 No. 16", "3.0 kg", "Gadget Elektronik High-end", "Waiting for pickup", "Yogyakarta", "BNI - 72382322", "Weight", "1500.0", "102000", "0.0", "357", "90500.0", "10000"},
+        {"18122023192438", "18-12-2023", "Rangga Dwi Saputra", "08899887766", "Malang", "Economic", "96000.0", "Naufal", "Farhan Mawaluddin", "Jl. Seroja 3 No. 7", "1.0 kg", "Smartwatch Fitness Tracker", "Waiting for pickup", "Yogyakarta", "Cash", "Weight", "500.0", "100000", "4000.0", "357", "90500.0", "5000", "08855443322"},
+        {"18122023190643", "18-12-2023", "Haikal Muhammad Rafli", "08899887766", "Malang", "Regular", "102000.0", "Farhan", "Ahmad Naufal Waskito Aji", "Jl. Melati 20 No. 16", "3.0 kg", "Gadget Elektronik High-end", "Waiting for pickup", "Yogyakarta", "BNI - 72382322", "Weight", "1500.0", "102000", "0.0", "357", "90500.0", "10000", "08855443322"},
     };
 
     static String[][] shipmentDetails = {
@@ -368,16 +368,19 @@ public class Main {
         "│  "+padString(23, getLanguageModuleText(41))+"│ %-21s│   "+padString(23, getLanguageModuleText(153))+"│ %-44s│ │\n" +
         "│                         ╰──────────────────────╯                          ╰─────────────────────────────────────────────╯ │\n" +
         "│                         ╭──────────────────────╮                          ╭─────────────────────────────────────────────╮ │\n" +
+        "│  "+padString(23, getLanguageModuleText(96))+"│ %-21s│   "+padString(23, getLanguageModuleText(177))+"│ %-44s│ │\n" +
+        "│                         ╰──────────────────────╯                          ╰─────────────────────────────────────────────╯ │\n" +
+        "│                         ╭──────────────────────╮                          ╭─────────────────────────────────────────────╮ │\n" +
         "│  "+padString(23, getLanguageModuleText(89))+"│ %-21s│   "+padString(23, getLanguageModuleText(40))+"│ %-44s│ │\n" +
         "│                         ╰──────────────────────╯                          ╰─────────────────────────────────────────────╯ │\n" +
         "│                         ╭──────────────────────╮                          ╭─────────────────────────────────────────────╮ │\n" +
-        "│  "+padString(23, getLanguageModuleText(30))+"│ %-21s│   "+padString(23, getLanguageModuleText(96))+"│ %-44s│ │\n" +
+        "│  "+padString(23, getLanguageModuleText(30))+"│ %-21s│   "+padString(23, getLanguageModuleText(177))+"│ %-44s│ │\n" +
         "│                         ╰──────────────────────╯                          ╰─────────────────────────────────────────────╯ │\n" +
-        "│  ╭────────────────┬───╮ ╭───────────────────────────────────────────────╮ ╭─────────────────────────────────────────────╮ │\n" +
-        "│  │"+centerString(16, getLanguageModuleText(103))+"│ ▼ │ │"+centerString(47, getLanguageModuleText(93))+"│ │"+centerString(45, getLanguageModuleText(94))+"│ │\n" +
-        "│  ├────────────────┴───┤ ├───────────────────────────────────────────────┤ ├─────────────────────────────────────────────┤ │\n" +
-        "│  │ %-19s│ │%s│ │%s│ │\n" +
-        "│  ╰────────────────────╯ ╰───────────────────────────────────────────────╯ ╰─────────────────────────────────────────────╯ │\n" +
+        "│  ╭───────────────────────────────────────────────────╮              ╭───────────────────────────────────────────────────╮ │\n" +
+        "│  │"+centerString(51, getLanguageModuleText(93))+"│              │"+centerString(51, getLanguageModuleText(94))+"│ │\n" +
+        "│  ├───────────────────────────────────────────────────┤              ├───────────────────────────────────────────────────┤ │\n" +
+        "│  │%s│              │%s│ │\n" +
+        "│  ╰───────────────────────────────────────────────────╯              ╰───────────────────────────────────────────────────╯ │\n" +
         "│                                                                                                                           │\n" +
         "│  ╭──────────────────────────────────────────────────────────────┬───────────────────────────────────────────┬───────────╮ │\n" +
         "│  │"+centerString(62, getLanguageModuleText(154))+"│                                           │           │ │\n" +
@@ -1842,14 +1845,14 @@ public class Main {
         System.out.print (languageModule[20][selectedLanguage]);
         String namaPengirim = input.nextLine();
 
-        String nomorKontak;
+        String nomorKontakPengirim;
         do {
             if (!validInput) {
                 System.out.print(languageModule[21][selectedLanguage]); // "║ Masukkan Nomor Kontak: "
             }
-            nomorKontak = input.nextLine();
+            nomorKontakPengirim = input.nextLine();
             
-            if (nomorKontak.matches("\\d+")) {
+            if (nomorKontakPengirim.matches("\\d+")) {
                 validInput = true;
             } else {
                 System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════");
@@ -1865,6 +1868,28 @@ public class Main {
         
         System.out.print (languageModule[22][selectedLanguage]);
         String namaPenerima = input.nextLine();
+
+        String nomorKontakPenerima;
+        validInput = false;
+        do {
+            if (!validInput) {
+                System.out.print(languageModule[21][selectedLanguage]); // "║ Masukkan Nomor Kontak: "
+            }
+            nomorKontakPenerima = input.nextLine();
+            
+            if (nomorKontakPenerima.matches("\\d+")) {
+                validInput = true;
+            } else {
+                System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════");
+                System.out.println("║                                                                                                  ║");
+                System.out.println("║" + centerString(99, languageModule[114][selectedLanguage] + "║")); // "⚠️ INPUT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI."
+                System.out.println("║                                                                                                  ║");
+                System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                System.out.print(languageModule[81][selectedLanguage]); // "Tekan [  ⏎ Enter] untuk melanjutkan"
+                input.nextLine();
+                System.out.print("\033[7A\033[0J");
+            }
+        } while (!validInput);
 
         System.out.print (languageModule[23][selectedLanguage]);
         String alamatPenerima = input.nextLine();
@@ -2135,13 +2160,14 @@ public class Main {
                     receiptFormat,
                     tanggalHariIni,
                     namaPengirim,
+                    loggedInUsername,
+                    nomorKontakPengirim,
                     nomorResi, 
                     namaPenerima,
                     paymentMethod,
-                    loggedInUsername,
-                    arrayLayanan[pilihanLayanan-1][0],
-                    centerString(47, origin), 
-                    centerString(45, destination),
+                    nomorKontakPenerima,
+                    centerString(51, origin), 
+                    centerString(51, destination),
                     deskripsiBarang,
                     selectedKgVol,
                     KgVol,
@@ -2166,13 +2192,14 @@ public class Main {
                     receiptFormat,
                     tanggalHariIni,
                     namaPengirim,
+                    loggedInUsername,
+                    nomorKontakPengirim,
                     nomorResi, 
                     namaPenerima,
                     paymentMethod,
-                    loggedInUsername,
-                    arrayLayanan[pilihanLayanan-1][0],
-                    centerString(47, origin), 
-                    centerString(45, destination),
+                    nomorKontakPenerima,
+                    centerString(51, origin), 
+                    centerString(51, destination),
                     deskripsiBarang,
                     selectedKgVol,
                     KgVol,
@@ -2211,13 +2238,14 @@ public class Main {
                         receiptFormat,
                         tanggalHariIni,
                         namaPengirim,
+                        loggedInUsername,
+                        nomorKontakPengirim,
                         nomorResi, 
                         namaPenerima,
                         paymentMethod,
-                        loggedInUsername,
-                        arrayLayanan[pilihanLayanan-1][0],
-                        centerString(47, origin), 
-                        centerString(45, destination),
+                        nomorKontakPenerima,
+                        centerString(51, origin), 
+                        centerString(51, destination),
                         deskripsiBarang,
                         selectedKgVol,
                         KgVol,
@@ -2240,7 +2268,7 @@ public class Main {
             nomorResi,
             tanggalHariIni,
             namaPengirim,
-            String.valueOf(nomorKontak),
+            String.valueOf(nomorKontakPengirim),
             destination,
             arrayLayanan[pilihanLayanan-1][0],
             Double.toString(biayaAkhir),
@@ -2258,7 +2286,8 @@ public class Main {
             String.valueOf(kembalian),
             String.valueOf(jarak),
             String.valueOf(biayaJarak),
-            arrayLayanan[pilihanLayanan-1][1]
+            arrayLayanan[pilihanLayanan-1][1],
+            nomorKontakPenerima
         };
 
         clearTerminal();
@@ -2271,7 +2300,7 @@ public class Main {
             namaPenerima, 
             namaPengirim,
             alamatPenerima, 
-            nomorKontak,
+            nomorKontakPengirim,
             destination,
             origin,
             deskripsiBarang
@@ -3168,12 +3197,16 @@ public class Main {
                 historyTransaksi[index][1],
                 historyTransaksi[index][2],
                 historyTransaksi[index][0],
+                historyTransaksi[index][3],
+                historyTransaksi[index][7],
                 historyTransaksi[index][8],
                 historyTransaksi[index][14], //paymentmethod
-                historyTransaksi[index][7],
-                historyTransaksi[index][5],
-                centerString(47, historyTransaksi[index][13]), 
-                centerString(45, historyTransaksi[index][4]),
+                historyTransaksi[index][22],
+                
+                
+
+                centerString(51, historyTransaksi[index][13]), 
+                centerString(51, historyTransaksi[index][4]),
                 historyTransaksi[index][11],
                 historyTransaksi[index][15],
                 historyTransaksi[index][10],
