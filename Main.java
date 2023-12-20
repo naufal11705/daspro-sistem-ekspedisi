@@ -13,15 +13,6 @@ public class Main {
      * @param args
      */
 
-
-    static Scanner input = new Scanner(System.in);
-    // Akun default
-    static String[][] userData = {
-        {"Naufal", "2341720080","ADMIN"},
-        {"Putra", "2341720248","KASIR"},
-        {"Farhan", "2341720258","KURIR"},
-    };
-
     static String[][] languageModule = {
         {"Welcome to the Expedition System", "Selamat Datang di Sistem Ekspedisi"}, //0
         {"║ ⤷ Input Username  : ", "║ ⤷ Masukkan Username   : "}, //1
@@ -188,7 +179,6 @@ public class Main {
         {"Handling fee", "Ongkir"}, //162
         {"Do you want to change the delivery status of the goods? (Y/N): ", "Apakah anda ingin mengubah status pengiriman barang? (Y/N): "}, //163
         {"Expedition History", "Riwayat Ekspedisi"}, //164
-
         {"Monthly Delivery Report: ", "Monthly Delivery Report: "}, //165
         {"Total Delivery Per Asset","Total Pengiriman Per Asset "}, //166
         {"Total Delivery Per kg","Total Pengiriman Per kg"}, //167
@@ -203,12 +193,6 @@ public class Main {
         {"Exit", "Keluar"}, //176
         {"Contact Number", "Nomor Kontak"}, //177
     };
-
-    // Format tanggal
-    static SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-    static Date date = new Date();
-    static String tanggalHariIni = dateFormat.format(date);
-    static String inputanTanggalAwal = "00-00-000", inputanTanggalAkhir = "00-00-0000";
 
     static String[][] arrayLayanan = {
         {"Economic","5000", "5", "10"},
@@ -230,36 +214,12 @@ public class Main {
         {"Pasuruan", "Malang", "53"},
     };
 
-    static Date startDate;
-    static Date endDate;
-
-    static String RESET = "\u001B[0m";
-    static String CLEAR = "\033[H\033[2J";
-    static String GREEN = "\u001B[32m";
-    static String RED = "\u001B[31m";
-    static String YELLOW = "\u001B[33m";
-    static String BOLD = "\u001B[1m";
-
-    static int selectedLanguage = 0;
-
-    static boolean session = true;
-    static boolean isAdmin = false;
-    static boolean masuk = false;
-    static boolean isKurir = false;
-
-    static String loggedInUsername = "";
-
-    static double tarifPerKg = 2500;
-    static double tarifPerKm = 500;
-
-    static int inputselectedLanguage;
-
-    static boolean validInput = false;
-    static int menuUtama, subMenu, editMenu;
-    static boolean login = false;
-    static String bankName;
-    static String paymentMethod;
-    
+    // Akun default
+    static String[][] userData = {
+        {"Naufal", "2341720080","ADMIN"},
+        {"Putra", "2341720248","KASIR"},
+        {"Farhan", "2341720258","KURIR"},
+    };
 
     static String[][] historyTransaksi = {
         //untuk cek history & melakukan pengiriman
@@ -302,6 +262,41 @@ public class Main {
     static String[][] shipmentDetails = {
         {"", "", ""},
     };
+
+    static Scanner input = new Scanner(System.in);    
+    // Format tanggal
+    static SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    static Date date = new Date();
+    static Date startDate;
+    static Date endDate;
+    static String tanggalHariIni = dateFormat.format(date);
+    static String inputanTanggalAwal = "00-00-000", inputanTanggalAkhir = "00-00-0000";
+
+    static String RESET = "\u001B[0m";
+    static String CLEAR = "\033[H\033[2J";
+    static String GREEN = "\u001B[32m";
+    static String RED = "\u001B[31m";
+    static String YELLOW = "\u001B[33m";
+    static String BOLD = "\u001B[1m";
+
+    static int selectedLanguage = 0;
+
+    static boolean session = true;
+    static boolean isAdmin = false;
+    static boolean isKurir = false;
+
+    static String loggedInUsername = "";
+
+    static double tarifPerKg = 2500;
+    static double tarifPerKm = 500;
+
+    static int inputselectedLanguage;
+
+    static boolean validInput = false;
+    static int menuUtama, subMenu, editMenu;
+    static boolean login = false;
+    static String bankName;
+    static String paymentMethod;
 
     static String reportFormat = 
         "╔══════════════════════════════════════════════════════════════════════════════════════════════════╗\n" +
@@ -372,7 +367,7 @@ public class Main {
         "│  ├──────────────────────────────────────────────────────────────┼───────────────────────────────────────────┼───────────┤ │\n" +
         "│  │  %-60s│%42s │%10s │ │\n" +
         "│  ├──────────────────────────────────────────────────────────────┼───────────────────────────────────────────┼───────────┤ │\n" +
-        "│  │  "+padString(60, getLanguageModuleText(156))+"│%42s │%10s │ │\n" +
+        "│  │  "+padString(60, getLanguageModuleText(156))+"│%39s km │%10s │ │\n" +
         "│  ├──────────────────────────────────────────────────────────────┼───────────────────────────────────────────┼───────────┤ │\n" +
         "│  │  "+padString(60, getLanguageModuleText(103))+"│%42s │%10s │ │\n" +
         "│  ╰──────────────────────────────────────────────────────────────┴───────────────────────────────────────────┴───────────╯ │\n" +
@@ -2155,7 +2150,7 @@ public class Main {
                     selectedKgVol,
                     KgVol,
                     hargaTertinggi,
-                    jarak+" Km",
+                    jarak,
                     biayaJarak,
                     arrayLayanan[pilihanLayanan-1][0],
                     arrayLayanan[pilihanLayanan-1][1],
@@ -2187,7 +2182,7 @@ public class Main {
                     selectedKgVol,
                     KgVol,
                     hargaTertinggi,
-                    jarak+" Km",
+                    jarak,
                     biayaJarak,
                     arrayLayanan[pilihanLayanan-1][0],
                     arrayLayanan[pilihanLayanan-1][1],
@@ -2233,7 +2228,7 @@ public class Main {
                         selectedKgVol,
                         KgVol,
                         hargaTertinggi,
-                        jarak+" Km",
+                        jarak,
                         biayaJarak,
                         arrayLayanan[pilihanLayanan-1][0],
                         arrayLayanan[pilihanLayanan-1][1],
@@ -2573,6 +2568,7 @@ public class Main {
 
     private static void viewReport() {
         Locale locale;
+        
         if (inputselectedLanguage == 1) {
             locale = Locale.ENGLISH;
             System.out.print("Enter month name (e.g., January): ");
@@ -2583,10 +2579,12 @@ public class Main {
             System.out.println("Pilihan bahasa tidak valid!");
             return;
         }
+
         String namaBulan = input.nextLine();
         Calendar calendar = Calendar.getInstance(locale);
 
         int nomorBulan = -1;    
+
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("MMMM", locale);
             calendar.setTime(sdf.parse(namaBulan));
@@ -2595,11 +2593,11 @@ public class Main {
             System.out.println("Format bulan tidak valid!");
             return;
         }
+
         Calendar cal = Calendar.getInstance();
         int tahunSekarang = cal.get(Calendar.YEAR);
-
         String tanggalAwal = String.format("01-%02d-%d", nomorBulan+1, tahunSekarang);
-        cal.set(Calendar.MONTH, nomorBulan - 1); // Bulan dimulai dari 0
+        cal.set(Calendar.MONTH, nomorBulan - 1);
         int hariTerakhir = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
         String tanggalAkhir = String.format("%02d-%02d-%d", hariTerakhir, nomorBulan+1, tahunSekarang);
 
@@ -2670,14 +2668,14 @@ public class Main {
                     historyTransaksi[i][4].equalsIgnoreCase(location) && historyTransaksi[i][12].equalsIgnoreCase("Arrived at warehouse")) {
                         System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
                             i,
-                            historyTransaksi[i][0], // Nomor Resi
-                            historyTransaksi[i][1], // Tanggal
-                            historyTransaksi[i][2], // Nama Pengirim
-                            historyTransaksi[i][5],  //Jenis Layanan
+                            historyTransaksi[i][0],
+                            historyTransaksi[i][1],
+                            historyTransaksi[i][2],
+                            historyTransaksi[i][5],
                             historyTransaksi[i][13],
-                            historyTransaksi[i][4], // Tujuan
-                            historyTransaksi[i][8], // Nama Penerima
-                            historyTransaksi[i][9], // Alamat
+                            historyTransaksi[i][4],
+                            historyTransaksi[i][8],
+                            historyTransaksi[i][9],
                             historyTransaksi[i][12]
                         ));
                 }
@@ -2727,14 +2725,14 @@ public class Main {
                         if(historyTransaksi[i][0].equals(shipmentDetails[k][0])) {
                             System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
                                 i,
-                                historyTransaksi[i][0], // Nomor Resi
-                                historyTransaksi[i][1], // Tanggal
-                                historyTransaksi[i][2], // Nama Pengirim
-                                historyTransaksi[i][5],  //Jenis Layanan
+                                historyTransaksi[i][0],
+                                historyTransaksi[i][1],
+                                historyTransaksi[i][2], 
+                                historyTransaksi[i][5],
                                 historyTransaksi[i][13],
-                                historyTransaksi[i][4], // Tujuan
-                                historyTransaksi[i][8], // Nama Penerima
-                                historyTransaksi[i][9], // Alamat
+                                historyTransaksi[i][4],
+                                historyTransaksi[i][8],
+                                historyTransaksi[i][9], 
                                 historyTransaksi[i][12]
                             ));
                         }
@@ -2801,14 +2799,14 @@ public class Main {
                     if (historyTransaksi[i][13].equalsIgnoreCase(location) && historyTransaksi[i][12].equalsIgnoreCase("Waiting for pickup")) {
                         System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
                             i,
-                            historyTransaksi[i][0], // Nomor Resi
-                            historyTransaksi[i][1], // Tanggal
-                            historyTransaksi[i][2], // Nama Pengirim
-                            historyTransaksi[i][5],  //Jenis Layanan
+                            historyTransaksi[i][0],
+                            historyTransaksi[i][1],
+                            historyTransaksi[i][2],
+                            historyTransaksi[i][5],
                             historyTransaksi[i][13],
-                            historyTransaksi[i][4], // Tujuan
-                            historyTransaksi[i][8], // Nama Penerima
-                            historyTransaksi[i][9], // Alamat
+                            historyTransaksi[i][4],
+                            historyTransaksi[i][8], 
+                            historyTransaksi[i][9], 
                             historyTransaksi[i][12]
                         ));
                         searchIndex++;
@@ -2832,14 +2830,14 @@ public class Main {
                             adaKesamaanData = true;
                             System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
                                 i,
-                                historyTransaksi[i][0], // Nomor Resi
-                                historyTransaksi[i][1], // Tanggal
-                                historyTransaksi[i][2], // Nama Pengirim
-                                historyTransaksi[i][5],  //Jenis Layanan
+                                historyTransaksi[i][0],
+                                historyTransaksi[i][1],
+                                historyTransaksi[i][2],
+                                historyTransaksi[i][5], 
                                 historyTransaksi[i][13],
-                                historyTransaksi[i][4], // Tujuan
-                                historyTransaksi[i][8], // Nama Penerima
-                                historyTransaksi[i][9], // Alamat
+                                historyTransaksi[i][4],
+                                historyTransaksi[i][8],
+                                historyTransaksi[i][9], 
                                 historyTransaksi[i][12]
                             ));
                         }
@@ -2869,14 +2867,14 @@ public class Main {
 
                                 System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
                                     i,
-                                    historyTransaksi[i][0], // Nomor Resi
-                                    historyTransaksi[i][1], // Tanggal
-                                    historyTransaksi[i][2], // Nama Pengirim
-                                    historyTransaksi[i][5],  //Jenis Layanan
+                                    historyTransaksi[i][0],
+                                    historyTransaksi[i][1],
+                                    historyTransaksi[i][2],
+                                    historyTransaksi[i][5],
                                     historyTransaksi[i][13],
-                                    historyTransaksi[i][4], // Tujuan
-                                    historyTransaksi[i][8], // Nama Penerima
-                                    historyTransaksi[i][9], // Alamat
+                                    historyTransaksi[i][4],
+                                    historyTransaksi[i][8],
+                                    historyTransaksi[i][9],
                                     historyTransaksi[i][12]
                                 ));
 
@@ -2895,14 +2893,14 @@ public class Main {
                             if (historyTransaksi[i][13].equalsIgnoreCase(location) && historyTransaksi[i][12].equalsIgnoreCase("Waiting for pickup")) {
                                 System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
                                     i,
-                                    historyTransaksi[i][0], // Nomor Resi
-                                    historyTransaksi[i][1], // Tanggal
-                                    historyTransaksi[i][2], // Nama Pengirim
-                                    historyTransaksi[i][5],  //Jenis Layanan
+                                    historyTransaksi[i][0],
+                                    historyTransaksi[i][1], 
+                                    historyTransaksi[i][2],
+                                    historyTransaksi[i][5], 
                                     historyTransaksi[i][13],
-                                    historyTransaksi[i][4], // Tujuan
-                                    historyTransaksi[i][8], // Nama Penerima
-                                    historyTransaksi[i][9], // Alamat
+                                    historyTransaksi[i][4],
+                                    historyTransaksi[i][8],
+                                    historyTransaksi[i][9],
                                     historyTransaksi[i][12]
                                 ));
                                 searchIndex++;
@@ -2923,14 +2921,14 @@ public class Main {
                                     if(historyTransaksi[i][0].equals(shipmentDetails[k][0])) {
                                         System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
                                             i,
-                                            historyTransaksi[i][0], // Nomor Resi
-                                            historyTransaksi[i][1], // Tanggal
-                                            historyTransaksi[i][2], // Nama Pengirim
-                                            historyTransaksi[i][5],  //Jenis Layanan
+                                            historyTransaksi[i][0],
+                                            historyTransaksi[i][1],
+                                            historyTransaksi[i][2], 
+                                            historyTransaksi[i][5],  
                                             historyTransaksi[i][13],
-                                            historyTransaksi[i][4], // Tujuan
-                                            historyTransaksi[i][8], // Nama Penerima
-                                            historyTransaksi[i][9], // Alamat
+                                            historyTransaksi[i][4],
+                                            historyTransaksi[i][8], 
+                                            historyTransaksi[i][9],
                                             historyTransaksi[i][12]
                                         ));
                                     }
@@ -3104,14 +3102,14 @@ public class Main {
                 if (historyTransaksi[i][4].equalsIgnoreCase(location) && historyTransaksi[i][12].equalsIgnoreCase("Arrived at warehouse")) {
                     System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
                         i,
-                        historyTransaksi[i][0], // Nomor Resi
-                        historyTransaksi[i][1], // Tanggal
-                        historyTransaksi[i][2], // Nama Pengirim
-                        historyTransaksi[i][5],  //Jenis Layanan
+                        historyTransaksi[i][0],
+                        historyTransaksi[i][1],
+                        historyTransaksi[i][2],
+                        historyTransaksi[i][5],
                         historyTransaksi[i][13],
-                        historyTransaksi[i][4], // Tujuan
-                        historyTransaksi[i][8], // Nama Penerima
-                        historyTransaksi[i][9], // Alamat
+                        historyTransaksi[i][4],
+                        historyTransaksi[i][8],
+                        historyTransaksi[i][9],
                         historyTransaksi[i][12]
                     ));
                 }
@@ -3151,14 +3149,14 @@ public class Main {
             if (historyTransaksi[i][12].equalsIgnoreCase("Has been received by the recipient")) {
                 System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
                     i,
-                    historyTransaksi[i][0], // Nomor Resi
-                    historyTransaksi[i][1], // Tanggal
-                    historyTransaksi[i][2], // Nama Pengirim
-                    historyTransaksi[i][5],  //Jenis Layanan
+                    historyTransaksi[i][0], 
+                    historyTransaksi[i][1],
+                    historyTransaksi[i][2], 
+                    historyTransaksi[i][5],  
                     historyTransaksi[i][13],
-                    historyTransaksi[i][4], // Tujuan
-                    historyTransaksi[i][8], // Nama Penerima
-                    historyTransaksi[i][9], // Alamat
+                    historyTransaksi[i][4], 
+                    historyTransaksi[i][8],
+                    historyTransaksi[i][9], 
                     historyTransaksi[i][12]
                 ));
             }
@@ -3183,18 +3181,15 @@ public class Main {
                 historyTransaksi[index][3],
                 historyTransaksi[index][7],
                 historyTransaksi[index][8],
-                historyTransaksi[index][14], //paymentmethod
+                historyTransaksi[index][14],
                 historyTransaksi[index][22],
-                
-                
-
                 centerString(51, historyTransaksi[index][13]), 
                 centerString(51, historyTransaksi[index][4]),
                 historyTransaksi[index][11],
                 historyTransaksi[index][15],
                 historyTransaksi[index][10],
                 historyTransaksi[index][16],
-                historyTransaksi[index][19]+" km",
+                historyTransaksi[index][19],
                 historyTransaksi[index][20],
                 historyTransaksi[index][5],
                 historyTransaksi[index][21],
@@ -3225,7 +3220,7 @@ public class Main {
                     historyTransaksi[i][15],
                     historyTransaksi[i][10],
                     historyTransaksi[i][16],
-                    historyTransaksi[i][19]+" km",
+                    historyTransaksi[i][19],
                     historyTransaksi[i][20],
                     historyTransaksi[i][5],
                     historyTransaksi[i][21],
