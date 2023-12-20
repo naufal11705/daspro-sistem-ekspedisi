@@ -3232,9 +3232,9 @@ public class Main {
         }
     }    
 
-    private static void Countdown(int second) {
+    private static void Countdown(int seconds) {
         try {
-            for (int i = second; i > 0; i--) {
+            for (int i = seconds; i > 0; i--) {
                 System.out.println("Detik yang tersisa: "+i);
                 Thread.sleep(1000);
                 System.out.print("\033[1A\033[2K");
@@ -3242,6 +3242,10 @@ public class Main {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void MoveCursor(int row, int column) {
+        System.out.print("\033[" + row + ";" + column + "H");
     }
 
 }
