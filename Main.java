@@ -1386,7 +1386,7 @@ public class Main {
 
         loginValidation(inputUsername, inputPassword);
 
-        if(!masuk){
+        if(!login){
             notificationBox(97, languageModule[4][selectedLanguage]);
             pressEnter();
             Login();
