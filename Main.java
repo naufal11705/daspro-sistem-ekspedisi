@@ -107,9 +107,9 @@ public class Main {
                 {"Send Package", "Kirim Paket"},    //75
                     {" ⤷ Enter index: ", " ⤷ Masukkan index: "},  //76
                 {"Deliver Package", "Antar Paket"}, //77
-            {"Exit", "Keluar"}, //78
+            {"Logout", "Keluar"}, //78
 
-        {"Logout Successs. See You! 👋","Anda telah berhasil keluar. Sampai jumpa lain waktu! 👋"}, //79
+        {"You have successfully exited. See You! 👋","Anda telah berhasil keluar. Sampai jumpa lain waktu! 👋"}, //79
         {" ⤷ Enter Options: ", " ⤷ Masukkan Pilihan: "},  //80
         {"Click [  ⏎ Enter] to Continue", "Tekan [  ⏎ Enter] untuk melanjutkan"}, //81
 
@@ -216,7 +216,9 @@ public class Main {
         {"Unit","Buah"},//171
         {" ⤷ Input Account Number: ", " ⤷ Masukkan Nomor Rekening: "}, //172
         {"Cash", "Tunai"}, //173
-        {" ⤷ Do you want to see transaction details? (Y/N): ", " ⤷ Apakah anda ingin melihat detail transaksi? (Y/N): "} //174
+        {" ⤷ Do you want to see transaction details? (Y/N): ", " ⤷ Apakah anda ingin melihat detail transaksi? (Y/N): "}, //174
+        {"Login", "Masuk"}, //175
+        {"Exit", "Keluar"} //176
     };
 
     // Format tanggal
@@ -257,7 +259,7 @@ public class Main {
 
     static int selectedLanguage = 0;
 
-    static boolean login = false;
+    static boolean session = true;
     static boolean isAdmin = false;
     static boolean masuk = false;
     static boolean isKurir = false;
@@ -398,24 +400,47 @@ public class Main {
         "│  "+padString(25, getLanguageModuleText(159))+"                                                                                     %10s │\n" +
         "╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯";
     public static void main(String[] args) {
-        clearTerminal();
-        ManageLanguage();
-        clearTerminal();
 
-        input.nextLine();
+        while (session) {
 
-        while (!login) {
-
-            login = false;
             exit = false;
             isAdmin = false;
             isKurir = false;
             masuk = false;
 
+            clearTerminal();
+            displayHeader();
+            displayIndonesianMap();
+            viewLoginMenu();
+
+            int pilihan;
+            System.out.print(languageModule[80][selectedLanguage]);
+            pilihan = input.nextInt();
+            input.nextLine();
+
+            switch (pilihan) {
+
+                case 1:
+                    clearTerminal();
+                    Login();
+                    break;
+
+                case 2:
+                    clearTerminal();
+                    ManageLanguage();
+                    continue;
+
+                case 3:
+                    Exit();
+                    continue;
+
+                default:
+                    continue;
+            }
+
+
             while (!masuk) {
-                displayHeader();
-                displayIndonesianMap();
-                Login();
+
             }
 
             notificationBox(97, languageModule[3][selectedLanguage] + loggedInUsername);
@@ -580,7 +605,6 @@ public class Main {
     private static void loginValidation(String username, String password) {
         for (int i = 0; i < userData.length ; i++ ) {
             if (userData[i][0].equals(username) && userData[i][1].equals(password)) {
-                login = true;
                 masuk = true;
                 loggedInUsername = username;
                 
@@ -1071,7 +1095,7 @@ public class Main {
         System.out.println("║             │                                                                      │             ║");
         System.out.println("║             │                     [4]. " + padString(44, languageModule[15][selectedLanguage]) + "│             ║");
         System.out.println("║             │                                                                      │             ║");
-        System.out.println("║             │                     [5]. " + padString(44, languageModule[78][selectedLanguage]) + "│             ║");
+        System.out.println("║             │                     [5]. " + padString(44, languageModule[17][selectedLanguage]) + "│             ║");
         System.out.println("║             │                                                                      │             ║"); 
         System.out.println("║             ╰──────────────────────────────────────────────────────────────────────╯             ║");
         System.out.println("║                                                                                                  ║"); 
@@ -1109,7 +1133,7 @@ public class Main {
         System.out.println("║             │                                                                      │             ║");
         System.out.println("║             │                     [4]. " + padString(44, languageModule[54][selectedLanguage]) + "│             ║");
         System.out.println("║             │                                                                      │             ║");
-        System.out.println("║             │                     [5]. " + padString(44, languageModule[78][selectedLanguage]) + "│             ║");
+        System.out.println("║             │                     [5]. " + padString(44, languageModule[17][selectedLanguage]) + "│             ║");
         System.out.println("║             │                                                                      │             ║"); 
         System.out.println("║             ╰──────────────────────────────────────────────────────────────────────╯             ║");
         System.out.println("║                                                                                                  ║"); 
@@ -1126,7 +1150,26 @@ public class Main {
         System.out.println("║             │                                                                      │             ║");
         System.out.println("║             │          [2]. " + padString(55, languageModule[70][selectedLanguage]) + "│             ║");
         System.out.println("║             │                                                                      │             ║");
-        System.out.println("║             │          [3]. " + padString(55, languageModule[78][selectedLanguage]) + "│             ║");
+        System.out.println("║             │          [3]. " + padString(55, languageModule[17][selectedLanguage]) + "│             ║");
+        System.out.println("║             │                                                                      │             ║");
+        System.out.println("║             │                                                                      │             ║");
+        System.out.println("║             │                                                                      │             ║"); 
+        System.out.println("║             ╰──────────────────────────────────────────────────────────────────────╯             ║");
+        System.out.println("║                                                                                                  ║"); 
+        System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+    }
+
+    private static void viewLoginMenu() {
+        System.out.println("║                                                                                                  ║");
+        System.out.println("║             ╭──────────────────────────────────────────────────────────────────────╮             ║");
+        System.out.println("║             │                                                                      │             ║");
+        System.out.println("║             │                                                                      │             ║");
+        System.out.println("║             │                                                                      │             ║");
+        System.out.println("║             │                       [1]. " + padString(42, languageModule[175][selectedLanguage]) + "│             ║");
+        System.out.println("║             │                                                                      │             ║");
+        System.out.println("║             │                       [2]. " + padString(42, languageModule[67][selectedLanguage]) + "│             ║");
+        System.out.println("║             │                                                                      │             ║");
+        System.out.println("║             │                       [3]. " + padString(42, languageModule[176][selectedLanguage]) + "│             ║");
         System.out.println("║             │                                                                      │             ║");
         System.out.println("║             │                                                                      │             ║");
         System.out.println("║             │                                                                      │             ║"); 
@@ -1147,7 +1190,7 @@ public class Main {
         System.out.println("║             │                                                                      │             ║");
         System.out.println("║             │                     [4]. " + padString(44, languageModule[65][selectedLanguage]) + "│             ║");
         System.out.println("║             │                                                                      │             ║");
-        System.out.println("║             │                     [5]. " + padString(44, languageModule[78][selectedLanguage]) + "│             ║");
+        System.out.println("║             │                     [5]. " + padString(44, languageModule[17][selectedLanguage]) + "│             ║");
         System.out.println("║             │                                                                      │             ║"); 
         System.out.println("║             ╰──────────────────────────────────────────────────────────────────────╯             ║");
         System.out.println("║                                                                                                  ║"); 
@@ -1344,6 +1387,9 @@ public class Main {
     }    
 
     private static void Login() {
+        displayHeader();
+        displayIndonesianMap();
+
         System.out.print(languageModule[1][selectedLanguage]);
         String inputUsername = input.nextLine();
 
@@ -1355,6 +1401,7 @@ public class Main {
         if(!masuk){
             notificationBox(97, languageModule[4][selectedLanguage]);
             pressEnter();
+            Login();
         }
     }
 
@@ -2585,7 +2632,7 @@ public class Main {
         System.out.println("║             │                                                                      │             ║");
         System.out.println("║             │                     [4]. " + padString(44, languageModule[164][selectedLanguage]) + "│             ║");
         System.out.println("║             │                                                                      │             ║");
-        System.out.println("║             │                     [5]. " + padString(44, languageModule[78][selectedLanguage]) + "│             ║");
+        System.out.println("║             │                     [5]. " + padString(44, languageModule[17][selectedLanguage]) + "│             ║");
         System.out.println("║             │                                                                      │             ║"); 
         System.out.println("║             ╰──────────────────────────────────────────────────────────────────────╯             ║");
         System.out.println("║                                                                                                  ║"); 
@@ -2954,14 +3001,17 @@ public class Main {
     }
 
     private static void Logout() {
+        exit=true;
+    }
+
+    private static void Exit() {
         System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════════════╗");
         System.out.println("║                                                                                                  ║");
         System.out.println("║"+centerString(98, languageModule[79][selectedLanguage])+"║"); //"Anda telah berhasil keluar. Sampai jumpa lain waktu! 👋"
         System.out.println("║                                                                                                  ║");
         System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
         pressEnter();
-        exit=true;
-        login=false;
+        session = false;
     }
 
     private static void EditRoute() {
