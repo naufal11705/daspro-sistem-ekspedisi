@@ -42,7 +42,7 @@ public class Main {
         {"║ Input Length: ", "║ Masukkan Panjang: "}, //25
         {"║ Input Width: ", "║ Masukkan Lebar: "}, //26
         {"║ Input Height: ", "║ Masukkan Tinggi: "},  //27
-        {"⚠️ RUTE IS NOT FOUND. PLEASE TRY AGAIN", "⚠️ RUTE TIDAK DITEMUKAN. SILAKAN COBA LAGI."},  //28
+        {"⚠️ ROUTE IS NOT FOUND. PLEASE TRY AGAIN", "⚠️ RUTE TIDAK DITEMUKAN. SILAKAN COBA LAGI."},  //28
         {"day", "hari"},    //29
         {"Payment Method", "Metode Pembayaran"},   //30
         {" ⤷ Choose Payment methode: ", " ⤷ Pilih Metode Pembayaran: "},  //31
@@ -192,6 +192,21 @@ public class Main {
         {"Login", "Masuk"}, //175
         {"Exit", "Keluar"}, //176
         {"Contact Number", "Nomor Kontak"}, //177
+        {"║ Input Origin", "║ Masukkan Asal"}, //178
+        {"║ Input Destination", "║ Masukkan Tujuan"}, //179
+        {                
+                "███████╗ ██████╗ ██████╗ ███╗   ███╗\r\n" + //
+                "██╔════╝██╔═══██╗██╔══██╗████╗ ████║\r\n" + //
+                "█████╗  ██║   ██║██████╔╝██╔████╔██║\r\n" + //
+                "██╔══╝  ██║   ██║██╔══██╗██║╚██╔╝██║\r\n" + //
+                "██║     ╚██████╔╝██║  ██║██║ ╚═╝ ██║\r\n" + //
+                "╚═╝      ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝\r\n",
+                "███████╗ ██████╗ ██████╗ ███╗   ███╗██╗   ██╗██╗     ██╗██████╗ \r\n" + //
+                "██╔════╝██╔═══██╗██╔══██╗████╗ ████║██║   ██║██║     ██║██╔══██╗\r\n" + //
+                "█████╗  ██║   ██║██████╔╝██╔████╔██║██║   ██║██║     ██║██████╔╝\r\n" + //
+                "██╔══╝  ██║   ██║██╔══██╗██║╚██╔╝██║██║   ██║██║     ██║██╔══██╗\r\n" + //
+                "██║     ╚██████╔╝██║  ██║██║ ╚═╝ ██║╚██████╔╝███████╗██║██║  ██║\r\n" + //
+                "╚═╝      ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝ ╚═════╝ ╚══════╝╚═╝╚═╝  ╚═╝"} //180
     };
 
     static String[][] arrayLayanan = {
@@ -1818,6 +1833,8 @@ public class Main {
         double biayaJarak = 0;
         validInput = false;
 
+        System.out.println(languageModule[180][selectedLanguage]);
+
         System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════════════╗");
 
         System.out.print (languageModule[20][selectedLanguage]);
@@ -1833,11 +1850,11 @@ public class Main {
             if (nomorKontakPengirim.matches("\\d+")) {
                 validInput = true;
             } else {
-                System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════");
+                System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
                 System.out.println("║                                                                                                  ║");
-                System.out.println("║" + centerString(99, languageModule[114][selectedLanguage] + "║")); // "⚠️ INPUT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI."
+                System.out.println("║" + centerString(99, languageModule[114][selectedLanguage] )+"║"); // "⚠️ INPUT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI."
                 System.out.println("║                                                                                                  ║");
-                System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
                 System.out.print(languageModule[81][selectedLanguage]); // "Tekan [  ⏎ Enter] untuk melanjutkan"
                 input.nextLine();
                 System.out.print("\033[7A\033[0J");
@@ -1858,11 +1875,11 @@ public class Main {
             if (nomorKontakPenerima.matches("\\d+")) {
                 validInput = true;
             } else {
-                System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════");
+                System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
                 System.out.println("║                                                                                                  ║");
-                System.out.println("║" + centerString(99, languageModule[114][selectedLanguage] + "║")); // "⚠️ INPUT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI."
+                System.out.println("║" + centerString(99, languageModule[114][selectedLanguage] )+"║"); // "⚠️ INPUT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI."
                 System.out.println("║                                                                                                  ║");
-                System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
                 System.out.print(languageModule[81][selectedLanguage]); // "Tekan [  ⏎ Enter] untuk melanjutkan"
                 input.nextLine();
                 System.out.print("\033[7A\033[0J");
@@ -1886,7 +1903,7 @@ public class Main {
                 input.nextLine();
                 System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
                 System.out.println("║                                                                                                  ║");
-                System.out.println("║"+centerString(99,languageModule[114][selectedLanguage]+ "║"));  //"⚠️ INPUT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI.")
+                System.out.println("║"+centerString(99,languageModule[114][selectedLanguage] )+"║");  //"⚠️ INPUT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI.")
                 System.out.println("║                                                                                                  ║");
                 System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
                 System.out.print(languageModule[81][selectedLanguage]);//"Tekan [  ⏎ Enter] untuk melanjutkan"
@@ -1901,7 +1918,7 @@ public class Main {
                 input.nextLine();
                 System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
                 System.out.println("║                                                                                                  ║");
-                System.out.println("║"+centerString(99,languageModule[115] +"║"));  //"⚠️ BERAT HARUS LEBIH BESAR DARI 0 . SILAHKAN COBA LAGI.")
+                System.out.println("║"+centerString(99,languageModule[115][selectedLanguage] )+"║");  //"⚠️ BERAT HARUS LEBIH BESAR DARI 0 . SILAHKAN COBA LAGI.")
                 System.out.println("║                                                                                                  ║");
                 System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
                 System.out.print(languageModule[81][selectedLanguage]);//"Tekan [  ⏎ Enter] untuk melanjutkan"
@@ -1918,7 +1935,7 @@ public class Main {
                 input.nextLine();
                 System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
                 System.out.println("║                                                                                                  ║");
-                System.out.println("║"+centerString(99,languageModule[114][selectedLanguage] +"║"));  //"⚠️ INPUT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI.")
+                System.out.println("║"+centerString(99,languageModule[114][selectedLanguage] )+"║");  //"⚠️ INPUT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI.")
                 System.out.println("║                                                                                                  ║");
                 System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
                 System.out.print(languageModule[81][selectedLanguage]);//"Tekan [  ⏎ Enter] untuk melanjutkan"
@@ -2016,10 +2033,10 @@ public class Main {
         double kembalian=0;
         int bayar=0;
         do {
-            System.out.print("║ " + languageModule[93][selectedLanguage] + ": ");//asal
+            System.out.print(languageModule[178][selectedLanguage] + ": ");//asal
             origin = input.nextLine().toUpperCase();
 
-            System.out.print("║ " + languageModule[94][selectedLanguage] + ": ");//tujuan
+            System.out.print(languageModule[179][selectedLanguage] + ": ");//tujuan
             destination = input.nextLine().toUpperCase();
 
             for (int i = 0; i < rutePengiriman.length; i++) {
@@ -2047,7 +2064,7 @@ public class Main {
                 destination = "";
                 System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣");
                 System.out.println("║                                                                                                  ║");
-                System.out.println("║"+centerString(98, languageModule[28][selectedLanguage])+"║"); //"⚠️ RUTE TIDAK DITEMUKAN. SILAKAN COBA LAGI."
+                System.out.println("║"+centerString(99, languageModule[28][selectedLanguage])+"║"); //"⚠️ RUTE TIDAK DITEMUKAN. SILAKAN COBA LAGI."
                 System.out.println("║                                                                                                  ║");
                 System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
                 System.out.print(languageModule[81][selectedLanguage]);//"Tekan [  ⏎ Enter] untuk melanjutkan"
