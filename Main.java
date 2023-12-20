@@ -273,7 +273,7 @@ public class Main {
 
     static boolean validInput = false;
     static int menuUtama, subMenu, editMenu;
-    static boolean exit = false;
+    static boolean login = false;
     static String bankName;
     static String paymentMethod;
     
@@ -401,10 +401,6 @@ public class Main {
 
         while (session) {
 
-            exit = false;
-            isAdmin = false;
-            isKurir = false;
-
             clearTerminal();
             displayHeader();
             displayIndonesianMap();
@@ -438,7 +434,7 @@ public class Main {
             notificationBox(97, languageModule[3][selectedLanguage] + loggedInUsername);
             pressEnter();
 
-            while(!exit) {
+            while(login) {
 
                 while (true) {
                     try {
@@ -2993,7 +2989,9 @@ public class Main {
     }
 
     private static void Logout() {
-        exit=true;
+        login=false;
+        isAdmin = false;
+        isKurir = false;
     }
 
     private static void Exit() {
