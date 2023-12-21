@@ -60,7 +60,7 @@ public class Main {
         {"Date", "Tanggal"},        //41
         {"Cost", "Biaya"},      //42
         {"Edit Transaction", "Edit Transaksi"}, //43
-        {"║ Input receipt number: ", "║ Masukkan nomor resi: "},    //44
+        {" ⤷ Input receipt number: ", " ⤷ Masukkan nomor resi: "},    //44
         {"Data is not found", "Data tidak ditemukan"},  //45
         {"Remove Transaction", "Hapus Transaksi"},  //46
         {"Data with this receipt number has been removed","Data dengan nomor resi yang sesuai sudah dihapus"},  //47
@@ -1639,6 +1639,46 @@ public class Main {
 
     private static void searchHistoryByMonth() {
         try {
+            int tahunInput = 0;
+            validInput = false;
+            while (!validInput) {
+                System.out.print(languageModule[139][selectedLanguage]);//"║ ⤷ Masukkan Tahun: "
+
+                if (input.hasNextInt()) {
+                    tahunInput = input.nextInt();
+                    input.nextLine();
+
+                    if (tahunInput >= 1900 && tahunInput <= 3000) {
+                        validInput = true;
+                    } else {
+                        System.out.print(languageModule[138][selectedLanguage]);//"║ Tahun tidak valid. Harap masukkan tahun antara 1900 dan 3000."
+                    }
+                } else {
+                    System.out.print(languageModule[137][selectedLanguage]);//"║ Input bukan angka. Silakan masukkan tahun antara 1900 dan 3000."
+                    input.next(); 
+                }
+            }
+
+            Locale locale;
+            if (selectedLanguage == 0) {
+                locale = Locale.ENGLISH;
+
+            } else {
+                locale = new Locale("id");
+            }
+
+            DateFormatSymbols dateFormatSymbols = new DateFormatSymbols(locale);
+            String[] monthNames = dateFormatSymbols.getMonths();
+
+            System.out.println("╔════════════════════╗"); 
+
+            for (int i = 0; i < 12; i++) {
+                String monthName = monthNames[i];
+                System.out.println("║"+padStringLeft(20, " ["+(i + 1) +"]. " + monthName)+"║");
+            }
+
+            System.out.println("╚════════════════════╝");  
+
             int bulanInput;
             validInput = false;
             while (true) {
@@ -1657,12 +1697,11 @@ public class Main {
             }
 
             Calendar cal = Calendar.getInstance();
-            int tahunSekarang = cal.get(Calendar.YEAR);
 
-            String tanggalAwal = String.format("01-%02d-%d", bulanInput, tahunSekarang);
+            String tanggalAwal = String.format("01-%02d-%d", bulanInput, tahunInput);
             cal.set(Calendar.MONTH, bulanInput - 1); // Bulan dimulai dari 0
             int hariTerakhir = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-            String tanggalAkhir = String.format("%02d-%02d-%d", hariTerakhir, bulanInput, tahunSekarang);
+            String tanggalAkhir = String.format("%02d-%02d-%d", hariTerakhir, bulanInput, tahunInput);
 
             Date startDate = dateFormat.parse(tanggalAwal);
             Date endDate = dateFormat.parse(tanggalAkhir);
@@ -1678,6 +1717,63 @@ public class Main {
 
     private static void searchHistoryByDay() {
         try {
+            int tahunInput = 0;
+            validInput = false;
+            while (!validInput) {
+                System.out.print(languageModule[139][selectedLanguage]);//"║ ⤷ Masukkan Tahun: "
+
+                if (input.hasNextInt()) {
+                    tahunInput = input.nextInt();
+                    input.nextLine();
+
+                    if (tahunInput >= 1900 && tahunInput <= 3000) {
+                        validInput = true;
+                    } else {
+                        System.out.print(languageModule[138][selectedLanguage]);//"║ Tahun tidak valid. Harap masukkan tahun antara 1900 dan 3000."
+                    }
+                } else {
+                    System.out.print(languageModule[137][selectedLanguage]);//"║ Input bukan angka. Silakan masukkan tahun antara 1900 dan 3000."
+                    input.next(); 
+                }
+            }
+
+            Locale locale;
+            if (selectedLanguage == 0) {
+                locale = Locale.ENGLISH;
+
+            } else {
+                locale = new Locale("id");
+            }
+            
+            DateFormatSymbols dateFormatSymbols = new DateFormatSymbols(locale);
+            String[] monthNames = dateFormatSymbols.getMonths();
+
+            System.out.println("╔════════════════════╗"); 
+
+            for (int i = 0; i < 12; i++) {
+                String monthName = monthNames[i];
+                System.out.println("║"+padStringLeft(20, " ["+(i + 1) +"]. " + monthName)+"║");
+            }
+
+            System.out.println("╚════════════════════╝");  
+
+            int bulanInput;
+            validInput = false;
+            while (true) {
+                System.out.print(languageModule[136][selectedLanguage]);//"║ ⤷ Masukkan Bulan (MM): "
+                if (input.hasNextInt()) {
+                    bulanInput = input.nextInt();
+                    if (bulanInput >= 1 && bulanInput <= 12) {
+                        break; // Keluar dari loop saat input valid
+                    } else {
+                        System.out.print(languageModule[135][selectedLanguage]);//"║ Bulan tidak valid. Masukkan angka antara 1 sampai 12."
+                    }
+                } else {
+                    System.out.print(languageModule[134][selectedLanguage]);//"║ Masukkan angka antara 1 sampai 12."
+                    input.next(); 
+                }
+            }
+
             int tanggalInput;
             validInput = false;
             while (!validInput) {
@@ -1690,10 +1786,8 @@ public class Main {
                     } else {
                         validInput = true;
                         Calendar cal = Calendar.getInstance();
-                        int bulanSekarang = cal.get(Calendar.MONTH) + 1; // Bulan dimulai dari 0
-                        int tahunSekarang = cal.get(Calendar.YEAR);
         
-                        String tanggalYangDiinginkan = String.format("%02d-%02d-%d", tanggalInput, bulanSekarang, tahunSekarang);
+                        String tanggalYangDiinginkan = String.format("%02d-%02d-%d", tanggalInput, bulanInput, tahunInput);
                         Date startDate = dateFormat.parse(tanggalYangDiinginkan);
                         Date endDate = dateFormat.parse(tanggalYangDiinginkan);
         
@@ -2566,10 +2660,14 @@ public class Main {
             DateFormatSymbols dateFormatSymbols = new DateFormatSymbols(locale);
             String[] monthNames = dateFormatSymbols.getMonths();
 
+            System.out.println("╔════════════════════╗"); 
+
             for (int i = 0; i < 12; i++) {
                 String monthName = monthNames[i];
-                System.out.println("\t["+(i + 1) +"]. " + monthName);
+                System.out.println("║"+padStringLeft(20, " ["+(i + 1) +"]. " + monthName)+"║");
             }
+
+            System.out.println("╚════════════════════╝");  
 
             System.out.print(" ⤷ Enter month index: ");
             nomorBulan = input.nextInt();
@@ -2582,10 +2680,14 @@ public class Main {
             DateFormatSymbols dateFormatSymbols = new DateFormatSymbols(locale);
             String[] monthNames = dateFormatSymbols.getMonths();
 
+            System.out.println("╔════════════════════╗"); 
+
             for (int i = 0; i < 12; i++) {
                 String monthName = monthNames[i];
-                System.out.println("\t["+(i + 1) +"]. " + monthName);
+                System.out.println("║"+padStringLeft(20, " ["+(i + 1) +"]. " + monthName)+"║");
             }
+
+            System.out.println("╚════════════════════╝");  
 
             System.out.print(" ⤷ Masukkan index bulan: ");
             nomorBulan = input.nextInt();
@@ -3043,7 +3145,7 @@ public class Main {
         System.out.println("║"+centerString(98, languageModule[79][selectedLanguage])+"║"); //"Anda telah berhasil keluar. Sampai jumpa lain waktu! 👋"
         System.out.println("║                                                                                                  ║");
         System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
-        pressEnter();
+        CountdownAndClear(3);
         session = false;
     }
 
