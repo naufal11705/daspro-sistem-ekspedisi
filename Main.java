@@ -1,6 +1,8 @@
 import java.util.Scanner;
+import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Month;
 import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Locale;
@@ -179,7 +181,7 @@ public class Main {
         {"Handling fee", "Ongkir"}, //162
         {"Do you want to change the delivery status of the goods? (Y/N): ", "Apakah anda ingin mengubah status pengiriman barang? (Y/N): "}, //163
         {"Expedition History", "Riwayat Ekspedisi"}, //164
-        {"Monthly Delivery Report: ", "Monthly Delivery Report: "}, //165
+        {"Monthly Delivery Report: ", "Laporan Pesanan Bulanan: "}, //165
         {"Total Delivery Per Asset","Total Pengiriman Per Asset "}, //166
         {"Total Delivery Per kg","Total Pengiriman Per kg"}, //167
         {"Total income","Total Pendapatan"}, //168
@@ -206,7 +208,9 @@ public class Main {
                 "█████╗  ██║   ██║██████╔╝██╔████╔██║██║   ██║██║     ██║██████╔╝\r\n" + //
                 "██╔══╝  ██║   ██║██╔══██╗██║╚██╔╝██║██║   ██║██║     ██║██╔══██╗\r\n" + //
                 "██║     ╚██████╔╝██║  ██║██║ ╚═╝ ██║╚██████╔╝███████╗██║██║  ██║\r\n" + //
-                "╚═╝      ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝ ╚═════╝ ╚══════╝╚═╝╚═╝  ╚═╝"} //180
+                "╚═╝      ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝ ╚═════╝ ╚══════╝╚═╝╚═╝  ╚═╝"}, //180
+        {"Inbound", "Barang Masuk"}, //181
+        {"Outbound", "Barang Keluar"} //182
     };
 
     static String[][] arrayLayanan = {
@@ -305,7 +309,7 @@ public class Main {
     static double tarifPerKg = 2500;
     static double tarifPerKm = 500;
 
-    static int inputselectedLanguage;
+    static int inputselectedLanguage = 0;
 
     static boolean validInput = false;
     static int menuUtama, subMenu, editMenu;
@@ -326,8 +330,9 @@ public class Main {
         "╠═══════════════════════════════════════════════════════╦════════════════════════╦═════════════════╣\n" +
         "║                                                       ║       "+languageModule[169][selectedLanguage]+"            ║     "+languageModule[170][selectedLanguage]+"        ║\n" +
         "║                                                       ╠════════════════════════╬═════════════════╣\n" +
-        "║ "+padString(54, languageModule[166][selectedLanguage])+"║      %s   ║      "+languageModule[171][selectedLanguage]+"       ║\n" +
-        "║ "+padString(54, languageModule[168][selectedLanguage])+"║      %s   ║     Rupiah      ║\n" +
+        "║ "+padString(54, getLanguageModuleText(166))+"║      %s   ║      "+languageModule[171][selectedLanguage]+"       ║\n" +
+        "║ "+padString(54, getLanguageModuleText(168))+"║      %s   ║     Rupiah      ║\n" +
+        "║ "+padString(54, getLanguageModuleText(181))+"║      %s   ║      "+languageModule[171][selectedLanguage]+"       ║\n" +
         "║                                                       ║                        ║                 ║\n" +
         "╚═══════════════════════════════════════════════════════╩════════════════════════╩═════════════════╝";
 
@@ -910,27 +915,52 @@ public class Main {
         return revenue;  
     }
 
-    private static int getTotalWeight(Date startDate, Date endDate) {
-        int weight = 0;
+    private static int getExpeditionCount(Date startDate, Date endDate) {
+        int count = 0;
+        
         try {
             for (int i = 0; i < historyTransaksi.length; i++) {
                 Date transaksiDate = dateFormat.parse(historyTransaksi[i][1]);
                 if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
-                    weight += Double.parseDouble(historyTransaksi[i][10]);
+                    count++;
                 }
             }
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return weight;  
+        return count;  
     }
 
-    private static int getExpeditionCount(Date startDate, Date endDate) {
+    private static int getInbound(Date startDate, Date endDate, String location) {
         int count = 0;
+
         try {
             for (int i = 0; i < historyTransaksi.length; i++) {
                 Date transaksiDate = dateFormat.parse(historyTransaksi[i][1]);
-                if (transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0) {
+                if ((historyTransaksi[i][12].equalsIgnoreCase("Arrived at warehouse") 
+                    || historyTransaksi[i][12].equalsIgnoreCase("Has been received by the recipient"))
+                    && transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0
+                    && historyTransaksi[i][4].equalsIgnoreCase(location)) {
+                    count++;
+                }
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return count;  
+    }
+
+    private static int getOutbound(Date startDate, Date endDate, String location) {
+        int count = 0;
+
+        try {
+            for (int i = 0; i < historyTransaksi.length; i++) {
+                Date transaksiDate = dateFormat.parse(historyTransaksi[i][1]);
+                if ((historyTransaksi[i][12].equalsIgnoreCase("Arrived at warehouse") 
+                    || historyTransaksi[i][12].equalsIgnoreCase("Has been received by the recipient")
+                    || historyTransaksi[i][12].equalsIgnoreCase("Sending to destination"))
+                    && transaksiDate.compareTo(startDate) >= 0 && transaksiDate.compareTo(endDate) <= 0
+                    && historyTransaksi[i][13].equalsIgnoreCase(location)) {
                     count++;
                 }
             }
@@ -1545,6 +1575,7 @@ public class Main {
                 continue;
             } else {
                 changeLanguage(inputselectedLanguage);
+                RefreshFormatter();
                 break;
             }
         } while (true);
@@ -2584,57 +2615,81 @@ public class Main {
     }
 
     private static void viewReport() {
-        String namaBulan;
         int tahun;
         Locale locale;
-        if (inputselectedLanguage == 0) {
+        int nomorBulan; 
+
+        System.out.print(languageModule[100][selectedLanguage]);
+        String location = input.nextLine();
+
+        if (selectedLanguage == 0) {
             locale = Locale.ENGLISH;
             System.out.print("Enter Years (YYYY): ");
             tahun = input.nextInt();
             input.nextLine();
-            System.out.print("Enter month name (e.g., January): ");
-            namaBulan = input.nextLine();
+            
+            DateFormatSymbols dateFormatSymbols = new DateFormatSymbols(locale);
+            String[] monthNames = dateFormatSymbols.getMonths();
+
+            for (int i = 0; i < 12; i++) {
+                String monthName = monthNames[i];
+                System.out.println("["+(i + 1) +"]. " + monthName);
+            }
+
+            System.out.print("Enter month index: ");
+            nomorBulan = input.nextInt();
         } else {
             locale = new Locale("id");
             System.out.print("Masukkan Tahun (TTTT): ");
             tahun = input.nextInt();
-            System.out.print("Masukkan nama bulan (e.g., Januari): ");
             input.nextLine();
-            namaBulan = input.nextLine();
+
+            DateFormatSymbols dateFormatSymbols = new DateFormatSymbols(locale);
+            String[] monthNames = dateFormatSymbols.getMonths();
+
+            for (int i = 0; i < 12; i++) {
+                String monthName = monthNames[i];
+                System.out.println("["+(i + 1) +"]. " + monthName);
+            }
+
+            System.out.print("Masukkan index bulan: ");
+            nomorBulan = input.nextInt();
         }
         
+        input.nextLine();
         Calendar calendar = Calendar.getInstance(locale);
-        calendar.set(Calendar.YEAR, tahun); // Set the year in the calendar
-
-        int nomorBulan = -1;    
+        calendar.set(Calendar.YEAR, tahun);
+   
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("MMMM", locale);
-            calendar.setTime(sdf.parse(namaBulan));
-            nomorBulan = calendar.get(Calendar.MONTH);
         } catch (Exception e) {
             System.out.println("Format bulan tidak valid!");
             return;
         }
         Calendar cal = Calendar.getInstance();
-        
 
-        String tanggalAwal = String.format("01-%02d-%d", nomorBulan+1, tahun);
-        cal.set(Calendar.MONTH, nomorBulan - 1); // Bulan dimulai dari 0
+        String tanggalAwal = String.format("01-%02d-%d", nomorBulan, tahun);
+        cal.set(Calendar.MONTH, nomorBulan - 1); 
         int hariTerakhir = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-        String tanggalAkhir = String.format("%02d-%02d-%d", hariTerakhir, nomorBulan+1, tahun);
+        String tanggalAkhir = String.format("%02d-%02d-%d", hariTerakhir, nomorBulan, tahun);
+
+        DateFormatSymbols dateFormatSymbols = new DateFormatSymbols(locale);
+        String monthName = dateFormatSymbols.getMonths()[nomorBulan-1];
 
         try {
             Date startDate = dateFormat.parse(tanggalAwal);
             Date endDate = dateFormat.parse(tanggalAkhir);
 
-            String namaBulanInReport = new SimpleDateFormat("MMMM", locale).format(calendar.getTime());
-            String namaTahunInReport = new SimpleDateFormat("yyyy", locale).format(calendar.getTime());
+            clearTerminal();
+
             System.out.println(String.format(
                 reportFormat,
-                centerString(15, namaBulan+" "+tahun),
+                centerString(15, monthName + " " + tahun),
                 centerString(15, Integer.toString(getExpeditionCount(startDate, endDate))),
-                centerString(15, "Rp "+Double.toString(getRevenue(startDate, endDate)))
+                centerString(15, "Rp "+Double.toString(getRevenue(startDate, endDate))),
+                centerString(15, Integer.toString(getInbound(startDate, endDate, location)))
             ));
+            //System.out.println("Test barang masuk"+getInbound(startDate, endDate, location));
+            //System.out.println("Test barang keluar"+getOutbound(startDate, endDate, location));
         } catch (Exception e) {
             System.out.println("Error parsing dates!");
         }
@@ -3268,6 +3323,90 @@ public class Main {
 
     private static void MoveCursor(int row, int column) {
         System.out.print("\033[" + row + ";" + column + "H");
+    }
+
+    private static void RefreshFormatter() {
+        reportFormat = 
+                "╔══════════════════════════════════════════════════════════════════════════════════════════════════╗\n" +
+                "║                                                                                                  ║\n" +
+                "║                                        ╦═╗╔═╗╔═╗╔═╗╦═╗╔╦╗                                        ║\n" + 
+                "║                                        ╠╦╝║╣ ╠═╝║ ║╠╦╝ ║                                         ║\n" +
+                "║                                        ╩╚═╚═╝╩  ╚═╝╩╚═ ╩                                         ║\n" +
+                "║                                                                                                  ║\n" +
+                "╠══════════════════════════════════════════════════════════════════════════════════════════════════╣\n" +
+                "║ "+padString(97, languageModule[160][selectedLanguage])+"║\n" + 
+                "║ "+padString(84, languageModule[165][selectedLanguage]+"%s")+"║\n" + 
+                "╠═══════════════════════════════════════════════════════╦════════════════════════╦═════════════════╣\n" +
+                "║                                                       ║       "+languageModule[169][selectedLanguage]+"            ║     "+languageModule[170][selectedLanguage]+"        ║\n" +
+                "║                                                       ╠════════════════════════╬═════════════════╣\n" +
+                "║ "+padString(54, getLanguageModuleText(166))+"║      %s   ║      "+languageModule[171][selectedLanguage]+"       ║\n" +
+                "║ "+padString(54, getLanguageModuleText(168))+"║      %s   ║     Rupiah      ║\n" +
+                "║ "+padString(54, getLanguageModuleText(181))+"║      %s   ║      "+languageModule[171][selectedLanguage]+"       ║\n" +
+                "║                                                       ║                        ║                 ║\n" +
+                "╚═══════════════════════════════════════════════════════╩════════════════════════╩═════════════════╝";
+
+        labelFormat =
+                "╭──────────────────────────────────────────────────────────────────────╮\n" +
+                "│  "+padString(40, getLanguageModuleText(160))+"%26s  │\n" +
+                "├──────────────────────────────────────────────────────────────────────┤\n" +
+                "│                                                                      │\n" +
+                "│  "+padString(18, getLanguageModuleText(92))+padString(34, getLanguageModuleText(155))+padString(16, getLanguageModuleText(162))+"│\n" +
+                "│  %-18s%-4s Kg                           Rp.%-13s│\n" +
+                "│                                                                      │\n" + 
+                "│  ╭─────────────────────────────────────────────────────────────────╮ │\n" +
+                "│  │"+centerString(65, getLanguageModuleText(161))+"│ │\n" +
+                "│  ╰─────────────────────────────────────────────────────────────────╯ │\n" +
+                "│                                                                      │\n" +
+                "│   "+padString(38, getLanguageModuleText(94))+padString(29, getLanguageModuleText(93))+"│\n" +
+                "│   %-38s%-29s│\n" +
+                "│   %-38s%-29s│\n" +
+                "│   %-38s%-29s│\n" +
+                "│                                                                      │\n" +
+                "├──────────────────────────────────────────────────────────────────────┤\n" +
+                "│  "+padString(68, getLanguageModuleText(154))+"│\n" +
+                "│  %-68s│\n" +
+                "╰──────────────────────────────────────────────────────────────────────╯";
+
+        receiptFormat =
+                "╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮\n" +
+                "│" + centerString(123, getLanguageModuleText(152)) + "│\n" +
+                "├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤\n" +
+                "│                         ╭──────────────────────╮                          ╭─────────────────────────────────────────────╮ │\n" +
+                "│  "+padString(23, getLanguageModuleText(41))+"│ %-21s│   "+padString(23, getLanguageModuleText(153))+"│ %-44s│ │\n" +
+                "│                         ╰──────────────────────╯                          ╰─────────────────────────────────────────────╯ │\n" +
+                "│                         ╭──────────────────────╮                          ╭─────────────────────────────────────────────╮ │\n" +
+                "│  "+padString(23, getLanguageModuleText(96))+"│ %-21s│   "+padString(23, getLanguageModuleText(177))+"│ %-44s│ │\n" +
+                "│                         ╰──────────────────────╯                          ╰─────────────────────────────────────────────╯ │\n" +
+                "│                         ╭──────────────────────╮                          ╭─────────────────────────────────────────────╮ │\n" +
+                "│  "+padString(23, getLanguageModuleText(89))+"│ %-21s│   "+padString(23, getLanguageModuleText(40))+"│ %-44s│ │\n" +
+                "│                         ╰──────────────────────╯                          ╰─────────────────────────────────────────────╯ │\n" +
+                "│                         ╭──────────────────────╮                          ╭─────────────────────────────────────────────╮ │\n" +
+                "│  "+padString(23, getLanguageModuleText(30))+"│ %-21s│   "+padString(23, getLanguageModuleText(177))+"│ %-44s│ │\n" +
+                "│                         ╰──────────────────────╯                          ╰─────────────────────────────────────────────╯ │\n" +
+                "│  ╭───────────────────────────────────────────────────╮              ╭───────────────────────────────────────────────────╮ │\n" +
+                "│  │"+centerString(51, getLanguageModuleText(93))+"│              │"+centerString(51, getLanguageModuleText(94))+"│ │\n" +
+                "│  ├───────────────────────────────────────────────────┤              ├───────────────────────────────────────────────────┤ │\n" +
+                "│  │%s│              │%s│ │\n" +
+                "│  ╰───────────────────────────────────────────────────╯              ╰───────────────────────────────────────────────────╯ │\n" +
+                "│                                                                                                                           │\n" +
+                "│  ╭──────────────────────────────────────────────────────────────┬───────────────────────────────────────────┬───────────╮ │\n" +
+                "│  │"+centerString(62, getLanguageModuleText(154))+"│                                           │           │ │\n" +
+                "│  ├──────────────────────────────────────────────────────────────┤"+centerString(43, getLanguageModuleText(157))+"│   Total   │ │\n" +
+                "│  │  %-60s│                                           │           │ │\n" +
+                "│  ├──────────────────────────────────────────────────────────────┼───────────────────────────────────────────┼───────────┤ │\n" +
+                "│  │  %-60s│%42s │%10s │ │\n" +
+                "│  ├──────────────────────────────────────────────────────────────┼───────────────────────────────────────────┼───────────┤ │\n" +
+                "│  │  "+padString(60, getLanguageModuleText(156))+"│%39s km │%10s │ │\n" +
+                "│  ├──────────────────────────────────────────────────────────────┼───────────────────────────────────────────┼───────────┤ │\n" +
+                "│  │  "+padString(60, getLanguageModuleText(103))+"│%42s │%10s │ │\n" +
+                "│  ╰──────────────────────────────────────────────────────────────┴───────────────────────────────────────────┴───────────╯ │\n" +
+                "├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤\n" +
+                "│  Total :                                                                                                       %10s │\n" +
+                "├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤\n" +
+                "│  "+padString(25, getLanguageModuleText(158))+"                                                                                     %10s │\n" +
+                "├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤\n" +
+                "│  "+padString(25, getLanguageModuleText(159))+"                                                                                     %10s │\n" +
+                "╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯";
     }
 
 }
