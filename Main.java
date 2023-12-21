@@ -3090,9 +3090,6 @@ public class Main {
             break;
         }
 
-
-
-
     }
 
     private static void ManageShipment() {
@@ -3261,12 +3258,10 @@ public class Main {
 
     private static void viewExpeditionHistory() {
         int[] columnWidths = calculateColumnWidths(historyTransaksi);
-        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
+        String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
             "No", 
             languageModule[89][selectedLanguage],//no resi
-            languageModule[90][selectedLanguage],//tanggal
             languageModule[91][selectedLanguage],//pengirim
-            languageModule[92][selectedLanguage],//layanan
             languageModule[93][selectedLanguage],//asal
             languageModule[94][selectedLanguage],//tujuan
             languageModule[97][selectedLanguage],//penerima
@@ -3280,12 +3275,10 @@ public class Main {
 
         for (int i = 0; i < historyTransaksi.length; i++) {
             if (historyTransaksi[i][12].equalsIgnoreCase("Has been received by the recipient")) {
-                System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
+                System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
                     i,
                     historyTransaksi[i][0], 
-                    historyTransaksi[i][1],
                     historyTransaksi[i][2], 
-                    historyTransaksi[i][5],  
                     historyTransaksi[i][13],
                     historyTransaksi[i][4], 
                     historyTransaksi[i][8],
