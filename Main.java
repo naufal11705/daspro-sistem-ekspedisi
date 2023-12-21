@@ -210,7 +210,8 @@ public class Main {
                 "██║     ╚██████╔╝██║  ██║██║ ╚═╝ ██║╚██████╔╝███████╗██║██║  ██║\r\n" + //
                 "╚═╝      ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝ ╚═════╝ ╚══════╝╚═╝╚═╝  ╚═╝"}, //180
         {"Inbound", "Barang Masuk"}, //181
-        {"Outbound", "Barang Keluar"} //182
+        {"Outbound", "Barang Keluar"}, //182
+        {" ⤷ Do you want to see package details? (Y/N): ", " ⤷ Apakah anda ingin melihat detail paket? (Y/N): "}, //183
     };
 
     static String[][] arrayLayanan = {
@@ -392,6 +393,40 @@ public class Main {
         "├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤\n" +
         "│  "+padStringLeft(25, getLanguageModuleText(159))+"                                                                                     %10s │\n" +
         "╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯";
+
+    static String packageDetailsFormat =
+        "╭─────────────────────────────────────────────────────────────────────────╮\n" +
+        "│                         ╭─────────────────────────────────────────────╮ │\n" +
+        "│  "+padStringLeft(23, getLanguageModuleText(153))+"│ %-44s│ │\n" +
+        "│                         ╰─────────────────────────────────────────────╯ │\n" +
+        "│                         ╭─────────────────────────────────────────────╮ │\n" +
+        "│  "+padStringLeft(23, getLanguageModuleText(177))+"│ %-44s│ │\n" +
+        "│                         ╰─────────────────────────────────────────────╯ │\n" +
+        "│                         ╭─────────────────────────────────────────────╮ │\n" +
+        "│  "+padStringLeft(23, getLanguageModuleText(40))+"│ %-44s│ │\n" +
+        "│                         ╰─────────────────────────────────────────────╯ │\n" +
+        "│                         ╭─────────────────────────────────────────────╮ │\n" +
+        "│  "+padStringLeft(23, getLanguageModuleText(177))+"│ %-44s│ │\n" +
+        "│                         ╰─────────────────────────────────────────────╯ │\n" +
+        "│  ╭─────────────────────────╮                ╭─────────────────────────╮ │\n" +
+        "│  │"+centerString(25, getLanguageModuleText(93))+"│                │"+centerString(25, getLanguageModuleText(94))+"│ │\n" +
+        "│  ├─────────────────────────┤                ├─────────────────────────┤ │\n" +
+        "│  │%s│                │%s│ │\n" +
+        "│  ╰─────────────────────────╯                ╰─────────────────────────╯ │\n" +
+        "│                                                                         │\n" +
+        "│  ╭────────────────────────────────┬───────────────────────────────────╮ │\n" +
+        "│  │"+centerString(32, getLanguageModuleText(154))+"│                                   │ │\n" +
+        "│  ├────────────────────────────────┤"+centerString(31, getLanguageModuleText(157))+"    │ │\n" +
+        "│  │  %-30s│                                   │ │\n" +
+        "│  ├────────────────────────────────┼───────────────────────────────────┤ │\n" +
+        "│  │  %-30s│%34s │ │\n" +
+        "│  ├────────────────────────────────┼───────────────────────────────────┤ │\n" +
+        "│  │  "+padStringLeft(30, getLanguageModuleText(156))+"│%31s km │ │\n" +
+        "│  ├────────────────────────────────┼───────────────────────────────────┤ │\n" +
+        "│  │  "+padStringLeft(30, getLanguageModuleText(103))+"│%34s │ │\n" +
+        "│  ╰────────────────────────────────┴───────────────────────────────────╯ │\n" +
+        "│                                                                         │\n" +
+        "╰─────────────────────────────────────────────────────────────────────────╯";
     public static void main(String[] args) {
 
         while (session) {
@@ -2716,50 +2751,56 @@ public class Main {
     }
 
     private static void viewWarehouseInventory() {
-        clearTerminal();
         boolean inputFound = true;
         System.out.print(languageModule[74][selectedLanguage]);//"Kirim Paket"
         String location  = input.nextLine();
 
+        clearTerminal();
+
         while (inputFound) {
             int[] columnWidths = calculateColumnWidths(historyTransaksi);
-            String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
+            String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[11] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
                 "No", 
                 languageModule[89][selectedLanguage],//no resi
-                languageModule[90][selectedLanguage],//tanggal
-                languageModule[91][selectedLanguage],//pengirim
-                languageModule[92][selectedLanguage],//layanan
-                languageModule[93][selectedLanguage],//asal
-                languageModule[94][selectedLanguage],//tujuan
-                languageModule[97][selectedLanguage],//penerima
+                languageModule[154][selectedLanguage],//deskripsi
+                languageModule[94][selectedLanguage],//destination
                 languageModule[98][selectedLanguage],//alamat
                 "Status"
             );
 
-            System.out.println("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
+            System.out.println("╔═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
             System.out.println(formattedHeader);
-            System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
+            System.out.println("╠═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
 
             for (int i = 0; i < historyTransaksi.length; i++) {
                 if (historyTransaksi[i][13].equalsIgnoreCase(location) && historyTransaksi[i][12].equalsIgnoreCase("Waiting for pickup") ||
                     historyTransaksi[i][4].equalsIgnoreCase(location) && historyTransaksi[i][12].equalsIgnoreCase("Arrived at warehouse")) {
-                        System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
+                        System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[11] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
                             i,
                             historyTransaksi[i][0],
-                            historyTransaksi[i][1],
-                            historyTransaksi[i][2],
-                            historyTransaksi[i][5],
-                            historyTransaksi[i][13],
+                            historyTransaksi[i][11],
                             historyTransaksi[i][4],
-                            historyTransaksi[i][8],
                             historyTransaksi[i][9],
                             historyTransaksi[i][12]
                         ));
                 }
+            }        
+            System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
+            
+            System.out.print(getLanguageModuleText(183));
+            String confirm = input.nextLine();
+
+            if (confirm.equalsIgnoreCase("Y")){
+                System.out.print(getLanguageModuleText(76));
+                int index = input.nextInt();
+                viewWarehousePackageDetail(index);
+                pressEnter();
+                continue;
+            } else {
+                break;
             }
-            break;
+        
         }
-        System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
     }
 
     private static void SendPackage() {
@@ -2775,262 +2816,281 @@ public class Main {
         }
                             
 
-        while (shipmentFound) {
-            int[] columnWidths = calculateColumnWidths(historyTransaksi);
-            String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
-                "No", 
-                languageModule[89][selectedLanguage], //no resi
-                languageModule[90][selectedLanguage], //tanggal
-                languageModule[91][selectedLanguage], //pengirim
-                languageModule[92][selectedLanguage], //layanan
-                languageModule[93][selectedLanguage], //asal
-                languageModule[94][selectedLanguage], //tujuan
-                languageModule[97][selectedLanguage], //penerima
-                languageModule[98][selectedLanguage], //alamat
-                "Status"
-            );
+        while (true) {
 
-            System.out.println("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
-            System.out.println("║"+centerString(160, languageModule[150][selectedLanguage]+": " +loggedInUsername)+"║");
-            System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
-            System.out.println(formattedHeader);
-            System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
-
-            for (int k = 0; k < shipmentDetails.length; k++) {
-                if (shipmentDetails[k][1].equalsIgnoreCase(loggedInUsername) && shipmentDetails[k][2].equalsIgnoreCase("Sending")) {
-                    for (int i = 0; i < historyTransaksi.length; i++) {
-                        if(historyTransaksi[i][0].equals(shipmentDetails[k][0])) {
-                            System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
-                                i,
-                                historyTransaksi[i][0],
-                                historyTransaksi[i][1],
-                                historyTransaksi[i][2], 
-                                historyTransaksi[i][5],
-                                historyTransaksi[i][13],
-                                historyTransaksi[i][4],
-                                historyTransaksi[i][8],
-                                historyTransaksi[i][9], 
-                                historyTransaksi[i][12]
-                            ));
-                        }
-                    }
-                }
-            }
-
-            System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
-
-            System.out.print(languageModule[127][selectedLanguage]); //apakah anda ingin mengubah pesanan menjadi selesai
-            String driverChoice = input.nextLine();
-
-            if (driverChoice.equalsIgnoreCase("Y")) {
-                for (int k = 0; k < shipmentDetails.length; k++) {
-                    if (shipmentDetails[k][1].equalsIgnoreCase(loggedInUsername) && shipmentDetails[k][2].equalsIgnoreCase("Sending")) {
-                        shipmentDetails[k][2] = "Done";
-
-                        for (int i = 0; i < historyTransaksi.length; i++) {
-                            if(historyTransaksi[i][0].equals(shipmentDetails[k][0])) {
-                                historyTransaksi[i][12] = "Arrived at warehouse";
-                            }
-                        }
-
-                        shipmentFound = true;
-                    }
-                }
-                break;
-            } else {
-                break;
-            }
-        }
-
-        while (!shipmentFound) {
-            System.out.print(languageModule[74][selectedLanguage]);//"Kirim Paket"
-            location  = input.nextLine();
-
-            for (int i = 0; i < rutePengiriman.length; i++) {
-                if ((rutePengiriman[i][0].equalsIgnoreCase(location) || rutePengiriman[i][1].equalsIgnoreCase(location))) {
-                    inputFound = true;
-                } 
-            }
-
-            while (inputFound) {
+            while (shipmentFound) {
                 int[] columnWidths = calculateColumnWidths(historyTransaksi);
-                String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
+                String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[11] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
                     "No", 
-                    languageModule[89][selectedLanguage], //"No Resi"
-                    languageModule[90][selectedLanguage], //"Tanggal"
-                    languageModule[91][selectedLanguage], //"Pengirim"
-                    languageModule[92][selectedLanguage], //"Layanan"
-                    languageModule[93][selectedLanguage], //"Asal"
-                    languageModule[94][selectedLanguage], //"Tujuan"
-                    languageModule[97][selectedLanguage], // "Penerima"
-                    languageModule[98][selectedLanguage], // "Alamat"
+                    languageModule[89][selectedLanguage],//no resi
+                    languageModule[154][selectedLanguage],//deskripsi
+                    languageModule[92][selectedLanguage],//layanan
+                    languageModule[94][selectedLanguage],//destination
+                    languageModule[98][selectedLanguage],//alamat
                     "Status"
                 );
 
-                clearTerminal();
-                System.out.println("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
+                System.out.println("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
+                System.out.println("║"+centerString(140, getLanguageModuleText(150)+": "+loggedInUsername)+"║");
+                System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
                 System.out.println(formattedHeader);
-                System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
 
-                for (int i = 0; i < historyTransaksi.length; i++) {
-                    if (historyTransaksi[i][13].equalsIgnoreCase(location) && historyTransaksi[i][12].equalsIgnoreCase("Waiting for pickup")) {
-                        System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
-                            i,
-                            historyTransaksi[i][0],
-                            historyTransaksi[i][1],
-                            historyTransaksi[i][2],
-                            historyTransaksi[i][5],
-                            historyTransaksi[i][13],
-                            historyTransaksi[i][4],
-                            historyTransaksi[i][8], 
-                            historyTransaksi[i][9], 
-                            historyTransaksi[i][12]
-                        ));
-                        searchIndex++;
+                for (int k = 0; k < shipmentDetails.length; k++) {
+                    if (shipmentDetails[k][1].equalsIgnoreCase(loggedInUsername) && shipmentDetails[k][2].equalsIgnoreCase("Sending")) {
+                        shipmentDetails[k][2] = "Sending";
+
+                        for (int i = 0; i < historyTransaksi.length; i++) {
+                            if(historyTransaksi[i][0].equals(shipmentDetails[k][0])) {
+                                System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[11] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
+                                    i,
+                                    historyTransaksi[i][0],
+                                    historyTransaksi[i][11],
+                                    historyTransaksi[i][5],
+                                    historyTransaksi[i][4],
+                                    historyTransaksi[i][9],
+                                    historyTransaksi[i][12]
+                                ));
+                            }
+                        }
                     }
                 }
 
-                System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
 
-                if (searchIndex != 0){
-                    int indexKirim;
-                    boolean adaKesamaanData = false; 
-                    System.out.print(languageModule[76][selectedLanguage]);
-                    indexKirim = input.nextInt();
+                System.out.print(languageModule[127][selectedLanguage]); //apakah anda ingin mengubah pesanan menjadi selesai
+                String driverChoice = input.nextLine();
+
+                if (driverChoice.equalsIgnoreCase("Y")) {
+                    for (int k = 0; k < shipmentDetails.length; k++) {
+                        if (shipmentDetails[k][1].equalsIgnoreCase(loggedInUsername) && shipmentDetails[k][2].equalsIgnoreCase("Sending")) {
+                            shipmentDetails[k][2] = "Done";
+
+                            for (int i = 0; i < historyTransaksi.length; i++) {
+                                if(historyTransaksi[i][0].equals(shipmentDetails[k][0])) {
+                                    historyTransaksi[i][12] = "Arrived at warehouse";
+                                }
+                            }
+
+                            shipmentFound = true;
+                        }
+                    }
+                    clearTerminal();
+                    break;
+                } else {
+                    clearTerminal();
+                    break;
+                }
+            }
+
+
+            while (!shipmentFound) {
+                
+                System.out.print(languageModule[74][selectedLanguage]);//"Kirim Paket"
+                location  = input.nextLine();
+
+                for (int i = 0; i < rutePengiriman.length; i++) {
+                    if ((rutePengiriman[i][0].equalsIgnoreCase(location) || rutePengiriman[i][1].equalsIgnoreCase(location))) {
+                        inputFound = true;
+                    } 
+                }
+
+                while (inputFound) {
+                    int[] columnWidths = calculateColumnWidths(historyTransaksi);
+                    String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[11] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
+                        "No", 
+                        languageModule[89][selectedLanguage],//no resi
+                        languageModule[154][selectedLanguage],//deskripsi
+                        languageModule[92][selectedLanguage],//layanan
+                        languageModule[94][selectedLanguage],//destination
+                        languageModule[98][selectedLanguage],//alamat
+                        "Status"
+                    );
+
+                    clearTerminal();
+                    System.out.println("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
+                    System.out.println(formattedHeader);
+                    System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
 
                     for (int i = 0; i < historyTransaksi.length; i++) {
-                        if (i != indexKirim && historyTransaksi[i][12].equals("Waiting for pickup" ) && 
-                            historyTransaksi[i][4].equals(historyTransaksi[indexKirim][4]) && 
-                            historyTransaksi[i][5].equals(historyTransaksi[indexKirim][5]) && 
-                            historyTransaksi[i][0] != historyTransaksi[indexKirim][0] &&
-                            historyTransaksi[i][13].equals(historyTransaksi[indexKirim][13])) {
-                            adaKesamaanData = true;
-                            System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
+                        if (historyTransaksi[i][13].equalsIgnoreCase(location) && historyTransaksi[i][12].equalsIgnoreCase("Waiting for pickup")) {
+                            System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[11] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
                                 i,
                                 historyTransaksi[i][0],
-                                historyTransaksi[i][1],
-                                historyTransaksi[i][2],
-                                historyTransaksi[i][5], 
-                                historyTransaksi[i][13],
+                                historyTransaksi[i][11],
+                                historyTransaksi[i][5],
                                 historyTransaksi[i][4],
-                                historyTransaksi[i][8],
-                                historyTransaksi[i][9], 
+                                historyTransaksi[i][9],
                                 historyTransaksi[i][12]
                             ));
+                            searchIndex++;
                         }
                     }
 
-                    if (adaKesamaanData){
-                        for (int i = 0; i < historyTransaksi.length; i++) {
-                            if (historyTransaksi[i][12].equals("Waiting for pickup" ) && 
-                                historyTransaksi[i][4].equals(historyTransaksi[indexKirim][4]) && 
-                                historyTransaksi[i][5].equals(historyTransaksi[indexKirim][5]) && 
-                                historyTransaksi[i][0] != historyTransaksi[indexKirim][0] &&
-                                historyTransaksi[i][13].equals(historyTransaksi[indexKirim][13])) {
-                                historyTransaksi[i][12] = "Sending to destination";
-                                historyTransaksi[indexKirim][12] = "Sending to destination";
+                    System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                    System.out.println("║ [1] Lihat Detail Paket");
+                    System.out.println("║ [2] Pilih Paket Untuk Diantar");
+                    System.out.println("║ [3] Keluar");
+                    System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");  
 
-                                shipmentDetails = Arrays.copyOf(shipmentDetails,shipmentDetails.length + 1);
-                                shipmentDetails[shipmentDetails.length-1] = new String[] {
-                                    historyTransaksi[i][0],
-                                    loggedInUsername,
-                                    "Sending"};
+                    System.out.print(getLanguageModuleText(142));
+                    int choice = input.nextInt();
+                    
+                    switch (choice) {
+                        case 1:
+                            System.out.print(getLanguageModuleText(76));
+                            int index = input.nextInt();
+                            viewWarehousePackageDetail(index);
+                            pressEnter();
+                            continue;
 
-                                shipmentDetails = Arrays.copyOf(shipmentDetails,shipmentDetails.length + 1);
-                                shipmentDetails[shipmentDetails.length-1] = new String[] {
-                                    historyTransaksi[indexKirim][0],
-                                    loggedInUsername,
-                                    "Sending"};
-
-                                System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
-                                    i,
-                                    historyTransaksi[i][0],
-                                    historyTransaksi[i][1],
-                                    historyTransaksi[i][2],
-                                    historyTransaksi[i][5],
-                                    historyTransaksi[i][13],
-                                    historyTransaksi[i][4],
-                                    historyTransaksi[i][8],
-                                    historyTransaksi[i][9],
-                                    historyTransaksi[i][12]
-                                ));
-
-                            }
-                        }
-
-                        clearTerminal();
-
-                        System.out.println("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
-                        System.out.println("║"+centerString(160, location)+"║");
-                        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                        System.out.println(formattedHeader);
-                        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
-
-                        for (int i = 0; i < historyTransaksi.length; i++) {
-                            if (historyTransaksi[i][13].equalsIgnoreCase(location) && historyTransaksi[i][12].equalsIgnoreCase("Waiting for pickup")) {
-                                System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
-                                    i,
-                                    historyTransaksi[i][0],
-                                    historyTransaksi[i][1], 
-                                    historyTransaksi[i][2],
-                                    historyTransaksi[i][5], 
-                                    historyTransaksi[i][13],
-                                    historyTransaksi[i][4],
-                                    historyTransaksi[i][8],
-                                    historyTransaksi[i][9],
-                                    historyTransaksi[i][12]
-                                ));
-                                searchIndex++;
-                            }
-                        }
-
-                        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                        System.out.println("║"+centerString(160, "⇩   "+loggedInUsername+"   ⇩")+"║");
-                        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                        System.out.println(formattedHeader);
-                        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
-
-                        for (int k = 0; k < shipmentDetails.length; k++) {
-                            if (shipmentDetails[k][1].equalsIgnoreCase(loggedInUsername) && shipmentDetails[k][2].equalsIgnoreCase("Sending")) {
-                                shipmentDetails[k][2] = "Sending";
+                        case 2:
+                            if (searchIndex != 0){
+                                int indexKirim;
+                                boolean adaKesamaanData = false; 
+                                System.out.print(languageModule[76][selectedLanguage]);
+                                indexKirim = input.nextInt();
+                                input.nextLine();
 
                                 for (int i = 0; i < historyTransaksi.length; i++) {
-                                    if(historyTransaksi[i][0].equals(shipmentDetails[k][0])) {
-                                        System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
+                                    if (i != indexKirim && historyTransaksi[i][12].equals("Waiting for pickup" ) && 
+                                        historyTransaksi[i][4].equals(historyTransaksi[indexKirim][4]) && 
+                                        historyTransaksi[i][5].equals(historyTransaksi[indexKirim][5]) && 
+                                        historyTransaksi[i][0] != historyTransaksi[indexKirim][0] &&
+                                        historyTransaksi[i][13].equals(historyTransaksi[indexKirim][13])) {
+                                        adaKesamaanData = true;
+                                        System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[11] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
                                             i,
                                             historyTransaksi[i][0],
-                                            historyTransaksi[i][1],
-                                            historyTransaksi[i][2], 
-                                            historyTransaksi[i][5],  
-                                            historyTransaksi[i][13],
+                                            historyTransaksi[i][11],
+                                            historyTransaksi[i][5],
                                             historyTransaksi[i][4],
-                                            historyTransaksi[i][8], 
                                             historyTransaksi[i][9],
                                             historyTransaksi[i][12]
                                         ));
                                     }
                                 }
 
-                                shipmentFound = true;
-                            }
-                        }
-                            System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
-                            input.nextLine();
-                            pressEnter();
+                                if (adaKesamaanData){
+                                    for (int i = 0; i < historyTransaksi.length; i++) {
+                                        if (historyTransaksi[i][12].equals("Waiting for pickup" ) && 
+                                            historyTransaksi[i][4].equals(historyTransaksi[indexKirim][4]) && 
+                                            historyTransaksi[i][5].equals(historyTransaksi[indexKirim][5]) && 
+                                            historyTransaksi[i][0] != historyTransaksi[indexKirim][0] &&
+                                            historyTransaksi[i][13].equals(historyTransaksi[indexKirim][13])) {
+                                            historyTransaksi[i][12] = "Sending to destination";
 
-                        } else {
-                            historyTransaksi[indexKirim][12] = "Sending to destination";
-                            shipmentDetails = Arrays.copyOf(shipmentDetails,shipmentDetails.length + 1);
-                            shipmentDetails[shipmentDetails.length-1] = new String[] {
-                                historyTransaksi[indexKirim][0],
-                                loggedInUsername,
-                                "Sending"};
-                        }
+                                            shipmentDetails = Arrays.copyOf(shipmentDetails,shipmentDetails.length + 1);
+                                            shipmentDetails[shipmentDetails.length-1] = new String[] {
+                                                historyTransaksi[i][0],
+                                                loggedInUsername,
+                                                "Sending"};
+
+                                        }
+                                    }
+
+                                    historyTransaksi[indexKirim][12] = "Sending to destination";
+
+                                    shipmentDetails = Arrays.copyOf(shipmentDetails,shipmentDetails.length + 1);
+                                    shipmentDetails[shipmentDetails.length-1] = new String[] {
+                                        historyTransaksi[indexKirim][0],
+                                        loggedInUsername,
+                                        "Sending"};
+
+                                    clearTerminal();
+
+                                    System.out.println("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
+                                    System.out.println("║"+centerString(140, getLanguageModuleText(73)+": "+location.toUpperCase())+"║");
+                                    System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                    System.out.println(formattedHeader);
+                                    System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
+
+                                    for (int i = 0; i < historyTransaksi.length; i++) {
+                                        if (historyTransaksi[i][13].equalsIgnoreCase(location) && historyTransaksi[i][12].equalsIgnoreCase("Waiting for pickup")) {
+                                            System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[11] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
+                                                i,
+                                                historyTransaksi[i][0],
+                                                historyTransaksi[i][11],
+                                                historyTransaksi[i][5],
+                                                historyTransaksi[i][4],
+                                                historyTransaksi[i][9],
+                                                historyTransaksi[i][12]
+                                            ));
+                                            searchIndex++;
+                                        }
+                                    }
+
+                                    System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
+
+                                    System.out.println();
+
+                                    System.out.println("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
+                                    System.out.println("║"+centerString(140, getLanguageModuleText(150)+": "+loggedInUsername)+"║");
+                                    System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
+                                    System.out.println(formattedHeader);
+                                    System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
+
+                                    for (int k = 0; k < shipmentDetails.length; k++) {
+                                        if (shipmentDetails[k][1].equalsIgnoreCase(loggedInUsername) && shipmentDetails[k][2].equalsIgnoreCase("Sending")) {
+                                            shipmentDetails[k][2] = "Sending";
+
+                                            for (int i = 0; i < historyTransaksi.length; i++) {
+                                                if(historyTransaksi[i][0].equals(shipmentDetails[k][0])) {
+                                                    System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[11] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
+                                                        i,
+                                                        historyTransaksi[i][0],
+                                                        historyTransaksi[i][11],
+                                                        historyTransaksi[i][5],
+                                                        historyTransaksi[i][4],
+                                                        historyTransaksi[i][9],
+                                                        historyTransaksi[i][12]
+                                                    ));
+                                                }
+                                            }
+
+                                            shipmentFound = true;
+                                        }
+                                    }
+                                        
+                                    System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
+                                    pressEnter();
+
+                                    } else {
+                                        historyTransaksi[indexKirim][12] = "Sending to destination";
+                                        shipmentDetails = Arrays.copyOf(shipmentDetails,shipmentDetails.length + 1);
+                                        shipmentDetails[shipmentDetails.length-1] = new String[] {
+                                            historyTransaksi[indexKirim][0],
+                                            loggedInUsername,
+                                            "Sending"};
+                                    }
+                                    
+                                    for (int k = 0; k < shipmentDetails.length; k++) {
+                                        if (shipmentDetails[k][1].equalsIgnoreCase(loggedInUsername) && shipmentDetails[k][2].equalsIgnoreCase("Sending")) {
+                                            shipmentFound = true;
+                                        }
+                                    }
+                            }
+                            break;
+                    
+                        case 3:
+
+                            break;
+
+                        default:
+                            continue;
+                    }
+
+
+                    break;
                 }
                 break;
             }
             break;
         }
+
+
+
+
     }
 
     private static void ManageShipment() {
@@ -3046,7 +3106,7 @@ public class Main {
             switch (subMenu) {
                 case 1:
                     viewWarehouseInventory();
-                    pressEnter();
+                    clearTerminal();
                     continue;
 
                 case 2:
@@ -3402,6 +3462,61 @@ public class Main {
                 "├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤\n" +
                 "│  "+padStringLeft(25, getLanguageModuleText(159))+"                                                                                     %10s │\n" +
                 "╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯";
+
+        packageDetailsFormat =
+                "╭─────────────────────────────────────────────────────────────────────────╮\n" +
+                "│                         ╭─────────────────────────────────────────────╮ │\n" +
+                "│  "+padStringLeft(23, getLanguageModuleText(153))+"│ %-44s│ │\n" +
+                "│                         ╰─────────────────────────────────────────────╯ │\n" +
+                "│                         ╭─────────────────────────────────────────────╮ │\n" +
+                "│  "+padStringLeft(23, getLanguageModuleText(177))+"│ %-44s│ │\n" +
+                "│                         ╰─────────────────────────────────────────────╯ │\n" +
+                "│                         ╭─────────────────────────────────────────────╮ │\n" +
+                "│  "+padStringLeft(23, getLanguageModuleText(40))+"│ %-44s│ │\n" +
+                "│                         ╰─────────────────────────────────────────────╯ │\n" +
+                "│                         ╭─────────────────────────────────────────────╮ │\n" +
+                "│  "+padStringLeft(23, getLanguageModuleText(177))+"│ %-44s│ │\n" +
+                "│                         ╰─────────────────────────────────────────────╯ │\n" +
+                "│  ╭─────────────────────────╮                ╭─────────────────────────╮ │\n" +
+                "│  │"+centerString(25, getLanguageModuleText(93))+"│                │"+centerString(25, getLanguageModuleText(94))+"│ │\n" +
+                "│  ├─────────────────────────┤                ├─────────────────────────┤ │\n" +
+                "│  │%s│                │%s│ │\n" +
+                "│  ╰─────────────────────────╯                ╰─────────────────────────╯ │\n" +
+                "│                                                                         │\n" +
+                "│  ╭────────────────────────────────┬───────────────────────────────────╮ │\n" +
+                "│  │"+centerString(32, getLanguageModuleText(154))+"│                                   │ │\n" +
+                "│  ├────────────────────────────────┤"+centerString(31, getLanguageModuleText(157))+"    │ │\n" +
+                "│  │  %-30s│                                   │ │\n" +
+                "│  ├────────────────────────────────┼───────────────────────────────────┤ │\n" +
+                "│  │  %-30s│%34s │ │\n" +
+                "│  ├────────────────────────────────┼───────────────────────────────────┤ │\n" +
+                "│  │  "+padStringLeft(30, getLanguageModuleText(156))+"│%31s km │ │\n" +
+                "│  ├────────────────────────────────┼───────────────────────────────────┤ │\n" +
+                "│  │  "+padStringLeft(30, getLanguageModuleText(103))+"│%34s │ │\n" +
+                "│  ╰────────────────────────────────┴───────────────────────────────────╯ │\n" +
+                "│                                                                         │\n" +
+                "╰─────────────────────────────────────────────────────────────────────────╯";
+
+    }
+
+    private static void viewWarehousePackageDetail(int index) {
+        clearTerminal();
+
+        System.out.println(String.format(
+            packageDetailsFormat,
+            historyTransaksi[index][2],
+            historyTransaksi[index][3],
+            historyTransaksi[index][8],
+            historyTransaksi[index][22],
+            centerString(25, historyTransaksi[index][13]), 
+            centerString(25, historyTransaksi[index][4]),
+            historyTransaksi[index][11],
+            historyTransaksi[index][15],
+            historyTransaksi[index][10],
+            historyTransaksi[index][19],
+            historyTransaksi[index][5]
+        )); 
+        input.nextLine();
     }
 
 }
