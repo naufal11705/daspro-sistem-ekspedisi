@@ -212,6 +212,8 @@ public class Main {
         {"Inbound", "Barang Masuk"}, //181
         {"Outbound", "Barang Keluar"}, //182
         {" ⤷ Do you want to see package details? (Y/N): ", " ⤷ Apakah anda ingin melihat detail paket? (Y/N): "}, //183
+        {"View Package Details", "Lihat Detail Paket"}, //184
+        {"Select a Package to Send", "Pilih Paket Untuk Dikirim"}, //184
     };
 
     static String[][] arrayLayanan = {
@@ -2928,9 +2930,9 @@ public class Main {
                     }
 
                     System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
-                    System.out.println("║ [1] Lihat Detail Paket");
-                    System.out.println("║ [2] Pilih Paket Untuk Diantar");
-                    System.out.println("║ [3] Keluar");
+                    System.out.println("║ [1] "+getLanguageModuleText(184));
+                    System.out.println("║ [2] "+getLanguageModuleText(185));
+                    System.out.println("║ [3] "+getLanguageModuleText(176));
                     System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");  
 
                     System.out.print(getLanguageModuleText(142));
