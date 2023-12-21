@@ -97,7 +97,7 @@ public class Main {
         {"Logout", "Keluar"}, //78
         {"You have successfully exited. See You! 👋","Anda telah berhasil keluar. Sampai jumpa lain waktu! 👋"}, //79
         {" ⤷ Enter Options: ", " ⤷ Masukkan Pilihan: "},  //80
-        {"Click [  ⏎ Enter] to Continue", "Tekan [  ⏎ Enter] untuk melanjutkan"}, //81
+        {"Click [  ⏎ Enter] to continue... ", "Tekan [  ⏎ Enter] untuk melanjutkan... "}, //81
         {"║ Input Weight: ", "║ Masukkan berat barang: "}, //82
         {"Transaction History", "Histori Transaksi"}, //83
         {"Date Range", "Rentang Tanggal"}, //84
@@ -464,7 +464,7 @@ public class Main {
             }
 
             notificationBox(97, languageModule[3][selectedLanguage] + loggedInUsername);
-            pressEnter();
+            CountdownAndClear(2);
 
             while(login) {
 
@@ -1442,17 +1442,23 @@ public class Main {
         displayHeader();
         displayIndonesianMap();
 
+        LeftBorder();
+
         System.out.print(languageModule[1][selectedLanguage]);
         String inputUsername = input.nextLine();
 
+        LeftBorder();
+
         System.out.print(languageModule[2][selectedLanguage]);
         String inputPassword = input.nextLine();
+
+        LeftBorder();
 
         loginValidation(inputUsername, inputPassword);
 
         if(!login){
             notificationBox(97, languageModule[4][selectedLanguage]);
-            pressEnter();
+            CountdownAndClear(3);
             Login();
         }
     }
@@ -1902,9 +1908,8 @@ public class Main {
         double biayaJarak = 0;
         validInput = false;
 
-        System.out.println(languageModule[180][selectedLanguage]);
-
-        System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════════════╗");
+        displayHeader();
+        LeftBorder();
 
         System.out.print (languageModule[20][selectedLanguage]);
         String namaPengirim = input.nextLine();
@@ -1912,8 +1917,10 @@ public class Main {
         String nomorKontakPengirim;
         do {
             if (!validInput) {
+                LeftBorder();
                 System.out.print(languageModule[21][selectedLanguage]); // "║ Masukkan Nomor Kontak: "
             }
+            
             nomorKontakPengirim = input.nextLine();
             
             if (nomorKontakPengirim.matches("\\d+")) {
@@ -1924,12 +1931,12 @@ public class Main {
                 System.out.println("║" + centerString(99, languageModule[114][selectedLanguage] )+"║"); // "⚠️ INPUT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI."
                 System.out.println("║                                                                                                  ║");
                 System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
-                System.out.print(languageModule[81][selectedLanguage]); // "Tekan [  ⏎ Enter] untuk melanjutkan"
-                input.nextLine();
+                Countdown(2); // "Tekan [  ⏎ Enter] untuk melanjutkan"
                 System.out.print("\033[7A\033[0J");
             }
         } while (!validInput);
         
+        LeftBorder();
         System.out.print (languageModule[22][selectedLanguage]);
         String namaPenerima = input.nextLine();
 
@@ -1937,6 +1944,7 @@ public class Main {
         validInput = false;
         do {
             if (!validInput) {
+                LeftBorder();
                 System.out.print(languageModule[21][selectedLanguage]); // "║ Masukkan Nomor Kontak: "
             }
             nomorKontakPenerima = input.nextLine();
@@ -1949,15 +1957,16 @@ public class Main {
                 System.out.println("║" + centerString(99, languageModule[114][selectedLanguage] )+"║"); // "⚠️ INPUT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI."
                 System.out.println("║                                                                                                  ║");
                 System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
-                System.out.print(languageModule[81][selectedLanguage]); // "Tekan [  ⏎ Enter] untuk melanjutkan"
-                input.nextLine();
+                Countdown(2); // "Tekan [  ⏎ Enter] untuk melanjutkan"
                 System.out.print("\033[7A\033[0J");
             }
         } while (!validInput);
 
+        LeftBorder();
         System.out.print (languageModule[23][selectedLanguage]);
         String alamatPenerima = input.nextLine();
 
+        LeftBorder();
         System.out.print(languageModule[24][selectedLanguage]);
         String deskripsiBarang = input.nextLine();
 
@@ -1967,6 +1976,7 @@ public class Main {
         int tinggi = 0;
         
         do {
+            LeftBorder();
             System.out.print(languageModule[82][selectedLanguage]);
             while (!input.hasNextInt()) {
                 input.nextLine();
@@ -1975,9 +1985,8 @@ public class Main {
                 System.out.println("║"+centerString(99,languageModule[114][selectedLanguage] )+"║");  //"⚠️ INPUT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI.")
                 System.out.println("║                                                                                                  ║");
                 System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
-                System.out.print(languageModule[81][selectedLanguage]);//"Tekan [  ⏎ Enter] untuk melanjutkan"
-                input.nextLine();  
-                System.out.print("\033[7A\033[0J");
+                Countdown(2);
+                System.out.print("\033[6A\033[0J");
                 System.out.print(languageModule[82][selectedLanguage]); //"║ Masukkan Berat: "
             }
             beratBarang= input.nextInt();
@@ -1990,7 +1999,7 @@ public class Main {
                 System.out.println("║"+centerString(99,languageModule[115][selectedLanguage] )+"║");  //"⚠️ BERAT HARUS LEBIH BESAR DARI 0 . SILAHKAN COBA LAGI.")
                 System.out.println("║                                                                                                  ║");
                 System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
-                System.out.print(languageModule[81][selectedLanguage]);//"Tekan [  ⏎ Enter] untuk melanjutkan"
+                Countdown(2);
                 input.nextLine();  
                 System.out.print("\033[7A\033[0J");
             } else {
@@ -1999,6 +2008,7 @@ public class Main {
         } while (!validInput);
         
         do {
+            LeftBorder();
             System.out.print(languageModule[25][selectedLanguage]); //"║ Masukkan Panjang: "
             while (!input.hasNextInt()) {
                 input.nextLine();
@@ -2007,9 +2017,8 @@ public class Main {
                 System.out.println("║"+centerString(99,languageModule[114][selectedLanguage] )+"║");  //"⚠️ INPUT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI.")
                 System.out.println("║                                                                                                  ║");
                 System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
-                System.out.print(languageModule[81][selectedLanguage]);//"Tekan [  ⏎ Enter] untuk melanjutkan"
-                input.nextLine();  
-                System.out.print("\033[7A\033[0J");
+                Countdown(2);
+                System.out.print("\033[6A\033[0J");
                 System.out.print(languageModule[25][selectedLanguage]); //msukan panjang
             }
             panjang= input.nextInt();
@@ -2022,7 +2031,7 @@ public class Main {
                 System.out.println("║"+centerString(99, languageModule[116][selectedLanguage])+"║");  //"⚠️ PANJANG HARUS LEBIH BESAR DARI 0 . SILAHKAN COBA LAGI.")+"
                 System.out.println("║                                                                                                  ║");
                 System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
-                System.out.print(languageModule[81][selectedLanguage]);//"Tekan [  ⏎ Enter] untuk melanjutkan"
+                Countdown(2);
                 input.nextLine();  
                 System.out.print("\033[7A\033[0J");
             } else {
@@ -2031,6 +2040,7 @@ public class Main {
         } while (!validInput);
         
         do {
+            LeftBorder();
             System.out.print(languageModule[26][selectedLanguage]); //"║ Masukkan Lebar: "
             while (!input.hasNextInt()) {
                 input.nextLine();
@@ -2039,9 +2049,8 @@ public class Main {
                 System.out.println("║"+centerString(99,languageModule[114][selectedLanguage] )+"║"); //"⚠️ INPUT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI."
                 System.out.println("║                                                                                                  ║");
                 System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
-                System.out.print(languageModule[81][selectedLanguage]);//"Tekan [  ⏎ Enter] untuk melanjutkan"
-                input.nextLine();  
-                System.out.print("\033[7A\033[0J");
+                Countdown(2);
+                System.out.print("\033[6A\033[0J");
                 System.out.print(languageModule[26][selectedLanguage]); //"║ Masukkan Lebar: "
             }
             lebar = input.nextInt();
@@ -2054,7 +2063,7 @@ public class Main {
                 System.out.println("║"+centerString(99, languageModule[117][selectedLanguage])+"║"); //"⚠️ LEBAR HARUS LEBIH BESAR DARI 0. SILAHKAN COBA LAGI."
                 System.out.println("║                                                                                                  ║");
                 System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
-                System.out.print(languageModule[81][selectedLanguage]);//"Tekan [  ⏎ Enter] untuk melanjutkan"
+                Countdown(2);
                 input.nextLine();  
                 System.out.print("\033[7A\033[0J");
             } else {
@@ -2063,6 +2072,7 @@ public class Main {
         } while (!validInput);
 
         do {
+            LeftBorder();
             System.out.print(languageModule[27][selectedLanguage]); //"║ Masukkan Tinggi: "
             while (!input.hasNextInt()) {
                 input.nextLine();
@@ -2071,9 +2081,8 @@ public class Main {
                 System.out.println("║"+centerString(99,languageModule[114][selectedLanguage] )+"║");     //"⚠️ INPUT HARUS BERUPA BILANGAN BULAT. SILAHKAN COBA LAGI."
                 System.out.println("║                                                                                                  ║");
                 System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
-                System.out.print(languageModule[81][selectedLanguage]);//"Tekan [  ⏎ Enter] untuk melanjutkan"
-                input.nextLine();  
-                System.out.print("\033[7A\033[0J");
+                Countdown(2);
+                System.out.print("\033[6A\033[0J");
                 System.out.print(languageModule[27][selectedLanguage]); //"║ Masukkan Tinggi: "
             }
             tinggi = input.nextInt();
@@ -2086,7 +2095,7 @@ public class Main {
                 System.out.println("║"+centerString(99,languageModule[118][selectedLanguage] )+"║"); //"⚠️ TINGGI HARUS LEBIH BESAR DARI 0. SILAHKAN COBA LAGI."
                 System.out.println("║                                                                                                  ║");
                 System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
-                System.out.print(languageModule[81][selectedLanguage]);//"Tekan [  ⏎ Enter] untuk melanjutkan"
+                Countdown(2);
                 input.nextLine();  
                 System.out.print("\033[7A\033[0J");
             } else {
@@ -2102,11 +2111,15 @@ public class Main {
         double kembalian=0;
         int bayar=0;
         do {
+            LeftBorder();
             System.out.print(languageModule[178][selectedLanguage] + ": ");//asal
             origin = input.nextLine().toUpperCase();
 
+            LeftBorder();
             System.out.print(languageModule[179][selectedLanguage] + ": ");//tujuan
             destination = input.nextLine().toUpperCase();
+
+            LeftBorder();
 
             for (int i = 0; i < rutePengiriman.length; i++) {
                 if ((rutePengiriman[i][0].equalsIgnoreCase(origin) && rutePengiriman[i][1].equalsIgnoreCase(destination)) || 
@@ -2136,9 +2149,8 @@ public class Main {
                 System.out.println("║"+centerString(99, languageModule[28][selectedLanguage])+"║"); //"⚠️ RUTE TIDAK DITEMUKAN. SILAKAN COBA LAGI."
                 System.out.println("║                                                                                                  ║");
                 System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝");
-                System.out.print(languageModule[81][selectedLanguage]);//"Tekan [  ⏎ Enter] untuk melanjutkan"
-                input.nextLine();  
-                System.out.print("\033[8A\033[0J");
+                Countdown(3);
+                System.out.print("\033[10A\033[0J");
             }    
         } while (!found);
 
@@ -3358,10 +3370,33 @@ public class Main {
         }
     }    
 
+    private static void CountdownAndClear(int seconds) {
+        try {
+            for (int i = seconds; i > 0; i--) {
+                if (selectedLanguage == 0) {
+                    System.out.print("Wait [🕒 "+i+" seconds ] to continue... ");
+                } else {
+                    System.out.print("Tunggu [🕒 "+i+" detik ] untuk melanjutkan... ");
+                }
+                
+                Thread.sleep(1000);
+                System.out.print("\r");
+            }
+            clearTerminal();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     private static void Countdown(int seconds) {
         try {
             for (int i = seconds; i > 0; i--) {
-                System.out.println("Detik yang tersisa: "+i);
+                if (selectedLanguage == 0) {
+                    System.out.println("Wait [🕒 "+i+" seconds ] to continue... ");
+                } else {
+                    System.out.println("Tunggu [🕒 "+i+" detik ] untuk melanjutkan... ");
+                }
+                
                 Thread.sleep(1000);
                 System.out.print("\033[1A\033[2K");
             }
@@ -3506,6 +3541,10 @@ public class Main {
             historyTransaksi[index][5]
         )); 
         input.nextLine();
+    }
+
+    private static void LeftBorder() {
+        System.out.println("║");
     }
 
 }
