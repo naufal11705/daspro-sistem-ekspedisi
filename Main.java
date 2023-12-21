@@ -179,7 +179,7 @@ public class Main {
         {"POLINEMA EXPEDITION", "EKSPEDISI POLINEMA"}, //160
         {"💵 The recipient does not need to pay anything to the courier", "💵 Penerima tidak perlu membayar apapun ke kurir"}, //161
         {"Handling fee", "Ongkir"}, //162
-        {"Do you want to change the delivery status of the goods? (Y/N): ", "Apakah anda ingin mengubah status pengiriman barang? (Y/N): "}, //163
+        {" ⤷ Do you want to change the delivery status of the goods? (Y/N): ", " ⤷ Apakah anda ingin mengubah status pengiriman barang? (Y/N): "}, //163
         {"Expedition History", "Riwayat Ekspedisi"}, //164
         {"Monthly Delivery Report: ", "Laporan Pesanan Bulanan: "}, //165
         {"Total Delivery","Jumlah Pengiriman"}, //166
@@ -3220,42 +3220,36 @@ public class Main {
 
         while (inputFound) {
             int[] columnWidths = calculateColumnWidths(historyTransaksi);
-            String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
+            String formattedHeader = String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[11] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
                 "No", 
                 languageModule[89][selectedLanguage],//no resi
-                languageModule[90][selectedLanguage],//tanggal
-                languageModule[91][selectedLanguage],//pengirim
-                languageModule[92][selectedLanguage],//layanan
-                languageModule[93][selectedLanguage],//asal
-                languageModule[94][selectedLanguage],//tujuan
+                languageModule[154][selectedLanguage],//deskripsi
                 languageModule[97][selectedLanguage],//penerima
                 languageModule[98][selectedLanguage],//alamat
                 "Status"
             );
 
-            System.out.println("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
+            System.out.println("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
             System.out.println(formattedHeader);
-            System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
+            System.out.println("╠════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣");
 
             for (int i = 0; i < historyTransaksi.length; i++) {
                 if (historyTransaksi[i][4].equalsIgnoreCase(location) && historyTransaksi[i][12].equalsIgnoreCase("Arrived at warehouse")) {
-                    System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[1] + "s ║ %-" + columnWidths[2] + "s ║ %-" + columnWidths[5] + "s ║ %-" + columnWidths[13] + "s ║ %-" + columnWidths[4] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
+                    System.out.println(String.format("║ %3s ║ %-" + columnWidths[0] + "s ║ %-" + columnWidths[11] + "s ║ %-" + columnWidths[8] + "s ║ %-" + columnWidths[9] + "s ║ %-" + columnWidths[12] + "s",
                         i,
                         historyTransaksi[i][0],
-                        historyTransaksi[i][1],
-                        historyTransaksi[i][2],
-                        historyTransaksi[i][5],
-                        historyTransaksi[i][13],
-                        historyTransaksi[i][4],
+                        historyTransaksi[i][11],
                         historyTransaksi[i][8],
                         historyTransaksi[i][9],
                         historyTransaksi[i][12]
                     ));
                 }
             }
+
+            System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
             break;
         }
-        System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
+
         System.out.print(getLanguageModuleText(163));
         String confirm = input.nextLine();
         if(confirm.equalsIgnoreCase("Y")) {
