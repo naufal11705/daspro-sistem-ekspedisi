@@ -145,7 +145,7 @@ public class Main {
         {"⤷ Enter the route number you want to change: ","⤷ Masukkan nomor rute yang ingin diubah: "},//126
         {"⤷ Do you want to change the delivery status to completed? (Y/N): ","⤷ Apakah anda ingin mengubah status pengiriman menjadi selesai? (Y/N): "},//127
         {"║ Invalid date format. Please enter the date in dd-MM-yyyy format.","║ Format tanggal tidak valid. Harap masukkan tanggal dengan format dd-MM-yyyy."},//128
-        {"║ Enter End Date (dd-MM-yyyy):","║ Masukkan Tanggal Akhir (dd-MM-yyyy): "},//129
+        {" ⤷ Enter End Date (dd-MM-yyyy): "," ⤷ Masukkan Tanggal Akhir (dd-MM-yyyy): "},//129
         {" ⤷ Enter Start Date (dd-MM-yyyy): "," ⤷ Masukkan Tanggal Awal (dd-MM-yyyy): "},//130
         {"The input must be a number.","Input harus berupa angka."},//131
         {"Invalid date.","Tanggal tidak valid."},//132
@@ -415,6 +415,8 @@ public class Main {
                         if (isAdmin) { 
                             switch (menuUtama) {
                                 case 6: 
+                                    displayHeader();
+                                    displayIndonesianMap();
                                     viewReport();
                                     pressEnter();
                                     break;
@@ -1441,27 +1443,22 @@ public class Main {
                         switch (editMenu) {
                             case 1:
                                 searchHistoryDateRange();
-                                pressEnter();
                                 continue;
 
                             case 2:
-                                searchHistoryByDay();
-                                pressEnter(); 
+                                searchHistoryByDay(); 
                                 continue;
 
                             case 3:
                                 searchHistoryByMonth();
-                                pressEnter(); 
                                 continue;
 
                             case 4:
                                 searchHistoryByYear();
-                                pressEnter(); 
                                 continue;
 
                             case 5:
-                                searchHistoryByTrackingNumber();
-                                pressEnter();                                                         
+                                searchHistoryByTrackingNumber();                                                    
                                 continue;
 
                             case 6:
@@ -3324,6 +3321,9 @@ public class Main {
             )); 
 
             input.nextLine();
+            pressEnter();
+        } else {
+            CountdownAndClear(2);
         }
     }
 
@@ -3335,12 +3335,13 @@ public class Main {
                     historyTransaksi[i][1],
                     historyTransaksi[i][2],
                     historyTransaksi[i][0],
+                    historyTransaksi[i][3],
+                    historyTransaksi[i][7],
                     historyTransaksi[i][8],
                     historyTransaksi[i][14],
-                    historyTransaksi[i][7],
-                    historyTransaksi[i][5],
-                    centerString(47, historyTransaksi[i][13]), 
-                    centerString(45, historyTransaksi[i][4]),
+                    historyTransaksi[i][22],
+                    centerString(51, historyTransaksi[i][13]), 
+                    centerString(51, historyTransaksi[i][4]),
                     historyTransaksi[i][11],
                     historyTransaksi[i][15],
                     historyTransaksi[i][10],
